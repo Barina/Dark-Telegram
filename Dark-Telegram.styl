@@ -21,38 +21,38 @@
 @var color border               'Border color' #333943
 @var range border-size          'Border size' [3, 0, 50, 1, "px"]
 
-@var color control                'Base control color' #252A33
-@var color control-hover          'Control hover color' #292f38
-@var color control-active         'Control active color' #343b46
+@var color control              'Base control color' #252A33
+@var color control-hover        'Control hover color' #292f38
+@var color control-active       'Control active color' #343b46
 
-@var color inputbg          'Input background color' #1c2026
+@var color inputbg              'Input background color' #1c2026
 
-@var color shadow            'Shadow color' #00000040
+@var color shadow               'Shadow color' #00000040
 
-@var color  btn-bg               'Buttons color' #2b313b
-@var color  btn-bg-h         'Hover buttons color' #363d4a
+@var color  btn-bg              'Buttons color' #2b313b
+@var color  btn-bg-h            'Hover buttons color' #363d4a
 
-@var color accent                   'Accent color' #7289da
+@var color accent               'Accent color' #7289da
 
 @var range round                'User photo round' [25, 0, 50, 1, "%"]
 
-@var text     bg_image      'Custom background image link' url('https://media.discordapp.net/attachments/310799529161129984/417408747812552715/zilesanamin.jpg')
-@var text     chatbg2       'Custom image for chat' url('https://i.imgur.com/AzleJ7c.png')
+@var text     bg_image          'Custom background image link' url('https://media.discordapp.net/attachments/310799529161129984/417408747812552715/zilesanamin.jpg')
+@var text     chatbg2           'Custom image for chat' url('https://i.imgur.com/AzleJ7c.png')
 
-@var checkbox showchatbg    'Enable chat background image' 1
-@var text     chatbg        'Custom image for chat' url('https://web.whatsapp.com/img/bg-chat-tile_9e8a2898faedb7db9bf5638405cf81ae.png')
-@var range    chatbg-o  'Chat background image opacity' [0.15, 0.0, 1, 0.01]
-@var range    chatbg-i  'Chat background image inverted colors' [0.6, 0.0, 1, 0.1]
+@var checkbox showchatbg        'Enable chat background image' 1
+@var text     chatbg            'Custom image for chat' url('https://web.whatsapp.com/img/bg-chat-tile_9e8a2898faedb7db9bf5638405cf81ae.png')
+@var range    chatbg-o          'Chat background image opacity' [0.15, 0.0, 1, 0.01]
+@var range    chatbg-i          'Chat background image inverted colors' [0.6, 0.0, 1, 0.1]
 
-@var select   app_image  'Custom app background' {
+@var select   app_image         'Custom app background' {
     'Default background           *': 'default ',
     'None                          ': 'none    ',
 }
-@var text bgimage           'Custom background image' url('https://images.unsplash.com/photo-1434569117012-ce134ee1a088?fit=crop&w=1280&h=720&q=80')
-@var range bgopacity       'Background image opacity' [0.4, 0.0, 1, 0.01]
-@var range bgblur          'Background image blur size' [12, 0, 50, 1, 'px']
-@var range bghue           'Background image hue' [320, 0, 360, 1, 'deg']
-@var range bginvert        'Background image invert colors' [0, 0.0, 1, 0.1]
+@var text bgimage               'Custom background image' url('https://images.unsplash.com/photo-1434569117012-ce134ee1a088?fit=crop&w=1280&h=720&q=80')
+@var range bgopacity            'Background image opacity' [0.4, 0.0, 1, 0.01]
+@var range bgblur               'Background image blur size' [12, 0, 50, 1, 'px']
+@var range bghue                'Background image hue' [320, 0, 360, 1, 'deg']
+@var range bginvert             'Background image invert colors' [0, 0.0, 1, 0.1]
 
 @var checkbox tail              'Messages tail' 1
 @var checkbox vign              'Vignette effect on photos' 1
@@ -60,23 +60,30 @@
 @var checkbox private           'Enable private mode' 0
 @var checkbox shift-anim        'Enable contacts shift animation on mouse hover' 1
 
-@var color usrc1          'User color 1' #6f5c8a
-@var color usrc2          'User color 2' #476845
-@var color usrc3          'User color 3' #817356
-@var color usrc4          'User color 4' #4e6274
-@var color usrc5          'User color 5' #815956
-@var color usrc6          'User color 6' #7d5464
-@var color usrc7          'User color 7' #4e6974
-@var color usrc8          'User color 8' #745e4e
+@var checkbox hideinitials      'Hide contact initials' 1
+@var checkbox useicons          'Enable custom contact icons' 1
 
-@var color usrbgc1      'User bg color 1' #9978a5
-@var color usrbgc2      'User bg color 2' #6e9362
-@var color usrbgc3      'User bg color 3' #9d926c
-@var color usrbgc4      'User bg color 4' #668399
-@var color usrbgc5      'User bg color 5' #906060
-@var color usrbgc6      'User bg color 6' #a37584
-@var color usrbgc7      'User bg color 7' #669799
-@var color usrbgc8      'User bg color 8' #9d806c
+@var text contacticon           'Contact icon url' url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmOCI/Pg0KPHN2ZyB4bWxucz0iaHR0cDov%0D%0AL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMTIgMjEyIiB3aWR0aD0iMjEyIiBo%0D%0AZWlnaHQ9IjIxMiI+DQogICAgPHBhdGggZmlsbD0iIzFmMjMyYSIgY2xhc3M9ImJhY2tncm91bmQi%0D%0AIGQ9Ik0xMDYuMjUxLjVDMTY0LjY1My41IDIxMiA0Ny44NDYgMjEyIDEwNi4yNVMxNjQuNjUzIDIx%0D%0AMiAxMDYuMjUgMjEyQzQ3Ljg0NiAyMTIgLjUgMTY0LjY1NC41IDEwNi4yNVM0Ny44NDYuNSAxMDYu%0D%0AMjUxLjV6Ii8+DQogICAgPHBhdGggZmlsbD0iI2ExYTFhMSIgY2xhc3M9InByaW1hcnkiIGQ9Ik0x%0D%0ANzMuNTYxIDE3MS42MTVhNjIuNzY3IDYyLjc2NyAwIDAgMC0yLjA2NS0yLjk1NSA2Ny43IDY3Ljcg%0D%0AMCAwIDAtMi42MDgtMy4yOTkgNzAuMTEyIDcwLjExMiAwIDAgMC0zLjE4NC0zLjUyNyA3MS4wOTcg%0D%0ANzEuMDk3IDAgMCAwLTUuOTI0LTUuNDcgNzIuNDU4IDcyLjQ1OCAwIDAgMC0xMC4yMDQtNy4wMjYg%0D%0ANzUuMiA3NS4yIDAgMCAwLTUuOTgtMy4wNTVjLS4wNjItLjAyOC0uMTE4LS4wNTktLjE4LS4wODct%0D%0AOS43OTItNC40NC0yMi4xMDYtNy41MjktMzcuNDE2LTcuNTI5cy0yNy42MjQgMy4wODktMzcuNDE2%0D%0AIDcuNTI5Yy0uMzM4LjE1My0uNjUzLjMxOC0uOTg1LjQ3NGE3NS4zNyA3NS4zNyAwIDAgMC02LjIy%0D%0AOSAzLjI5OCA3Mi41ODkgNzIuNTg5IDAgMCAwLTkuMTUgNi4zOTUgNzEuMjQzIDcxLjI0MyAwIDAg%0D%0AMC01LjkyNCA1LjQ3IDcwLjA2NCA3MC4wNjQgMCAwIDAtMy4xODQgMy41MjcgNjcuMTQyIDY3LjE0%0D%0AMiAwIDAgMC0yLjYwOSAzLjI5OSA2My4yOTIgNjMuMjkyIDAgMCAwLTIuMDY1IDIuOTU1IDU2LjMz%0D%0AIDU2LjMzIDAgMCAwLTEuNDQ3IDIuMzI0Yy0uMDMzLjA1Ni0uMDczLjExOS0uMTA0LjE3NGE0Ny45%0D%0AMiA0Ny45MiAwIDAgMC0xLjA3IDEuOTI2Yy0uNTU5IDEuMDY4LS44MTggMS42NzgtLjgxOCAxLjY3%0D%0AOHYuMzk4YzE4LjI4NSAxNy45MjcgNDMuMzIyIDI4Ljk4NSA3MC45NDUgMjguOTg1IDI3LjY3OCAw%0D%0AIDUyLjc2MS0xMS4xMDMgNzEuMDU1LTI5LjA5NXYtLjI4OXMtLjYxOS0xLjQ1LTEuOTkyLTMuNzc4%0D%0AYTU4LjM0NiA1OC4zNDYgMCAwIDAtMS40NDYtMi4zMjJ6TTEwNi4wMDIgMTI1LjVjMi42NDUgMCA1%0D%0ALjIxMi0uMjUzIDcuNjgtLjczN2EzOC4yNzIgMzguMjcyIDAgMCAwIDMuNjI0LS44OTYgMzcuMTI0%0D%0AIDM3LjEyNCAwIDAgMCA1LjEyLTEuOTU4IDM2LjMwNyAzNi4zMDcgMCAwIDAgNi4xNS0zLjY3IDM1%0D%0ALjkyMyAzNS45MjMgMCAwIDAgOS40ODktMTAuNDggMzYuNTU4IDM2LjU1OCAwIDAgMCAyLjQyMi00%0D%0ALjg0IDM3LjA1MSAzNy4wNTEgMCAwIDAgMS43MTYtNS4yNWMuMjk5LTEuMjA4LjU0Mi0yLjQ0My43%0D%0AMjUtMy43MDEuMjc1LTEuODg3LjQxNy0zLjgyNy40MTctNS44MTFzLS4xNDItMy45MjUtLjQxNy01%0D%0ALjgxMWEzOC43MzQgMzguNzM0IDAgMCAwLTEuMjE1LTUuNDk0IDM2LjY4IDM2LjY4IDAgMCAwLTMu%0D%0ANjQ4LTguMjk4IDM1LjkyMyAzNS45MjMgMCAwIDAtOS40ODktMTAuNDggMzYuMzQ3IDM2LjM0NyAw%0D%0AIDAgMC02LjE1LTMuNjcgMzcuMTI0IDM3LjEyNCAwIDAgMC01LjEyLTEuOTU4IDM3LjY3IDM3LjY3%0D%0AIDAgMCAwLTMuNjI0LS44OTYgMzkuODc1IDM5Ljg3NSAwIDAgMC03LjY4LS43MzdjLTIxLjE2MiAw%0D%0ALTM3LjM0NSAxNi4xODMtMzcuMzQ1IDM3LjM0NSAwIDIxLjE1OSAxNi4xODMgMzcuMzQyIDM3LjM0%0D%0ANSAzNy4zNDJ6Ii8+DQo8L3N2Zz4=")
+
+@var text groupicon             'Group icon url' url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmOCI/Pg0KPHN2ZyB4bWxucz0iaHR0cDov%0D%0AL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMTIgMjEyIiB3aWR0aD0iMjEyIiBo%0D%0AZWlnaHQ9IjIxMiI+DQogICAgPHBhdGggZmlsbD0iIzFmMjMyYSIgY2xhc3M9ImJhY2tncm91bmQi%0D%0AIGQ9Ik0xMDUuOTQ2LjI1QzE2NC4zMTguMjUgMjExLjY0IDQ3LjU5NiAyMTEuNjQgMTA2cy00Ny4z%0D%0AMjIgMTA1Ljc1LTEwNS42OTUgMTA1Ljc1QzQ3LjU3MSAyMTEuNzUuMjUgMTY0LjQwNC4yNSAxMDZT%0D%0ANDcuNTcxLjI1IDEwNS45NDYuMjV6Ii8+DQogICAgPHBhdGggZmlsbD0iI2ExYTFhMSIgY2xhc3M9%0D%0AInByaW1hcnkiIGQ9Ik02MS41NDMgMTAwLjk4OGM4LjA3MyAwIDE0LjI0Ni02LjE3NCAxNC4yNDYt%0D%0AMTQuMjQ2cy02LjE3My0xNC4yNDYtMTQuMjQ2LTE0LjI0Ni0xNC4yNDYgNi4xNzMtMTQuMjQ2IDE0%0D%0ALjI0NiA2LjE3NCAxNC4yNDYgMTQuMjQ2IDE0LjI0NnptOC4xNTkgMTcuNTQxYTQ4LjE5MiA0OC4x%0D%0AOTIgMCAwIDEgOC41NDUtNi4wNjJjLTQuMTc0LTIuMjE3LTkuNjQxLTMuODU5LTE2LjcwNC0zLjg1%0D%0AOS0yMS44NDQgMC0yOC40OTIgMTUuNjctMjguNDkyIDE1LjY3djguMDczaDI2LjE4MWwuMTA1LS4y%0D%0ANDhjLjMwMy0uNzEzIDMuMTY0LTcuMTUxIDEwLjM2NS0xMy41NzR6bTgwLjc1NS05LjkyMWMtNi44%0D%0ANTQgMC0xMi4yMSAxLjU0My0xNi4zMzYgMy42NjFhNDguMjIzIDQ4LjIyMyAwIDAgMSA4LjkwMyA2%0D%0ALjI2YzcuMjAxIDYuNDIyIDEwLjA2MSAxMi44NjEgMTAuMzY0IDEzLjU3NGwuMTA1LjI0OGgyNS40%0D%0ANTZ2LTguMDczYy0uMDAxIDAtNi42NDktMTUuNjctMjguNDkyLTE1LjY3em0wLTcuNjJjOC4wNzMg%0D%0AMCAxNC4yNDYtNi4xNzQgMTQuMjQ2LTE0LjI0NnMtNi4xNzMtMTQuMjQ2LTE0LjI0Ni0xNC4yNDYt%0D%0AMTQuMjQ2IDYuMTczLTE0LjI0NiAxNC4yNDYgNi4xNzMgMTQuMjQ2IDE0LjI0NiAxNC4yNDZ6bS00%0D%0ANC4wOTMgMy4yMWEyMy4yMSAyMy4yMSAwIDAgMCA0LjQ2NC0uNDI4Yy43MTctLjE0IDEuNDE5LS4z%0D%0AMTUgMi4xMDYtLjUyMSAxLjAzLS4zMDkgMi4wMjMtLjY5IDIuOTc2LTEuMTM4YTIxLjA5OSAyMS4w%0D%0AOTkgMCAwIDAgMy41NzQtMi4xMzMgMjAuODcyIDIwLjg3MiAwIDAgMCA1LjUxNS02LjA5MSAyMS4y%0D%0AODMgMjEuMjgzIDAgMCAwIDIuMTIxLTQuODIzIDIyLjE2IDIyLjE2IDAgMCAwIC43MDYtMy4xOTNj%0D%0ALjE2LTEuMDk3LjI0Mi0yLjIyNC4yNDItMy4zNzdzLS4wODMtMi4yODEtLjI0Mi0zLjM3N2EyMi43%0D%0ANzggMjIuNzc4IDAgMCAwLS43MDYtMy4xOTMgMjEuMjgzIDIxLjI4MyAwIDAgMC0zLjI3Mi02LjU1%0D%0AIDIwLjg0OCAyMC44NDggMCAwIDAtNC4zNjQtNC4zNjQgMjEuMDk5IDIxLjA5OSAwIDAgMC0zLjU3%0D%0ANC0yLjEzMyAyMS40ODggMjEuNDg4IDAgMCAwLTIuOTc2LTEuMTM4IDIyLjMzIDIyLjMzIDAgMCAw%0D%0ALTIuMTA2LS41MjEgMjMuMjAyIDIzLjIwMiAwIDAgMC00LjQ2NC0uNDI4Yy0xMi4yOTkgMC0yMS43%0D%0AMDUgOS40MDUtMjEuNzA1IDIxLjcwNCAwIDEyLjI5OSA5LjQwNiAyMS43MDQgMjEuNzA1IDIxLjcw%0D%0ANHpNMTQ1LjYyOSAxMzFhMzYuNzM5IDM2LjczOSAwIDAgMC0xLjItMS43MTggMzkuODA0IDM5Ljgw%0D%0ANCAwIDAgMC0zLjM2Ny0zLjk2NyA0MS40ODEgNDEuNDgxIDAgMCAwLTMuNDQyLTMuMTc5IDQyLjA3%0D%0AOCA0Mi4wNzggMCAwIDAtNS45MzEtNC4wODMgNDMuNzI1IDQzLjcyNSAwIDAgMC0zLjQ3Ni0xLjc3%0D%0ANmMtLjAzNi0uMDE2LS4wNjktLjAzNC0uMTA0LS4wNS01LjY5Mi0yLjU4MS0xMi44NDktNC4zNzYt%0D%0AMjEuNzQ2LTQuMzc2LTguODk4IDAtMTYuMDU1IDEuNzk1LTIxLjc0NiA0LjM3Ni0uMTk2LjA4OS0u%0D%0AMzc5LjE4NS0uNTcyLjI3NmE0My4zMTYgNDMuMzE2IDAgMCAwLTMuNjIgMS45MTcgNDIuMzIgNDIu%0D%0AMzIgMCAwIDAtNS4zMTggMy43MTYgNDEuNTAxIDQxLjUwMSAwIDAgMC0zLjQ0MyAzLjE3OSA0MC42%0D%0AMzIgNDAuNjMyIDAgMCAwLTMuMzY2IDMuOTY3Yy0uNDUyLjYxLS44NTEgMS4xODYtMS4yIDEuNzE4%0D%0ALS4zMjQuNDkzLS42Ljk0My0uODQxIDEuMzUxbC0uMDYxLjEwMWEyNy45NiAyNy45NiAwIDAgMC0u%0D%0ANjIyIDEuMTE5Yy0uMzI1LjYyMS0uNDc1Ljk3NS0uNDc1Ljk3NXYxMS42OTJoODIuNTN2LTExLjY5%0D%0AMnMtLjM2LS44NDItMS4xNTgtMi4xOTVhMzUuNDE3IDM1LjQxNyAwIDAgMC0uODQyLTEuMzUxeiIv%0D%0APg0KPC9zdmc+")
+
+@var color usrc1                'User color 1' #6f5c8a
+@var color usrc2                'User color 2' #476845
+@var color usrc3                'User color 3' #817356
+@var color usrc4                'User color 4' #4e6274
+@var color usrc5                'User color 5' #815956
+@var color usrc6                'User color 6' #7d5464
+@var color usrc7                'User color 7' #4e6974
+@var color usrc8                'User color 8' #745e4e
+
+@var color usrbgc1              'User bg color 1' #9978a5
+@var color usrbgc2              'User bg color 2' #6e9362
+@var color usrbgc3              'User bg color 3' #9d926c
+@var color usrbgc4              'User bg color 4' #668399
+@var color usrbgc5              'User bg color 5' #906060
+@var color usrbgc6              'User bg color 6' #a37584
+@var color usrbgc7              'User bg color 7' #669799
+@var color usrbgc8              'User bg color 8' #9d806c
 
 
 ==/UserStyle== */
@@ -135,6 +142,28 @@
     .user_bgcolor_6{background: usrbgc6 i}
     .user_bgcolor_7{background: usrbgc7 i}
     .user_bgcolor_8{background: usrbgc8 i}
+        
+        
+    /* contact icon initials */
+    if(hideinitials is 1){
+        .peer_initials{
+            color: transparent;
+        }
+    }
+    
+    /* contact icon */
+    if(useicons is 1){
+        .im_dialog_photo,
+        .im_message_contact_photo,
+        .im_message_from_photo,
+        .im_message_fwd_photo,
+        .md_modal_list_peer_photo,
+        .peer_modal_photo{
+            background-color: transparent i;
+            background-image: contacticon;
+            background-size: cover;
+        }
+    }
         
     /* Blurry mode for contacts and photos */
     .im_dialog_wrap.active,
