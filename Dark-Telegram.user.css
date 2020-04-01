@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.styl
-@version        1.0.1
+@version        1.0.2
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -112,7 +112,7 @@
     
         --is-private (private is 1 ? 10px : 0);    
         
-        --version "Dark-Telegram v1.0.1 — April 1st, 2020"
+        --version "Dark-Telegram v1.0.2 — April 2nd, 2020"
         --message "An update is available, please report any issues on GitHub so that we can fix them."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -342,6 +342,7 @@
         brad msgb
         padding 0px 3px 3px 3px
         border 1px solid border
+        border-top none
         shad 0px 3px 5px shadow
     }
     
@@ -349,24 +350,25 @@
     .im_message_body:before{
         content ''
         position absolute
-        top 0px; 
+        top 0px
         height 0
         width 0
-        border-top 15px solid border
         visibility var(--tail-v)
     }
     
     /* in tail */
     .im_message_in .im_message_body:before{
         /*left: 79px;*/
-        left 47px
+        left 48px
+        border-top 15px solid msg-in-bg
         border-left 10px solid transparent
     }
     
     /* out tail */
     .im_message_out .im_message_body:before{
         /*right: 37px;*/
-        right 5px
+        right 6px
+        border-top 15px solid msg-out-bg
         border-right 10px solid transparent
     }
     
@@ -561,6 +563,11 @@
     /*nicknames in contactlist via hamburger menu*/
     .contacts_modal_members_list a.contacts_modal_contact {
         color text
+    }
+    
+    /* hiding FF scrollbars */
+    .nano-content{
+        scrollbar-width none
     }
 
     .im_dialogs_scrollable_wrap a.im_dialog_searchpeer{
