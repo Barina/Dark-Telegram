@@ -9,7 +9,7 @@ Dark mode implementation for [Telegram Web](https://web.telegram.org/) based on 
 [<img src="https://img.shields.io/badge/Install%20directly%20with-Stylus-116b59.svg?longCache=true&style=flat"/>](https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.styl)
 
 <p align="center">
-  <img src="Resources/Screenshots/20200403.png" width="2003" height="1025"/>
+  <img src="Resources/Screenshots/20200403.png" width="100%" style="max-width: 100%;"/>
 </p>
 
 Currently at version 1.0.4 most features are ported from the original style, I will continue to work on it to add more cool things.</br>
