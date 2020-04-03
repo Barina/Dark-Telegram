@@ -23,7 +23,7 @@ Feel free to contribute and make sure to check [Dark-WhatsApp style by vednoc](h
 * Border sizes for bubbles, icons and whole page
 * Hide contacts initials
 * Custom icons for contacts (to match original style) (group icons currently not supported by telegram)
-* Emoji popup positioning (wip)
+* Emoji popup positioning
 * Vignette effect fot photo thumbs (video thumbs currently not supported)
 * Compact mode
 * Messages tails
