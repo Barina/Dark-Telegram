@@ -1,14 +1,16 @@
 <p align="center">
 <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Telegram_X_2019_Logo.svg" width="128" height="128"/>
-</p>
 
-# Dark-Telegram
+<h1>Dark-Telegram</h1>
+</p>
 
 Dark mode implementation for [Telegram Web](https://web.telegram.org/) based on the awesome [Dark WhatsApp style by vednoc](https://github.com/vednoc/dark-whatsapp) with many improvements and wide range of customization options.
 
-[<img src="https://img.shields.io/badge/Install%20directly%20with-Stylus-116b59.svg?longCache=true&style=flat"/>](https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.styl)
-
 <p align="center">
+  <a target="_blank" rel="noopener noreferrer" href="https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.styl">
+    <img src="https://img.shields.io/badge/Install%20directly%20with-Stylus-116b59.svg?longCache=true&style=flat"/>
+  </a>
+  <br/>
   <img src="Resources/Screenshots/20200403.png" width="100%" style="max-width: 100%;"/>
 </p>
 
