@@ -4,6 +4,7 @@
 * Media and system messages now has a fancy background too.
 * Shifted user photos a bit up.
 * Drop area now animated with accent colors.
+* You can now choose Emoji popup position.
 
 ## V1.0.3 (2020-04-02)
 * A changelog will now be updated.
