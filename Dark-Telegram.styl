@@ -4,13 +4,13 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.styl
-@version        1.0.3
+@version        1.0.4
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
 @preprocessor   stylus
 
-@var color text                 'Text color' #ccccca
+@var color textc                'Text color' #ccccca
 
 @var color msg-in-bg            'Incoming message background color'  #3c434f
 @var color msg-out-bg           'Outgoing message background color' #333a47
@@ -36,8 +36,12 @@
 
 @var range round                'User photo round' [25, 0, 50, 1, "%"]
 
-@var text     bg_image          'Custom background image link' url('https://media.discordapp.net/attachments/310799529161129984/417408747812552715/zilesanamin.jpg')
-@var text     chatbg2           'Custom image for chat' url('https://i.imgur.com/AzleJ7c.png')
+@var checkbox enableCompact     'Enable compact mode' 1
+@var text compactBreak          'Compact mode breakpoint' 1080px
+@var text compactDelayOn        'Compact mode hover-on delay' 0.25s
+@var text compactDelayOff       'Compact mode hover-off delay' 1s
+@var range comTranDurOn         'Compact mode transition on duration' [0.7, 0, 5, .1, "s"]
+@var range comTranDurOff        'Compact mode transition off duration' [1.2, 0, 5, .1, "s"]
 
 @var checkbox showchatbg        'Enable chat background image' 1
 @var text     chatbg            'Custom image for chat' url('https://web.whatsapp.com/img/bg-chat-tile_9e8a2898faedb7db9bf5638405cf81ae.png')
@@ -116,7 +120,7 @@
     
         --is-private (private is 1 ? 10px : 0);    
         
-        --version "Dark-Telegram v1.0.3 — April 2nd, 2020"
+        --version "Dark-Telegram v1.0.4 — April 3rd, 2020"
         --message "An update is available, please report any issues on GitHub so that we can fix them."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -204,7 +208,29 @@
     // .user_bgcolor_6{ bg: usrbgc6 i; }
     // .user_bgcolor_7{ bg: usrbgc7 i; }
     // .user_bgcolor_8{ bg: usrbgc8 i; }
-       
+    
+
+    /* style pose */
+    /*body,div,p,a,.tg_head_peer_title,.im_dialog_peer>span,.im_short_message_text,.im_dialog_chat_from_wrap,.im_short_message_media,.im_short_message_service,.im_submit {
+        color transparent i
+    }
+    .tg_head_peer_title,.icon-tg-title,.im_dialog_peer>span,.im_short_message_text,.im_dialog_chat_from_wrap,.im_short_message_media,.im_short_message_service,.im_submit {
+        bgc control-active
+        bgi none
+        brad 4px
+    }
+    img.im_dialog_photo{
+        visibility hidden
+        bgc transparent i
+        bgi contacticon i
+        bgs cover i
+    }
+    .im_dialog_chat_from_wrap,.im_short_message_media,.im_short_message_service {
+        bgc accent i
+    }*/
+    /* end of pose */
+    
+
     /* contact icon initials */
     if(hideinitials is 1){
         .peer_initials{
@@ -269,8 +295,9 @@
     /* Widescreen */
     .im_send_form,
     .im_send_panel_wrap,
-    .im_message_wrap {
-        max-width 1000px
+    .im_message_wrap,
+    .composer_rich_textarea {
+        max-width 100% i
     }
 
     .im_send_panel_wrap {
@@ -351,8 +378,15 @@
         margin 0
     }
     
-    .im_message_contact_photo, .im_message_from_photo, .im_message_fwd_photo{
+    .im_message_contact_photo,
+    .im_message_from_photo,
+    .im_message_fwd_photo{
         min-width 42px
+    }
+
+    /* shifting user photos in chat a bit up */
+    a.im_message_from_photo{
+        margin-top -10px
     }
         
     /* short message bubble */
@@ -502,7 +536,7 @@
             font-size 16px
             margin-bottom 16px
             padding 16px 20%
-            color text
+            color textc
             user-select auto i
         }
         /* version footer */
@@ -514,7 +548,7 @@
             font-size 11px
             margin-top 16px
             padding-top 16px
-            color text - 50%
+            color textc - 50%
             user-select auto i
         }
     }
@@ -538,7 +572,7 @@
     
     body{
         /* bgc bgcolor i*/
-        color text i
+        color textc i
         &:before{
             if(app_image == default and bgopacity != null and bgopacity > .01){
                 content ''
@@ -565,7 +599,7 @@
     }
     
     a.tg_checkbox{
-        color text i
+        color textc i
     }
 
     /* outer body */
@@ -582,12 +616,12 @@
 
     /* nickname unselected */
     .im_dialog_peer {
-        color text i;     
+        color textc i;     
     }
 
     /*nicknames in contactlist via hamburger menu*/
     .contacts_modal_members_list a.contacts_modal_contact {
-        color text
+        color textc
     }
     
     /* hiding FF scrollbars */
@@ -652,6 +686,104 @@
         border-top 0px none i
         padding-bottom initial
         height auto
+    }
+
+    /* positioning meta data as preparation for compact mode*/
+    .im_dialog_meta{
+        position absolute
+        right 18px
+    }
+
+    /* fixing theader in place and hiding all overflow content */
+    .dropdown-toggle{
+        white-space nowrap
+        overflow hidden
+    }
+      
+    if(enableCompact){
+        @media screen and (max-width compactBreak) {
+            wmin = 80px
+            wmax = 31%
+            
+            /* let all the envolved transit nicely */
+            .tg_head_main_wrap,
+            .im_history_col_wrap,
+            .im_send_form,
+            .im_dialog_meta,
+            .tg_head_logo_wrap,
+            .im_dialogs_col_wrap,
+            .icon-tg-title{
+                transition comTranDurOff ease i
+                transition-delay compactDelayOff i
+            }
+            
+            /* top left header and contact list minimum width */
+            .tg_head_logo_wrap,
+            .im_dialogs_col_wrap{
+                width wmin
+            }
+            
+            /* top right header and message history panel maximum width */
+            .tg_head_main_wrap,
+            .im_history_col_wrap{
+                width calc(100% - 80px)
+            }
+
+            /* hiding top left header text and metadata */
+            .im_dialog_meta,
+            .icon-tg-title{
+                opacity 0
+            }
+            
+            /* while contact list is hovered or has focus within (search box) */
+            .page_wrap > .im_page_wrap > .im_page_split > .im_dialogs_col_wrap:hover,
+            .page_wrap > .im_page_wrap > .im_page_split > .im_dialogs_col_wrap:focus-within{
+                
+                /* let all the envolved transit nicely */
+                .tg_head_logo_wrap,//<- need to fix that
+                .tg_head_main_wrap,//<- need to fix that
+                .icon-tg-title,//<- need to fix that
+                & .im_dialogs_col .im_dialogs_wrap .im_dialogs_scrollable_wrap .nav .im_dialog_wrap .im_dialog .im_dialog_meta,
+                ~ .im_history_col_wrap,
+                &{
+                    transition comTranDurOn ease i
+                    transition-delay compactDelayOn i
+                }
+                
+                /* maximize contact list and top left header width */
+                / div .tg_page_head .tg_head_split .tg_head_logo_wrap:hover,//<- need to fix that
+                &{
+                    width wmax i
+                }
+
+                /* minimize message history (including textarea) and top right header width to it's initial state */
+                .tg_head_main_wrap,//<- need to fix that
+                ~ .im_history_col_wrap{
+                    width 69% i
+                }
+                
+                /* show top left header text and metadata */
+                .icon-tg-title,//<- need to fix that
+                & .im_dialogs_col .im_dialogs_wrap .im_dialogs_scrollable_wrap .nav .im_dialog_wrap .im_dialog .im_dialog_meta{
+                    opacity 1 i
+                }
+            }
+
+            /* while hovering the top left header (temporary until I find a way to do this from a different selector) */
+            .tg_head_logo_wrap:hover{
+                width wmax i
+                &,
+                .icon-tg-title,
+                ~ .tg_head_main_wrap{
+                    transition comTranDurOn ease i
+                    transition-delay compactDelayOn i
+                    opacity 1 i
+                }
+                ~ .tg_head_main_wrap{
+                    width 69% i
+                }
+            }
+        }
     }
 
     /* inline code messages */
@@ -943,6 +1075,29 @@
         border-radius border-size i
         min-height 42px
         scrollbar-width none
+    }
+   
+    /* files drop area with animation */
+    .im_send_dropbox_wrap{
+        padding 10px
+        border unset
+        font-size 18px
+           
+        text-align center
+        background linear-gradient(to right, accent 20%, accent-alt 40%, accent-alt 60%, accent 80%)
+        background-size 200% auto
+        
+        background-clip text
+        text-fill-color transparent
+        -webkit-background-clip text
+        -webkit-text-fill-color transparent
+        
+        animation wipe 1s linear infinite
+        @keyframes wipe {
+            to {
+                background-position 200% center
+            }
+        }     
     }
     
     /* own user profile photo in text area */
@@ -1262,8 +1417,8 @@
     /* replay and pinned messages */
     .im_message_reply_wrap,
     .im_history_pinned_wrap .im_message_reply{
-        background-color #0003
-        border-radius 0 2px 2px 0
+        bgc #0003
+        brad 0 2px 2px 0
         padding 8px 16px
         border 1px solid border
         position relative
@@ -1281,6 +1436,29 @@
         }
     }
     
+    /* media messages */
+    .audio_player_wrap,
+    .im_message_document{
+        bgc #0003
+        brad msgb-thumb
+        padding 8px 
+        border 1px solid border
+        margin-top 4px
+        display block
+    }
+    /* fixing the media messages button in place ... */
+    .im_message_document{
+        display -webkit-box i
+    }
+
+    /* media not supported message */
+    div[ng-switch-when="messageMediaUnsupported"]{
+        bgc #0003
+        brad msgb-thumb
+        padding 0px 8px
+        margin-top 4px
+    }
+
     /* reply messages border radius */
     .im_message_reply_wrap{
         brad msgb-thumb
@@ -1335,7 +1513,7 @@
     /* group info edit input */
     .md-input{
         bg inputbg
-        color text
+        color textc
     }
     .md-input-group{
         border-bottom 1px solid control
@@ -1348,7 +1526,7 @@
     h1, h2, h3, h4, h5,
     .composer_stickerset_title,
     .composer_stickerset_title:hover{
-        color text
+        color textc
     }
     
     /* toggles ON */
@@ -1381,7 +1559,7 @@
     .dropdown-menu>li>a,
     .dropdown-menu>li>a:focus,
     .dropdown-menu>li>a:hover{
-        color text
+        color textc
     }
     
     /* slider thumb */
@@ -1399,7 +1577,7 @@
     
     /* radio button */
     a.tg_radio{    
-        color text
+        color textc
     }
     
     i.icon-radio{
@@ -1454,7 +1632,7 @@
     /* unread badge active */
     .active .im_dialog_badge{
         bgc accent-alt
-        color text
+        color textc
     }
     
     /* unread badge muted */
