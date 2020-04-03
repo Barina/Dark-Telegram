@@ -1,7 +1,7 @@
-<p align="center">
-<img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Telegram_X_2019_Logo.svg" width="128" height="128"/>
-
-<h1>Dark-Telegram</h1>
+<p align="center" style="text-align: center;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Telegram_X_2019_Logo.svg" width="128" height="128"/>
+  <br/>
+  <h1>Dark-Telegram</h1>
 </p>
 
 Dark mode implementation for [Telegram Web](https://web.telegram.org/) based on the awesome [Dark WhatsApp style by vednoc](https://github.com/vednoc/dark-whatsapp) with many improvements and wide range of customization options.
