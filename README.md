@@ -34,7 +34,7 @@ Feel free to contribute and make sure to check [Dark-WhatsApp style by vednoc](h
   * Custom chat window width
 * <i>and more ...</i>
 
-See the [Changelog](Changelog) for more details.
+See the [Changelog](Changelog.md) for more details.
 
 ## Credits
 Full credit for design goes to original style creators at [vednoc](https://github.com/vednoc).
