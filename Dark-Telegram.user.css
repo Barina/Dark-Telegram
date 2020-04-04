@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.styl
-@version        1.0.4
+@version        1.0.5
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -43,6 +43,8 @@
 @var range comTranDurOn         'Compact mode transition on duration' [0.7, 0, 5, .1, "s"]
 @var range comTranDurOff        'Compact mode transition off duration' [1.2, 0, 5, .1, "s"]
 
+@var checkbox useChatSize       'Use custom chat width' 0
+@var number chatSize            'Chat width in px' [780, 0]
 @var checkbox showchatbg        'Enable chat background image' 1
 @var text     chatbg            'Custom image for chat' url('https://web.whatsapp.com/img/bg-chat-tile_9e8a2898faedb7db9bf5638405cf81ae.png')
 @var range    chatbg-o          'Chat background image opacity' [0.15, 0.0, 1, 0.01]
@@ -61,7 +63,8 @@
 @var checkbox tail              'Messages tail' 1
 @var checkbox vign              'Vignette effect on photos' 1
 
-@var select emoj-pos            'Emoji popup position' {
+@var range emojo                'Emoji and sticker icons opacity' [.6, 0, 1, .01]
+@var select emoj-pos            'Emoji and sticker popup position' {
     'Center                      *': 'center',
     'Right                        ': 'right',
     'Left                         ': 'left',
@@ -72,9 +75,11 @@
 @var checkbox hideinitials      'Hide contact initials' 1
 @var checkbox useicons          'Enable custom contact icons' 1
 
-@var text contacticon           'Contact icon url' url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjxz%0D%0AdmcKICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICB4bWxu%0D%0AczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIgogICB4bWxuczpyZGY9Imh0dHA6%0D%0ALy93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiCiAgIHhtbG5zOnN2Zz0iaHR0%0D%0AcDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAw%0D%0AL3N2ZyIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQv%0D%0ARFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2Fw%0D%0AZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgdmlld0JveD0iMCAwIDIxMiAyMTIiCiAgIHdp%0D%0AZHRoPSIyMTIiCiAgIGhlaWdodD0iMjEyIgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmczNzI5%0D%0AIgogICBzb2RpcG9kaTpkb2NuYW1lPSJjb250YWN0LWljb24uc3ZnIgogICBpbmtzY2FwZTp2ZXJz%0D%0AaW9uPSIwLjkyLjQgKDVkYTY4OWMzMTMsIDIwMTktMDEtMTQpIj4KICA8bWV0YWRhdGEKICAgICBp%0D%0AZD0ibWV0YWRhdGEzNzM1Ij4KICAgIDxyZGY6UkRGPgogICAgICA8Y2M6V29yawogICAgICAgICBy%0D%0AZGY6YWJvdXQ9IiI+CiAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9zdmcreG1sPC9kYzpmb3JtYXQ+%0D%0ACiAgICAgICAgPGRjOnR5cGUKICAgICAgICAgICByZGY6cmVzb3VyY2U9Imh0dHA6Ly9wdXJsLm9y%0D%0AZy9kYy9kY21pdHlwZS9TdGlsbEltYWdlIiAvPgogICAgICA8L2NjOldvcms+CiAgICA8L3JkZjpS%0D%0AREY+CiAgPC9tZXRhZGF0YT4KICA8ZGVmcwogICAgIGlkPSJkZWZzMzczMyIgLz4KICA8c29kaXBv%0D%0AZGk6bmFtZWR2aWV3CiAgICAgcGFnZWNvbG9yPSIjZmZmZmZmIgogICAgIGJvcmRlcmNvbG9yPSIj%0D%0ANjY2NjY2IgogICAgIGJvcmRlcm9wYWNpdHk9IjEiCiAgICAgb2JqZWN0dG9sZXJhbmNlPSIxMCIK%0D%0AICAgICBncmlkdG9sZXJhbmNlPSIxMCIKICAgICBndWlkZXRvbGVyYW5jZT0iMTAiCiAgICAgaW5r%0D%0Ac2NhcGU6cGFnZW9wYWNpdHk9IjAiCiAgICAgaW5rc2NhcGU6cGFnZXNoYWRvdz0iMiIKICAgICBp%0D%0AbmtzY2FwZTp3aW5kb3ctd2lkdGg9IjI1NjAiCiAgICAgaW5rc2NhcGU6d2luZG93LWhlaWdodD0i%0D%0AMTM2MSIKICAgICBpZD0ibmFtZWR2aWV3MzczMSIKICAgICBzaG93Z3JpZD0iZmFsc2UiCiAgICAg%0D%0AaW5rc2NhcGU6c25hcC1nbG9iYWw9InRydWUiCiAgICAgaW5rc2NhcGU6c25hcC1iYm94PSJ0cnVl%0D%0AIgogICAgIGlua3NjYXBlOmJib3gtcGF0aHM9InRydWUiCiAgICAgaW5rc2NhcGU6YmJveC1ub2Rl%0D%0Acz0idHJ1ZSIKICAgICBpbmtzY2FwZTpzbmFwLWJib3gtZWRnZS1taWRwb2ludHM9InRydWUiCiAg%0D%0AICAgaW5rc2NhcGU6c25hcC1iYm94LW1pZHBvaW50cz0idHJ1ZSIKICAgICBpbmtzY2FwZTpzbmFw%0D%0ALWludGVyc2VjdGlvbi1wYXRocz0idHJ1ZSIKICAgICBpbmtzY2FwZTpzbmFwLXNtb290aC1ub2Rl%0D%0Acz0idHJ1ZSIKICAgICBpbmtzY2FwZTp6b29tPSIzLjg5NTc1ODEiCiAgICAgaW5rc2NhcGU6Y3g9%0D%0AIjg3LjQ3OTk5MSIKICAgICBpbmtzY2FwZTpjeT0iMTA5LjI4MTYxIgogICAgIGlua3NjYXBlOndp%0D%0AbmRvdy14PSItOSIKICAgICBpbmtzY2FwZTp3aW5kb3cteT0iLTkiCiAgICAgaW5rc2NhcGU6d2lu%0D%0AZG93LW1heGltaXplZD0iMSIKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJzdmczNzI5IiAv%0D%0APgogIDxyZWN0CiAgICAgZmlsbD0iIzFmMjMyYSIKICAgICB3aWR0aD0iMjEyIgogICAgIGhlaWdo%0D%0AdD0iMjEyIgogICAgIGlkPSJyZWN0MzcyNSIgLz4KICA8cGF0aAogICAgIGNsYXNzPSJwcmltYXJ5%0D%0AIgogICAgIGQ9Im0gMTczLjU2MSwxNzEuNjE1IGMgLTAuNjU5OSwtMS4wMDQ1NyAtMS4zNDg1Miwt%0D%0AMS45ODk5NyAtMi4wNjUsLTIuOTU1IC0wLjgzNDk2LC0xLjEyNjQxIC0xLjcwNDcxLC0yLjIyNjYx%0D%0AIC0yLjYwOCwtMy4yOTkgLTEuMDIxMTgsLTEuMjExMyAtMi4wODMxMiwtMi4zODc2NSAtMy4xODQs%0D%0ALTMuNTI3IC0xLjg2OTYsLTEuOTMzOTMgLTMuODQ3NDUsLTMuNzYwMiAtNS45MjQsLTUuNDcgLTMu%0D%0AMTk0NTEsLTIuNjI5MDIgLTYuNjA4MzIsLTQuOTc5NjEgLTEwLjIwNCwtNy4wMjYgLTEuOTQ2ODUs%0D%0ALTEuMTA2ODcgLTMuOTQyMTcsLTIuMTI2MjIgLTUuOTgsLTMuMDU1IC0wLjA2MiwtMC4wMjggLTAu%0D%0AMTE4LC0wLjA1OSAtMC4xOCwtMC4wODcgLTkuNzkyLC00LjQ0IC0yMi4xMDYsLTcuNTI5IC0zNy40%0D%0AMTYsLTcuNTI5IC0xNS4zMSwwIC0yNy42MjQsMy4wODkgLTM3LjQxNiw3LjUyOSAtMC4zMzgsMC4x%0D%0ANTMgLTAuNjUzLDAuMzE4IC0wLjk4NSwwLjQ3NCAtMi4xMjY2MjcsMS4wMDE1OSAtNC4yMDUyMzMs%0D%0AMi4xMDIxMyAtNi4yMjksMy4yOTggLTMuMjA5NjMzLDEuODkzNjMgLTYuMjY4Njc2LDQuMDMxNjIg%0D%0ALTkuMTUsNi4zOTUgLTIuMDc2MzQ3LDEuNzEwMDQgLTQuMDU0MTgsMy41MzYyOSAtNS45MjQsNS40%0D%0ANyAtMS4xMDA5MDUsMS4xMzkzMyAtMi4xNjI4NDksMi4zMTU2NyAtMy4xODQsMy41MjcgLTAuOTAz%0D%0AOTA1LDEuMDcyMTUgLTEuNzczOTk4LDIuMTcyMzYgLTIuNjA5LDMuMjk5IC0wLjcxNjI1MiwwLjk2%0D%0ANTE5IC0xLjQwNDg2NCwxLjk1MDU5IC0yLjA2NSwyLjk1NSAtMy4wOTM3MjUsNC45OTg4NSAtNi4z%0D%0AMTkyNjgsMTAuNzk4MDMgLTguNjExOTQ1LDE1Ljg1Nzk5IC00LjA1NzU0OCw5LjE0NTY2IC01Ljk0%0D%0ANjMyNiwxOS41NzAxIC01Ljk0NjMyNiwxOS41NzAxIGwgODIuMDY0MjcxLDAuMDU2OSA4MS4wMjgz%0D%0ANiwtMC4wMTQ3IGMgMCwwIC0yLjYzMTQ3LC0xMS4xNzUwOSAtNC44NDU3OSwtMTcuOTM0MzUgLTEu%0D%0AOTI3ODQsLTUuODg0NzYgLTUuNzQ2NTcsLTEyLjg4NDkzIC03LjExOTU3LC0xNS4yMTI5MyAtMC40%0D%0ANjM3OSwtMC43ODUxOSAtMC45NDU5MiwtMS41NTk0MSAtMS40NDYsLTIuMzIyIHogTSAxMDYuMDAy%0D%0ALDEyNS41IGMgMi42NDUsMCA1LjIxMiwtMC4yNTMgNy42OCwtMC43MzcgMS4yMjE4NiwtMC4yMzk1%0D%0ANCAyLjQzMTI5LC0wLjUzODU2IDMuNjI0LC0wLjg5NiAxLjc1MjU5LC0wLjUyNTYgMy40NjM5Miwt%0D%0AMS4xODAwNSA1LjEyLC0xLjk1OCAyLjE2NTk0LC0xLjAxNzY2IDQuMjI1OTYsLTIuMjQ2OTcgNi4x%0D%0ANSwtMy42NyAzLjgyNTk3LC0yLjgzMDMgNy4wNTE0MiwtNi4zOTI2MSA5LjQ4OSwtMTAuNDggMC45%0D%0AMjU4MSwtMS41NTEyNyAxLjczNTM2LC0zLjE2OTA0IDIuNDIyLC00Ljg0IDAuNzAxODIsLTEuNzA0%0D%0AODcgMS4yNzU0MiwtMy40NTk3NDMgMS43MTYsLTUuMjUgMC4yOTksLTEuMjA4IDAuNTQyLC0yLjQ0%0D%0AMyAwLjcyNSwtMy43MDEgMC4yNzUsLTEuODg3IDAuNDE3LC0zLjgyNyAwLjQxNywtNS44MTEgMCwt%0D%0AMS45ODQgLTAuMTQyLC0zLjkyNSAtMC40MTcsLTUuODExIC0wLjI3MTI3LC0xLjg1ODM2NyAtMC42%0D%0ANzczNCwtMy42OTQ1NDQgLTEuMjE1LC01LjQ5NCAtMC44NjgyNCwtMi45MDYxOSAtMi4wOTM1OSwt%0D%0ANS42OTM0NjggLTMuNjQ4LC04LjI5OCAtMi40Mzc1OCwtNC4wODczOTQgLTUuNjYzMDMsLTcuNjQ5%0D%0ANzAyIC05LjQ4OSwtMTAuNDggLTEuOTI0MTgsLTEuNDIyODA5IC0zLjk4NDE4LC0yLjY1MjEwOCAt%0D%0ANi4xNSwtMy42NyAtMS42NTYwOCwtMC43Nzc5NDggLTMuMzY3NDEsLTEuNDMyMzk4IC01LjEyLC0x%0D%0ALjk1OCAtMS4xOTI0NSwtMC4zNTgzNzcgLTIuNDAxOTMsLTAuNjU3NDEgLTMuNjI0LC0wLjg5NiAt%0D%0AMi41MzAxNiwtMC40OTMzMzQgLTUuMTAyMiwtMC43NDAxNTYgLTcuNjgsLTAuNzM3IC0yMS4xNjIs%0D%0AMCAtMzcuMzQ1LDE2LjE4MyAtMzcuMzQ1LDM3LjM0NSAwLDIxLjE1OSAxNi4xODMsMzcuMzQyIDM3%0D%0ALjM0NSwzNy4zNDIgeiIKICAgICBpZD0icGF0aDM3MjciCiAgICAgaW5rc2NhcGU6Y29ubmVjdG9y%0D%0ALWN1cnZhdHVyZT0iMCIKICAgICBzdHlsZT0iZmlsbDojYTFhMWExIgogICAgIHNvZGlwb2RpOm5v%0D%0AZGV0eXBlcz0ic2NjY2NjY2NzY2NjY2NjY2NjY2Njc2Njc3NjY2NjY2Njc2NjY2NjY2Njc3NzIiAv%0D%0APgo8L3N2Zz4K")
+@var text contacticon           'Contact icon url' url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjxz%0D%0AdmcKICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICB4bWxu%0D%0AczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIgogICB4bWxuczpyZGY9Imh0dHA6%0D%0ALy93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiCiAgIHhtbG5zOnN2Zz0iaHR0%0D%0AcDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAw%0D%0AL3N2ZyIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQv%0D%0ARFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2Fw%0D%0AZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgdmlld0JveD0iMCAwIDIxMiAyMTIiCiAgIHdp%0D%0AZHRoPSIyMTIiCiAgIGhlaWdodD0iMjEyIgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmczNzI5%0D%0AIgogICBzb2RpcG9kaTpkb2NuYW1lPSJjb250YWN0LWljb24uc3ZnIgogICBpbmtzY2FwZTp2ZXJz%0D%0AaW9uPSIwLjkyLjQgKDVkYTY4OWMzMTMsIDIwMTktMDEtMTQpIj4KICA8bWV0YWRhdGEKICAgICBp%0D%0AZD0ibWV0YWRhdGEzNzM1Ij4KICAgIDxyZGY6UkRGPgogICAgICA8Y2M6V29yawogICAgICAgICBy%0D%0AZGY6YWJvdXQ9IiI+CiAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9zdmcreG1sPC9kYzpmb3JtYXQ+%0D%0ACiAgICAgICAgPGRjOnR5cGUKICAgICAgICAgICByZGY6cmVzb3VyY2U9Imh0dHA6Ly9wdXJsLm9y%0D%0AZy9kYy9kY21pdHlwZS9TdGlsbEltYWdlIiAvPgogICAgICA8L2NjOldvcms+CiAgICA8L3JkZjpS%0D%0AREY+CiAgPC9tZXRhZGF0YT4KICA8ZGVmcwogICAgIGlkPSJkZWZzMzczMyIgLz4KICA8c29kaXBv%0D%0AZGk6bmFtZWR2aWV3CiAgICAgcGFnZWNvbG9yPSIjZmZmZmZmIgogICAgIGJvcmRlcmNvbG9yPSIj%0D%0ANjY2NjY2IgogICAgIGJvcmRlcm9wYWNpdHk9IjEiCiAgICAgb2JqZWN0dG9sZXJhbmNlPSIxMCIK%0D%0AICAgICBncmlkdG9sZXJhbmNlPSIxMCIKICAgICBndWlkZXRvbGVyYW5jZT0iMTAiCiAgICAgaW5r%0D%0Ac2NhcGU6cGFnZW9wYWNpdHk9IjAiCiAgICAgaW5rc2NhcGU6cGFnZXNoYWRvdz0iMiIKICAgICBp%0D%0AbmtzY2FwZTp3aW5kb3ctd2lkdGg9IjI1NjAiCiAgICAgaW5rc2NhcGU6d2luZG93LWhlaWdodD0i%0D%0AMTM2MSIKICAgICBpZD0ibmFtZWR2aWV3MzczMSIKICAgICBzaG93Z3JpZD0iZmFsc2UiCiAgICAg%0D%0AaW5rc2NhcGU6c25hcC1nbG9iYWw9InRydWUiCiAgICAgaW5rc2NhcGU6c25hcC1iYm94PSJ0cnVl%0D%0AIgogICAgIGlua3NjYXBlOmJib3gtcGF0aHM9InRydWUiCiAgICAgaW5rc2NhcGU6YmJveC1ub2Rl%0D%0Acz0idHJ1ZSIKICAgICBpbmtzY2FwZTpzbmFwLWJib3gtZWRnZS1taWRwb2ludHM9InRydWUiCiAg%0D%0AICAgaW5rc2NhcGU6c25hcC1iYm94LW1pZHBvaW50cz0idHJ1ZSIKICAgICBpbmtzY2FwZTpzbmFw%0D%0ALWludGVyc2VjdGlvbi1wYXRocz0idHJ1ZSIKICAgICBpbmtzY2FwZTpzbmFwLXNtb290aC1ub2Rl%0D%0Acz0idHJ1ZSIKICAgICBpbmtzY2FwZTp6b29tPSI0IgogICAgIGlua3NjYXBlOmN4PSIxMTAuMTgx%0D%0AMzYiCiAgICAgaW5rc2NhcGU6Y3k9Ijk5LjU3MDIyOSIKICAgICBpbmtzY2FwZTp3aW5kb3cteD0i%0D%0ALTkiCiAgICAgaW5rc2NhcGU6d2luZG93LXk9Ii05IgogICAgIGlua3NjYXBlOndpbmRvdy1tYXhp%0D%0AbWl6ZWQ9IjEiCiAgICAgaW5rc2NhcGU6Y3VycmVudC1sYXllcj0ic3ZnMzcyOSIgLz4KICA8cmVj%0D%0AdAogICAgIGZpbGw9IiMxZjIzMmEiCiAgICAgd2lkdGg9IjIxMiIKICAgICBoZWlnaHQ9IjIxMiIK%0D%0AICAgICBpZD0icmVjdDM3MjUiIC8+CiAgPHBhdGgKICAgICBjbGFzcz0icHJpbWFyeSIKICAgICBk%0D%0APSJtIDE3My41NjEsMTcxLjYxNSBjIC0wLjY1OTksLTEuMDA0NTcgLTEuMzQ4NTIsLTEuOTg5OTcg%0D%0ALTIuMDY1LC0yLjk1NSAtMC44MzQ5NiwtMS4xMjY0MSAtMS43MDQ3MSwtMi4yMjY2MSAtMi42MDgs%0D%0ALTMuMjk5IC0xLjAyMTE4LC0xLjIxMTMgLTIuMDgzMTIsLTIuMzg3NjUgLTMuMTg0LC0zLjUyNyAt%0D%0AMS44Njk2LC0xLjkzMzkzIC0zLjg0NzQ1LC0zLjc2MDIgLTUuOTI0LC01LjQ3IC0zLjE5NDUxLC0y%0D%0ALjYyOTAyIC02LjYwODMyLC00Ljk3OTYxIC0xMC4yMDQsLTcuMDI2IC0xLjk0Njg1LC0xLjEwNjg3%0D%0AIC0zLjk0MjE3LC0yLjEyNjIyIC01Ljk4LC0zLjA1NSAtMC4wNjIsLTAuMDI4IC0wLjExOCwtMC4w%0D%0ANTkgLTAuMTgsLTAuMDg3IC05Ljc5MiwtNC40NCAtMjIuMTA2LC03LjUyOSAtMzcuNDE2LC03LjUy%0D%0AOSAtMTUuMzEsMCAtMjcuNjI0LDMuMDg5IC0zNy40MTYsNy41MjkgLTAuMzM4LDAuMTUzIC0wLjY1%0D%0AMywwLjMxOCAtMC45ODUsMC40NzQgLTIuMTI2NjI3LDEuMDAxNTkgLTQuMjA1MjMzLDIuMTAyMTMg%0D%0ALTYuMjI5LDMuMjk4IC0zLjIwOTYzMywxLjg5MzYzIC02LjI2ODY3Niw0LjAzMTYyIC05LjE1LDYu%0D%0AMzk1IC0yLjA3NjM0NywxLjcxMDA0IC00LjA1NDE4LDMuNTM2MjkgLTUuOTI0LDUuNDcgLTEuMTAw%0D%0AOTA1LDEuMTM5MzMgLTIuMTYyODQ5LDIuMzE1NjcgLTMuMTg0LDMuNTI3IC0wLjkwMzkwNSwxLjA3%0D%0AMjE1IC0xLjc3Mzk5OCwyLjE3MjM2IC0yLjYwOSwzLjI5OSAtMC43MTYyNTIsMC45NjUxOSAtMS40%0D%0AMDQ4NjQsMS45NTA1OSAtMi4wNjUsMi45NTUgQyAzMC4xNjczMjYsMTg0LjAyMDIzIDI1LjkzNDQx%0D%0ANiwxOTYuOTgyNzUgMjMuODc5NzI5LDIxMiBIIDEwNS45NDQgMTg2Ljk3MjM2IGMgLTIuMDU0ODgs%0D%0ALTEzLjQ0ODA3IC01LjA0Nzk1LC0yNi4yMjk3NiAtMTEuOTY1MzYsLTM4LjA2Mjk5IC0wLjQ2Mzc5%0D%0ALC0wLjc4NTE5IC0wLjk0NTkyLC0xLjU1OTQxIC0xLjQ0NiwtMi4zMjIgeiBNIDEwNi4wMDIsMTI1%0D%0ALjUgYyAyLjY0NSwwIDUuMjEyLC0wLjI1MyA3LjY4LC0wLjczNyAxLjIyMTg2LC0wLjIzOTU0IDIu%0D%0ANDMxMjksLTAuNTM4NTYgMy42MjQsLTAuODk2IDEuNzUyNTksLTAuNTI1NiAzLjQ2MzkyLC0xLjE4%0D%0AMDA1IDUuMTIsLTEuOTU4IDIuMTY1OTQsLTEuMDE3NjYgNC4yMjU5NiwtMi4yNDY5NyA2LjE1LC0z%0D%0ALjY3IDMuODI1OTcsLTIuODMwMyA3LjA1MTQyLC02LjM5MjYxIDkuNDg5LC0xMC40OCAwLjkyNTgx%0D%0ALC0xLjU1MTI3IDEuNzM1MzYsLTMuMTY5MDQgMi40MjIsLTQuODQgMC43MDE4MiwtMS43MDQ4NyAx%0D%0ALjI3NTQyLC0zLjQ1OTc0MyAxLjcxNiwtNS4yNSAwLjI5OSwtMS4yMDggMC41NDIsLTIuNDQzIDAu%0D%0ANzI1LC0zLjcwMSAwLjI3NSwtMS44ODcgMC40MTcsLTMuODI3IDAuNDE3LC01LjgxMSAwLC0xLjk4%0D%0ANCAtMC4xNDIsLTMuOTI1IC0wLjQxNywtNS44MTEgLTAuMjcxMjcsLTEuODU4MzY3IC0wLjY3NzM0%0D%0ALC0zLjY5NDU0NCAtMS4yMTUsLTUuNDk0IC0wLjg2ODI0LC0yLjkwNjE5IC0yLjA5MzU5LC01LjY5%0D%0AMzQ2OCAtMy42NDgsLTguMjk4IC0yLjQzNzU4LC00LjA4NzM5NCAtNS42NjMwMywtNy42NDk3MDIg%0D%0ALTkuNDg5LC0xMC40OCAtMS45MjQxOCwtMS40MjI4MDkgLTMuOTg0MTgsLTIuNjUyMTA4IC02LjE1%0D%0ALC0zLjY3IC0xLjY1NjA4LC0wLjc3Nzk0OCAtMy4zNjc0MSwtMS40MzIzOTggLTUuMTIsLTEuOTU4%0D%0AIC0xLjE5MjQ1LC0wLjM1ODM3NyAtMi40MDE5MywtMC42NTc0MSAtMy42MjQsLTAuODk2IC0yLjUz%0D%0AMDE2LC0wLjQ5MzMzNCAtNS4xMDIyLC0wLjc0MDE1NiAtNy42OCwtMC43MzcgLTIxLjE2MiwwIC0z%0D%0ANy4zNDUsMTYuMTgzIC0zNy4zNDUsMzcuMzQ1IDAsMjEuMTU5IDE2LjE4MywzNy4zNDIgMzcuMzQ1%0D%0ALDM3LjM0MiB6IgogICAgIGlkPSJwYXRoMzcyNyIKICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3Vy%0D%0AdmF0dXJlPSIwIgogICAgIHN0eWxlPSJmaWxsOiNhMWExYTEiCiAgICAgc29kaXBvZGk6bm9kZXR5%0D%0AcGVzPSJzY2NjY2NjY3NjY2NjY2NjY2NjY2Njc3NjY2NjY2Njc2NjY2NjY2Njc3NzIiAvPgo8L3N2%0D%0AZz4K")
 
 @var text groupicon             'Group icon url' url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmOCI/Pg0KPHN2ZyB4bWxucz0iaHR0cDov%0D%0AL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMTIgMjEyIiB3aWR0aD0iMjEyIiBo%0D%0AZWlnaHQ9IjIxMiI+DQogICAgPHJlY3QgZmlsbD0iIzFmMjMyYSIgd2lkdGg9IjIxMiIgaGVpZ2h0%0D%0APSIyMTIiLz4NCiAgICA8cGF0aCBmaWxsPSIjYTFhMWExIiBjbGFzcz0icHJpbWFyeSIgZD0iTTYx%0D%0ALjU0MyAxMDAuOTg4YzguMDczIDAgMTQuMjQ2LTYuMTc0IDE0LjI0Ni0xNC4yNDZzLTYuMTczLTE0%0D%0ALjI0Ni0xNC4yNDYtMTQuMjQ2LTE0LjI0NiA2LjE3My0xNC4yNDYgMTQuMjQ2IDYuMTc0IDE0LjI0%0D%0ANiAxNC4yNDYgMTQuMjQ2em04LjE1OSAxNy41NDFhNDguMTkyIDQ4LjE5MiAwIDAgMSA4LjU0NS02%0D%0ALjA2MmMtNC4xNzQtMi4yMTctOS42NDEtMy44NTktMTYuNzA0LTMuODU5LTIxLjg0NCAwLTI4LjQ5%0D%0AMiAxNS42Ny0yOC40OTIgMTUuNjd2OC4wNzNoMjYuMTgxbC4xMDUtLjI0OGMuMzAzLS43MTMgMy4x%0D%0ANjQtNy4xNTEgMTAuMzY1LTEzLjU3NHptODAuNzU1LTkuOTIxYy02Ljg1NCAwLTEyLjIxIDEuNTQz%0D%0ALTE2LjMzNiAzLjY2MWE0OC4yMjMgNDguMjIzIDAgMCAxIDguOTAzIDYuMjZjNy4yMDEgNi40MjIg%0D%0AMTAuMDYxIDEyLjg2MSAxMC4zNjQgMTMuNTc0bC4xMDUuMjQ4aDI1LjQ1NnYtOC4wNzNjLS4wMDEg%0D%0AMC02LjY0OS0xNS42Ny0yOC40OTItMTUuNjd6bTAtNy42MmM4LjA3MyAwIDE0LjI0Ni02LjE3NCAx%0D%0ANC4yNDYtMTQuMjQ2cy02LjE3My0xNC4yNDYtMTQuMjQ2LTE0LjI0Ni0xNC4yNDYgNi4xNzMtMTQu%0D%0AMjQ2IDE0LjI0NiA2LjE3MyAxNC4yNDYgMTQuMjQ2IDE0LjI0NnptLTQ0LjA5MyAzLjIxYTIzLjIx%0D%0AIDIzLjIxIDAgMCAwIDQuNDY0LS40MjhjLjcxNy0uMTQgMS40MTktLjMxNSAyLjEwNi0uNTIxIDEu%0D%0AMDMtLjMwOSAyLjAyMy0uNjkgMi45NzYtMS4xMzhhMjEuMDk5IDIxLjA5OSAwIDAgMCAzLjU3NC0y%0D%0ALjEzMyAyMC44NzIgMjAuODcyIDAgMCAwIDUuNTE1LTYuMDkxIDIxLjI4MyAyMS4yODMgMCAwIDAg%0D%0AMi4xMjEtNC44MjMgMjIuMTYgMjIuMTYgMCAwIDAgLjcwNi0zLjE5M2MuMTYtMS4wOTcuMjQyLTIu%0D%0AMjI0LjI0Mi0zLjM3N3MtLjA4My0yLjI4MS0uMjQyLTMuMzc3YTIyLjc3OCAyMi43NzggMCAwIDAt%0D%0ALjcwNi0zLjE5MyAyMS4yODMgMjEuMjgzIDAgMCAwLTMuMjcyLTYuNTUgMjAuODQ4IDIwLjg0OCAw%0D%0AIDAgMC00LjM2NC00LjM2NCAyMS4wOTkgMjEuMDk5IDAgMCAwLTMuNTc0LTIuMTMzIDIxLjQ4OCAy%0D%0AMS40ODggMCAwIDAtMi45NzYtMS4xMzggMjIuMzMgMjIuMzMgMCAwIDAtMi4xMDYtLjUyMSAyMy4y%0D%0AMDIgMjMuMjAyIDAgMCAwLTQuNDY0LS40MjhjLTEyLjI5OSAwLTIxLjcwNSA5LjQwNS0yMS43MDUg%0D%0AMjEuNzA0IDAgMTIuMjk5IDkuNDA2IDIxLjcwNCAyMS43MDUgMjEuNzA0ek0xNDUuNjI5IDEzMWEz%0D%0ANi43MzkgMzYuNzM5IDAgMCAwLTEuMi0xLjcxOCAzOS44MDQgMzkuODA0IDAgMCAwLTMuMzY3LTMu%0D%0AOTY3IDQxLjQ4MSA0MS40ODEgMCAwIDAtMy40NDItMy4xNzkgNDIuMDc4IDQyLjA3OCAwIDAgMC01%0D%0ALjkzMS00LjA4MyA0My43MjUgNDMuNzI1IDAgMCAwLTMuNDc2LTEuNzc2Yy0uMDM2LS4wMTYtLjA2%0D%0AOS0uMDM0LS4xMDQtLjA1LTUuNjkyLTIuNTgxLTEyLjg0OS00LjM3Ni0yMS43NDYtNC4zNzYtOC44%0D%0AOTggMC0xNi4wNTUgMS43OTUtMjEuNzQ2IDQuMzc2LS4xOTYuMDg5LS4zNzkuMTg1LS41NzIuMjc2%0D%0AYTQzLjMxNiA0My4zMTYgMCAwIDAtMy42MiAxLjkxNyA0Mi4zMiA0Mi4zMiAwIDAgMC01LjMxOCAz%0D%0ALjcxNiA0MS41MDEgNDEuNTAxIDAgMCAwLTMuNDQzIDMuMTc5IDQwLjYzMiA0MC42MzIgMCAwIDAt%0D%0AMy4zNjYgMy45NjdjLS40NTIuNjEtLjg1MSAxLjE4Ni0xLjIgMS43MTgtLjMyNC40OTMtLjYuOTQz%0D%0ALS44NDEgMS4zNTFsLS4wNjEuMTAxYTI3Ljk2IDI3Ljk2IDAgMCAwLS42MjIgMS4xMTljLS4zMjUu%0D%0ANjIxLS40NzUuOTc1LS40NzUuOTc1djExLjY5Mmg4Mi41M3YtMTEuNjkycy0uMzYtLjg0Mi0xLjE1%0D%0AOC0yLjE5NWEzNS40MTcgMzUuNDE3IDAgMCAwLS44NDItMS4zNTF6Ii8+DQo8L3N2Zz4=")
+
+@var checkbox fullscreen        'Enable fullscreen' 0
 
 @var range clight               'Colors lightness' [0.75, 0, 2, 0.01]
 @var range chue                 'Colors hue' [320, 0, 360, 1, 'deg']
@@ -120,8 +125,8 @@
     
         --is-private (private is 1 ? 10px : 0);    
         
-        --version "Dark-Telegram v1.0.4 — April 2nd, 2020"
-        --message "An update is available, please report any issues on GitHub so that we can fix them."
+        --version "Dark-Telegram v1.0.5 — April 4th, 2020"
+        --message "Please report any issues on GitHub so that we can fix them."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
     }
@@ -170,6 +175,13 @@
 
     /* border */
     brad() { border-radius arguments }
+
+    /*
+    *   Clamping a given value by a given minimum and maximum.
+    */
+    clamp(value, minimum, maximum){
+        max(minimum, min(maximum, value))
+    }
 
     /* setting up icon and contact name colors */
     colors1 = #000 usrc1 usrc2 usrc3 usrc4 usrc5 usrc6 usrc7 usrc8
@@ -292,12 +304,16 @@
         border-bottom 1px solid border
     }
     
-    /* Widescreen */
+    /* chat size */
     .im_send_form,
     .im_send_panel_wrap,
     .im_message_wrap,
     .composer_rich_textarea {
-        max-width 100% i
+        if(useChatSize){
+            max-width unit(chatSize, "px") i
+        } else{
+            max-width 100% i
+        }
     }
 
     .im_send_panel_wrap {
@@ -305,14 +321,48 @@
         padding-bottom 10px
     }
     
+    /* emoji's & stickers opacity */
+    a.composer_emoji_btn,
+    .composer_sticker_image{
+        opacity emojo
+        &:hover{
+            opacity 1
+        }
+    }
+
+    /* emoji's button background when hovered */
     a.composer_emoji_btn:hover{
         bgc control-active
     }
-    
+        
     .tg_head_split{
-        margin-top 10px
+        margin-top 23px
         height 49px
         border 1px solid border i
+    }
+
+    /* fullscreen mixin */
+    fullscreenblock() {
+        .tg_head_split{
+            margin-top -1px i
+        }
+        .im_page_wrap,
+        .tg_head_split{
+            min-width 100% i
+        }
+        .footer_wrap.footer_empty{
+            display none i
+            height 0
+        }
+    }
+
+    /* setting fullscreen mode */
+    if(fullscreen){
+        fullscreenblock()
+    }else{
+        @media screen and (max-width 1010px), (max-height 600px){
+            fullscreenblock()    
+        }
     }
         
     .im_page_wrap,
@@ -403,6 +453,19 @@
         border 1px solid border
         border-top none
         shad 0px 3px 5px shadow
+    }
+    
+    /* clamping video thumb images to 256x256 */
+    img.im_message_video_thumb{
+        max-width 256px
+        max-height 256px
+        width auto
+        height auto
+    }
+
+    /* fix message body to fit inside chat area */
+    div.im_message_body{
+        display grid i
     }
     
     /* messages bubble tail*/
@@ -644,10 +707,18 @@
     
     /* top bar */
     .tg_head_split,
-    .md_modal_head {
+    .md_modal_head{
         /*page header block*/
         bgc control i
-        border-radius border-size border-size 0px 0px
+        brad border-size border-size 0px 0px
+    }
+
+    /* fixing top corners buttons border-size */
+    .tg_head_btn.dropdown-toggle{
+        brad border-size border-size 0px 0px
+        &:hover{
+            bg none i
+        }
     }
 
     .dropdown.open .tg_head_btn,
@@ -660,11 +731,11 @@
         height 47px
         top 0
         transition t-out
-    }
-    
-    .tg_head_btn:hover{
-        transition t-in
-    }
+        .tg_head_btn:hover{
+            transition t-in
+            bgc none
+        }
+    }    
     
     .tg_head_logo_wrap, .tg_head_logo_wrap:hover{
         border-right 1px solid border
@@ -699,7 +770,8 @@
         white-space nowrap
         overflow hidden
     }
-      
+    
+
     if(enableCompact){
         @media screen and (max-width compactBreak) {
             wmin = 80px
@@ -736,9 +808,8 @@
             }
             
             /* while contact list is hovered or has focus within (search box) */
-            .page_wrap > .im_page_wrap > .im_page_split > .im_dialogs_col_wrap:hover,
-            .page_wrap > .im_page_wrap > .im_page_split > .im_dialogs_col_wrap:focus-within{
-                
+            .page_wrap .im_page_wrap .im_page_split .im_dialogs_col_wrap:hover,
+            .page_wrap .im_page_wrap .im_page_split .im_dialogs_col_wrap:focus-within{
                 /* let all the envolved transit nicely */
                 .tg_head_logo_wrap,//<- need to fix that
                 .tg_head_main_wrap,//<- need to fix that
@@ -1250,8 +1321,7 @@
     }*/
     
     .im_grouped_short .im_content_message_wrap,
-    .im_content_message_wrap{         
-        /* display flex */
+    .im_content_message_wrap{
         margin 2px 16px
     }
     
