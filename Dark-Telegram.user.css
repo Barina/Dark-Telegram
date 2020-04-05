@@ -4,17 +4,22 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.styl
-@version        1.0.6
+@version        1.0.7
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
 @preprocessor   stylus
 
-@var color textc                'Text color' #ccccca
+@var color textc2               'Headers text color' #fff
+@var color textc1               'Primary text color' #ccccca
+@var color textc3               'Secondary text color' #6e6e6e
 
+@var checkbox customFont        'Use custom font' 0
+@var text ui_font               'Font family' 'sans-serif'
+
+@var range msgb                 'Messages bubble corner size' [10, 1, 100, 1, "px"]
 @var color msg-in-bg            'Incoming message background color'  #3c434f
 @var color msg-out-bg           'Outgoing message background color' #333a47
-@var range msgb                 'Messages bubble corner size' [10, 1, 100, 1, "px"]
 
 @var select inpos               'Incoming bubble position'{
     'Left                       *': 'left',
@@ -27,8 +32,8 @@
     'Stretch                     ': 'stretch'
 }
 
-@var checkbox hideownicon       'Hide own user photo from chat window' 1
 @var checkbox hideothericon     'Hide other contact user photo from chat window' 1
+@var checkbox hideownicon       'Hide own user photo from chat window' 1
 
 @var color bgcolor              'Background color' #1f232a
 
@@ -59,6 +64,7 @@
 
 @var checkbox useChatSize       'Use custom chat width' 0
 @var number chatSize            'Chat width in px' [780, 0]
+@var color bgccolor             'Chat background color' #1f232a
 @var checkbox showchatbg        'Enable chat background image' 1
 @var text     chatbg            'Custom image for chat' url('https://web.whatsapp.com/img/bg-chat-tile_9e8a2898faedb7db9bf5638405cf81ae.png')
 @var range    chatbg-o          'Chat background image opacity' [0.15, 0.0, 1, 0.01]
@@ -121,8 +127,8 @@
 ==/UserStyle== */
 @-moz-document domain("web.telegram.org") {
     :root {
-        --test-color #292f38
-    
+        --ui-font ui_font 'Segoe UI' 'Helvetica Neue' Helvetica 'Lucida Grande' Arial Ubuntu Cantarell 'Fira Sans' sans-serif
+        --control-t rgba(control, .5)
         --control-t-hover rgba(control-hover, .5)
         --control-t-active rgba(control-active, .5)
     
@@ -139,7 +145,7 @@
     
         --is-private (private is 1 ? 10px : 0);    
         
-        --version "Dark-Telegram v1.0.6 — April 5th, 2020"
+        --version "Dark-Telegram v1.0.7 — April 5th, 2020"
         --message "Please report any issues on GitHub so that we can fix them."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -258,24 +264,26 @@
     
 
     /* contact icon initials */
-    if(hideinitials is 1){
+    if(hideinitials){
         .peer_initials{
-            color transparent
+            color transparent i
         }
     }
 
     /* contact icon */
     if(useicons is 1){
-        .im_dialog_photo,
+        // .im_dialog_photo,//
         .im_message_contact_photo,
-        .im_message_from_photo,
-        .im_message_fwd_photo,
-        .md_modal_list_peer_photo,
-        .peer_modal_photo{
+        // .im_message_from_photo,//
+        // .im_message_fwd_photo,
+        // .md_modal_list_peer_photo,//
+        // .im_dialog_photo,
+        .peer_initials{
             bgc transparent i
-            bgi contacticon
-            bgs cover
-        }    
+            bgi contacticon i
+            bgs cover i
+            filter none
+        }
     }
 
     /* changed group icon in message history */
@@ -398,7 +406,7 @@
     
     /* chat background */
     .im_history_wrap{
-        bgc bgcolor
+        bgc bgccolor
         if(showchatbg and chatbg-o > 0){
             &:before{
                 content ''
@@ -531,7 +539,7 @@
     /* out tail */
     .im_message_out .im_message_body:before{
         if(outpos == right){
-            rightTail(msg-out-bg, 56)
+            rightTail(msg-out-bg, 58)
         } else {
             leftTail(msg-out-bg)
         }
@@ -548,6 +556,14 @@
         /* fixing out messages without icon right margin */
         .im_history_message_wrap.im_grouped .im_message_out .im_message_body,
         .im_grouped_short .im_message_outer_wrap .im_message_out .im_message_body{
+            margin-right 70px
+        }
+    }
+
+    if(inpos == right){
+        /* fixing in messages without icon right margin */
+        .im_history_message_wrap.im_grouped .im_message_in .im_message_body,
+        .im_grouped_short .im_message_outer_wrap .im_message_in .im_message_body{
             margin-right 70px
         }
     }
@@ -665,7 +681,7 @@
             font-size 16px
             margin-bottom 16px
             padding 16px 20%
-            color textc
+            color textc1
             user-select auto i
         }
         /* version footer */
@@ -677,7 +693,7 @@
             font-size 11px
             margin-top 16px
             padding-top 16px
-            color textc - 50%
+            color textc1 - 50%
             user-select auto i
         }
     }
@@ -701,7 +717,10 @@
     
     body{
         /* bgc bgcolor i*/
-        color textc i
+        color textc1 i
+        if(customFont){
+            font-family var(--ui-font) i
+        }
         &:before{
             if(app_image == default and bgopacity != null and bgopacity > .01){
                 content ''
@@ -727,8 +746,105 @@
         }
     }
     
-    a.tg_checkbox{
-        color textc i
+    ::selection {
+        background accent i
+        color textc2 i
+    }
+
+    /* primary text color elements */
+    .error_modal_description,
+    .im_message_webpage_site,
+    .im_message_video_duration,
+    .media_modal_bottom_panel,
+    a.md_modal_action,
+    a.tg_checkbox,
+    body{
+        color textc1
+    }
+
+    /* force primary text color elements */
+    input{
+        color textc1 i
+    }
+
+    /* secondary text color elements */
+    .im_history_typing,
+    .im_history_typing a.im_history_typing_author,
+    .audio_player_duration, 
+    .audio_player_size,
+    .im_message_document_size,
+    .md-input-disabled .md-input,
+    .media_modal_date, 
+    a.media_modal_date:hover,
+    .im_dialogs_contacts_wrap h5, .im_dialogs_messages_wrap h5,
+    .md_modal_section_param_wrap .md_modal_section_param_name,
+    .im_dialog_date,
+    .im_service_message,
+    .im_message_date, 
+    .im_message_fwd_date,
+    .im_message_author_admin,
+    .im_history_empty,
+    a.im_dialog .im_short_message_text,
+    .md-input-label{
+        color textc3
+    }
+        
+    /* force secondary text color elements */
+    .md_modal_list_peer_description,
+    .im_dialog_message,
+    .composer_rich_textarea:empty::before,
+    input::placeholder{
+        color textc3 i
+    }
+
+    /* headers color elements */
+    .badge,
+    .im_message_views_cnt,
+    .contacts_modal_members_list .active a.contacts_modal_contact, 
+    .contacts_modal_members_list .active a.contacts_modal_contact:hover,
+    .contacts_modal_members_list .active a.contacts_modal_contact .md_modal_list_peer_description, 
+    .contacts_modal_members_list .active a.contacts_modal_contact:hover .md_modal_list_peer_description, 
+    .contacts_modal_members_list .active a.contacts_modal_contact .md_modal_list_peer_description .status_online,
+    .active a.im_dialog .im_dialog_chat_from_wrap, 
+    .active a.im_dialog .im_dialog_draft_from, 
+    .active a.im_dialog .im_dialog_message, 
+    .active a.im_dialog .im_short_message_media, 
+    .active a.im_dialog .im_short_message_service, 
+    .active a.im_dialog .im_short_message_text,
+    .active .im_dialog_date, 
+    .active a.im_dialog:hover .im_dialog_date, 
+    .active a.im_dialog_selected .im_dialog_date,
+    .icon-tg-title,
+    .tg_head_peer_title,
+    .md_modal_title,
+    .peer_modal_profile_name,
+    a.md_modal_action:hover,
+    .tg_head_peer_media,
+    .media_modal_title_wrap,
+    .peer_initials{
+        color textc2
+    }
+
+    /* force secondary background color elements */
+    .icon-hamburger-wrap .icon-bar{
+        bg textc2 i
+    }
+
+    .im_message_video_duration{
+        bgc var(--control-t)
+    }
+
+    /* replacing telegram logo with a simple text to be able to paint it */
+    .icon-tg-title{
+        width 0
+        &:after{
+            content 'Telegram'
+            position relative
+            top -3px
+            font-style normal
+            font-family tahoma
+            font-size 13px i
+        }
     }
 
     /* outer body */
@@ -745,12 +861,12 @@
 
     /* nickname unselected */
     .im_dialog_peer {
-        color textc i;     
+        color textc1 i;     
     }
 
     /*nicknames in contactlist via hamburger menu*/
     .contacts_modal_members_list a.contacts_modal_contact {
-        color textc
+        color textc1
     }
     
     /* hiding FF scrollbars */
@@ -813,7 +929,6 @@
     .im_dialogs_modal_col_wrap .im_dialogs_search_field{
         bgc inputbg
         border-radius border-size
-        color #fff i
         border-color border i
     }
 
@@ -837,7 +952,7 @@
         overflow hidden
     }
     
-
+    /* compact mode */
     if(enableCompact){
         @media screen and (max-width compactBreak) {
             wmin = 80px
@@ -960,6 +1075,26 @@
         transition t-in
         color accent-alt
     }
+
+    /* buttons disabled */
+    .btn-primary.disabled,
+    .btn-primary.disabled.active,
+    .btn-primary.disabled:active,
+    .btn-primary.disabled:focus,
+    .btn-primary.disabled:hover,
+    .btn-primary[disabled],
+    .btn-primary[disabled].active,
+    .btn-primary[disabled]:active,
+    .btn-primary[disabled]:focus,
+    .btn-primary[disabled]:hover,
+    fieldset[disabled] .btn-primary,
+    fieldset[disabled] .btn-primary.active,
+    fieldset[disabled] .btn-primary:active,
+    fieldset[disabled] .btn-primary:focus,
+    fieldset[disabled] .btn-primary:hover{
+        border 1px solid border
+        border-bottom 3px solid border
+    }
         
     /* round button */
     .im_record_bg,
@@ -989,6 +1124,9 @@
         padding 3px 8px;       
     }
     
+    .im_dialogs_scrollable_wrap a.im_dialog_searchpeer, 
+    .im_dialogs_scrollable_wrap a.im_dialog_searchpeer:hover, 
+    .im_dialogs_scrollable_wrap a.im_dialog_searchpeer_selected,
     .im_message_mymention {
         bg control
     }
@@ -1249,6 +1387,47 @@
         padding 0
     }
 
+    /* play overlay button */
+    .icon-videoplay{
+        margin 0
+        border none
+
+        &:before{
+            content ''
+            position absolute
+            width 50px
+            height 50px
+            top -25px
+            left -25px
+            bgc var(--control-t)
+            z-index -1
+            // padding 5px
+            brad 50%
+            border 1px solid border
+        }
+        &:hover:before{
+            bgc control            
+        }
+        &:after{
+            content ''
+            position: absolute;
+            display: inline-block;
+            top: 50%;
+            left: 50%;
+            margin-left: -5px;
+            margin-top: -9px;
+            z-index: 1;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 9px 0 9px 14px;
+            border-color transparent transparent transparent accent
+        }
+        &:hover:after{
+            border-color transparent transparent transparent accent-alt
+        }
+    }
+
     /* margin media buttons */
     .im_attach{
         margin-top 14px i
@@ -1442,9 +1621,9 @@
         right 0
         top 0
         bottom 0
-        border-radius 0
+        brad 0
         width 6px
-        background #0003
+        bg var(--control-t-active)
         z-index 5
     }
     
@@ -1457,15 +1636,15 @@
     .composer_rich_textarea,
     .composer_textarea,
     ::-webkit-scrollbar-thumb{
-        border-radius 0
-        background accent
+        brad 0
+        bg accent
         z-index 5
     }
     
     /*scrollbarbutton when hover*/
     .im_dialogs_col .nano > .nano-pane > .nano-slider,
     ::-webkit-scrollbar-thumb:hover{
-       background accent-alt
+       bg accent-alt
        z-index 5
     }
     
@@ -1477,18 +1656,20 @@
     
     /* contacts scrollbar bg */
     .im_dialogs_col .nano > .nano-pane{
-        background #0003
+        bg var(--control-t-active)
         width 4px
     }
     
     /* contacts scrollbar */
     .im_dialogs_col .nano > .nano-pane > .nano-slider{
-        background-color accent i
+        bgc accent i
         width 5px
         left -5px
     }
     
-    /* accent colors */
+    /* accent text color elements */
+    .error_modal_details_link,
+    .changelog_github_link,
     .im_message_author, .im_message_fwd_author,
     a, a:focus, a:hover,
     .tg_head_btn,
@@ -1505,11 +1686,38 @@
     a.im_dialog .im_short_message_service,
     .tg_head_logo_dropdown .dropdown-menu > li > a,
     .md_modal_list_peer_description .status_online,
-    .md_modal_list_peer_description.status_online{
+    .md_modal_list_peer_description.status_online,
+    .tg_head_peer_status{
         color accent
         // transition t-in
     }
-    
+
+    /* alt accent text color elements */
+    .error_modal_details_link:hover,
+    .im_message_selected .im_message_date, 
+    .im_message_selected .im_message_document_size, 
+    .im_message_selected .im_message_audio_duration, 
+    .im_message_selected .im_message_audio_size, 
+    .im_message_selected .im_message_fwd_date, 
+    .im_message_selected .im_message_author_admin, 
+    .im_message_selected .im_message_views_cnt, 
+    .im_message_selected .im_message_sign_link, 
+    .im_history_select_active .im_message_outer_wrap:hover .im_message_date, 
+    .im_history_select_active .im_message_outer_wrap:hover .im_message_document_size, 
+    .im_history_select_active .im_message_outer_wrap:hover .im_message_audio_duration, 
+    .im_history_select_active .im_message_outer_wrap:hover .im_message_audio_size, 
+    .im_history_select_active .im_message_outer_wrap:hover .im_message_fwd_date, 
+    .im_history_select_active .im_message_outer_wrap:hover .im_message_author_admin, 
+    .im_history_select_active .im_message_outer_wrap:hover .im_message_views_cnt, 
+    .im_history_select_active .im_message_outer_wrap:hover .im_message_sign_link,    
+    .dropdown-menu > li > a:focus,
+    .dropdown-menu > li > a:hover,
+    .dropdown.open .tg_head_btn,
+    .tg_head_btn:hover,
+    a:focus, a:hover{
+        color accent-alt i
+    }
+
     /* emoji/stickers tab */
     .composer_emoji_tooltip_tab_shadow{
         bg accent-alt
@@ -1537,7 +1745,7 @@
     /* message content when hover in left contact list */
     .contacts_modal_contact_wrap:hover .contacts_modal_contact .md_modal_list_peer_description,
     a.im_dialog:hover .im_short_message_text{
-        color accent-alt
+        color accent-alt i
     }
     
     /* date when hover in left contact list */
@@ -1569,7 +1777,7 @@
     /* replay and pinned messages */
     .im_message_reply_wrap,
     .im_history_pinned_wrap .im_message_reply{
-        bgc #0003
+        bgc var(--control-t)
         brad 0 2px 2px 0
         padding 8px 16px
         border 1px solid border
@@ -1591,7 +1799,7 @@
     /* media messages */
     .audio_player_wrap,
     .im_message_document{
-        bgc #0003
+        bgc var(--control-t)
         brad msgb-thumb
         padding 8px 
         border 1px solid border
@@ -1605,7 +1813,7 @@
 
     /* media not supported message */
     div[ng-switch-when="messageMediaUnsupported"]{
-        bgc #0003
+        bgc var(--control-t)
         brad msgb-thumb
         padding 0px 8px
         margin-top 4px
@@ -1665,7 +1873,9 @@
     /* group info edit input */
     .md-input{
         bg inputbg
-        color textc
+        color textc1
+        padding-left 5px
+        padding-right 5px
     }
     .md-input-group{
         border-bottom 1px solid control
@@ -1678,7 +1888,7 @@
     h1, h2, h3, h4, h5,
     .composer_stickerset_title,
     .composer_stickerset_title:hover{
-        color textc
+        color textc1
     }
     
     /* toggles ON */
@@ -1711,7 +1921,7 @@
     .dropdown-menu>li>a,
     .dropdown-menu>li>a:focus,
     .dropdown-menu>li>a:hover{
-        color textc
+        color textc1
     }
     
     /* slider thumb */
@@ -1729,7 +1939,7 @@
     
     /* radio button */
     a.tg_radio{    
-        color textc
+        color textc1
     }
     
     i.icon-radio{
@@ -1784,7 +1994,7 @@
     /* unread badge active */
     .active .im_dialog_badge{
         bgc accent-alt
-        color textc
+        color textc1
     }
     
     /* unread badge muted */

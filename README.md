@@ -14,7 +14,7 @@ Dark mode implementation for [Telegram Web](https://web.telegram.org/) based on 
   <img src="Resources/Screenshots/20200403.png" width="100%" style="max-width: 100%;"/>
 </p>
 
-Currently at version 1.0.6 most features are ported from the original style, I will continue to work on it to add more cool things.</br>
+Most features are ported from the original style, I will continue to work on it to add more cool stuff.</br>
 Feel free to contribute and make sure to check [Dark-WhatsApp style by vednoc](https://github.com/vednoc/dark-whatsapp)!
 
 ## Features

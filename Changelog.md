@@ -1,3 +1,11 @@
+## V1.0.7 (2020-04-)
+
+- Added custom font.
+- Fixed short incoming messages indentation when setting its bubble to right position.
+- Fixed an issue with custom contact icons appearing behind contact icons.
+- Fixed right tail position.
+- A LOT of color tweaks.
+
 ## V1.0.6 (2020-04-05)
 
 - Added bubble position.
