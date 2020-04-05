@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.styl
-@version        1.0.5
+@version        1.0.6
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -15,6 +15,20 @@
 @var color msg-in-bg            'Incoming message background color'  #3c434f
 @var color msg-out-bg           'Outgoing message background color' #333a47
 @var range msgb                 'Messages bubble corner size' [10, 1, 100, 1, "px"]
+
+@var select inpos               'Incoming bubble position'{
+    'Left                       *': 'left',
+    'Right                       ': 'right',
+    'Stretch                     ': 'stretch'
+}
+@var select outpos              'Outgoing bubble position'{
+    'Left                        ': 'left',
+    'Right                       *': 'right',
+    'Stretch                     ': 'stretch'
+}
+
+@var checkbox hideownicon       'Hide own user photo from chat window' 1
+@var checkbox hideothericon     'Hide other contact user photo from chat window' 1
 
 @var color bgcolor              'Background color' #1f232a
 
@@ -125,7 +139,7 @@
     
         --is-private (private is 1 ? 10px : 0);    
         
-        --version "Dark-Telegram v1.0.5 — April 4th, 2020"
+        --version "Dark-Telegram v1.0.6 — April 5th, 2020"
         --message "Please report any issues on GitHub so that we can fix them."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -404,13 +418,6 @@
         // filter: invert(chatbg-i) opacity(chatbg-o);
     }
     
-    /* chat bubbles */
-    .im_message_text {
-        border 1px border
-        padding 10px
-        brad 0px 10px 10px 10px
-    }
-    
     /* user photo */
     .im_dialog_photo,
     .md_modal_list_peer_photo,
@@ -420,12 +427,26 @@
         brad round
     }
     
-    /* own user photo in chat history */
-    .im_message_out a.im_message_from_photo{        
+    /* user photo mixin */
+    hideIcon(){
         visibility hidden
-        width 0
-        min-width 0
-        margin 0
+        // width 0
+        // min-width 0
+        // margin 0
+    }
+
+    /* own user photo in chat history */
+    if(hideownicon){
+        .im_message_out a.im_message_from_photo{
+            visibility hidden
+        }
+    }
+
+    /* other user photo in chat history */
+    if(hideothericon){
+        .im_message_in a.im_message_from_photo{
+            visibility hidden
+        }
     }
     
     .im_message_contact_photo,
@@ -439,6 +460,13 @@
         margin-top -10px
     }
         
+    /* chat bubbles */
+    .im_message_text {
+        border 1px border
+        padding 10px
+        brad 0px 10px 10px 10px
+    }
+    
     /* short message bubble */
     .im_grouped_short .im_message_outer_wrap .im_message_out .im_message_body,
     .im_grouped_short .im_message_outer_wrap .im_message_in .im_message_body{
@@ -447,7 +475,6 @@
         
     /* message bubble base */
     .im_message_body{
-        bgc msg-in-bg
         brad msgb
         padding 0px 3px 3px 3px
         border 1px solid border
@@ -472,26 +499,42 @@
     .im_message_body:before{
         content ''
         position absolute
-        top 0px
+        top 0
         height 0
         width 0
         visibility var(--tail-v)
     }
-    
-    /* in tail */
-    .im_message_in .im_message_body:before{
+
+    /* tail mixins */
+    leftTail(tailCol, gap = 0){
         /*left: 79px;*/
-        left 48px
-        border-top 15px solid msg-in-bg
-        border-left 10px solid transparent
+        left gap + 48px
+        border-top 15px solid tailCol
+        border-left 10px solid transparent        
+    }
+    rightTail(tailCol, gap = 0){
+        /*right: 37px;*/
+        right gap + 6px
+        border-top 15px solid tailCol
+        border-right 10px solid transparent
+    }
+    
+    /* in tail */    
+    .im_message_in .im_message_body:before{
+        if(inpos != right){
+            leftTail(msg-in-bg)
+        }else{
+            rightTail(msg-in-bg, 58)
+        }
     }
     
     /* out tail */
     .im_message_out .im_message_body:before{
-        /*right: 37px;*/
-        right 6px
-        border-top 15px solid msg-out-bg
-        border-right 10px solid transparent
+        if(outpos == right){
+            rightTail(msg-out-bg, 56)
+        } else {
+            leftTail(msg-out-bg)
+        }
     }
     
     /* hide tails in short messages */
@@ -500,18 +543,35 @@
         display none
         visibility hidden
     }
+        
+    if(outpos == right){
+        /* fixing out messages without icon right margin */
+        .im_history_message_wrap.im_grouped .im_message_out .im_message_body,
+        .im_grouped_short .im_message_outer_wrap .im_message_out .im_message_body{
+            margin-right 70px
+        }
+    }
     
-    /* out message bubble */
-    .im_message_out .im_message_body{
-        bgc msg-out-bg
+    /* bubble mixins */
+    rightBubble(){
         border-top-right-radius 1px
         margin-left 10px
         margin-right 15px
     }
-    
+    leftBubble(){
+        border-top-left-radius 1px
+    }
+
     /* in message bubble */
     .im_message_in .im_message_body{
-        border-top-left-radius 1px
+        bgc msg-in-bg
+        (inpos != right) ? leftBubble() : rightBubble()
+    }
+    
+    /* out message bubble */
+    .im_message_out .im_message_body{
+        bgc msg-out-bg
+        (outpos == right) ? rightBubble() : leftBubble()
     }
     
     /* photo messages */
@@ -551,14 +611,20 @@
         margin 0
     }
     
+    /* message author position mixin */
+    authorAlign(a, w){
+        text-align a
+        width w
+    }
+
+    /* out message author position mixin */
     .im_message_out .im_message_body .im_message_author_wrap .im_message_author{        
-        text-align end
-        width 100%
+        authorAlign (outpos == right ? end : start) 100%
     }
         
+    /* in message author position mixin */
     .im_message_in .im_message_body .im_message_author_wrap .im_message_author{        
-        text-align start
-        width 100%
+        authorAlign (inpos != right ? start : end) 100%
     }
         
     /* right user profile photo in text area */
@@ -1036,7 +1102,9 @@
     /* status dot in message history area */
     .im_message_out>.icon-message-status{
         bg accent
-        margin-left 5px;       
+        if(outpos == right){
+            margin-left 5px
+        }
     }
     .im_dialog_unread,
     .active .im_dialog_unread{
@@ -1326,21 +1394,35 @@
     }
     
     .im_message_meta,
-    .historyMessage,
-    .im_message_out{
+    .historyMessage{
          display flex
+    }
+
+    /* bubble position mixin */
+    bubblePos(f, d, fl = unset){
+        float f
+        flex-direction d
+        display fl
     }
     
     .im_message_out{
-         float right
-         flex-direction row-reverse
-         /* bg #ff000030 */
+        if(outpos == left){
+            bubblePos left row
+        } else if(outpos == right){
+            bubblePos right row-reverse flex
+        } else {
+            /* Telegram original */
+        } 
     }
     
     .im_message_in{
-        float left
-        flex-direction row
-        /* bg #ff000036 */
+        if(inpos == right){
+            bubblePos right row-reverse flex
+        } else if(inpos == left){
+            bubblePos left row
+        } else {
+            /* Telegram original */
+        }
     }
     
     .historyMessage{

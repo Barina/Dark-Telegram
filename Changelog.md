@@ -1,3 +1,8 @@
+## V1.0.6 (2020-04-05)
+
+- Added bubble position.
+- Added hiding contacts icon from chat.
+
 ## V1.0.5 (2020-04-04)
 
 - Added fullscreen mode.
