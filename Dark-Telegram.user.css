@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.styl
-@version        1.0.8
+@version        1.0.9
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -160,7 +160,7 @@
     
         --is-private (private is 1 ? 10px : 0);    
         
-        --version "Dark-Telegram v1.0.8 — April 8th, 2020"
+        --version "Dark-Telegram v1.0.9 — April 8th, 2020"
         --message "Please report any issues on GitHub so that we can fix them."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -1954,6 +1954,9 @@
 
     /* set icons as SVG's */
     svgIcon(m, c = textc1){
+        -webkit-mask-image m i
+        -o-mask-image m i
+        -moz-mask-image m i
         mask-image m i
         bgi none i
         mask-position center
@@ -2151,6 +2154,9 @@
 
     /* SVG icons to fit inside round buttons */
     setSvg(m, t = 17, l = 16, c = accent){
+        -webkit-mask-image m i
+        -o-mask-image m i
+        -moz-mask-image m i
         mask-image m i
         mask-repeat no-repeat
         mask-position center

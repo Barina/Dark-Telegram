@@ -1,3 +1,7 @@
+## V1.0.9 (2020-04-08)
+
+- Fixed mask-image to include -webkit- -o- and -moz- that I forgot to include last version...
+
 ## V1.0.8 (2020-04-08)
 
 - Added a noise texture to controls. may be expanded in the future.
