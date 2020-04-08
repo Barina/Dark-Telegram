@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.styl
-@version        1.0.9
+@version        1.0.10
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -160,7 +160,7 @@
     
         --is-private (private is 1 ? 10px : 0);    
         
-        --version "Dark-Telegram v1.0.9 — April 8th, 2020"
+        --version "Dark-Telegram v1.0.10 — April 8th, 2020"
         --message "Please report any issues on GitHub so that we can fix them."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -1953,15 +1953,24 @@
     }
 
     /* set icons as SVG's */
-    svgIcon(m, c = textc1){
+    svgIcon(m, c = textc1, s = 100%){
         -webkit-mask-image m i
         -o-mask-image m i
         -moz-mask-image m i
         mask-image m i
-        bgi none i
         mask-position center
+        -webkit-mask-position center
+        -o-mask-position center
+        -moz-mask-position center
         mask-repeat no-repeat
-        mask-size 100%
+        -webkit-mask-repeat no-repeat
+        -o-mask-repeat no-repeat
+        -moz-mask-repeat no-repeat
+        mask-size s
+        -webkit-mask-size s
+        -o-mask-size s
+        -moz-mask-size s
+        bgi none i
         bgc c i
     }
 
@@ -2099,13 +2108,11 @@
     }
 
     .composer_emoji_tooltip_category_flower{
-        svgIcon flowerSvg accent
-        mask-size 85% i
+        svgIcon flowerSvg accent 85%
     }
 
     .composer_emoji_tooltip_category_bell{
-        svgIcon bellSvg accent
-        mask-size 85% i
+        svgIcon bellSvg accent 85%
     }
 
     .composer_emoji_tooltip_category_car{
@@ -2153,14 +2160,23 @@
     }
 
     /* SVG icons to fit inside round buttons */
-    setSvg(m, t = 17, l = 16, c = accent){
+    setSvg(m, t = 17, l = 16, c = accent, s = 100%){
         -webkit-mask-image m i
         -o-mask-image m i
         -moz-mask-image m i
         mask-image m i
-        mask-repeat no-repeat
         mask-position center
-        mask-size 100%
+        -webkit-mask-position center
+        -o-mask-position center
+        -moz-mask-position center
+        mask-repeat no-repeat
+        -webkit-mask-repeat no-repeat
+        -o-mask-repeat no-repeat
+        -moz-mask-repeat no-repeat
+        mask-size s
+        -webkit-mask-size s
+        -o-mask-size s
+        -moz-mask-size s
         background-position unset
         margin (t)px 0 0 (l)px
         max-width 100%

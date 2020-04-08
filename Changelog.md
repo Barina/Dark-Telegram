@@ -1,3 +1,7 @@
+## V1.0.10 (2020-04-08)
+
+- Fixed other mask issues. I'm so tired....
+
 ## V1.0.9 (2020-04-08)
 
 - Fixed mask-image to include -webkit- -o- and -moz- that I forgot to include last version...
