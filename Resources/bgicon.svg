@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="9.63972mm"
+   height="9.5818396mm"
+   viewBox="0 0 9.63972 9.5818396"
+   version="1.1"
+   id="svg8767"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="bgicon.svg">
+  <defs
+     id="defs8761" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.959798"
+     inkscape:cx="-35.429066"
+     inkscape:cy="24.64018"
+     inkscape:document-units="mm"
+     inkscape:current-layer="svg8767"
+     showgrid="false"
+     inkscape:window-width="2560"
+     inkscape:window-height="1361"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata8764">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-opacity:1"
+     d="M 1.079,0 C 0.48121,0 0,0.48121 0,1.079 v 7.42384 c 0,0.59779 0.48121,1.079 1.079,1.079 h 7.48172 c 0.59779,0 1.079,-0.48121 1.079,-1.079 V 1.079 C 9.63972,0.48121 9.15851,0 8.56072,0 Z m 5.04776,4.71289 c 0.0588,0 0.11769,0.0275 0.16278,0.0822 L 8.87905,7.93754 H 0.84594 l 1.96733,-2.2686 c 0.0902,-0.10399 0.23538,-0.10399 0.32556,0 l 1.079,1.24489 1.74615,-2.11874 c 0.0451,-0.0547 0.10394,-0.0822 0.16278,-0.0822 z"
+     id="rect4615"
+     inkscape:label="bgicon" />
+</svg>

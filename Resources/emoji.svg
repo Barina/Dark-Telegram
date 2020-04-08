@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="11.719698mm"
+   height="11.71969mm"
+   viewBox="0 0 11.719698 11.71969"
+   version="1.1"
+   id="svg11038"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="emoji.svg">
+  <defs
+     id="defs11032" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="22.4"
+     inkscape:cx="21.565899"
+     inkscape:cy="21.091055"
+     inkscape:document-units="mm"
+     inkscape:current-layer="svg11038"
+     showgrid="false"
+     inkscape:window-width="2560"
+     inkscape:window-height="1361"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata11035">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-opacity:1"
+     d="M 5.860107,0 A 5.8598731,5.8598731 0 0 0 0,5.85958 5.8598731,5.8598731 0 0 0 5.860107,11.71969 5.8598731,5.8598731 0 0 0 11.719698,5.85958 5.8598731,5.8598731 0 0 0 5.860107,0 Z m 0,1.11879 A 4.7001068,4.7001068 0 0 1 10.560079,5.81928 4.7001068,4.7001068 0 0 1 5.860107,10.51925 4.7001068,4.7001068 0 0 1 1.160136,5.81928 4.7001068,4.7001068 0 0 1 5.860107,1.11879 Z M 3.967716,3.68246 A 0.73248417,1.0580327 0 0 0 3.235461,4.74079 0.73248417,1.0580327 0 0 0 3.967716,5.79861 0.73248417,1.0580327 0 0 0 4.700488,4.74079 0.73248417,1.0580327 0 0 0 3.967716,3.68246 Z m 3.764112,0 A 0.73248417,1.0580327 0 0 0 6.999573,4.74079 0.73248417,1.0580327 0 0 0 7.731828,5.79861 0.73248417,1.0580327 0 0 0 8.4646,4.74079 0.73248417,1.0580327 0 0 0 7.731828,3.68246 Z M 3.509863,6.98923 c -0.338164,0 -0.610298,0.27214 -0.610298,0.6103 v 0.56948 c 0,0.33816 0.272134,0.61029 0.610298,0.61029 h 4.720642 c 0.338165,0 0.610299,-0.27213 0.610299,-0.61029 V 7.59953 c 0,-0.33816 -0.272134,-0.6103 -0.610299,-0.6103 z"
+     id="path4673"
+     inkscape:label="emoji" />
+</svg>
