@@ -1,4 +1,10 @@
-## V1.0.7 (2020-04-)
+## V1.0.8 (2020-04-08)
+
+- Added a noise texture to controls. may be expanded in the future.
+- Replaced almost all bitmap icons with handmade SVG's.
+- Fixed bg color leak when choosing to blur the background.
+
+## V1.0.7 (2020-04-05)
 
 - Added custom font.
 - Fixed short incoming messages indentation when setting its bubble to right position.
