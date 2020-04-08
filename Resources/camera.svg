@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="10.66756mm"
+   height="9.5001965mm"
+   viewBox="0 0 10.66756 9.5001965"
+   version="1.1"
+   id="svg5031"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="camera.svg">
+  <defs
+     id="defs5025" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="22.4"
+     inkscape:cx="32.078267"
+     inkscape:cy="18.258199"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="2560"
+     inkscape:window-height="1361"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5028">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(579.85759,88.750098)">
+    <path
+       style="fill:#7f7f7f;fill-opacity:0.95422537;stroke:none;stroke-width:0.26458332;stroke-opacity:1"
+       d="m -576.01597,-88.750098 -0.92759,1.032494 h -1.74201 c -0.64935,0 -1.17202,0.522672 -1.17202,1.172023 v 6.123657 c 0,0.649351 0.52267,1.172022 1.17202,1.172022 h 8.32352 c 0.64935,0 1.17202,-0.522671 1.17202,-1.172022 v -6.123657 c 0,-0.649351 -0.52267,-1.172023 -1.17202,-1.172023 h -1.71876 l -0.89503,-1.032494 z m 1.43868,2.554883 a 2.6877407,2.6877407 0 0 1 2.68769,2.687691 2.6877407,2.6877407 0 0 1 -2.68769,2.68769 2.6877407,2.6877407 0 0 1 -2.6877,-2.68769 2.6877407,2.6877407 0 0 1 2.6877,-2.687691 z m 0.0238,1.070219 a 1.5698309,1.5698309 0 0 0 -1.56993,1.569929 1.5698309,1.5698309 0 0 0 1.56993,1.569931 1.5698309,1.5698309 0 0 0 1.56993,-1.569931 1.5698309,1.5698309 0 0 0 -1.56993,-1.569929 z"
+       id="path4793"
+       inkscape:connector-curvature="0"
+       inkscape:label="camera" />
+  </g>
+</svg>

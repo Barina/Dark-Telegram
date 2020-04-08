@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" 
+   xmlns:cc="http://creativecommons.org/ns#" 
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+   xmlns:svg="http://www.w3.org/2000/svg" 
+   xmlns="http://www.w3.org/2000/svg" 
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" 
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" 
+   width="8.8724213mm" 
+   height="10.651042mm" 
+   viewBox="0 0 8.8724213 10.651042" 
+   version="1.1" 
+   id="svg4916" 
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)" 
+   sodipodi:docname="bell.svg">
+   <defs id="defs4910" />
+   <sodipodi:namedview id="base" 
+      pagecolor="#ffffff" 
+      bordercolor="#666666" 
+      borderopacity="1.0" 
+      inkscape:pageopacity="0.0" 
+      inkscape:pageshadow="2" 
+      inkscape:zoom="7.9195959" 
+      inkscape:cx="35.933141" 
+      inkscape:cy="40.002195" 
+      inkscape:document-units="mm" 
+      inkscape:current-layer="layer1" 
+      showgrid="false" 
+      inkscape:window-width="2560" 
+      inkscape:window-height="1361" 
+      inkscape:window-x="-9" 
+      inkscape:window-y="-9" 
+      inkscape:window-maximized="1" />
+   <metadata id="metadata4913">
+      <rdf:RDF>
+         <cc:Work rdf:about="">
+            <dc:format>image/svg+xml</dc:format>
+            <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+            <dc:title></dc:title>
+         </cc:Work>
+      </rdf:RDF>
+   </metadata>
+   <g inkscape:label="Layer 1" 
+      inkscape:groupmode="layer" 
+      id="layer1" 
+      transform="translate(30.894552,-259.92447)">
+      <path style="fill:#7f7f7f;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" 
+         d="m -26.421435,259.9245 c -0.64325,-0.005 -0.816488,0.5855 -0.816488,0.5855 l -0.03721,0.74724 c -0.882985,0 -2.544734,0.81606 -2.59519,2.56522 0,0 -0.0724,1.60558 -0.0708,3.39307 2.33e-4,0.26114 -0.93461,0.97236 -0.929659,1.15238 0.0046,0.16663 -0.02377,0.57516 -0.02377,0.57516 l 8.860441,0.0362 c 0,0 0.0019,-0.36514 0.01188,-0.54726 0.0115,-0.2086 -0.971202,-0.80927 -0.975651,-1.04851 -0.01829,-0.98346 0.02325,-3.74189 0.02325,-3.74189 0.01682,-1.0764 -1.353325,-2.40103 -2.682007,-2.39262 l -0.0026,-0.73587 c 0,0 -0.12951,-0.58378 -0.762227,-0.5886 z m 0.952396,9.61647 -2.018481,0.0253 c 0,0 -0.0299,1.00924 1.009241,1.00924 0.99542,0 1.00924,-1.03456 1.00924,-1.03456 z" 
+         id="path4725" 
+         inkscape:connector-curvature="0" 
+         inkscape:label="bell" />
+   </g>
+</svg>
