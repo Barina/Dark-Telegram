@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="7.634675mm"
+   height="7.6098342mm"
+   viewBox="0 0 7.634675 7.6098342"
+   version="1.1"
+   id="svg2065"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="search.svg">
+  <defs
+     id="defs2059" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="15.839192"
+     inkscape:cx="10.155396"
+     inkscape:cy="18.595909"
+     inkscape:document-units="mm"
+     inkscape:current-layer="svg2065"
+     showgrid="false"
+     inkscape:window-width="2560"
+     inkscape:window-height="1361"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata2062">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:#999999;fill-opacity:1;stroke:none;stroke-width:0.87312502;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="M 4.550625,2.2030321e-8 A 3.0836814,3.0836814 0 0 0 1.467085,3.083531 3.0836814,3.0836814 0 0 0 1.981265,4.784204 l -1.90634,1.906344 c -0.0999,0.09986 -0.0999,0.260842 0,0.360701 l 0.48318,0.48369 c 0.0999,0.09986 0.26084,0.09986 0.3607,0 L 2.821015,5.632731 A 3.0836814,3.0836814 0 0 0 4.550625,6.167064 3.0836814,3.0836814 0 0 0 7.634675,3.083531 3.0836814,3.0836814 0 0 0 4.550625,2.2030321e-8 Z M 4.550625,0.96118102 A 2.1221033,2.1221033 0 0 1 6.672975,3.083531 2.1221033,2.1221033 0 0 1 4.550625,5.205884 2.1221033,2.1221033 0 0 1 2.428785,3.083531 2.1221033,2.1221033 0 0 1 4.550625,0.96118102 Z"
+     id="path858"
+     inkscape:label="search" />
+</svg>

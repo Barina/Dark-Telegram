@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="7.4414101mm"
+   height="9.5436029mm"
+   viewBox="0 0 7.4414101 9.5436029"
+   version="1.1"
+   id="svg19554"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="trash.svg">
+  <defs
+     id="defs19548" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="15.839192"
+     inkscape:cx="21.920293"
+     inkscape:cy="17.776501"
+     inkscape:document-units="mm"
+     inkscape:current-layer="svg19554"
+     showgrid="false"
+     inkscape:window-width="2560"
+     inkscape:window-height="1361"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata19551">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:#999999;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-opacity:1"
+     d="M 2.45928,0 C 2.37778,0 2.26357,0.08779 2.19832,0.147278 L 1.88309,0.434599 H 0.14728 C 0.06578,0.434599 0,0.500349 0,0.581877 v 0.840774 c 0,0.08152 0.0658,0.146762 0.14728,0.146762 h 7.14685 c 0.0815,0 0.14728,-0.06524 0.14728,-0.146762 V 0.581877 c 0,-0.08152 -0.0658,-0.147278 -0.14728,-0.147278 H 5.51336 L 5.17281,0.147278 C 5.10531,0.090258 4.99337,0 4.91185,0 Z M 0.46251,2.074291 v 6.15828 c 0,0.726308 0.58472,1.311032 1.31103,1.311032 h 3.85247 c 0.72631,0 1.31104,-0.584724 1.31104,-1.311032 v -6.15828 z"
+     id="rect17256"
+     inkscape:label="trash" />
+</svg>

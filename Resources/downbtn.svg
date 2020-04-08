@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="8.0015802mm"
+   height="10.72079mm"
+   viewBox="0 0 8.0015802 10.72079"
+   version="1.1"
+   id="svg20120"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="downbtn.svg">
+  <defs
+     id="defs20114" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="22.4"
+     inkscape:cx="15.68181"
+     inkscape:cy="21.487032"
+     inkscape:document-units="mm"
+     inkscape:current-layer="svg20120"
+     showgrid="false"
+     inkscape:window-width="2560"
+     inkscape:window-height="1361"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata20117">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:#999999;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-opacity:1"
+     d="M 2.52956,0 C 2.44806,0 2.38228,0.0658 2.38228,0.14728 V 4.66173 C 1.4815,4.69933 0.53254,4.76176 0.43408,4.86637 0.25632,5.05524 1.66915,6.67842 1.84691,6.86728 2.02468,7.05615 3.61012,8.6186 3.96565,8.6186 4.32117,8.6186 5.90714,7.05615 6.0849,6.86728 6.26266,6.67842 7.67549,5.05524 7.49773,4.86637 7.40193,4.76463 6.49804,4.70186 5.61929,4.6638 V 0.14728 C 5.61929,0.06578 5.55349,0 5.47202,0 Z M 0.14676,9.52914 C 0.06526,9.52914 0,9.59484 0,9.67642 v 0.8971 c 0,0.0815 0.0652,0.14727 0.14676,0.14727 h 7.70806 c 0.0815,0 0.14676,-0.0658 0.14676,-0.14727 v -0.8971 c 0,-0.0815 -0.0652,-0.14728 -0.14676,-0.14728 z"
+     id="rect17268"
+     inkscape:label="downbtn" />
+</svg>

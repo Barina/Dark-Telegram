@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" 
+   xmlns:cc="http://creativecommons.org/ns#" 
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+   xmlns:svg="http://www.w3.org/2000/svg" 
+   xmlns="http://www.w3.org/2000/svg" 
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" 
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" 
+   width="12.5672mm" 
+   height="12.56721mm" 
+   viewBox="0 0 12.5672 12.56721" 
+   version="1.1" 
+   id="svg4329" 
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)" 
+   sodipodi:docname="circle.svg">
+   <defs id="defs4323" />
+   <sodipodi:namedview id="base" 
+      pagecolor="#ffffff" 
+      bordercolor="#666666" 
+      borderopacity="1.0" 
+      inkscape:pageopacity="0.0" 
+      inkscape:pageshadow="2" 
+      inkscape:zoom="11.2" 
+      inkscape:cx="18.821606" 
+      inkscape:cy="17.791726" 
+      inkscape:document-units="mm" 
+      inkscape:current-layer="svg4329" 
+      showgrid="false" 
+      inkscape:window-width="2560" 
+      inkscape:window-height="1361" 
+      inkscape:window-x="-9" 
+      inkscape:window-y="-9" 
+      inkscape:window-maximized="1" />
+   <metadata id="metadata4326">
+      <rdf:RDF>
+         <cc:Work rdf:about="">
+            <dc:format>image/svg+xml</dc:format>
+            <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+            <dc:title></dc:title>
+         </cc:Work>
+      </rdf:RDF>
+   </metadata>
+   <path inkscape:connector-curvature="0" 
+      style="fill:#6794b7;fill-opacity:1;stroke:none;stroke-width:0.87312502;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" 
+      d="M 6.28386,0 A 6.2835684,6.2835684 0 0 0 0,6.28335 6.2835684,6.2835684 0 0 0 6.28386,12.56721 6.2835684,6.2835684 0 0 0 12.5672,6.28335 6.2835684,6.2835684 0 0 0 6.28386,0 Z M 6.26056,0.51575001 A 5.7443068,5.7443068 0 0 1 12.0044,6.26009 5.7443068,5.7443068 0 0 1 6.26056,12.00444 5.7443068,5.7443068 0 0 1 0.51621001,6.26009 5.7443068,5.7443068 0 0 1 6.26056,0.51575001 Z" 
+      id="path896" 
+      inkscape:label="circle" />
+</svg>
