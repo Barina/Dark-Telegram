@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="10.723527mm"
+   height="9.6966105mm"
+   viewBox="0 0 10.723527 9.6966105"
+   version="1.1"
+   id="svg5190"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="car.svg">
+  <defs
+     id="defs5184" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="11.2"
+     inkscape:cx="14.465537"
+     inkscape:cy="23.272531"
+     inkscape:document-units="mm"
+     inkscape:current-layer="svg5190"
+     showgrid="false"
+     inkscape:window-width="2560"
+     inkscape:window-height="1361"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5187">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:#6794b7;fill-opacity:1;stroke:none;stroke-width:0.87312502;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="m 4.1399887,0 c -1.4036,0 -2.62914,0.93875 -2.83704,1.71669 l -1.27123999,4.7563 c -0.12913,0.4832 0.15077,0.92663 0.57413,1.19528 V 9.2661 c 0,0.23851 0.19196,0.43047 0.43045999,0.43047 h 0.84078 c 0.23851,0 0.43046,-0.19196 0.43046,-0.43047 V 8.51214 c 0.0643,0.0155 0.13063,0.0264 0.19999,0.0264 h 6.13968 c 0.0546,0 0.10753,-0.006 0.15916,-0.0155 v 0.74311 c 0,0.23851 0.19196,0.43046 0.43047,0.43046 h 0.59427 c 0.2385103,0 0.4304703,-0.19195 0.4304703,-0.43046 V 7.56083 c 0.33866,-0.27104 0.54408,-0.66267 0.43046,-1.08779 L 9.4213187,1.71674 C 9.2134287,0.93882 7.8999887,5e-5 6.5837687,5e-5 Z m 0.24805,0.98392 h 1.94768 c 1.04907,0 2.09618,0.74837 2.26188,1.36839 l 0.39532,1.48105 h -7.26209 l 0.39585,-1.48105 c 0.1657,-0.62004 1.14263,-1.36839 2.26136,-1.36839 z m -1.87534,4.19251 a 1.0045332,1.0045332 0 0 1 1.00407,1.00459 1.0045332,1.0045332 0 0 1 -1.00407,1.00459 1.0045332,1.0045332 0 0 1 -1.00459,-1.00459 1.0045332,1.0045332 0 0 1 1.00459,-1.00459 z m 5.82187,0 a 1.0045332,1.0045332 0 0 1 1.00459,1.00459 1.0045332,1.0045332 0 0 1 -1.00459,1.00459 1.0045332,1.0045332 0 0 1 -1.00459,-1.00459 1.0045332,1.0045332 0 0 1 1.00459,-1.00459 z"
+     id="rect855"
+     inkscape:label="car" />
+</svg>

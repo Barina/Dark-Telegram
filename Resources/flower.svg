@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="10.23865mm"
+   height="11.32644mm"
+   viewBox="0 0 10.23865 11.32644"
+   version="1.1"
+   id="svg5756"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="flower.svg">
+  <defs
+     id="defs5750" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="15.839192"
+     inkscape:cx="-2.0765914"
+     inkscape:cy="24.172893"
+     inkscape:document-units="mm"
+     inkscape:current-layer="svg5756"
+     showgrid="false"
+     inkscape:window-width="2560"
+     inkscape:window-height="1361"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5753">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     inkscape:connector-curvature="0"
+     style="display:inline;fill:#6794b7;fill-opacity:1;stroke:none;stroke-width:0.87312502;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="M 5.06428,0 C 4.32177,0 3.71333,0.548957 3.61785,1.264523 2.95073,0.988883 2.17122,1.239973 1.79936,1.882574 1.42851,2.523434 1.59704,3.322301 2.16471,3.76411 1.59445,4.202821 1.42156,5.000635 1.78902,5.643583 c 0.37057,0.648372 1.15609,0.90364 1.82728,0.623734 0.0901,0.721569 0.70122,1.276925 1.44798,1.276925 0.74243,0 1.35034,-0.549064 1.4459,-1.264521 0.66719,0.275841 1.4471,0.02413 1.81901,-0.618567 C 8.70019,5.020035 8.53104,4.221313 7.96281,3.779615 8.53325,3.340941 8.70653,2.543177 8.33901,1.900142 7.9685,1.251868 7.18338,0.997222 6.51225,1.276924 6.42225,0.555289 5.81108,0 5.06428,0 Z M 5.04878,2.295985 A 1.4452978,1.4452978 0 0 1 6.49417,3.741375 1.4452978,1.4452978 0 0 1 5.04878,5.186764 1.4452978,1.4452978 0 0 1 3.60339,3.741375 1.4452978,1.4452978 0 0 1 5.04878,2.295985 Z M 0.22066,6.324161 A 4.83816,4.83816 0 0 0 0,6.335011 5.1251697,5.1251697 0 0 0 5.12061,11.32644 5.1251697,5.1251697 0 0 0 10.23865,6.348447 4.83816,4.83816 0 0 0 9.79475,6.324157 4.83816,4.83816 0 0 0 5.00796,10.498581 4.83816,4.83816 0 0 0 0.22066,6.324157 Z"
+     id="rect835"
+     inkscape:label="flower" />
+</svg>
