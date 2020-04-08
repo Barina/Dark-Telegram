@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.styl
-@version        1.0.11
+@version        1.0.12
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -160,7 +160,7 @@
     
         --is-private (private is 1 ? 10px : 0);    
         
-        --version "Dark-Telegram v1.0.11 — April 8th, 2020"
+        --version "Dark-Telegram v1.0.12 — April 8th, 2020"
         --message "Please report any issues on GitHub so that we can fix them."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -432,9 +432,14 @@
     }
 
     /* enlarging emoji's and stickers when hover just like the original style */
+    .composer_sticker_btn .composer_sticker_image,
+    .composer_emoji_btn .emoji{
+        transition t-out
+    }
     .composer_sticker_btn:hover .composer_sticker_image,
     .composer_emoji_btn:hover .emoji{
         transform scale(1.5)
+        transition t-in
     }
         
     .tg_head_split{

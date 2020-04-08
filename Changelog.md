@@ -1,3 +1,7 @@
+## V1.0.12 (2020-04-08)
+
+- Added transition to emoji's and stickers.
+
 ## V1.0.11 (2020-04-08)
 
 - Emoji's and stickers are now enlarged when hovered.
