@@ -1,3 +1,7 @@
+## V1.0.11 (2020-04-08)
+
+- Emoji's and stickers are now enlarged when hovered.
+
 ## V1.0.10 (2020-04-08)
 
 - Fixed other mask issues. I'm so tired....
