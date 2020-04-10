@@ -1,6 +1,6 @@
 ## V1.0.13 (2020-04-10)
 
-- Renamed styl file to user.style to make stylus recognize it and be able to be installed. (issue #1)
+- Renamed styl file to user.style to make stylus recognize it and be able to be installed. ([Issue #1](../../issues/1))
 - Fixed the circular progress bar when loading messages.
 - Fixed extra unneeded indentation for RTL input languages.
 
