@@ -1,3 +1,7 @@
+## V1.0.14 (2020-04-10)
+
+- Fixed login screen colors.
+
 ## V1.0.13 (2020-04-10)
 
 - Renamed styl file to user.style to make stylus recognize it and be able to be installed. ([Issue #1](../../issues/1))
