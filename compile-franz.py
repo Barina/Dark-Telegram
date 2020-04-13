@@ -21,12 +21,12 @@ def franzify(inFile):
     # define needed variables
     target = "@-moz-document domain("
     processed = False
-    tempFile = inFile + '.tmp'
+    outFile = 'darkmode.css'
     tempLines = ''
     lastBraceLine = ''
 
     # open in file to read and target file to write to
-    with open(inFile, 'r') as readObj, open(tempFile, 'w') as writeObj:
+    with open(inFile, 'r') as readObj, open(outFile, 'w') as writeObj:
         # iterating over all lines in the file
         for line in readObj:
             # if the current line starts with the moz-document we'll skip it
@@ -58,14 +58,13 @@ def franzify(inFile):
         # writing all the remaining lines excluding last line with closing curly brace
         writeObj.write(tempLines)
 
-    # we need to check if we made changes to the file
+    # we need to check if we processed a new file
     if processed:
-        # then we will replace it with the original
+        # then we don't need the original anymore
         os.remove(inFile)
-        os.rename(tempFile, inFile)
     else:
-        # or just remove the temp file as it is identical to the original at this point
-        os.remove(tempFile)
+        # or just remove the out file as it is identical to the original at this point
+        os.remove(outFile)
 
     print("Done.")
 
@@ -74,16 +73,24 @@ def franzify(inFile):
 if len(sys.argv) > 1:
     argFile = sys.argv[1]
     if os.path.isfile(argFile):
-        # call the shell command to compile to given object
-        output = check_output("stylus " + argFile, shell=True).decode()
-        print(output)
-        # and check if the output contains a 'compiled' sub-string
-        # this way we know the compilation was success
-        if output.find("compiled") >= 0:
-            # and now we can franzify the compiled CSS
-            franzify(argFile)
+        if argFile.endswith('.styl'):
+            # call the shell command to compile to given object
+            output = check_output("stylus " + argFile, shell=True).decode()
+            print(output)
+            # and check if the output contains a 'compiled' sub-string
+            # this way we know the compilation was success
+            if output.find("compiled") >= 0:
+                # compilation was success
+                processFile = argFile.replace('.styl', '.css')
+                if os.path.isfile(processFile):
+                    # and now we can franzify the compiled CSS
+                    franzify(processFile)
+                else:
+                    print("Cannot find compiled file.")
+            else:
+                print("Couldn't compile styl file.")
         else:
-            print("Couldn't compile styl file.")
+            print("Not a styl file.")
     else:
         print("Not a valid file " + argFile)
 else:

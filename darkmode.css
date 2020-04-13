@@ -9,7 +9,6 @@
 @author         Roy Barina
 @license        MIT
 ==/UserStyle== */
-@-moz-document domain("web.telegram.org") {
   .user_color_0,
   .user_color_0:hover {
     color: #000 !important;
@@ -2543,5 +2542,4 @@
 /* soft transition */
       background-color: #292f38;
     }
-}
 }
