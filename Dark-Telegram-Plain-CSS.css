@@ -427,11 +427,11 @@
   body:before {
     content: '';
     position: absolute;
-    left: calc(-2 * bgblur);
-    top: calc(-2 * bgblur);
-    bottom: calc(-2 * bgblur);
-    right: calc(-2 * bgblur);
-    transform: scale(calc(-2 * bgblur));
+    left: -24px;
+    top: -24px;
+    bottom: -24px;
+    right: -24px;
+    transform: scale(-24px);
     filter: blur(12px) opacity(0.4) invert(0) hue-rotate(320deg);
     background-image: url("https://images.unsplash.com/photo-1434569117012-ce134ee1a088?fit=crop&w=1280&h=720&q=80");
     background-size: cover;
