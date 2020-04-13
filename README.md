@@ -7,7 +7,7 @@
 Dark mode implementation for [Telegram Web](https://web.telegram.org/) based on the awesome [Dark WhatsApp style by vednoc](https://github.com/vednoc/dark-whatsapp) with many improvements and wide range of customization options.
 
 <p align="center">
-  <a target="_blank" rel="noopener noreferrer" href="https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.styl">
+  <a target="_blank" rel="noopener noreferrer" href="https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl">
     <img src="https://img.shields.io/badge/Install%20directly%20with-Stylus-116b59.svg?longCache=true&style=flat"/>
   </a>
   <br/>
@@ -35,6 +35,19 @@ Feel free to contribute and make sure to check [Dark-WhatsApp style by vednoc](h
 - <i>and more ...</i>
 
 See the [Changelog](Changelog.md) for more details.
+
+## Installation
+
+To use this style you'll need to install
+[Stylus](https://add0n.com/stylus.html)
+first, and then click on the button below.
+
+<a target="_blank" rel="noopener noreferrer" href="https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl">
+  <img src="https://img.shields.io/badge/Install%20directly%20with-Stylus-116b59.svg?longCache=true&style=flat"/>
+</a>
+<br />
+
+For more information, please follow the original style [Dark-WhatsApp installation section](https://github.com/vednoc/dark-whatsapp/wiki/Installation).
 
 ## Credits
 
