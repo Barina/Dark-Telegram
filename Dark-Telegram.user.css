@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.0.14
+@version        1.1.15
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -48,8 +48,8 @@
 
 @var color shadow               'Shadow color' #00000040
 
-@var color  btn-bg              'Buttons color' #2b313b
-@var color  btn-bg-h            'Hover buttons color' #363d4a
+@var color btn-bg               'Buttons color' #2b313b
+@var color btn-bg-h             'Hover buttons color' #363d4a
 
 @var color accent               'Accent color' #7289da
 
@@ -66,9 +66,9 @@
 @var number chatSize            'Chat width in px' [780, 0]
 @var color bgccolor             'Chat background color' #1f232a
 @var checkbox showchatbg        'Enable chat background image' 1
-@var text     chatbg            'Custom image for chat' url('https://web.whatsapp.com/img/bg-chat-tile_9e8a2898faedb7db9bf5638405cf81ae.png')
-@var range    chatbg-o          'Chat background image opacity' [0.15, 0.0, 1, 0.01]
-@var range    chatbg-i          'Chat background image inverted colors' [0.6, 0.0, 1, 0.1]
+@var text chatbg                'Custom image for chat' url('https://web.whatsapp.com/img/bg-chat-tile_9e8a2898faedb7db9bf5638405cf81ae.png')
+@var range chatbg-o             'Chat background image opacity' [0.15, 0.0, 1, 0.01]
+@var range chatbg-i             'Chat background image inverted colors' [0.6, 0.0, 1, 0.1]
 
 @var select app_image           'Custom app background' {
     'Default background          *': 'default',
@@ -141,14 +141,12 @@
         --control-active control-active
         --control-t-active rgba(control-active, .5)
     
-        --btnbg btn-bg              
-        --btnh btn-bg-h 
+        --btnbg btn-bg
+        --btnh btn-bg-h
 
         --accent accent
         --accent-alt accent-alt
         --accent-t rgba(accent, .3)
-    
-        --bgblur bgblur
     
         --bgccolor bgccolor
         --chatbg chatbg
@@ -158,9 +156,7 @@
         --tail-v (tail is 1 ? visible : hidden)
         --vignette (vign is 1 ? visible : hidden)
     
-        --is-private (private is 1 ? 10px : 0);    
-        
-        --version "Dark-Telegram v1.0.14 — April 10th, 2020"
+        --version "Dark-Telegram v1.1.15 — April 16th, 2020"
         --message "Please report any issues on GitHub so that we can fix them."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -175,7 +171,9 @@
     msgb-thumb = msgb - 5
         
     accent-alt = accent + 33%
-    
+
+    privateblur = (private is 1 ? 10px : 0)
+        
     // set emoji popup position
     if(emoj-pos is right) {
         emoj-l = -1px
@@ -419,7 +417,7 @@
     .tg_head_peer_info,
     .im_content_message_wrap,
     .composer_rich_textarea{
-        filter blur(var(--is-private))
+        filter blur(privateblur)
         transition t-out
     }
     
@@ -870,7 +868,7 @@
             if(app_image == default and bgopacity != null and bgopacity > .01){
                 content ''
                 position absolute
-                s = calc(-2 * var(--bgblur))
+                s = -2 * bgblur
                 b = blur(bgblur)
                 o = opacity(bgopacity)
                 i = invert(bginvert)

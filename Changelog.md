@@ -1,3 +1,8 @@
+## V1.1.15 (2020-04-16)
+
+- New compile script to handle sync of styl and css file versions and make a darkmode.css Franz/Ferdi compatible plain css file based on the synced files.
+- A few changes in code to follow the new script guidance.
+
 ## V1.0.14 (2020-04-10)
 
 - Fixed login screen colors.

@@ -1,6 +1,21 @@
+#!/usr/bin/env python
+
+""" Old script to create a darkmode.css file out of a premade plain CSS file. 
+
+Note: The new compile.py script will now handle this as well as creating a plain CSS file.
+"""
+
 import sys
 import os.path
 from subprocess import check_output
+
+__author__ = "Roy Barina"
+__credits__ = []
+__license__ = "MIT"
+__version__ = "1.0.1"
+__maintainer__ = "Roy Barina"
+__email__ = "https://github.com/Barina"
+__status__ = "Production"
 
 
 def franzify(inFile):
