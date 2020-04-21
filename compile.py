@@ -1,4 +1,12 @@
 #!/usr/bin/env python
+"""
+author      Roy Barina
+credits     Idan Haim Shalom
+license     MIT
+version     1.0.1
+maintainer  Roy Barina
+contact     https://github.com/Barina
+"""
 
 """ Compile script for Dark-Telegram.user.styl
 
@@ -7,29 +15,22 @@ by modification date and compile one of them
 (usually Dark-Telegram.user.styl) to a plain CSS format 
 to be compatible with services like Franz\Ferdi. """
 
+
+
+
 import sys
 import os.path
 import shutil
 from subprocess import check_output
-
-__author__ = "Roy Barina"
-__credits__ = []
-__license__ = "MIT"
-__version__ = "1.0.0"
-__maintainer__ = "Roy Barina"
-__email__ = "https://github.com/Barina"
-__status__ = "Production"
-
-
 class Var:
     """
     Used to represent a line of a variable
 
     Parameters
     ----------
-    typeName : str
+    type_name : str
         The name of the variable type. optional.
-    varName : str
+    var_name : str
         Variable name.
     comment : str
         This variable comment. optional
@@ -37,40 +38,40 @@ class Var:
         This variable value.
     """
 
-    typeName = None
-    varName = None
+    type_name = None
+    var_name = None
     comment = None
     value = None
 
-    def toString(self, isMeta=False, indentLevel=0):
+    def toString(self, is_meta=False, indent_level=0):
         """ Generate a string based on current variable. 
         Parameters
         ----------
-        isMeta : bool
+        is_meta : bool
             Treat this variable as a meta variable and include an assignment operator if not meta. (default False)
-        indentLevel : int
+        indent_level : int
             The level of indentation for this variable.
         """
 
         # built the resulting string
         s = ""
-        if self.varName != None:
-            s += self.varName
-            if self.value != None:
-                if not isMeta:
+        if self.var_name is not None:
+            s += self.var_name
+            if self.value is not None:
+                if not is_meta:
                     s += " ="
                 s += " " + self.value
-                if self.comment != None:
+                if self.comment is not None:
                     s += " // " + self.comment
-                    if self.typeName != None:
-                        s += " (" + self.typeName + ")"
+                    if self.type_name is not None:
+                        s += " (" + self.type_name + ")"
             else:
-                print("Empty value in " + self.varName)
+                print("Empty value in " + self.var_name)
 
         # build indentation
         indent = ""
         if s != "":
-            for i in range(indentLevel):
+            for i in range(indent_level):
                 indent += "    "
 
         return indent + s + "\n"
@@ -90,7 +91,7 @@ class Block:
         An array of items to include within this block. Indented. Can hold Vars and Blocks as well.
     footer : str
         The closing string of this block. Usually just a closing curly brace.
-    indentLevel : int
+    indent_level : int
         The level of indentation for this block. (default 0)
 
     """
@@ -99,7 +100,7 @@ class Block:
     meta = []
     body = []
     footer = None
-    indentLevel = 0
+    indent_level = 0
 
     def setHeader(self, header: str):
         """ Sets a given str as the current block header. """
@@ -122,14 +123,14 @@ class Block:
 
     def setIndentationLevel(self, level=0):
         """ Sets a given level as indentation level of this block. maxed to 0. """
-        self.indentLevel = max(level, 0)
+        self.indent_level = max(level, 0)
 
     def metaToString(self) -> str:
         """ Generate a string based on current block's meta elements. """
         result = ""
         for m in self.meta:
-            if isinstance(m, Var) and m.varName.find("preprocessor") < 0:
-                result += m.toString(True, self.indentLevel)
+            if isinstance(m, Var) and m.var_name.find("preprocessor") < 0:
+                result += m.toString(True, self.indent_level)
             else:
                 result += "\n"
         return result
@@ -139,36 +140,36 @@ class Block:
         result = ""
         for v in self.body:
             if isinstance(v, Var):
-                result += v.toString(False, self.indentLevel + 1)
+                result += v.toString(False, self.indent_level + 1)
             else:
                 result += "\n"
         return result
 
     def toString(self) -> str:
         """ Generate a string based on current block's value. """
-        indentStr = "    "
+        indent_str = "    "
         ind = ""
-        for i in range(self.indentLevel):
-            ind += indentStr
+        for i in range(self.indent_level):
+            ind += indent_str
 
         result = ""
-        if self.header != None:
+        if self.header is not None:
             result = ind + self.header + "\n"
             result += metaToString() + "\n"
             result += bodyToString() + "\n"
-            if self.footer != None:
+            if self.footer is not None:
                 result += ind + self.footer + "\n"
 
         return result + "\n"
 
 
-userStylFile = "Dark-Telegram.user.styl"
-userCSSFile = "Dark-Telegram.user.css"
+user_styl_file = "Dark-Telegram.user.styl"
+user_css_file = "Dark-Telegram.user.css"
 
 debug = False
-userStyleBlock = Block()
+user_style_block = Block()
 
-helpMsg = "\n\nCompiling Dark-Telegram.user.styl file to plain CSS\n" + \
+help_msg = "\n\nCompiling Dark-Telegram.user.styl file to plain CSS\n" + \
     "===========================================\n\n" + \
     "Description:\n" + \
     "   Syncs and compiles Dark-Telegram.user.styl to a plain CSS file to use in services like Franz/Ferdi.\n\n" + \
@@ -228,7 +229,7 @@ def extractMeta(line):
 
     args = line.strip().split(' ', 1)
     v = Var()
-    v.varName = args[0].strip()
+    v.var_name = args[0].strip()
     v.value = args[1].strip()
 
     return v
@@ -258,8 +259,8 @@ def extractVar(line):
     props = line.split('\'', 1)[1].split('\'', 1)
 
     v = Var()
-    v.typeName = args[1].strip()
-    v.varName = args[2].strip()
+    v.type_name = args[1].strip()
+    v.var_name = args[2].strip()
     v.value = props[1].strip()
     if debug:
         v.comment = props[0].strip()
@@ -276,60 +277,59 @@ def extractRootVar(line):
 
     v = Var()
     if len(args) > 1:
-        v.varName = args[0].strip()
+        v.var_name = args[0].strip()
         v.value = args[1].strip()
-        if v.varName.startswith("--"):
-            v.varName = v.varName[2:]
-        if v.varName == v.value:
-            v.varName = v.value = None
+        if v.var_name.startswith("--"):
+            v.var_name = v.var_name[2:]
+        if v.var_name is v.value:
+            v.var_name = v.value = None
 
     return v
 
 
-def extractVariables(inFile):
+def extractVariables(in_file):
     """ Extracts variables from a given file. """
 
     print("Extracting variables...")
 
-    global userStyleBlock
+    global user_style_block
     global debug
 
-    readingUserStyle = False
-    readingSelectBlock = False
-    selectBlock = None
-    readingRoot = False
-    readingRoot = False
+    reading_user_style = False
+    reading_select_block = False
+    select_block = None
+    reading_root = False
 
-    with open(inFile, 'r') as rObj:
+    with open(in_file, 'r') as rObj:
         for line in rObj:
             # finding UserStyle comment block
             if line.find("/*") >= 0 and line.find("UserStyle") >= 0:
                 log("found UserStyle block start..")
-                userStyleBlock = Block()
-                userStyleBlock.setHeader(line)
-                readingUserStyle = True
+                user_style_block = Block()
+                user_style_block.setHeader(line)
+                reading_user_style = True
 
             # finding UserStyle end block
             elif line.find("*/") >= 0 and line.find("/UserStyle") >= 0:
                 log("found UserStyle block end..")
-                userStyleBlock.setFooter(line)
-                readingUserStyle = False
+                user_style_block.setFooter(line)
+                reading_user_style = False
 
             # within UserStyle block
-            elif readingUserStyle:
+            elif reading_user_style:
                 # within a Select block
-                if readingSelectBlock:
+                if reading_select_block:
                     # finding the selected value
                     if line.find('*') >= 0:
-                        selectBlock += " " + \
+                        select_block += " " + \
                             line.replace(' ', '').replace(
                                 ',', '').split(':')[1]
                     # finding the end of the select block
                     elif line.find('}') >= 0:
-                        readingSelectBlock = False
-                        v = extractVar(selectBlock)
-                        userStyleBlock.addVar(v)
-                        selectBlock = None
+                        reading_select_block = False
+                        v = extractVar(select_block)
+                        user_style_block.addVar(v)
+                        select_block = None
 
                 # finding a @var variable
                 elif line.find("@var") >= 0:
@@ -339,44 +339,44 @@ def extractVariables(inFile):
                         if vType == "range" or vType == "number":
                             v = extractVar(line)
                             v.value = extractRangeValue(v.value)
-                            userStyleBlock.addVar(v)
+                            user_style_block.addVar(v)
                         # finding beggining of select blocks
                         elif vType == "select":
-                            selectBlock = line.replace('{', '')
-                            readingSelectBlock = True
+                            select_block = line.replace('{', '')
+                            reading_select_block = True
                         # finding all other regular variables
                         else:
                             v = extractVar(line)
-                            userStyleBlock.addVar(v)
+                            user_style_block.addVar(v)
 
                 # finding a meta variable
                 elif line.find("@") >= 0:
                     m = extractMeta(line)
-                    userStyleBlock.addMeta(m)
+                    user_style_block.addMeta(m)
 
                 # if we want to include blank lines, not really needed but good for debugging
                 elif debug:
-                    userStyleBlock.addVar(None)
+                    user_style_block.addVar(None)
 
             # finding :root header
             elif line.find(":root") >= 0 and line.find("{") >= 0:
                 log("found root start")
                 # root block won't need a header or a footer nor meta variables
-                readingRoot = True
+                reading_root = True
 
             # gathering root variables
-            elif readingRoot:
+            elif reading_root:
                 # finding the end of the root block
                 if line.find("}") >= 0:
                     log("found root block end")
-                    readingRoot = False
+                    reading_root = False
                     # this is the last block we need to save its children
                     # so we do not need to read the rest of the file
                     break
                 else:
                     v = extractRootVar(line)
-                    if v.varName != None and v.value != None:
-                        userStyleBlock.addVar(v)
+                    if v.var_name is not None and v.value is not None:
+                        user_style_block.addVar(v)
 
             # else:
             #     log("error?")
@@ -385,48 +385,48 @@ def extractVariables(inFile):
     print("Done extracting variables...")
 
 
-def constructStylFile(inFile) -> str:
+def constructStylFile(in_file) -> str:
     """ Construct a new temp file based on the given file """
 
     print("Generating temporary style file...")
 
-    global userStyleBlock
+    global user_style_block
 
-    outFile = "darkmode.styl"
+    out_file = "darkmode.styl"
     target = "@-moz-document domain("
     ignore = True
-    withinRoot = False
-    lastBraceLine = ''
-    tempLines = ''
+    within_root = False
+    last_brace_line = ''
+    temp_lines = ''
 
     # we will now write to a temp file the content of the given file replacing variables with our global variables
-    with open(inFile, 'r') as readObj, open(outFile, 'w') as writeObj:
-        for line in readObj:
+    with open(in_file, 'r') as read_obj, open(out_file, 'w') as write_obj:
+        for line in read_obj:
             if line.startswith(target):
                 # at this point we can insert the saved UserStyle from global variables
-                writeObj.write(userStyleBlock.header + "\n")
-                writeObj.write(userStyleBlock.metaToString())
-                writeObj.write(userStyleBlock.footer + "\n")
+                write_obj.write(user_style_block.header + "\n")
+                write_obj.write(user_style_block.metaToString())
+                write_obj.write(user_style_block.footer + "\n")
 
                 # we can ignore this here
-                # writeObj.write(line)
+                # write_obj.write(line)
 
                 # and after that we can insert the variables from the UserStyle block
-                writeObj.write(userStyleBlock.bodyToString())
+                write_obj.write(user_style_block.bodyToString())
 
                 # making sure we stop ignoring from here
                 ignore = False
 
             elif not ignore:
-                if withinRoot:
+                if within_root:
                     if line.find("}") >= 0:
                         # end of root block here
-                        withinRoot = False
+                        within_root = False
                         # we can now insert all of the root css elements as stylus variables
-                        # writeObj.write(rootBlock.bodyToString())
+                        # write_obj.write(rootBlock.bodyToString())
 
                 elif line.find(":root") >= 0 and line.find("{") >= 0:
-                    withinRoot = True
+                    within_root = True
 
                 else:
                     l = line
@@ -444,64 +444,64 @@ def constructStylFile(inFile) -> str:
                         # means that there's a new 'end of a block' and we need to
                         # include the old one we found earlier (if not the first time we found)
                         # and add all of the lines we kept before
-                        tempLines = lastBraceLine + tempLines
+                        temp_lines = last_brace_line + temp_lines
 
                         # then we need to write it all as usual
                         # at this point the output file is similar to the input file at this location
                         # except for the line we ignore at the start
-                        writeObj.write(tempLines)
+                        write_obj.write(temp_lines)
 
                         # now we will keep the new 'end block' line until we found another one
-                        lastBraceLine = l
+                        last_brace_line = l
 
                         # reset variables
-                        tempLines = ''
+                        temp_lines = ''
 
                     else:
                         # here we simply save the current line in a temp variable
-                        tempLines += l
+                        temp_lines += l
 
                     # else:
-                    #     writeObj.write(line)
+                    #     write_obj.write(line)
 
-    return outFile
+    return out_file
 
 
-def cleanLeftoverComments(inFile):
+def cleanLeftoverComments(in_file):
     """ Clears all the leftover comments excluding UserStyle block comment """
 
     print("Cleaning leftover comments...")
 
-    tmpFile = "styl.tmp"
-    withinComment = False
-    commentCount = 0
+    tmp_file = "styl.tmp"
+    within_comment = False
+    comment_count = 0
 
     # open in file to read and target file to write to
-    with open(inFile, 'r') as readObj, open(tmpFile, 'w') as writeObj:
+    with open(in_file, 'r') as read_obj, open(tmp_file, 'w') as write_obj:
         # iterating over all lines in the file
-        for line in readObj:
-            if withinComment:
+        for line in read_obj:
+            if within_comment:
                 # we are within a comment block and can ignore until we found closing block
                 if line.find("*/") >= 0:
-                    withinComment = False
-                    commentCount += 1
+                    within_comment = False
+                    comment_count += 1
 
             elif line.startswith("/*") and line.find("*/") > 0:
                 # one line comment we can completely ignore
-                commentCount += 1
+                comment_count += 1
 
             elif line.startswith("/*") and line.find("*/") < 0 and line.find("==UserStyle==") < 0:
                 # start of a comment block
-                withinComment = True
+                within_comment = True
             else:
                 # not a comment
-                writeObj.write(line)
+                write_obj.write(line)
 
-    print(str(commentCount) + " comments removed.")
+    print(str(comment_count) + " comments removed.")
 
     # renaming output file
-    os.remove(inFile)
-    os.rename(tmpFile, inFile)
+    os.remove(in_file)
+    os.rename(tmp_file, in_file)
 
 
 def checkStylCss() -> bool:
@@ -509,37 +509,38 @@ def checkStylCss() -> bool:
     and Dark-Telegram.user.css and makes sure they're synced.
     Returns True if the check has passed False otherwise."""
 
-    okResult = True
-    if os.path.isfile(userStylFile) and not os.path.isfile(userCSSFile):
+    ok_result = True
+    if os.path.isfile(user_styl_file) and not os.path.isfile(user_css_file):
         # style file exists but css file does not
-        shutil.copyfile(userStylFile, userCSSFile)
+        shutil.copyfile(user_styl_file, user_css_file)
         log("Dark-Telegram.user.styl -> Dark-Telegram.user.css")
 
-    elif not os.path.isfile(userStylFile) and os.path.isfile(userCSSFile):
+    elif not os.path.isfile(user_styl_file) and os.path.isfile(user_css_file):
         # style file does not exists but css file does
-        shutil.copyfile(userCSSFile, userStylFile)
+        shutil.copyfile(user_css_file, user_styl_file)
         log("Dark-Telegram.user.css -> Dark-Telegram.user.styl")
 
-    elif not os.path.isfile(userStylFile) and not os.path.isfile(userCSSFile):
+    elif not os.path.isfile(user_styl_file) and not os.path.isfile(user_css_file):
         # both files does not exists at all
-        okResult = False
-        print("Cannot find '" + userStylFile + "' or '" + userCSSFile + "'.")
+        ok_result = False
+        print("Cannot find '" + user_styl_file +
+              "' or '" + user_css_file + "'.")
 
     else:
         # both files exists, need to sync them up
-        stylTime = os.path.getmtime(userStylFile)
-        cssTime = os.path.getmtime(userCSSFile)
-        log("Dark-Telegram.user.styl timestamp: " + str(stylTime))
-        log("Dark-Telegram.user.css timestamp: " + str(cssTime))
+        styl_time = os.path.getmtime(user_styl_file)
+        css_time = os.path.getmtime(user_css_file)
+        log("Dark-Telegram.user.styl timestamp: " + str(styl_time))
+        log("Dark-Telegram.user.css timestamp: " + str(css_time))
 
-        if stylTime > cssTime:
+        if styl_time > css_time:
             # styl was modified after css
-            shutil.copyfile(userStylFile, userCSSFile)
+            shutil.copyfile(user_styl_file, user_css_file)
             log("Dark-Telegram.user.styl -> Dark-Telegram.user.css")
 
-        elif stylTime < cssTime:
+        elif styl_time < css_time:
             # css was modified after styl
-            shutil.copyfile(userCSSFile, userStylFile)
+            shutil.copyfile(user_css_file, user_styl_file)
             log("Dark-Telegram.user.css -> Dark-Telegram.user.styl")
 
         else:
@@ -547,7 +548,7 @@ def checkStylCss() -> bool:
             log("Dark-Telegram.user.styl = Dark-Telegram.user.css")
 
     print("File sync check done.")
-    return okResult
+    return ok_result
 
 
 # check if the debug argument was given
@@ -567,47 +568,47 @@ if s:
     checkStylCss()
 
 elif h:
-    print(helpMsg)
+    print(help_msg)
 
 # check if Dark-Telegram.user.styl and Dark-Telegram.user.css are synced and sync them if they don't
 elif checkStylCss():
 
-    argFile = userStylFile
-    if os.path.isfile(argFile):
-        if argFile.endswith('.styl'):
+    arg_file = user_styl_file
+    if os.path.isfile(arg_file):
+        if arg_file.endswith('.styl'):
             # extracting variables from the file to global variables
-            extractVariables(argFile)
+            extractVariables(arg_file)
 
             # construct a stylus file with the saved variables
-            stylFile = constructStylFile(argFile)
-            cssFile = stylFile.replace(".styl", ".css")
+            styl_file = constructStylFile(arg_file)
+            css_file = styl_file.replace(".styl", ".css")
 
             # call the shell command to compile to given object
-            stylCmd = "stylus "
+            styl_cmd = "stylus "
             if c:
-                stylCmd += "--compress "
+                styl_cmd += "--compress "
             if debug:
-                stylCmd += "--line-numbers "
+                styl_cmd += "--line-numbers "
 
-            output = check_output(stylCmd + stylFile, shell=True).decode()
+            output = check_output(styl_cmd + styl_file, shell=True).decode()
             print(output)
 
             # removing temp styl file as we do not need it anymore
             if not debug:
                 print("Removing temp styl file...")
-                os.remove(stylFile)
+                os.remove(styl_file)
 
             # and check if the output contains a 'compiled' sub-string
             # this way we know the compilation was success
             if output.find("compiled") >= 0:
-                if os.path.isfile(cssFile):
+                if os.path.isfile(css_file):
                     # compilation was success
 
                     if not debug:
                         # clean all leftover comments
-                        cleanLeftoverComments(cssFile)
+                        cleanLeftoverComments(css_file)
 
-                    print("Compilation done. Please check '" + cssFile + "'.")
+                    print("Compilation done. Please check '" + css_file + "'.")
 
                 else:
                     print("Couldn't find compiled CSS file!")
@@ -615,10 +616,10 @@ elif checkStylCss():
                 print("Couldn't compile styl file.")
         else:
             print("Not a styl file.")
-            print(helpMsg)
+            print(help_msg)
     else:
-        print("Not a valid file " + argFile)
-        print(helpMsg)
+        print("Not a valid file " + arg_file)
+        print(help_msg)
 else:
     print("Sync error. Make sure you have at least 'Dark-Telegram.user.styl' or 'Dark-Telegram.user.css' file.")
-    print(helpMsg)
+    print(help_msg)
