@@ -1,3 +1,10 @@
+## V1.1.16 (2020-04-24)
+
+- Fixed top padding of clickable media messages (non-animated stickers).
+- Fixed width of video thumbnails.
+- Fixed pinned message right margin.
+- Fixed author name position.
+
 ## V1.1.15 (2020-04-16)
 
 - New compile script to handle sync of styl and css file versions and make a darkmode.css Franz/Ferdi compatible plain css file based on the synced files.

@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.1.15
+@version        1.1.16
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -156,7 +156,7 @@
         --tail-v (tail is 1 ? visible : hidden)
         --vignette (vign is 1 ? visible : hidden)
     
-        --version "Dark-Telegram v1.1.15 — April 16th, 2020"
+        --version "Dark-Telegram v1.1.16 — April 24th, 2020"
         --message "Please report any issues on GitHub so that we can fix them."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -504,7 +504,6 @@
         height 49px
         border 1px solid border i
     }
-
     /* fullscreen mixin */
     fullscreenblock() {
         .tg_head_split{
@@ -514,9 +513,16 @@
         .tg_head_split{
             min-width 100% i
         }
+        .im_page_wrap,
+        .im_page_split,
+        .im_dialogs_col_wrap,
+        .im_history_col_wrap{
+            height 100% i
+        }
+        .footer_empty,
         .footer_wrap.footer_empty{
             display none i
-            height 0
+            height 0 i
         }
     }
 
@@ -563,6 +569,13 @@
         }
     }
     
+    .im_message_video, 
+    a.im_message_photo_thumb,
+    /* non-animated stickers */
+    .im_message_media > div > div {
+        margin-top 5px i
+    }
+
     .im_history_scrollable_wrap .im_history_scrollable{
         // bgc bgcolor
         // filter: invert(chatbg-i) opacity(chatbg-o);
@@ -633,11 +646,13 @@
     }
     
     /* clamping video thumb images to 256x256 */
+    .im_message_video_thumb,
+    a.im_message_video_thumb,
     img.im_message_video_thumb{
         max-width 256px
         max-height 256px
-        width auto
-        height auto
+        width auto i
+        height auto i
     }
 
     /* fix message body to fit inside chat area */
@@ -766,7 +781,7 @@
     
     .im_message_author{
         padding 0px 5px 0px 5px
-        margin 0
+        margin 5px 0 0 0
     }
     
     /* message author position mixin */
@@ -1185,7 +1200,7 @@
             }
 
             /* while hovering the top left header (temporary until I find a way to do this from a different selector) */
-            .tg_head_logo_wrap:hover{
+            .page_wrap div[my-head=""] .tg_page_head .tg_head_split .tg_head_logo_wrap:hover{
                 width wmax i
                 &,
                 .tg_head_btn .icon-tg-title,
@@ -1948,6 +1963,11 @@
         padding-left unset
     }
     
+    /* pinned message right margin */
+    .im_history_pinned_wrap .im_message_reply{
+        margin-right 56px
+    }
+
     /* replay and pinned messages */
     .im_message_reply_wrap,
     .im_history_pinned_wrap .im_message_reply{

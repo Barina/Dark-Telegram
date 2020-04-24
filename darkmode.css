@@ -4,7 +4,7 @@
 @homepageURL https://github.com/Barina/Dark-Telegram
 @supportURL https://github.com/Barina/Dark-Telegram/issues
 @updateURL https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version 1.1.15
+@version 1.1.16
 @description Customizable theme for telegram web.
 @author Roy Barina
 @license MIT
@@ -203,9 +203,16 @@ a.composer_emoji_btn:hover {
   .tg_head_split {
     min-width: 100% !important;
   }
+  .im_page_wrap,
+  .im_page_split,
+  .im_dialogs_col_wrap,
+  .im_history_col_wrap {
+    height: 100% !important;
+  }
+  .footer_empty,
   .footer_wrap.footer_empty {
     display: none !important;
-    height: 0;
+    height: 0 !important;
   }
 }
 .im_page_wrap,
@@ -237,6 +244,11 @@ a.composer_emoji_btn:hover {
   right: 0;
   background-image: url("https://web.whatsapp.com/img/bg-chat-tile_9e8a2898faedb7db9bf5638405cf81ae.png");
   filter: invert(0.6) opacity(0.15);
+}
+.im_message_video,
+a.im_message_photo_thumb,
+.im_message_media > div > div {
+  margin-top: 5px !important;
 }
 .im_dialog_photo,
 .md_modal_list_peer_photo,
@@ -279,11 +291,13 @@ a.im_message_from_photo {
   -moz-shadow: 0px 3px 5px rgba(0,0,0,0.251);
   box-shadow: 0px 3px 5px rgba(0,0,0,0.251);
 }
+.im_message_video_thumb,
+a.im_message_video_thumb,
 img.im_message_video_thumb {
   max-width: 256px;
   max-height: 256px;
-  width: auto;
-  height: auto;
+  width: auto !important;
+  height: auto !important;
 }
 div.im_message_body {
   display: grid !important;
@@ -355,7 +369,7 @@ a.im_message_photo_thumb {
 }
 .im_message_author {
   padding: 0px 5px 0px 5px;
-  margin: 0;
+  margin: 5px 0 0 0;
 }
 .im_message_out .im_message_body .im_message_author_wrap .im_message_author {
   text-align: end;
@@ -392,7 +406,7 @@ a.pull-right,
 }
 .im_history_not_selected:after {
   display: block;
-  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.1.15 — April 16th, 2020";
+  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.1.16 — April 24th, 2020";
   white-space: pre-wrap;
   border-top: 1px solid #333943;
   font-size: 11px;
@@ -671,17 +685,17 @@ a.md_modal_action:hover,
   .page_wrap .im_page_wrap .im_page_split .im_dialogs_col_wrap:focus-within .im_dialogs_col .im_dialogs_wrap .im_dialogs_scrollable_wrap .nav .im_dialog_wrap .im_dialog .im_dialog_meta {
     opacity: 1 !important;
   }
-  .tg_head_logo_wrap:hover {
+  .page_wrap div[my-head=""] .tg_page_head .tg_head_split .tg_head_logo_wrap:hover {
     width: 31% !important;
   }
-  .tg_head_logo_wrap:hover,
-  .tg_head_logo_wrap:hover .tg_head_btn .icon-tg-title,
-  .tg_head_logo_wrap:hover ~ .tg_head_main_wrap {
+  .page_wrap div[my-head=""] .tg_page_head .tg_head_split .tg_head_logo_wrap:hover,
+  .page_wrap div[my-head=""] .tg_page_head .tg_head_split .tg_head_logo_wrap:hover .tg_head_btn .icon-tg-title,
+  .page_wrap div[my-head=""] .tg_page_head .tg_head_split .tg_head_logo_wrap:hover ~ .tg_head_main_wrap {
     transition: 0.7s ease !important;
     transition-delay: 0.25s !important;
     opacity: 1 !important;
   }
-  .tg_head_logo_wrap:hover ~ .tg_head_main_wrap {
+  .page_wrap div[my-head=""] .tg_page_head .tg_head_split .tg_head_logo_wrap:hover ~ .tg_head_main_wrap {
     width: 69% !important;
   }
 }
@@ -1321,6 +1335,9 @@ a.im_dialog:hover .im_dialog_meta .active .im_dialog_unread {
 }
 .im_message_reply {
   padding-left: unset;
+}
+.im_history_pinned_wrap .im_message_reply {
+  margin-right: 56px;
 }
 .im_message_reply_wrap,
 .im_history_pinned_wrap .im_message_reply {
