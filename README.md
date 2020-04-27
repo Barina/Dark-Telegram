@@ -51,7 +51,7 @@ For more information, please follow the original style [Dark-WhatsApp installati
 
 ## Franz\Ferdi
 
-If you're using Franz or Ferdi, please take a look at [dcferreira](https://github.com/dcferreira)'s [Franz Themes Repository](https://github.com/dcferreira/franz-themes) for more instructions on how to install the [Dark-Telegram theme for Franz\Ferdi](https://github.com/dcferreira/franz-themes/tree/master/telegram).
+If you're using Franz or Ferdi, please take a look at [dcferreira](https://github.com/dcferreira)'s awesome [Franz Themes Repository](https://github.com/dcferreira/franz-themes) for more instructions on how to install the [Dark-Telegram theme for Franz\Ferdi](https://github.com/dcferreira/franz-themes/tree/master/telegram).
 
 ## Credits
 
