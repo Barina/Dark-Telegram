@@ -1,3 +1,7 @@
+## V1.1.17 (2020-04-28)
+
+- Fixed file upload\download info won't show on Chromium based browsers. ([Issue #8](../../issues/8))
+
 ## V1.1.16 (2020-04-24)
 
 - Fixed top padding of clickable media messages (non-animated stickers).
