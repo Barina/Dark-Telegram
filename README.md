@@ -49,6 +49,10 @@ first, and then click on the button below.
 
 For more information, please follow the original style [Dark-WhatsApp installation section](https://github.com/vednoc/dark-whatsapp/wiki/Installation).
 
+## Franz\Ferdi
+
+If you're using Franz or Ferdi, please take a look at [dcferreira](https://github.com/dcferreira)'s awesome [Franz Themes Repository](https://github.com/dcferreira/franz-themes) for more instructions on how to install the [Dark-Telegram theme for Franz\Ferdi](https://github.com/dcferreira/franz-themes/tree/master/telegram).
+
 ## Credits
 
 Full credit for design goes to original style creators at [vednoc](https://github.com/vednoc).
