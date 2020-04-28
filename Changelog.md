@@ -1,3 +1,7 @@
+## V1.1.19 (2020-04-28)
+
+- Fixed media message audio button won't show up as a pause button when playing audio files.
+
 ## V1.1.18 (2020-04-28)
 
 - Fixed media buttons background won't show up on Chromium based browsers.
