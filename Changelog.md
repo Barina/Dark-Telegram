@@ -1,3 +1,7 @@
+## V1.1.18 (2020-04-28)
+
+- Fixed media buttons background won't show up on Chromium based browsers.
+
 ## V1.1.17 (2020-04-28)
 
 - Fixed file upload\download info won't show on Chromium based browsers. ([Issue #8](../../issues/8))

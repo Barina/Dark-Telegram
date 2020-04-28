@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.1.17
+@version        1.1.18
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -156,7 +156,7 @@
         --tail-v (tail is 1 ? visible : hidden)
         --vignette (vign is 1 ? visible : hidden)
     
-        --version "Dark-Telegram v1.1.17 — April 28th, 2020"
+        --version "Dark-Telegram v1.1.18 — April 28th, 2020"
         --message "Please report any issues on GitHub so that we can fix them."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -1274,6 +1274,11 @@
         border-bottom 3px solid border
     }
         
+    /* fix for media button thet its background disappeared */
+    .im_message_file_button[ng-class="{im_message_file_button_dl_doc: media.document.downloaded}"] {
+        float unset i
+    }
+    
     /* round button */
     .im_record_bg,
     .im_message_file_button,
@@ -1291,7 +1296,7 @@
             color accent-alt
         }
     }
-    
+
     /* counter on buttons and current session text */
     .im_selected_count,
     .session_active_date_online{
@@ -2000,9 +2005,11 @@
         margin-top 4px
         display block
     }
+
     /* fixing the media messages button in place ... */
     .im_message_document{
         display -webkit-box i
+        display -moz-box i
     }
 
     /* media not supported message */
