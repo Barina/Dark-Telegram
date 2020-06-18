@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.1.19
+@version        1.1.20
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -156,8 +156,8 @@
         --tail-v (tail is 1 ? visible : hidden)
         --vignette (vign is 1 ? visible : hidden)
     
-        --version "Dark-Telegram v1.1.19 — April 28th, 2020"
-        --message "Please report any issues on GitHub so that we can fix them."
+        --version "Dark-Telegram v1.1.20 — June 18th, 2020"
+        --message "Please report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
     }
@@ -169,7 +169,13 @@
     t-out = 1s
     
     msgb-thumb = msgb - 5
-        
+    msgbgi = msg-in-bg
+    msgbgo = msg-out-bg
+    msgbgih = msgbgi + 10%
+    msgbgoh = msgbgo + 10%
+    msgbgis = msgbgi + 33%
+    msgbgos = msgbgo + 33%
+
     accent-alt = accent + 33%
 
     privateblur = (private is 1 ? 10px : 0)
@@ -685,21 +691,57 @@
         border-right 10px solid transparent
     }
     
-    /* in tail */    
+    /* in tail */
     .im_message_in .im_message_body:before{
         if(inpos != right){
-            leftTail(msg-in-bg)
+            leftTail(msgbgi)
         }else{
-            rightTail(msg-in-bg, 58)
+            rightTail(msgbgi, 58)
+        }
+    }
+    
+    /* in tail hover */
+    .im_message_outer_wrap:hover div .im_message_in .im_message_body:before{
+        if(inpos != right){
+            leftTail(msgbgih)
+        }else{
+            rightTail(msgbgih, 58)
+        }
+    }
+        
+    /* in tail selected */
+    .im_message_selected .im_message_outer_wrap div .im_message_in .im_message_body:before{
+        if(inpos != right){
+            leftTail(msgbgis)
+        }else{
+            rightTail(msgbgis, 58)
         }
     }
     
     /* out tail */
     .im_message_out .im_message_body:before{
         if(outpos == right){
-            rightTail(msg-out-bg, 58)
+            rightTail(msgbgo, 58)
         } else {
-            leftTail(msg-out-bg)
+            leftTail(msgbgo)
+        }
+    }
+        
+    /* out tail hover */
+    .im_message_outer_wrap:hover div .im_message_out .im_message_body:before{
+        if(outpos == right){
+            rightTail(msgbgoh, 58)
+        } else {
+            leftTail(msgbgoh)
+        }
+    }
+        
+    /* out tail selected */
+    .im_message_selected .im_message_outer_wrap div .im_message_out .im_message_body:before{
+        if(outpos == right){
+            rightTail(msgbgos, 58)
+        } else {
+            leftTail(msgbgos)
         }
     }
     
@@ -738,13 +780,13 @@
 
     /* in message bubble */
     .im_message_in .im_message_body{
-        bgc msg-in-bg
+        bgc msgbgi
         (inpos != right) ? leftBubble() : rightBubble()
     }
     
     /* out message bubble */
     .im_message_out .im_message_body{
-        bgc msg-out-bg
+        bgc msgbgo
         (outpos == right) ? rightBubble() : leftBubble()
     }
     
@@ -1319,8 +1361,27 @@
         bgc control
     }
 
-    .im_message_selected .im_message_outer_wrap {
-        bg var(--control-t-hover)
+    /* removing old hover+select chat bubbles mechanics*/
+    .im_message_outer_wrap,
+    .im_message_outer_wrap:hover {
+        bg none i
+    }
+
+    /* chat bubbles will change colors by hover+selected status */
+    .im_message_selected .im_message_outer_wrap div .im_message_in .im_message_body{
+        bg msgbgis i
+    }
+
+    .im_message_outer_wrap:hover div .im_message_in .im_message_body{
+        bg msgbgih
+    }
+
+    .im_message_selected .im_message_outer_wrap div .im_message_out .im_message_body{
+        bg msgbgos i
+    }
+
+    .im_message_outer_wrap:hover div .im_message_out .im_message_body{
+        bg msgbgoh
     }
 
     a.im_dialog:hover, .dropdown-menu a:hover{

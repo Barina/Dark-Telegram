@@ -1,3 +1,7 @@
+## V1.1.20 (2020-06-18)
+
+- Replaced hover & selected messages mechanics. Now the chat bubbles will highlight when hovered or selected.
+
 ## V1.1.19 (2020-04-28)
 
 - Fixed media message audio button won't show up as a pause button when playing audio files.
