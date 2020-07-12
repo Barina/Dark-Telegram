@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.1.20
+@version        1.1.21
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -156,7 +156,7 @@
         --tail-v (tail is 1 ? visible : hidden)
         --vignette (vign is 1 ? visible : hidden)
     
-        --version "Dark-Telegram v1.1.20 — June 18th, 2020"
+        --version "Dark-Telegram v1.1.21 — July 12th, 2020"
         --message "Please report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -558,6 +558,17 @@
     .composer_dropdown_wrap>div>div>div>div>div>div>ul>li>a:hover{
         bgc control-hover i
     }
+
+    /* background */
+    .im_page_split{
+        bgc bgccolor
+    }
+
+    /* control backgrounds */
+    .im_dialog_wrap a.im_dialog,
+    .im_dialogs_panel{
+        bgc control
+    }
     
     /* chat background */
     .im_history_wrap{
@@ -700,24 +711,6 @@
         }
     }
     
-    /* in tail hover */
-    .im_message_outer_wrap:hover div .im_message_in .im_message_body:before{
-        if(inpos != right){
-            leftTail(msgbgih)
-        }else{
-            rightTail(msgbgih, 58)
-        }
-    }
-        
-    /* in tail selected */
-    .im_message_selected .im_message_outer_wrap div .im_message_in .im_message_body:before{
-        if(inpos != right){
-            leftTail(msgbgis)
-        }else{
-            rightTail(msgbgis, 58)
-        }
-    }
-    
     /* out tail */
     .im_message_out .im_message_body:before{
         if(outpos == right){
@@ -726,22 +719,44 @@
             leftTail(msgbgo)
         }
     }
-        
-    /* out tail hover */
-    .im_message_outer_wrap:hover div .im_message_out .im_message_body:before{
-        if(outpos == right){
-            rightTail(msgbgoh, 58)
-        } else {
-            leftTail(msgbgoh)
+    
+    /* tail hovered and selected when selection mode is active */
+    .im_history_select_active .im_history_messages .im_history_messages_peer{
+
+        /* in tail hover */
+        & .im_message_outer_wrap:hover div .im_message_in .im_message_body:before{
+            if(inpos != right){
+                leftTail(msgbgih)
+            }else{
+                rightTail(msgbgih, 58)
+            }
         }
-    }
+            
+        /* in tail selected */
+        & .im_message_selected .im_message_outer_wrap div .im_message_in .im_message_body:before{
+            if(inpos != right){
+                leftTail(msgbgis)
+            }else{
+                rightTail(msgbgis, 58)
+            }
+        }
         
-    /* out tail selected */
-    .im_message_selected .im_message_outer_wrap div .im_message_out .im_message_body:before{
-        if(outpos == right){
-            rightTail(msgbgos, 58)
-        } else {
-            leftTail(msgbgos)
+        /* out tail hover */
+        & .im_message_outer_wrap:hover div .im_message_out .im_message_body:before{
+            if(outpos == right){
+                rightTail(msgbgoh, 58)
+            } else {
+                leftTail(msgbgoh)
+            }
+        }
+            
+        /* out tail selected */
+        & .im_message_selected .im_message_outer_wrap div .im_message_out .im_message_body:before{
+            if(outpos == right){
+                rightTail(msgbgos, 58)
+            } else {
+                leftTail(msgbgos)
+            }
         }
     }
     
@@ -1140,9 +1155,10 @@
         }
     }    
     
-    .tg_head_logo_wrap, .tg_head_logo_wrap:hover{
-        border-right 1px solid border
-    }
+    // disabling the border that splits the header
+    // .tg_head_logo_wrap, .tg_head_logo_wrap:hover{
+    //     border-right 1px solid border
+    // }
     
     /* search box */
     .form-control,
@@ -1212,6 +1228,10 @@
             /* while contact list is hovered or has focus within (search box) */
             .page_wrap .im_page_wrap .im_page_split .im_dialogs_col_wrap:hover,
             .page_wrap .im_page_wrap .im_page_split .im_dialogs_col_wrap:focus-within{
+
+                // setting the contacts width to expand on hover/focused
+                width wmax i
+
                 /* let all the envolved transit nicely */
                 .tg_head_logo_wrap,//<- need to fix that
                 .tg_head_main_wrap,//<- need to fix that
@@ -1223,11 +1243,12 @@
                     transition-delay compactDelayOn i
                 }
                 
+                // preventing expanding of left header in compact mode
                 /* maximize contact list and top left header width */
-                / div .tg_page_head .tg_head_split .tg_head_logo_wrap:hover,//<- need to fix that
-                &{
-                    width wmax i
-                }
+                // / div .tg_page_head .tg_head_split .tg_head_logo_wrap:hover,//<- need to fix that
+                // &{
+                //    width wmax i
+                // }
 
                 /* minimize message history (including textarea) and top right header width to it's initial state */
                 .tg_head_main_wrap,//<- need to fix that
@@ -1242,20 +1263,21 @@
                 }
             }
 
-            /* while hovering the top left header (temporary until I find a way to do this from a different selector) */
-            .page_wrap div[my-head=""] .tg_page_head .tg_head_split .tg_head_logo_wrap:hover{
-                width wmax i
-                &,
-                .tg_head_btn .icon-tg-title,
-                ~ .tg_head_main_wrap{
-                    transition comTranDurOn ease i
-                    transition-delay compactDelayOn i
-                    opacity 1 i
-                }
-                ~ .tg_head_main_wrap{
-                    width 69% i
-                }
-            }
+            // preventing expanding of left header in compact mode
+            // /* while hovering the top left header (temporary until I find a way to do this from a different selector) */
+            // .page_wrap div[my-head=""] .tg_page_head .tg_head_split .tg_head_logo_wrap:hover{
+            //     width wmax i
+            //     &,
+            //     .tg_head_btn .icon-tg-title,
+            //     ~ .tg_head_main_wrap{
+            //         transition comTranDurOn ease i
+            //         transition-delay compactDelayOn i
+            //         opacity 1 i
+            //     }
+            //     ~ .tg_head_main_wrap{
+            //         width 69% i
+            //     }
+            // }
         }
     }
 
@@ -1368,25 +1390,32 @@
     }
 
     /* chat bubbles will change colors by hover+selected status */
-    .im_message_selected .im_message_outer_wrap div .im_message_in .im_message_body{
-        bg msgbgis i
-    }
+    .im_history_select_active .im_history_messages .im_history_messages_peer{
+        
+        & .im_message_selected .im_message_outer_wrap div .im_message_in .im_message_body{
+            bg msgbgis i
+        }
 
-    .im_message_outer_wrap:hover div .im_message_in .im_message_body{
-        bg msgbgih
-    }
+        & .im_message_outer_wrap:hover div .im_message_in .im_message_body{
+            bg msgbgih
+        }
 
-    .im_message_selected .im_message_outer_wrap div .im_message_out .im_message_body{
-        bg msgbgos i
-    }
+        & .im_message_selected .im_message_outer_wrap div .im_message_out .im_message_body{
+            bg msgbgos i
+        }
 
-    .im_message_outer_wrap:hover div .im_message_out .im_message_body{
-        bg msgbgoh
-    }
-
+        & .im_message_outer_wrap:hover div .im_message_out .im_message_body{
+            bg msgbgoh
+        }
+    } 
     a.im_dialog:hover, .dropdown-menu a:hover{
         bgTex(hover) i
         // transition: t-in;
+    }
+    
+    /* bringing the top left menu to foreground */
+    .dropdown-menu{
+        z-index 5 i
     }
     
     /* current conversation marker in contact list */

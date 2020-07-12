@@ -1,3 +1,9 @@
+## V1.1.21 (2020-07-12)
+
+- Changed the bottom most background to a darker control color.
+- Bubbles will now only highlight in selection mode.
+- On compact mode the header is now fixed.
+
 ## V1.1.20 (2020-06-18)
 
 - Replaced hover & selected messages mechanics. Now the chat bubbles will highlight when hovered or selected.
