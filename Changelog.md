@@ -1,3 +1,7 @@
+## V1.1.22 (2020-08-15)
+
+- Fixed wrapping of long words. (Issue #10)
+
 ## V1.1.21 (2020-07-12)
 
 - Changed the bottom most background to a darker control color.
