@@ -4,7 +4,7 @@
 @homepageURL https://github.com/Barina/Dark-Telegram
 @supportURL https://github.com/Barina/Dark-Telegram/issues
 @updateURL https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version 1.1.23
+@version 1.1.24
 @description Customizable theme for telegram web.
 @author Roy Barina
 @license MIT
@@ -437,7 +437,7 @@ a.pull-right,
 }
 .im_history_not_selected:after {
   display: block;
-  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.1.23 — September 15th, 2020";
+  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.1.24 — September 15th, 2020";
   white-space: pre-wrap;
   border-top: 1px solid #333943;
   font-size: 11px;
@@ -1393,7 +1393,6 @@ a.im_dialog:hover .im_dialog_meta .active .im_dialog_unread {
   position: absolute;
   left: 0;
   top: 0;
-  right: 0;
   bottom: 0;
 }
 .audio_player_wrap,

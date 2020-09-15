@@ -1,4 +1,8 @@
-## V1.1.22 (2020-08-15)
+## V1.1.24 (2020-09-15)
+
+- Fixed an issue with pinned messages were the side ribbon taking up the whole space.
+
+## V1.1.23 (2020-09-15)
 
 - Added a QR Code linking to the issues page on GitHub for lazy people like me who don't wanna manually write the link.
 
