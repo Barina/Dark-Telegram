@@ -1,5 +1,9 @@
 ## V1.1.22 (2020-08-15)
 
+- Added a QR Code linking to the issues page on GitHub for lazy people like me who don't wanna manually write the link.
+
+## V1.1.22 (2020-08-15)
+
 - Fixed wrapping of long words. ([Issue #10](../../issues/10))
 
 ## V1.1.21 (2020-07-12)
