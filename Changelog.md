@@ -1,3 +1,7 @@
+## V1.1.25 (2020-09-15)
+
+- Fixed pinned messages hide button not showing the custom dedicated svg icon.
+
 ## V1.1.24 (2020-09-15)
 
 - Fixed an issue with pinned messages were the side ribbon taking up the whole space.
