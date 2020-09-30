@@ -1,3 +1,15 @@
+## V1.1.26 (2020-09-30)
+
+- Fixed messages tail visible seam in some zoom levels.
+- Fixed inconsistent messages content.
+- Fixed vote buttons and added a bg to them.
+- Fixed pinned message.
+- Removed ugly border from reply messages.
+- Added a maximum width for messages bubbles. (Set to 100% to ignore maximum width.)
+- Empty conversation now also have a fancy banner.
+- Fixed send buttons area mess when zooming to much in.
+- (May) Fixed the conversation list width issue on some browsers.
+
 ## V1.1.25 (2020-09-15)
 
 - Fixed pinned messages hide button not showing the custom dedicated svg icon.
