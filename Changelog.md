@@ -8,7 +8,7 @@
 - Added a maximum width for messages bubbles. (Set to 100% to ignore maximum width.)
 - Empty conversation now also have a fancy banner.
 - Fixed send buttons area mess when zooming to much in.
-- (May) Fixed the conversation list width issue on some browsers.
+- (~~May~~Did 😎) Fixed the conversation list width issue on some browsers.
 
 ## V1.1.25 (2020-09-15)
 
