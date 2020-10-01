@@ -1,3 +1,9 @@
+## V1.1.27 (2020-10-01)
+
+- Added blur behind.
+- Added window width.
+- Added a switch to fix the conversation list width issue on some browsers like FireFox. (Yes.. 🙄 a manual fix is required here for now as there's no way to detect browser that I know of.)
+
 ## V1.1.26 (2020-09-30)
 
 - Fixed messages tail visible seam in some zoom levels.
@@ -8,7 +14,7 @@
 - Added a maximum width for messages bubbles. (Set to 100% to ignore maximum width.)
 - Empty conversation now also have a fancy banner.
 - Fixed send buttons area mess when zooming to much in.
-- (~~May~~Did 😎) Fixed the conversation list width issue on some browsers.
+- (~~May~~ Did 😎) Fixed the conversation list width issue on some browsers.
 
 ## V1.1.25 (2020-09-15)
 

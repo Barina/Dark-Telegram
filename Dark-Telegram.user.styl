@@ -4,11 +4,13 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.1.26
+@version        1.1.27
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
 @preprocessor   stylus
+
+@var text windowwidth           'Window width' 75%
 
 @var color textc2               'Headers text color' #fff
 @var color textc1               'Primary text color' #ccccca
@@ -129,6 +131,9 @@
 @var color usrbgc7              'User bg color 7' #669799
 @var color usrbgc8              'User bg color 8' #9d806c
 
+@var text blurbehind            'Blur amount behind focused media' 8px
+
+@var checkbox fffix             'Chat list fix' 0
 
 ==/UserStyle== */
 @-moz-document domain("web.telegram.org") {
@@ -159,7 +164,7 @@
         --tail-v (tail is 1 ? visible : hidden)
         --vignette (vign is 1 ? visible : hidden)
     
-        --version "Dark-Telegram v1.1.26 — September 30th, 2020"
+        --version "Dark-Telegram v1.1.27 — October 1st, 2020"
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -580,9 +585,9 @@
         }
     }
         
-    .im_page_wrap,
+    .im_page_wrap
     .tg_head_split {
-        max-width: 1396px;
+        max-width windowwidth
         shad 0px 0px 10px shadow
     }
     
@@ -1154,15 +1159,25 @@
         color textc1
     }
     
-    /* hiding FF scrollbars */
+    /* hiding scrollbars */
     .nano-content{
         scrollbar-width none
+        &::-webkit-scrollbar{
+            display none
+        }
     }
 
     .im_dialogs_scrollable_wrap {
         padding 0 i
         & a.im_dialog_searchpeer{
             transition t-out;
+        }
+    }
+
+    /* FireFox fix */
+    if(fffix){
+        .nav{
+            padding-right 15px i
         }
     }
     
@@ -2707,6 +2722,22 @@
         // triple buttons
         .reply_markup_button_w3 &{
             width 100px i
+        }
+    }
+
+    /* blur behind open media & popups */
+    .page_wrap{
+        transition-duration .4s
+        .modal-open &{
+            filter blur(blurbehind)
+            transition-duration 1s
+        }
+    }
+
+    /* clearing the backdrop when there's a blur amount bigger than 0 */
+    if(blurbehind > 0){
+        .modal-backdrop{
+            display none
         }
     }
 }
