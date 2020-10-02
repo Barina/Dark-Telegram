@@ -1,3 +1,7 @@
+## V1.1.28 (2020-10-02)
+
+- Added a zoom effect when focusing on popups and media.
+
 ## V1.1.27 (2020-10-01)
 
 - Added blur behind.

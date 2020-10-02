@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.1.27
+@version        1.1.28
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -164,7 +164,9 @@
         --tail-v (tail is 1 ? visible : hidden)
         --vignette (vign is 1 ? visible : hidden)
     
-        --version "Dark-Telegram v1.1.27 — October 1st, 2020"
+        /* auto generated line below. please do not delete or modify. */
+        --version "Dark-Telegram v1.1.28 -- October 2nd, 2020"
+
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -2727,10 +2729,12 @@
 
     /* blur behind open media & popups */
     .page_wrap{
+        transform scale(1)
         transition-duration .4s
         .modal-open &{
             filter blur(blurbehind)
-            transition-duration 1s
+            transition-duration .4s
+            transform scale(.95)
         }
     }
 
