@@ -3,7 +3,7 @@
 author      Roy Barina
 credits     Idan Haim Shalom
 license     MIT
-version     1.0.1
+version     1.1.1
 maintainer  Roy Barina
 contact     https://github.com/Barina
 """
@@ -21,6 +21,7 @@ to be compatible with services like Franz\Ferdi. """
 import sys
 import os.path
 import shutil
+import datetime
 from subprocess import check_output
 class Var:
     """
@@ -176,10 +177,12 @@ help_msg = "\n\nCompiling Dark-Telegram.user.styl file to plain CSS\n" + \
     "Usage:\n" + \
     "   python compile.py [command(s)(optional)]\n\n" + \
     "Commands:\n" + \
-    "   --debug, -d, /d     - Will display more output and won't clear files.\n" + \
-    "   --compress, -c, /c  - Will compress the resulted CSS.\n" + \
-    "   --sync, -s, /s      - Will only sync styl and CSS files.\n" + \
-    "   --help, -h, /h      - Will show this message.\n\n" + \
+    "   --debug, -d, /d             - Will display more output and won't clear files.\n" + \
+    "   --compress, -c, /c          - Will compress the resulted CSS.\n" + \
+    "   --noversionstring, -nv, /nv - Whether to ignore version string.\n" + \
+    "   --sync, -s, /s              - Will only sync styl and CSS files.\n" + \
+    "   --timestamp, -t, /t         - Will use file's timestamp rather than version when syncing files.\n" + \
+    "   --help, -h, /h              - Will show this message.\n\n" + \
     "Example:\n" + \
     "   python compile.py -c -d\n\n" + \
     "   -> Will compile and compress 'Dark-Telegram.user.styl' file showing a bunch of info as output.\n" + \
@@ -290,7 +293,7 @@ def extractRootVar(line):
 def extractVariables(in_file):
     """ Extracts variables from a given file. """
 
-    print("Extracting variables...")
+    log("Extracting variables...")
 
     global user_style_block
     global debug
@@ -382,13 +385,13 @@ def extractVariables(in_file):
             #     log("error?")
             #     break
 
-    print("Done extracting variables...")
+    log("Done extracting variables...")
 
 
 def constructStylFile(in_file) -> str:
     """ Construct a new temp file based on the given file """
 
-    print("Generating temporary style file...")
+    log("Generating temporary style file...")
 
     global user_style_block
 
@@ -470,7 +473,7 @@ def constructStylFile(in_file) -> str:
 def cleanLeftoverComments(in_file):
     """ Clears all the leftover comments excluding UserStyle block comment """
 
-    print("Cleaning leftover comments...")
+    log("Cleaning leftover comments...")
 
     tmp_file = "styl.tmp"
     within_comment = False
@@ -497,16 +500,123 @@ def cleanLeftoverComments(in_file):
                 # not a comment
                 write_obj.write(line)
 
-    print(str(comment_count) + " comments removed.")
+    log(str(comment_count) + " comments removed.")
 
     # renaming output file
     os.remove(in_file)
     os.rename(tmp_file, in_file)
 
 
-def checkStylCss() -> bool:
+def generateVersionString(in_file):
+    """ Generates a version string for the given file. """
+
+    log("Generating version string for '" + in_file + "'")
+
+    tmp_file = "vstr.tmp"
+    name = "Unknown"
+    version = "-1"
+    versionStringGenerated = False
+
+    # building the date string of today
+    date = datetime.datetime.now()
+    day = date.day
+    datestring = date.strftime("%B") + " " + str(day)
+    if day < 2:
+        datestring += "st"
+    elif day < 3:
+        datestring += "nd"
+    elif day < 4:
+        datestring += "rd"
+    else:
+        datestring += "th"
+
+    datestring += ", " + date.strftime("%Y")
+
+    # open in file to read and target file to write to
+    with open(in_file, 'r') as read_obj, open(tmp_file, 'w') as write_obj:
+        # iterating over all lines in the file
+        for line in read_obj:
+            if line.find("@name ") >= 0:
+                name = line.replace("@name ", "").strip()
+            elif line.find("@version ") >= 0:
+                version = "v"+line.replace("@version ", "").strip()
+
+            if not versionStringGenerated:
+                i = line.find("--version ")
+                if i >= 0:
+                    line = ""
+                    # building indentation
+                    for c in range(i):
+                        line += " "
+                    line += "--version \"" + name + " " + version + \
+                        " -- " + datestring + "\"\n"
+                    versionStringGenerated = True
+
+            write_obj.write(line)
+
+    # renaming output file
+    os.remove(in_file)
+    os.rename(tmp_file, in_file)
+
+
+def getVersionFromFile(in_file):
+    """ Gets the version from the given Styl\CSS file.
+
+    Parameters:
+    -----------
+    in_file : str
+        The file to check against. cannot be empty.
+
+    Returns:
+    -----------
+    Returns the version specified in the line containing '@version' or -1 if not found."""
+
+    version = -1
+    versionFound = False
+
+    with open(in_file, "r") as read_obj:
+        for line in read_obj:
+            # searching for the line that contains the '@version' string
+            if line.find("@version ") >= 0:
+                temp = line.replace("@version", "").replace(" ", "")
+                if len(temp) > 0:
+                    version = temp
+                    versionFound = True
+                break
+
+    # print any error
+    if not versionFound or version == -1:
+        print("Did not find version in file '" + in_file + "'")
+
+    return version
+
+
+def compareVersions(v1, v2) -> int:
+    """ Compare two given version strings and return which is bigger.
+
+    Returns 1 when version1 is bigger than version2, -1 when version2 is bigger and 0 when they are equals. """
+
+    v1 = int(v1.replace(".", ""))
+    v2 = int(v2.replace(".", ""))
+
+    if v1 > v2:
+        return 1
+    if v2 > v1:
+        return -1
+    return 0
+
+
+def checkStylCss(useTimestamp=False) -> bool:
     """ Checks the presence of Dark-Telegram.user.styl 
-    and Dark-Telegram.user.css and makes sure they're synced.
+    and Dark-Telegram.user.css and make sure they're synced.
+
+    Parameters:
+    -----------
+    useTimestamp : bool
+        Whether to use file's timestamp rather than version. default is False.
+
+    Returns:
+    -----------
     Returns True if the check has passed False otherwise."""
 
     ok_result = True
@@ -528,26 +638,39 @@ def checkStylCss() -> bool:
 
     else:
         # both files exists, need to sync them up
-        styl_time = os.path.getmtime(user_styl_file)
-        css_time = os.path.getmtime(user_css_file)
-        log("Dark-Telegram.user.styl timestamp: " + str(styl_time))
-        log("Dark-Telegram.user.css timestamp: " + str(css_time))
 
-        if styl_time > css_time:
-            # styl was modified after css
+        vCompare = 0
+
+        if useTimestamp:
+            # checking which file was edited later
+            styl_time = os.path.getmtime(user_styl_file)
+            css_time = os.path.getmtime(user_css_file)
+            log("Dark-Telegram.user.styl timestamp: " + str(styl_time))
+            log("Dark-Telegram.user.css timestamp: " + str(css_time))
+            vCompare = compareVersions(styl_time, css_time)
+        else:
+            # checking which file have a grater version
+            stylv = getVersionFromFile(user_styl_file)
+            cssv = getVersionFromFile(user_css_file)
+            log("Dark-Telegram.user.styl version: " + str(stylv))
+            log("Dark-Telegram.user.css version: " + str(cssv))
+            vCompare = compareVersions(stylv, cssv)
+
+        if vCompare > 0:
+            # styl was modified after or is newer than css
             shutil.copyfile(user_styl_file, user_css_file)
             log("Dark-Telegram.user.styl -> Dark-Telegram.user.css")
 
-        elif styl_time < css_time:
-            # css was modified after styl
+        elif vCompare < 0:
+            # css was modified after or is newer than styl
             shutil.copyfile(user_css_file, user_styl_file)
             log("Dark-Telegram.user.css -> Dark-Telegram.user.styl")
 
         else:
-            # both files modified at the exact same time (in other words, unreachable code :P )
+            # both files version\timestamp are the same (in other words, unreachable code :P )
             log("Dark-Telegram.user.styl = Dark-Telegram.user.css")
 
-    print("File sync check done.")
+    log("File sync check done.")
     return ok_result
 
 
@@ -557,21 +680,30 @@ debug = "--debug" in sys.argv or "-d" in sys.argv or "/d" in sys.argv
 # check if the compress argument was given
 c = "--compress" in sys.argv or "-c" in sys.argv or "/c" in sys.argv
 
+# check if the ignoreversionstring argument was given
+nv = "--noversionstring" in sys.argv or "-nv" in sys.argv or "/nv" in sys.argv
+
 # check if the sync argument was given
 s = "--sync" in sys.argv or "-s" in sys.argv or "/s" in sys.argv
+
+# check if the timestamp argument was given
+t = "--timestamp" in sys.argv or "-t" in sys.argv or "/t" in sys.argv
 
 # check if the help argument was given
 h = "--help" in sys.argv or "-h" in sys.argv or "/h" in sys.argv
 
+if not nv:
+    generateVersionString(user_styl_file)
+    generateVersionString(user_css_file)
 
 if s:
-    checkStylCss()
+    checkStylCss(t)
 
 elif h:
     print(help_msg)
 
 # check if Dark-Telegram.user.styl and Dark-Telegram.user.css are synced and sync them if they don't
-elif checkStylCss():
+elif checkStylCss(t):
 
     arg_file = user_styl_file
     if os.path.isfile(arg_file):
@@ -595,7 +727,7 @@ elif checkStylCss():
 
             # removing temp styl file as we do not need it anymore
             if not debug:
-                print("Removing temp styl file...")
+                log("Removing temp styl file...")
                 os.remove(styl_file)
 
             # and check if the output contains a 'compiled' sub-string
