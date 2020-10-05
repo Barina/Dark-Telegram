@@ -1,6 +1,6 @@
 ## V1.2.29 (2020-10-05)
 
-- Versioning updated please review ([Issue #11](../../issues/10)).
+- Versioning updated please review [Issue #11](../../issues/11).
 - Fixed overflow of audio message box.
 - Fixed unread (or unheard) audio message indicator.
 - Fixed redundant background color from mentions.
