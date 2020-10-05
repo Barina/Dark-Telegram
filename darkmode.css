@@ -4,7 +4,7 @@
 @homepageURL https://github.com/Barina/Dark-Telegram
 @supportURL https://github.com/Barina/Dark-Telegram/issues
 @updateURL https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version 1.1.28
+@version 1.2.29
 @description Customizable theme for telegram web.
 @author Roy Barina
 @license MIT
@@ -305,6 +305,22 @@ a.im_message_photo_thumb,
 a.im_message_from_photo {
   margin-top: -10px;
 }
+.im_message_video_thumb,
+a.im_message_video_thumb,
+img.im_message_video_thumb {
+  max-width: 256px;
+  max-height: 256px;
+  width: auto !important;
+  height: auto !important;
+}
+div.im_message_body {
+  display: grid !important;
+}
+.im_grouped_short .im_message_outer_wrap .im_message_out .im_message_body:before,
+.im_grouped_short .im_message_outer_wrap .im_message_in .im_message_body:before {
+  display: none;
+  visibility: hidden;
+}
 .im_message_text {
   border: 1px #333943;
   border-radius: 0px 10px 10px 10px;
@@ -315,7 +331,7 @@ a.im_message_from_photo {
 }
 .im_grouped_short .im_message_outer_wrap .im_message_out .im_message_body,
 .im_grouped_short .im_message_outer_wrap .im_message_in .im_message_body {
-  border-radius: 10px;
+  border-radius: 10px !important;
 }
 .im_message_body {
   border-radius: 10px;
@@ -328,72 +344,18 @@ a.im_message_from_photo {
   -moz-shadow: 0px 3px 5px rgba(0,0,0,0.251);
   box-shadow: 0px 3px 5px rgba(0,0,0,0.251);
 }
-.im_message_video_thumb,
-a.im_message_video_thumb,
-img.im_message_video_thumb {
-  max-width: 256px;
-  max-height: 256px;
-  width: auto !important;
-  height: auto !important;
-}
-div.im_message_body {
-  display: grid !important;
-}
-.im_message_body:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  height: 0;
-  width: 0;
-  visibility: visible;
-}
-.im_message_in .im_message_body:before {
-  left: 50px;
-  border-top: 15px solid #3c434f;
-  border-left: 10px solid transparent;
-}
-.im_message_out .im_message_body:before {
-  right: 64px;
-  border-top: 15px solid #333a47;
-  border-right: 10px solid transparent;
-}
-.im_history_select_active .im_history_messages .im_history_messages_peer .im_message_outer_wrap:hover div .im_message_in .im_message_body:before {
-  left: 50px;
-  border-top: 15px solid #4c5564;
-  border-left: 10px solid transparent;
-}
-.im_history_select_active .im_history_messages .im_history_messages_peer .im_message_selected .im_message_outer_wrap div .im_message_in .im_message_body:before {
-  left: 50px;
-  border-top: 15px solid #727e94;
-  border-left: 10px solid transparent;
-}
-.im_history_select_active .im_history_messages .im_history_messages_peer .im_message_outer_wrap:hover div .im_message_out .im_message_body:before {
-  right: 64px;
-  border-top: 15px solid #434c5e;
-  border-right: 10px solid transparent;
-}
-.im_history_select_active .im_history_messages .im_history_messages_peer .im_message_selected .im_message_outer_wrap div .im_message_out .im_message_body:before {
-  right: 64px;
-  border-top: 15px solid #697792;
-  border-right: 10px solid transparent;
-}
-.im_grouped_short .im_message_outer_wrap .im_message_out .im_message_body:before,
-.im_grouped_short .im_message_outer_wrap .im_message_in .im_message_body:before {
-  display: none;
-  visibility: hidden;
-}
 .im_history_message_wrap.im_grouped .im_message_out .im_message_body,
 .im_grouped_short .im_message_outer_wrap .im_message_out .im_message_body {
   margin-right: 70px;
 }
 .im_message_in .im_message_body {
   background-color: #3c434f;
-  border-top-left-radius: 1px;
+  border-top-left-radius: 4px;
   max-width: 550px !important;
 }
 .im_message_out .im_message_body {
   background-color: #333a47;
-  border-top-right-radius: 1px;
+  border-top-right-radius: 4px;
   margin-left: 10px;
   margin-right: 15px;
   max-width: 65% !important;
@@ -469,7 +431,7 @@ a.pull-right,
 }
 .im_history_not_selected:after {
   display: block;
-  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.1.28 -- October 2nd, 2020";
+  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.2.29 -- October 5th, 2020";
   white-space: pre-wrap;
   border-top: 1px solid #333943;
   font-size: 11px;
@@ -846,8 +808,7 @@ fieldset[disabled] .btn-primary:hover {
 }
 .im_dialogs_scrollable_wrap a.im_dialog_searchpeer,
 .im_dialogs_scrollable_wrap a.im_dialog_searchpeer:hover,
-.im_dialogs_scrollable_wrap a.im_dialog_searchpeer_selected,
-.im_message_mymention {
+.im_dialogs_scrollable_wrap a.im_dialog_searchpeer_selected {
   Background: #252a33;
 }
 .im_message_focus .im_message_outer_wrap {
@@ -1373,7 +1334,9 @@ a.im_dialog .im_short_message_service,
 .tg_head_logo_dropdown .dropdown-menu > li > a,
 .md_modal_list_peer_description .status_online,
 .md_modal_list_peer_description.status_online,
-.tg_head_peer_status {
+.tg_head_peer_status,
+.composer_user_mention,
+.composer_dropdown li.composer_autocomplete_option_active a .composer_user_mention {
   color: #7289da;
 }
 .login_phone_head,
@@ -2726,6 +2689,30 @@ a.tg_radio_on:hover i.icon-radio {
 }
 .modal-backdrop {
   display: none;
+}
+.im_message_audio,
+.audio_player_wrap,
+.im_message_document,
+.im_message_document_name_wrap,
+.im_message_document_actions {
+  width: unset !important;
+}
+.audio_player_title_wrap {
+  overflow: unset !important;
+}
+.icon-audio-unread {
+  background-color: #7289da;
+}
+.im_message_mymention {
+  background-color: unset !important;
+}
+.composer_mention_option {
+  color: #ccccca !important;
+}
+.composer_dropdown li a:hover,
+.composer_dropdown li.composer_autocomplete_option_active a {
+  color: #a1b0e6 !important;
+  background-color: #343b46;
 }
 @-moz-keyframes pulse {
   0% {

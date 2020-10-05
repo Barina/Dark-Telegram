@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.1.28
+@version        1.2.29
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -33,9 +33,17 @@
     'Right                       *': 'right',
     'Stretch                     ': 'stretch'
 }
+@var select tail                'Messages tail' {
+    'None                         ': 'notail',
+    'Round Corner                *': 'roundtail',
+    'Triangle                     ': 'tritail',
+    'Sharp Corner                 ': 'recttail',
+}
 
 @var text msgwmax-in            'Incoming message maximum width' 550px
 @var text msgwmax-out           'Outgoing message maximum width' 65%
+
+@var checkbox centerauthor      'Center author name within chat bubbles' 0
 
 @var checkbox hideothericon     'Hide other contact user photo from chat window' 1
 @var checkbox hideownicon       'Hide own user photo from chat window' 1
@@ -88,7 +96,6 @@
 @var checkbox noise             'Enable noise' 0
 @var text noiseimg              'Noise image' url('https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Resources/noise.png')
 
-@var checkbox tail              'Messages tail' 1
 @var checkbox vign              'Vignette effect on photos' 1
 
 @var range emojo                'Emoji and sticker icons opacity' [.6, 0, 1, .01]
@@ -161,12 +168,10 @@
         --chatbg-o chatbg-o
         --chatbg-i chatbg-i
     
-        --tail-v (tail is 1 ? visible : hidden)
         --vignette (vign is 1 ? visible : hidden)
     
-        /* auto generated line below. please do not delete or modify. */
-        --version "Dark-Telegram v1.1.28 -- October 2nd, 2020"
-
+        /* auto generated line below. please do not delete or modify! */
+        --version "Dark-Telegram v1.2.29 -- October 5th, 2020"
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -191,6 +196,8 @@
     privateblur = (private is 1 ? 10px : 0)
 
     border-t = rgba(border, .1)
+
+    icon-size = 42px
         
     // set emoji popup position
     if(emoj-pos is right) {
@@ -420,15 +427,15 @@
 
     /* changed group icon in message history */
     a.im_service_message_photo_thumb{
-        max-width 42px
-        max-height 42px
+        max-width icon-size
+        max-height icon-size
         brad round
         overflow hidden
     }
         
     .im_service_message_photo_thumb{
-        max-width 42px
-        max-height 42px
+        max-width icon-size
+        max-height icon-size
         background-size cover
         display -webkit-inline-box    
     }
@@ -678,41 +685,14 @@
     .im_message_contact_photo,
     .im_message_from_photo,
     .im_message_fwd_photo{
-        min-width 42px
+        min-width icon-size
     }
 
     /* shifting user photos in chat a bit up */
     a.im_message_from_photo{
         margin-top -10px
     }
-        
-    /* text+media chat bubbles */
-    .im_message_ {
-        &text{
-            border 1px border
-            brad 0px 10px 10px 10px
-        }        
-        &text
-        &media{
-            padding 10px
-        }
-    }
-    
-    /* short message bubble */
-    .im_grouped_short .im_message_outer_wrap .im_message_out .im_message_body,
-    .im_grouped_short .im_message_outer_wrap .im_message_in .im_message_body{
-        brad msgb
-    }
-        
-    /* message bubble base */
-    .im_message_body{
-        brad msgb
-        padding 0px 3px 3px 3px
-        border 1px solid border
-        border-top none
-        shad 0px 3px 5px shadow
-    }
-    
+
     /* clamping video thumb images to 256x256 */
     .im_message_video_thumb,
     a.im_message_video_thumb,
@@ -728,95 +708,123 @@
         display grid i
     }
     
-    /* messages bubble tail*/
-    .im_message_body:before{
-        content ''
-        position absolute
-        top 0
-        height 0
-        width 0
-        visibility var(--tail-v)
-    }
-
-    /* tail mixins */
-    leftTail(tailCol, gap = 0){
-        /*left: 79px;*/
-        left gap + 50px
-        border-top 15px solid tailCol
-        border-left 10px solid transparent        
-    }
-    rightTail(tailCol, gap = 0){
-        /*right: 37px;*/
-        right gap + 6px
-        border-top 15px solid tailCol
-        border-right 10px solid transparent
-    }
-    
-    /* in tail */
-    .im_message_in .im_message_body:before{
-        if(inpos != right){
-            leftTail(msgbgi)
-        }else{
-            rightTail(msgbgi, 58)
+    if(tail == tritail){
+        /* messages bubble triangle tail*/
+        .im_message_body:before{
+            content ''
+            position absolute
+            top 0
+            height 0
+            width 0
         }
-    }
     
-    /* out tail */
-    .im_message_out .im_message_body:before{
-        if(outpos == right){
-            rightTail(msgbgo, 58)
-        } else {
-            leftTail(msgbgo)
+        /* triangle tail mixins */
+        leftTail(tailCol, gap = 0){
+            /*left: 79px;*/
+            left gap + 50px
+            border-top 15px solid tailCol
+            border-left 10px solid transparent        
         }
-    }
-    
-    /* tail hovered and selected when selection mode is active */
-    .im_history_select_active .im_history_messages .im_history_messages_peer{
-
-        /* in tail hover */
-        & .im_message_outer_wrap:hover div .im_message_in .im_message_body:before{
+        rightTail(tailCol, gap = 0){
+            /*right: 37px;*/
+            right gap + 6px
+            border-top 15px solid tailCol
+            border-right 10px solid transparent
+        }
+        
+        /* in tail */
+        .im_message_in .im_message_body:before{
             if(inpos != right){
-                leftTail(msgbgih)
+                leftTail(msgbgi)
             }else{
-                rightTail(msgbgih, 58)
-            }
-        }
-            
-        /* in tail selected */
-        & .im_message_selected .im_message_outer_wrap div .im_message_in .im_message_body:before{
-            if(inpos != right){
-                leftTail(msgbgis)
-            }else{
-                rightTail(msgbgis, 58)
+                rightTail(msgbgi, 58)
             }
         }
         
-        /* out tail hover */
-        & .im_message_outer_wrap:hover div .im_message_out .im_message_body:before{
+        /* out tail */
+        .im_message_out .im_message_body:before{
             if(outpos == right){
-                rightTail(msgbgoh, 58)
+                rightTail(msgbgo, 58)
             } else {
-                leftTail(msgbgoh)
+                leftTail(msgbgo)
             }
         }
+        
+        /* tail hovered and selected when selection mode is active */
+        .im_history_select_active .im_history_messages .im_history_messages_peer{
+
+            /* in tail hover */
+            & .im_message_outer_wrap:hover div .im_message_in .im_message_body:before{
+                if(inpos != right){
+                    leftTail(msgbgih)
+                }else{
+                    rightTail(msgbgih, 58)
+                }
+            }
+                
+            /* in tail selected */
+            & .im_message_selected .im_message_outer_wrap div .im_message_in .im_message_body:before{
+                if(inpos != right){
+                    leftTail(msgbgis)
+                }else{
+                    rightTail(msgbgis, 58)
+                }
+            }
             
-        /* out tail selected */
-        & .im_message_selected .im_message_outer_wrap div .im_message_out .im_message_body:before{
-            if(outpos == right){
-                rightTail(msgbgos, 58)
-            } else {
-                leftTail(msgbgos)
+            /* out tail hover */
+            & .im_message_outer_wrap:hover div .im_message_out .im_message_body:before{
+                if(outpos == right){
+                    rightTail(msgbgoh, 58)
+                } else {
+                    leftTail(msgbgoh)
+                }
+            }
+                
+            /* out tail selected */
+            & .im_message_selected .im_message_outer_wrap div .im_message_out .im_message_body:before{
+                if(outpos == right){
+                    rightTail(msgbgos, 58)
+                } else {
+                    leftTail(msgbgos)
+                }
             }
         }
     }
-    
+        
     /* hide tails in short messages */
     .im_grouped_short .im_message_outer_wrap .im_message_out .im_message_body:before,
     .im_grouped_short .im_message_outer_wrap .im_message_in .im_message_body:before{
         display none
         visibility hidden
     }
+    
+    /* text+media chat bubbles */
+    .im_message_ {
+        &text{
+            border 1px border
+            brad 0px 10px 10px 10px // fotget why this is here... 
+        }        
+        &text
+        &media{
+            padding 10px
+        }
+    }
+    
+    /* short message bubble */
+    .im_grouped_short .im_message_outer_wrap .im_message_out .im_message_body,
+    .im_grouped_short .im_message_outer_wrap .im_message_in .im_message_body{
+        brad msgb i
+    }
         
+    /* message bubble base */
+    .im_message_body{
+        brad msgb
+        padding 0px 3px 3px 3px
+        border 1px solid border
+        border-top none
+        shad 0px 3px 5px shadow
+    }
+    
     if(outpos == right){
         /* fixing out messages without icon right margin */
         .im_history_message_wrap.im_grouped .im_message_out .im_message_body,
@@ -835,12 +843,16 @@
     
     /* bubble mixins */
     rightBubble(){
-        border-top-right-radius 1px
+        if(tail != notail) {
+            border-top-right-radius (tail == roundtail ? 4px : 0px)
+        }
         margin-left 10px
         margin-right 15px
     }
     leftBubble(){
-        border-top-left-radius 1px
+        if(tail != notail){
+            border-top-left-radius (tail == roundtail ? 4px : 0px)
+        }
     }
 
     .im_message_body{
@@ -897,7 +909,7 @@
     
     /* message author position mixin */
     authorAlign(a, w){
-        text-align a
+        text-align (centerauthor ? center : a)
         width w
     }
 
@@ -1444,10 +1456,9 @@
         padding 3px 8px;       
     }
     
-    .im_dialogs_scrollable_wrap a.im_dialog_searchpeer, 
-    .im_dialogs_scrollable_wrap a.im_dialog_searchpeer:hover, 
-    .im_dialogs_scrollable_wrap a.im_dialog_searchpeer_selected,
-    .im_message_mymention {
+    .im_dialogs_scrollable_wrap a.im_dialog_searchpeer
+    .im_dialogs_scrollable_wrap a.im_dialog_searchpeer:hover
+    .im_dialogs_scrollable_wrap a.im_dialog_searchpeer_selected{
         bg control
     }
 
@@ -2049,7 +2060,10 @@
     .tg_head_logo_dropdown .dropdown-menu > li > a,
     .md_modal_list_peer_description .status_online,
     .md_modal_list_peer_description.status_online,
-    .tg_head_peer_status{
+    .tg_head_peer_status
+    .composer_user_mention
+    .composer_dropdown li a:hover .composer_user_mention
+    .composer_dropdown li.composer_autocomplete_option_active a .composer_user_mention{
         color accent
         // transition t-in
     }
@@ -2743,5 +2757,41 @@
         .modal-backdrop{
             display none
         }
+    }
+
+    /* audio messages overflow fix */
+    .im_message_audio
+    .audio_player_wrap
+    .im_message_document
+    .im_message_document_name_wrap
+    .im_message_document_actions{
+        width unset i
+    }
+
+    /* audio messages undesire line break fix */
+    .audio_player_title_wrap{
+        overflow unset i
+    }
+
+    /* unread (or unheard) audio message indicator */
+    .icon-audio-unread{
+        bgc accent
+    }
+
+    /* clear the background color from my mentions */
+    .im_message_mymention{
+        bgc unset i
+    }
+    
+    /* mentions drop down items */
+    .composer_mention_option{
+        color textc1 i
+    }
+
+    /* mentions drop down items when focus\hover */
+    .composer_dropdown li a:hover
+    .composer_dropdown li.composer_autocomplete_option_active a{
+        color accent-alt i
+        bgc control-active
     }
 }

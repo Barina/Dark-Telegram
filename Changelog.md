@@ -1,3 +1,13 @@
+## V1.2.29 (2020-10-05)
+
+- Versioning updated please review ([Issue #11](../../issues/10)).
+- Fixed overflow of audio message box.
+- Fixed unread (or unheard) audio message indicator.
+- Fixed redundant background color from mentions.
+- Fixed mention drop down list items colors.
+- Added more tail options.
+- You can now center authors name within their bubbles. good when you're not using any tail and a big round borders. try it :)
+
 ## V1.1.28 (2020-10-02)
 
 - Added a zoom effect when focusing on popups and media.
