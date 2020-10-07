@@ -1,3 +1,11 @@
+## V1.3.30 (2020-10-07)
+
+- Added messages text align.
+- You can now set the preview size of photo and video thumbnails. (set within reason with chat bubbles width.)
+- Video thumbs info got fancier.
+- Fixed wrong video info position in some situations.
+- Fixed pause SVG file to load from the file rather that fetching it every time from GitHub.
+
 ## V1.2.29 (2020-10-05)
 
 - Versioning updated please review [Issue #11](../../issues/11).

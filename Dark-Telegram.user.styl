@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.2.29
+@version        1.3.30
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -44,6 +44,16 @@
 @var text msgwmax-out           'Outgoing message maximum width' 65%
 
 @var checkbox centerauthor      'Center author name within chat bubbles' 0
+
+@var select texta               'Messages text align' {
+    'Auto                         ': 'textaauto',
+    'Unset                        ': 'unset',
+    'Start                       *': 'Start',
+    'End                          ': 'end',
+    'Center                       ': 'center',
+    'Left                         ': 'left',
+    'Right                        ': 'right',
+}
 
 @var checkbox hideothericon     'Hide other contact user photo from chat window' 1
 @var checkbox hideownicon       'Hide own user photo from chat window' 1
@@ -97,6 +107,7 @@
 @var text noiseimg              'Noise image' url('https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Resources/noise.png')
 
 @var checkbox vign              'Vignette effect on photos' 1
+@var text prevsize              'Video preview size' 256px
 
 @var range emojo                'Emoji and sticker icons opacity' [.6, 0, 1, .01]
 @var select emoj-pos            'Emoji and sticker popup position' {
@@ -145,41 +156,34 @@
 ==/UserStyle== */
 @-moz-document domain("web.telegram.org") {
     :root {
-        --ui-font ui_font 'Segoe UI' 'Helvetica Neue' Helvetica 'Lucida Grande' Arial Ubuntu Cantarell 'Fira Sans' sans-serif
-
-        --bgcolor bgcolor
-
-        --control control
-        --control-t rgba(control, .5)
-        --control-hover control-hover
-        --control-t-hover rgba(control-hover, .5)
-        --control-active control-active
-        --control-t-active rgba(control-active, .5)
-    
-        --btnbg btn-bg
-        --btnh btn-bg-h
-
-        --accent accent
-        --accent-alt accent-alt
-        --accent-t rgba(accent, .3)
-    
-        --bgccolor bgccolor
-        --chatbg chatbg
-        --chatbg-o chatbg-o
-        --chatbg-i chatbg-i
-    
-        --vignette (vign is 1 ? visible : hidden)
-    
         /* auto generated line below. please do not delete or modify! */
-        --version "Dark-Telegram v1.2.29 -- October 5th, 2020"
+        --version "Dark-Telegram v1.3.30 -- October 7th, 2020"
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
     }
+
+
+    /* ==================================
+    *   Variables
+    * =================================== */
     
-    /* Variable */
+    // this is important ;P
     i = !important
     
+    uifont = ui_font 'Segoe UI' 'Helvetica Neue' Helvetica 'Lucida Grande' Arial Ubuntu Cantarell 'Fira Sans' sans-serif
+
+    control-t = rgba(control, .5)
+    control-t-hover = rgba(control-hover, .5)
+    control-t-active = rgba(control-active, .5)
+
+    vignette = (vign is 1 ? visible : hidden)
+
+    version = var(--version)
+    message = var(--message)
+    link = var(--link)
+    notice = var(--notice)
+
     t-in = .1s
     t-out = 1s
     
@@ -192,13 +196,14 @@
     msgbgos = msgbgo + 33%
 
     accent-alt = accent + 33%
+    accent-t = rgba(accent, .3)
 
     privateblur = (private is 1 ? 10px : 0)
 
     border-t = rgba(border, .1)
 
     icon-size = 42px
-        
+
     // set emoji popup position
     if(emoj-pos is right) {
         emoj-l = -1px
@@ -213,32 +218,6 @@
         emoj-l = -133px
         emoj-t-l = 50%
         emoj-t-r = initial
-    }
-
-
-    /* Mixins & Functions */    
-    shad(){
-        -webkit-box-shadow arguments
-        -moz-box-shadow arguments
-        -webkit-shadow arguments
-        -moz-shadow arguments
-        box-shadow arguments
-    }
-
-    /* background */
-    bg() { Background arguments }
-    bgc() { background-color arguments }
-    bgi() { background-image arguments }
-    bgs() { background-size arguments }
-
-    /* border */
-    brad() { border-radius arguments }
-
-    /*
-    *   Clamping a given value by a given minimum and maximum.
-    */
-    clamp(value, minimum, maximum){
-        max(minimum, min(maximum, value))
     }
 
     /* setting up icon and contact name colors */
@@ -259,63 +238,6 @@
             bg c * clight i
             filter ch cc
         }
-    }
-
-    /*
-    * set a textured color for a given control
-    *   c: control color to use (default = control)
-    */
-    bgTex(c = undefine){
-        if(c is bgcolor) { bgc: var(--bgcolor) i; }
-
-        else if(c is bgccolor) { bgc: var(--bgccolor) i; }
-
-        else if(c is btnbg) { bgc: var(--btnbg) i; }
-        else if(c is btnh) { bgc: var(--btnh) i; }
-        
-        else if(c is hover) { bgc: var(--control-hover) i; }
-        else if(c is hover-t) { bgc: var(--control-t-hover) i; }
-        else if(c is active) { bgc: var(--control-active) i; }
-        else if(c is active-t) { bgc: var(--control-t-active) i; }
-        else { bgc: var(--control) i; }
-        if(noise) { bgi: noiseimg i; }
-    }
-
-    /* override methods */
-    mask-image(){
-        -webkit-mask-image arguments
-        -o-mask-image arguments
-        -moz-mask-image arguments
-        mask-image arguments
-    }
-
-    mask-position(){
-        mask-position arguments
-        -webkit-mask-position arguments
-        -o-mask-position arguments
-        -moz-mask-position arguments
-    }
-
-    mask-repeat(){
-        mask-repeat arguments
-        -webkit-mask-repeat arguments
-        -o-mask-repeat arguments
-        -moz-mask-repeat arguments
-    }
-        
-    mask-size(){
-        mask-size arguments
-        -webkit-mask-size arguments
-        -o-mask-size arguments
-        -moz-mask-size arguments
-    }
-
-    anim(){
-        animation arguments
-        -webkit-animation arguments
-        -o-animation arguments
-        -moz-animation arguments
-        -ms-animation arguments
     }
 
     /* SVG icons */
@@ -339,7 +261,7 @@
     downloadSvg = url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgIHhtbG5zOmNjPSJodHRwOi8vY3JlYXRpdmVjb21tb25zLm9yZy9ucyMiCiAgIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyIKICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzb2RpcG9kaT0iaHR0cDovL3NvZGlwb2RpLnNvdXJjZWZvcmdlLm5ldC9EVEQvc29kaXBvZGktMC5kdGQiCiAgIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIgogICB3aWR0aD0iNi40NjM2ODk4bW0iCiAgIGhlaWdodD0iOS41MzcyMTA1bW0iCiAgIHZpZXdCb3g9IjAgMCA2LjQ2MzY4OTggOS41MzcyMTA1IgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmcxMTYwNSIKICAgaW5rc2NhcGU6dmVyc2lvbj0iMC45Mi40ICg1ZGE2ODljMzEzLCAyMDE5LTAxLTE0KSIKICAgc29kaXBvZGk6ZG9jbmFtZT0iZG93bmxvYWQuc3ZnIj4KICA8ZGVmcwogICAgIGlkPSJkZWZzMTE1OTkiIC8+CiAgPHNvZGlwb2RpOm5hbWVkdmlldwogICAgIGlkPSJiYXNlIgogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzY2NjY2NiIKICAgICBib3JkZXJvcGFjaXR5PSIxLjAiCiAgICAgaW5rc2NhcGU6cGFnZW9wYWNpdHk9IjAuMCIKICAgICBpbmtzY2FwZTpwYWdlc2hhZG93PSIyIgogICAgIGlua3NjYXBlOnpvb209IjcuOTE5NTk1OSIKICAgICBpbmtzY2FwZTpjeD0iLTMuNTg5MjAwOCIKICAgICBpbmtzY2FwZTpjeT0iNDEuODY4MzE3IgogICAgIGlua3NjYXBlOmRvY3VtZW50LXVuaXRzPSJtbSIKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJzdmcxMTYwNSIKICAgICBzaG93Z3JpZD0iZmFsc2UiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSIyNTYwIgogICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9IjEzNjEiCiAgICAgaW5rc2NhcGU6d2luZG93LXg9Ii05IgogICAgIGlua3NjYXBlOndpbmRvdy15PSItOSIKICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIxIiAvPgogIDxtZXRhZGF0YQogICAgIGlkPSJtZXRhZGF0YTExNjAyIj4KICAgIDxyZGY6UkRGPgogICAgICA8Y2M6V29yawogICAgICAgICByZGY6YWJvdXQ9IiI+CiAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9zdmcreG1sPC9kYzpmb3JtYXQ+CiAgICAgICAgPGRjOnR5cGUKICAgICAgICAgICByZGY6cmVzb3VyY2U9Imh0dHA6Ly9wdXJsLm9yZy9kYy9kY21pdHlwZS9TdGlsbEltYWdlIiAvPgogICAgICAgIDxkYzp0aXRsZT48L2RjOnRpdGxlPgogICAgICA8L2NjOldvcms+CiAgICA8L3JkZjpSREY+CiAgPC9tZXRhZGF0YT4KICA8cGF0aAogICAgIGlua3NjYXBlOmNvbm5lY3Rvci1jdXJ2YXR1cmU9IjAiCiAgICAgc3R5bGU9ImZpbGw6I2ZmZmZmZjtmaWxsLW9wYWNpdHk6MC45OTMwMjQ0O3N0cm9rZTpub25lO3N0cm9rZS13aWR0aDowLjMxODc2ODI2O3N0cm9rZS1vcGFjaXR5OjEiCiAgICAgZD0iTSAyLjMyMDc5LDAgQyAyLjIxOTM0LDAgMi4xMzc4NiwwLjA4MTUgMi4xMzc4NiwwLjE4Mjk0IFYgNi4zOTM0MiBIIDAgbCAzLjA4MDQzLDMuMDgwOTQgYyAwLjA4MzgsMC4wODM4IDAuMjE5MDMsMC4wODM4IDAuMzAyODMsMCBMIDYuNDYzNjksNi4zOTM0MiBIIDQuMzQ1NDcgViAwLjE4Mjk0IEMgNC4zNDU0NywwLjA4MTUgNC4yNjM0NywwIDQuMTYyMDIsMCBaIgogICAgIGlkPSJwYXRoNDY5MiIKICAgICBpbmtzY2FwZTpsYWJlbD0iZG93bmxvYWQiIC8+Cjwvc3ZnPgo=')
     fileSvg = url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgIHhtbG5zOmNjPSJodHRwOi8vY3JlYXRpdmVjb21tb25zLm9yZy9ucyMiCiAgIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyIKICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzb2RpcG9kaT0iaHR0cDovL3NvZGlwb2RpLnNvdXJjZWZvcmdlLm5ldC9EVEQvc29kaXBvZGktMC5kdGQiCiAgIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIgogICB3aWR0aD0iOS42Njg2NjAybW0iCiAgIGhlaWdodD0iOS4wMzU2MzAybW0iCiAgIHZpZXdCb3g9IjAgMCA5LjY2ODY2MDIgOS4wMzU2MzAyIgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmc5MzM0IgogICBpbmtzY2FwZTp2ZXJzaW9uPSIwLjkyLjQgKDVkYTY4OWMzMTMsIDIwMTktMDEtMTQpIgogICBzb2RpcG9kaTpkb2NuYW1lPSJmaWxlLnN2ZyI+CiAgPGRlZnMKICAgICBpZD0iZGVmczkzMjgiIC8+CiAgPHNvZGlwb2RpOm5hbWVkdmlldwogICAgIGlkPSJiYXNlIgogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzY2NjY2NiIKICAgICBib3JkZXJvcGFjaXR5PSIxLjAiCiAgICAgaW5rc2NhcGU6cGFnZW9wYWNpdHk9IjAuMCIKICAgICBpbmtzY2FwZTpwYWdlc2hhZG93PSIyIgogICAgIGlua3NjYXBlOnpvb209IjAuMzUiCiAgICAgaW5rc2NhcGU6Y3g9Ii0xMzEzLjE1NzEiCiAgICAgaW5rc2NhcGU6Y3k9IjgzNC4yMTgwNyIKICAgICBpbmtzY2FwZTpkb2N1bWVudC11bml0cz0ibW0iCiAgICAgaW5rc2NhcGU6Y3VycmVudC1sYXllcj0ic3ZnOTMzNCIKICAgICBzaG93Z3JpZD0iZmFsc2UiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSIyNTYwIgogICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9IjEzNjEiCiAgICAgaW5rc2NhcGU6d2luZG93LXg9Ii05IgogICAgIGlua3NjYXBlOndpbmRvdy15PSItOSIKICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIxIiAvPgogIDxtZXRhZGF0YQogICAgIGlkPSJtZXRhZGF0YTkzMzEiPgogICAgPHJkZjpSREY+CiAgICAgIDxjYzpXb3JrCiAgICAgICAgIHJkZjphYm91dD0iIj4KICAgICAgICA8ZGM6Zm9ybWF0PmltYWdlL3N2Zyt4bWw8L2RjOmZvcm1hdD4KICAgICAgICA8ZGM6dHlwZQogICAgICAgICAgIHJkZjpyZXNvdXJjZT0iaHR0cDovL3B1cmwub3JnL2RjL2RjbWl0eXBlL1N0aWxsSW1hZ2UiIC8+CiAgICAgICAgPGRjOnRpdGxlPjwvZGM6dGl0bGU+CiAgICAgIDwvY2M6V29yaz4KICAgIDwvcmRmOlJERj4KICA8L21ldGFkYXRhPgogIDxwYXRoCiAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIKICAgICBzdHlsZT0iZmlsbDojZmZmZmZmO2ZpbGwtb3BhY2l0eToxO3N0cm9rZTpub25lO3N0cm9rZS13aWR0aDowLjI2NDU4MzMyO3N0cm9rZS1vcGFjaXR5OjEiCiAgICAgZD0iTSAxLjA3OTAxLDAgQyAwLjQ4MTIxLDAgMCwwLjQ4MTIxIDAsMS4wNzkgdiA2Ljg3NzYyIGMgMCwwLjU5NzggMC40ODEyMSwxLjA3OTAxIDEuMDc5MDEsMS4wNzkwMSBoIDcuNTEwNjUgYyAwLjU5Nzc5LDAgMS4wNzksLTAuNDgxMjEgMS4wNzksLTEuMDc5MDEgViAzLjUxMDkgSCA2LjExNDg4IFYgMCBaIE0gNi44NzcxLDAgViAyLjY2MTg1IEggOS42Njg2NiBWIDIuNDM5NjUgTCA3LjIyODUsMCBaIgogICAgIGlkPSJyZWN0NDYyOCIKICAgICBpbmtzY2FwZTpsYWJlbD0iZmlsZSIgLz4KPC9zdmc+Cg==')
     playSvg = url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgIHhtbG5zOmNjPSJodHRwOi8vY3JlYXRpdmVjb21tb25zLm9yZy9ucyMiCiAgIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyIKICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzb2RpcG9kaT0iaHR0cDovL3NvZGlwb2RpLnNvdXJjZWZvcmdlLm5ldC9EVEQvc29kaXBvZGktMC5kdGQiCiAgIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIgogICB3aWR0aD0iOC4xMzU1ODAxbW0iCiAgIGhlaWdodD0iOC44NDU1Mm1tIgogICB2aWV3Qm94PSIwIDAgOC4xMzU1ODAxIDguODQ1NTIiCiAgIHZlcnNpb249IjEuMSIKICAgaWQ9InN2ZzEyNzM3IgogICBpbmtzY2FwZTp2ZXJzaW9uPSIwLjkyLjQgKDVkYTY4OWMzMTMsIDIwMTktMDEtMTQpIgogICBzb2RpcG9kaTpkb2NuYW1lPSJwbGF5LnN2ZyI+CiAgPGRlZnMKICAgICBpZD0iZGVmczEyNzMxIiAvPgogIDxzb2RpcG9kaTpuYW1lZHZpZXcKICAgICBpZD0iYmFzZSIKICAgICBwYWdlY29sb3I9IiNmZmZmZmYiCiAgICAgYm9yZGVyY29sb3I9IiM2NjY2NjYiCiAgICAgYm9yZGVyb3BhY2l0eT0iMS4wIgogICAgIGlua3NjYXBlOnBhZ2VvcGFjaXR5PSIwLjAiCiAgICAgaW5rc2NhcGU6cGFnZXNoYWRvdz0iMiIKICAgICBpbmtzY2FwZTp6b29tPSIxMS4yIgogICAgIGlua3NjYXBlOmN4PSI1LjY2NjU2MjMiCiAgICAgaW5rc2NhcGU6Y3k9IjM1LjIzNTU5IgogICAgIGlua3NjYXBlOmRvY3VtZW50LXVuaXRzPSJtbSIKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJzdmcxMjczNyIKICAgICBzaG93Z3JpZD0iZmFsc2UiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSIyNTYwIgogICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9IjEzNjEiCiAgICAgaW5rc2NhcGU6d2luZG93LXg9Ii05IgogICAgIGlua3NjYXBlOndpbmRvdy15PSItOSIKICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIxIiAvPgogIDxtZXRhZGF0YQogICAgIGlkPSJtZXRhZGF0YTEyNzM0Ij4KICAgIDxyZGY6UkRGPgogICAgICA8Y2M6V29yawogICAgICAgICByZGY6YWJvdXQ9IiI+CiAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9zdmcreG1sPC9kYzpmb3JtYXQ+CiAgICAgICAgPGRjOnR5cGUKICAgICAgICAgICByZGY6cmVzb3VyY2U9Imh0dHA6Ly9wdXJsLm9yZy9kYy9kY21pdHlwZS9TdGlsbEltYWdlIiAvPgogICAgICAgIDxkYzp0aXRsZT48L2RjOnRpdGxlPgogICAgICA8L2NjOldvcms+CiAgICA8L3JkZjpSREY+CiAgPC9tZXRhZGF0YT4KICA8cGF0aAogICAgIGlua3NjYXBlOmNvbm5lY3Rvci1jdXJ2YXR1cmU9IjAiCiAgICAgc3R5bGU9ImZpbGw6I2ZmZmZmZjtmaWxsLW9wYWNpdHk6MC45OTMwMjQ0O3N0cm9rZTpub25lO3N0cm9rZS13aWR0aDowLjI2NDU4MzMyO3N0cm9rZS1vcGFjaXR5OjEiCiAgICAgaW5rc2NhcGU6dHJhbnNmb3JtLWNlbnRlci14PSItNC44MDQ0ODA3IgogICAgIGQ9Ik0gMC41MDg0Nyw4LjgyNjI3NDggQyAwLjEyNDU4LDguNjA0NjM0OCAwLDQuODY2MDQ0OCAwLDQuNDIyNzU0OCAwLDMuOTc5NDc0OCAwLjEyNDU4LDAuMjQwODg0ODEgMC41MDg0NywwLjAxOTI0NDgxIGMgMC4zODM4OSwtMC4yMjE2NCAzLjY4MzksMS41Mzk3Njk5OSA0LjA2Nzc5LDEuNzYxNDA5OTkgMC4zODM4OSwwLjIyMTY0IDMuNTU5MzIsMi4xOTg4MiAzLjU1OTMyLDIuNjQyMSAwLDAuNDQzMjkgLTMuMTc1NDMsMi40MjA0NyAtMy41NTkzMiwyLjY0MjExIC0wLjM4Mzg5LDAuMjIxNjQgLTMuNjgzOSwxLjk4MzA1IC00LjA2Nzc5LDEuNzYxNDEgeiIKICAgICBpZD0icGF0aDQ3MDgiCiAgICAgaW5rc2NhcGU6bGFiZWw9InBsYXkiIC8+Cjwvc3ZnPgo=')
-    pauseSvg = url('https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Resources/pause.svg')
+    pauseSvg = url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8IS0tIENyZWF0ZWQgd2l0aCBJbmtzY2FwZSAoaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvKSAtLT4NCg0KPHN2Zw0KICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIg0KICAgeG1sbnM6Y2M9Imh0dHA6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL25zIyINCiAgIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyINCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciDQogICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciDQogICB4bWxuczpzb2RpcG9kaT0iaHR0cDovL3NvZGlwb2RpLnNvdXJjZWZvcmdlLm5ldC9EVEQvc29kaXBvZGktMC5kdGQiDQogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSINCiAgIHdpZHRoPSI2LjM1ODI3MDJtbSINCiAgIGhlaWdodD0iNy4zODYxMDk4bW0iDQogICB2aWV3Qm94PSIwIDAgNi4zNTgyNzAyIDcuMzg2MTA5OCINCiAgIHZlcnNpb249IjEuMSINCiAgIGlkPSJzdmcxMjE3MSINCiAgIGlua3NjYXBlOnZlcnNpb249IjAuOTIuNCAoNWRhNjg5YzMxMywgMjAxOS0wMS0xNCkiDQogICBzb2RpcG9kaTpkb2NuYW1lPSJwYXVzZS5zdmciPg0KICA8ZGVmcw0KICAgICBpZD0iZGVmczEyMTY1IiAvPg0KICA8c29kaXBvZGk6bmFtZWR2aWV3DQogICAgIGlkPSJiYXNlIg0KICAgICBwYWdlY29sb3I9IiNmZmZmZmYiDQogICAgIGJvcmRlcmNvbG9yPSIjNjY2NjY2Ig0KICAgICBib3JkZXJvcGFjaXR5PSIxLjAiDQogICAgIGlua3NjYXBlOnBhZ2VvcGFjaXR5PSIwLjAiDQogICAgIGlua3NjYXBlOnBhZ2VzaGFkb3c9IjIiDQogICAgIGlua3NjYXBlOnpvb209IjcuOTE5NTk1OSINCiAgICAgaW5rc2NhcGU6Y3g9Ii0xMi42NTY0NTMiDQogICAgIGlua3NjYXBlOmN5PSIzOS43NjM4ODIiDQogICAgIGlua3NjYXBlOmRvY3VtZW50LXVuaXRzPSJtbSINCiAgICAgaW5rc2NhcGU6Y3VycmVudC1sYXllcj0ic3ZnMTIxNzEiDQogICAgIHNob3dncmlkPSJmYWxzZSINCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSIyNTYwIg0KICAgICBpbmtzY2FwZTp3aW5kb3ctaGVpZ2h0PSIxMzYxIg0KICAgICBpbmtzY2FwZTp3aW5kb3cteD0iLTkiDQogICAgIGlua3NjYXBlOndpbmRvdy15PSItOSINCiAgICAgaW5rc2NhcGU6d2luZG93LW1heGltaXplZD0iMSIgLz4NCiAgPG1ldGFkYXRhDQogICAgIGlkPSJtZXRhZGF0YTEyMTY4Ij4NCiAgICA8cmRmOlJERj4NCiAgICAgIDxjYzpXb3JrDQogICAgICAgICByZGY6YWJvdXQ9IiI+DQogICAgICAgIDxkYzpmb3JtYXQ+aW1hZ2Uvc3ZnK3htbDwvZGM6Zm9ybWF0Pg0KICAgICAgICA8ZGM6dHlwZQ0KICAgICAgICAgICByZGY6cmVzb3VyY2U9Imh0dHA6Ly9wdXJsLm9yZy9kYy9kY21pdHlwZS9TdGlsbEltYWdlIiAvPg0KICAgICAgICA8ZGM6dGl0bGU+PC9kYzp0aXRsZT4NCiAgICAgIDwvY2M6V29yaz4NCiAgICA8L3JkZjpSREY+DQogIDwvbWV0YWRhdGE+DQogIDxwYXRoDQogICAgIGlua3NjYXBlOmNvbm5lY3Rvci1jdXJ2YXR1cmU9IjAiDQogICAgIHN0eWxlPSJmaWxsOiNmZmZmZmY7ZmlsbC1vcGFjaXR5OjAuOTkzMDI0NDtzdHJva2U6bm9uZTtzdHJva2Utd2lkdGg6MC4yNjQ1ODMzMjtzdHJva2Utb3BhY2l0eToxIg0KICAgICBkPSJNIDAuMTgzNDUsMCBDIDAuMDgyLDAgMCwwLjA4MiAwLDAuMTgzNDMgdiA3LjAxOTc0IGMgMCwwLjEwMTQ0IDAuMDgyLDAuMTgyOTQgMC4xODM0NSwwLjE4Mjk0IGggMS43MTkyOCBjIDAuMTAxNDUsMCAwLjE4MjkzLC0wLjA4MTUgMC4xODI5MywtMC4xODI5NCBWIDAuMTgzNDMgQyAyLjA4NTY2LDAuMDgxOTkgMi4wMDQxNiwwIDEuOTAyNzMsMCBaIE0gNC40NTYwNiwwIEMgNC4zNTQ2MSwwIDQuMjczMTMsMC4wODIgNC4yNzMxMywwLjE4MzQzIHYgNy4wMTk3NCBjIDAsMC4xMDE0NCAwLjA4MTUsMC4xODI5NCAwLjE4MjkzLDAuMTgyOTQgaCAxLjcxOTI4IGMgMC4xMDE0NSwwIDAuMTgyOTMsLTAuMDgxNSAwLjE4MjkzLC0wLjE4Mjk0IFYgMC4xODM0MyBDIDYuMzU4MjcsMC4wODE5OSA2LjI3Njc3LDAgNi4xNzUzNCwwIFoiDQogICAgIGlkPSJyZWN0NDY5NyINCiAgICAgaW5rc2NhcGU6bGFiZWw9InBhdXNlIiAvPg0KPC9zdmc+DQo=')
     micSvg = url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgIHhtbG5zOmNjPSJodHRwOi8vY3JlYXRpdmVjb21tb25zLm9yZy9ucyMiCiAgIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyIKICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzb2RpcG9kaT0iaHR0cDovL3NvZGlwb2RpLnNvdXJjZWZvcmdlLm5ldC9EVEQvc29kaXBvZGktMC5kdGQiCiAgIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIgogICB3aWR0aD0iNy43ODQ1NDAybW0iCiAgIGhlaWdodD0iMTAuMTMzMjNtbSIKICAgdmlld0JveD0iMCAwIDcuNzg0NTQwMiAxMC4xMzMyMyIKICAgdmVyc2lvbj0iMS4xIgogICBpZD0ic3ZnMTA0NzIiCiAgIGlua3NjYXBlOnZlcnNpb249IjAuOTIuNCAoNWRhNjg5YzMxMywgMjAxOS0wMS0xNCkiCiAgIHNvZGlwb2RpOmRvY25hbWU9Im1pYy5zdmciPgogIDxkZWZzCiAgICAgaWQ9ImRlZnMxMDQ2NiIgLz4KICA8c29kaXBvZGk6bmFtZWR2aWV3CiAgICAgaWQ9ImJhc2UiCiAgICAgcGFnZWNvbG9yPSIjZmZmZmZmIgogICAgIGJvcmRlcmNvbG9yPSIjNjY2NjY2IgogICAgIGJvcmRlcm9wYWNpdHk9IjEuMCIKICAgICBpbmtzY2FwZTpwYWdlb3BhY2l0eT0iMC4wIgogICAgIGlua3NjYXBlOnBhZ2VzaGFkb3c9IjIiCiAgICAgaW5rc2NhcGU6em9vbT0iMTEuMiIKICAgICBpbmtzY2FwZTpjeD0iMS43MDAyOTI3IgogICAgIGlua3NjYXBlOmN5PSIyNC42ODkzODYiCiAgICAgaW5rc2NhcGU6ZG9jdW1lbnQtdW5pdHM9Im1tIgogICAgIGlua3NjYXBlOmN1cnJlbnQtbGF5ZXI9InN2ZzEwNDcyIgogICAgIHNob3dncmlkPSJmYWxzZSIKICAgICBpbmtzY2FwZTp3aW5kb3ctd2lkdGg9IjI1NjAiCiAgICAgaW5rc2NhcGU6d2luZG93LWhlaWdodD0iMTM2MSIKICAgICBpbmtzY2FwZTp3aW5kb3cteD0iLTkiCiAgICAgaW5rc2NhcGU6d2luZG93LXk9Ii05IgogICAgIGlua3NjYXBlOndpbmRvdy1tYXhpbWl6ZWQ9IjEiIC8+CiAgPG1ldGFkYXRhCiAgICAgaWQ9Im1ldGFkYXRhMTA0NjkiPgogICAgPHJkZjpSREY+CiAgICAgIDxjYzpXb3JrCiAgICAgICAgIHJkZjphYm91dD0iIj4KICAgICAgICA8ZGM6Zm9ybWF0PmltYWdlL3N2Zyt4bWw8L2RjOmZvcm1hdD4KICAgICAgICA8ZGM6dHlwZQogICAgICAgICAgIHJkZjpyZXNvdXJjZT0iaHR0cDovL3B1cmwub3JnL2RjL2RjbWl0eXBlL1N0aWxsSW1hZ2UiIC8+CiAgICAgICAgPGRjOnRpdGxlPjwvZGM6dGl0bGU+CiAgICAgIDwvY2M6V29yaz4KICAgIDwvcmRmOlJERj4KICA8L21ldGFkYXRhPgogIDxwYXRoCiAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIKICAgICBzdHlsZT0iZmlsbDojZmZmZmZmO2ZpbGwtb3BhY2l0eToxO3N0cm9rZTpub25lO3N0cm9rZS13aWR0aDowLjI2NDU4MzMyO3N0cm9rZS1vcGFjaXR5OjEiCiAgICAgZD0iTSAzLjg5MTI0LDAgQyAzLjAzMzAyLC0zLjk5OTgyNzVlLTUgMi4zMzcyOSwwLjY5NTY5IDIuMzM3MzMsMS41NTM5MSB2IDMuMzM3NzggYyAtNGUtNSwwLjg1ODIyIDAuNjk1NjksMS41NTM5NiAxLjU1MzkxLDEuNTUzOTEgMC44NTgyMiw1ZS01IDEuNTUzOTUsLTAuNjk1NjkgMS41NTM5MSwtMS41NTM5MSBWIDEuNTUzOTEgQyA1LjQ0NTE5LDAuNjk1NjkgNC43NDk0NiwtMy45OTk4Mjc1ZS01IDMuODkxMjQsMCBaIE0gMCw0LjgxOTg2IEEgMy44OTg5NzE0LDMuODk4OTcxNCAwIDAgMCAzLjMwODMzLDguNTEyMTQgViAxMC4wMTggYyAwLDAuMDYzOCAwLjA1MTUsMC4xMTUyMyAwLjExNTI0LDAuMTE1MjMgaCAwLjg5OTE3IGMgMC4wNjM4LDAgMC4xMTUyNCwtMC4wNTE1IDAuMTE1MjQsLTAuMTE1MjMgViA4LjUxNjc5IEEgMy44OTg5NzE0LDMuODk4OTcxNCAwIDAgMCA3Ljc4NDU0LDQuODE5ODYgSCA2Ljc3NTMgQSAyLjg5MTg1NjksMi44OTE4NTY5IDAgMCAxIDMuODkxMjQsNy41NTMwMyAyLjg5MTg1NjksMi44OTE4NTY5IDAgMCAxIDEuMDA1MTEsNC44MTk4NiBaIgogICAgIGlkPSJwYXRoNDY1NyIKICAgICBpbmtzY2FwZTpsYWJlbD0ibWljIiAvPgo8L3N2Zz4K')
     eyeSvg = url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgIHhtbG5zOmNjPSJodHRwOi8vY3JlYXRpdmVjb21tb25zLm9yZy9ucyMiCiAgIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyIKICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzb2RpcG9kaT0iaHR0cDovL3NvZGlwb2RpLnNvdXJjZWZvcmdlLm5ldC9EVEQvc29kaXBvZGktMC5kdGQiCiAgIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIgogICB3aWR0aD0iNy45MTUyNzk5bW0iCiAgIGhlaWdodD0iNS42MTU2NzVtbSIKICAgdmlld0JveD0iMCAwIDcuOTE1Mjc5OSA1LjYxNTY3NSIKICAgdmVyc2lvbj0iMS4xIgogICBpZD0ic3ZnMTU1NjgiCiAgIGlua3NjYXBlOnZlcnNpb249IjAuOTIuNCAoNWRhNjg5YzMxMywgMjAxOS0wMS0xNCkiCiAgIHNvZGlwb2RpOmRvY25hbWU9ImV5ZS5zdmciPgogIDxkZWZzCiAgICAgaWQ9ImRlZnMxNTU2MiIgLz4KICA8c29kaXBvZGk6bmFtZWR2aWV3CiAgICAgaWQ9ImJhc2UiCiAgICAgcGFnZWNvbG9yPSIjZmZmZmZmIgogICAgIGJvcmRlcmNvbG9yPSIjNjY2NjY2IgogICAgIGJvcmRlcm9wYWNpdHk9IjEuMCIKICAgICBpbmtzY2FwZTpwYWdlb3BhY2l0eT0iMC4wIgogICAgIGlua3NjYXBlOnBhZ2VzaGFkb3c9IjIiCiAgICAgaW5rc2NhcGU6em9vbT0iNy45MTk1OTU5IgogICAgIGlua3NjYXBlOmN4PSItMTAuMDk1NjU1IgogICAgIGlua3NjYXBlOmN5PSI0LjgzMjM5OTgiCiAgICAgaW5rc2NhcGU6ZG9jdW1lbnQtdW5pdHM9Im1tIgogICAgIGlua3NjYXBlOmN1cnJlbnQtbGF5ZXI9InN2ZzE1NTY4IgogICAgIHNob3dncmlkPSJmYWxzZSIKICAgICBpbmtzY2FwZTpwYWdlY2hlY2tlcmJvYXJkPSJ0cnVlIgogICAgIGlua3NjYXBlOndpbmRvdy13aWR0aD0iMjU2MCIKICAgICBpbmtzY2FwZTp3aW5kb3ctaGVpZ2h0PSIxMzYxIgogICAgIGlua3NjYXBlOndpbmRvdy14PSItOSIKICAgICBpbmtzY2FwZTp3aW5kb3cteT0iLTkiCiAgICAgaW5rc2NhcGU6d2luZG93LW1heGltaXplZD0iMSIgLz4KICA8bWV0YWRhdGEKICAgICBpZD0ibWV0YWRhdGExNTU2NSI+CiAgICA8cmRmOlJERj4KICAgICAgPGNjOldvcmsKICAgICAgICAgcmRmOmFib3V0PSIiPgogICAgICAgIDxkYzpmb3JtYXQ+aW1hZ2Uvc3ZnK3htbDwvZGM6Zm9ybWF0PgogICAgICAgIDxkYzp0eXBlCiAgICAgICAgICAgcmRmOnJlc291cmNlPSJodHRwOi8vcHVybC5vcmcvZGMvZGNtaXR5cGUvU3RpbGxJbWFnZSIgLz4KICAgICAgICA8ZGM6dGl0bGU+PC9kYzp0aXRsZT4KICAgICAgPC9jYzpXb3JrPgogICAgPC9yZGY6UkRGPgogIDwvbWV0YWRhdGE+CiAgPHBhdGgKICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIgogICAgIHN0eWxlPSJmaWxsOiNmZmZmZmY7ZmlsbC1vcGFjaXR5OjAuOTkzMDI0NDtzdHJva2U6bm9uZTtzdHJva2Utd2lkdGg6MC4yNjQ1ODMzMjtzdHJva2Utb3BhY2l0eToxIgogICAgIGQ9Ik0gMy45NTc5LDAgQyAxLjg1MjEzLDAgMWUtNSwxLjY4NDEyNiAwLDIuODA3NTczIGMgMCwxLjI3NjA1OSAxLjg2MjI5LDIuODA4MTAyIDMuOTU3OSwyLjgwODEwMiAyLjIxNzY5LDAgMy45NTczOSwtMS42NjQzMDggMy45NTczOCwtMi44MDgxMDIgQyA3LjkxNTI3LDEuNzg1ODU4IDYuMDg0MDIsMCAzLjk1NzksMCBaIE0gMy45NDc2LDAuODg0Njg3IEEgMS45MjI3NzEsMS45MjI3NzEgMCAwIDEgNS44NzA0OCwyLjgwNzU3MyAxLjkyMjc3MSwxLjkyMjc3MSAwIDAgMSAzLjk0NzYsNC43MzA0NTkgMS45MjI3NzEsMS45MjI3NzEgMCAwIDEgMi4wMjQ3MiwyLjgwNzU3MyAxLjkyMjc3MSwxLjkyMjc3MSAwIDAgMSAzLjk0NzYsMC44ODQ2ODcgWiBNIDMuOTU3OSwxLjcwODk0NCBBIDEuMTA4ODk5NywxLjEwODg5OTcgMCAwIDAgMi44NDg5MiwyLjgxNzkxOCAxLjEwODg5OTcsMS4xMDg4OTk3IDAgMCAwIDMuOTU3OSwzLjkyNjg5MyAxLjEwODg5OTcsMS4xMDg4OTk3IDAgMCAwIDUuMDY2MzYsMi44MTc5MTggMS4xMDg4OTk3LDEuMTA4ODk5NyAwIDAgMCAzLjk1NzksMS43MDg5NDQgWiIKICAgICBpZD0icGF0aDQ3NjMiCiAgICAgaW5rc2NhcGU6bGFiZWw9ImV5ZSIgLz4KPC9zdmc+Cg==')
     downbtnSvg = url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgIHhtbG5zOmNjPSJodHRwOi8vY3JlYXRpdmVjb21tb25zLm9yZy9ucyMiCiAgIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyIKICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzb2RpcG9kaT0iaHR0cDovL3NvZGlwb2RpLnNvdXJjZWZvcmdlLm5ldC9EVEQvc29kaXBvZGktMC5kdGQiCiAgIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIgogICB3aWR0aD0iOC4wMDE1ODAybW0iCiAgIGhlaWdodD0iMTAuNzIwNzltbSIKICAgdmlld0JveD0iMCAwIDguMDAxNTgwMiAxMC43MjA3OSIKICAgdmVyc2lvbj0iMS4xIgogICBpZD0ic3ZnMjAxMjAiCiAgIGlua3NjYXBlOnZlcnNpb249IjAuOTIuNCAoNWRhNjg5YzMxMywgMjAxOS0wMS0xNCkiCiAgIHNvZGlwb2RpOmRvY25hbWU9ImRvd25idG4uc3ZnIj4KICA8ZGVmcwogICAgIGlkPSJkZWZzMjAxMTQiIC8+CiAgPHNvZGlwb2RpOm5hbWVkdmlldwogICAgIGlkPSJiYXNlIgogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzY2NjY2NiIKICAgICBib3JkZXJvcGFjaXR5PSIxLjAiCiAgICAgaW5rc2NhcGU6cGFnZW9wYWNpdHk9IjAuMCIKICAgICBpbmtzY2FwZTpwYWdlc2hhZG93PSIyIgogICAgIGlua3NjYXBlOnpvb209IjIyLjQiCiAgICAgaW5rc2NhcGU6Y3g9IjE1LjY4MTgxIgogICAgIGlua3NjYXBlOmN5PSIyMS40ODcwMzIiCiAgICAgaW5rc2NhcGU6ZG9jdW1lbnQtdW5pdHM9Im1tIgogICAgIGlua3NjYXBlOmN1cnJlbnQtbGF5ZXI9InN2ZzIwMTIwIgogICAgIHNob3dncmlkPSJmYWxzZSIKICAgICBpbmtzY2FwZTp3aW5kb3ctd2lkdGg9IjI1NjAiCiAgICAgaW5rc2NhcGU6d2luZG93LWhlaWdodD0iMTM2MSIKICAgICBpbmtzY2FwZTp3aW5kb3cteD0iLTkiCiAgICAgaW5rc2NhcGU6d2luZG93LXk9Ii05IgogICAgIGlua3NjYXBlOndpbmRvdy1tYXhpbWl6ZWQ9IjEiIC8+CiAgPG1ldGFkYXRhCiAgICAgaWQ9Im1ldGFkYXRhMjAxMTciPgogICAgPHJkZjpSREY+CiAgICAgIDxjYzpXb3JrCiAgICAgICAgIHJkZjphYm91dD0iIj4KICAgICAgICA8ZGM6Zm9ybWF0PmltYWdlL3N2Zyt4bWw8L2RjOmZvcm1hdD4KICAgICAgICA8ZGM6dHlwZQogICAgICAgICAgIHJkZjpyZXNvdXJjZT0iaHR0cDovL3B1cmwub3JnL2RjL2RjbWl0eXBlL1N0aWxsSW1hZ2UiIC8+CiAgICAgICAgPGRjOnRpdGxlPjwvZGM6dGl0bGU+CiAgICAgIDwvY2M6V29yaz4KICAgIDwvcmRmOlJERj4KICA8L21ldGFkYXRhPgogIDxwYXRoCiAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIKICAgICBzdHlsZT0iZmlsbDojOTk5OTk5O2ZpbGwtb3BhY2l0eToxO3N0cm9rZTpub25lO3N0cm9rZS13aWR0aDowLjI2NDU4MzMyO3N0cm9rZS1vcGFjaXR5OjEiCiAgICAgZD0iTSAyLjUyOTU2LDAgQyAyLjQ0ODA2LDAgMi4zODIyOCwwLjA2NTggMi4zODIyOCwwLjE0NzI4IFYgNC42NjE3MyBDIDEuNDgxNSw0LjY5OTMzIDAuNTMyNTQsNC43NjE3NiAwLjQzNDA4LDQuODY2MzcgMC4yNTYzMiw1LjA1NTI0IDEuNjY5MTUsNi42Nzg0MiAxLjg0NjkxLDYuODY3MjggMi4wMjQ2OCw3LjA1NjE1IDMuNjEwMTIsOC42MTg2IDMuOTY1NjUsOC42MTg2IDQuMzIxMTcsOC42MTg2IDUuOTA3MTQsNy4wNTYxNSA2LjA4NDksNi44NjcyOCA2LjI2MjY2LDYuNjc4NDIgNy42NzU0OSw1LjA1NTI0IDcuNDk3NzMsNC44NjYzNyA3LjQwMTkzLDQuNzY0NjMgNi40OTgwNCw0LjcwMTg2IDUuNjE5MjksNC42NjM4IFYgMC4xNDcyOCBDIDUuNjE5MjksMC4wNjU3OCA1LjU1MzQ5LDAgNS40NzIwMiwwIFogTSAwLjE0Njc2LDkuNTI5MTQgQyAwLjA2NTI2LDkuNTI5MTQgMCw5LjU5NDg0IDAsOS42NzY0MiB2IDAuODk3MSBjIDAsMC4wODE1IDAuMDY1MiwwLjE0NzI3IDAuMTQ2NzYsMC4xNDcyNyBoIDcuNzA4MDYgYyAwLjA4MTUsMCAwLjE0Njc2LC0wLjA2NTggMC4xNDY3NiwtMC4xNDcyNyB2IC0wLjg5NzEgYyAwLC0wLjA4MTUgLTAuMDY1MiwtMC4xNDcyOCAtMC4xNDY3NiwtMC4xNDcyOCB6IgogICAgIGlkPSJyZWN0MTcyNjgiCiAgICAgaW5rc2NhcGU6bGFiZWw9ImRvd25idG4iIC8+Cjwvc3ZnPgo=')
@@ -381,7 +303,112 @@
     // .user_bgcolor_8{ bg: usrbgc8 i; }
     
 
-    /* style pose */
+
+    /* ==================================
+    *   Mixins & Functions
+    * =================================== */
+
+    shad(){
+        -webkit-box-shadow arguments
+        -moz-box-shadow arguments
+        -webkit-shadow arguments
+        -moz-shadow arguments
+        box-shadow arguments
+    }
+
+
+    /* background */
+    bg() { Background arguments }
+    bgc() { background-color arguments }
+    bgi() { background-image arguments }
+    bgs() { background-size arguments }
+
+
+    /* border */
+    brad() { border-radius arguments }
+
+
+    /* Clamping a given value by a given minimum and maximum. */
+    clamp(value, minimum, maximum){
+        max(minimum, min(maximum, value))
+    }
+
+
+    /* quote\reply\pinned messages mixin */
+    quote(b-rad, m, showbanner = true){
+        bgc control-t + 5%
+        brad b-rad
+        padding 8px 16px
+        margin m
+        border 0 // old border: 1px solid border-t
+        position relative
+        overflow hidden
+        if(showbanner){
+            &:before{
+                content ''
+                width 5px
+                height 100%
+                bgc accent-alt
+                position absolute
+                left 0
+                top 0
+                // right 0
+                bottom 0
+            }
+        }
+    }
+    
+    /*
+    * set a textured color for a given control
+    *   c: control color to use (default = control)
+    */
+    bgTex(c = control) {
+        bgc c i
+        if(noise) { bgi noiseimg i }
+    }
+
+
+    /* override methods */
+    mask-image(){
+        -webkit-mask-image arguments
+        -o-mask-image arguments
+        -moz-mask-image arguments
+        mask-image arguments
+    }
+
+    mask-position(){
+        mask-position arguments
+        -webkit-mask-position arguments
+        -o-mask-position arguments
+        -moz-mask-position arguments
+    }
+
+    mask-repeat(){
+        mask-repeat arguments
+        -webkit-mask-repeat arguments
+        -o-mask-repeat arguments
+        -moz-mask-repeat arguments
+    }
+        
+    mask-size(){
+        mask-size arguments
+        -webkit-mask-size arguments
+        -o-mask-size arguments
+        -moz-mask-size arguments
+    }
+
+    anim(){
+        animation arguments
+        -webkit-animation arguments
+        -o-animation arguments
+        -moz-animation arguments
+        -ms-animation arguments
+    }
+
+
+    /* ==================================
+    *   style pose
+    * =================================== */
     /*body,div,p,a,.tg_head_peer_title,.im_dialog_peer>span,.im_short_message_text,.im_dialog_chat_from_wrap,.im_short_message_media,.im_short_message_service,.im_submit {
         color transparent i
     }
@@ -401,6 +428,12 @@
     }*/
     /* end of pose */
     
+
+
+    /* ==================================
+    *   Style starts here
+    * =================================== */
+
 
     /* contact icon initials */
     if(hideinitials){
@@ -478,7 +511,7 @@
     }
 
     .im_send_panel_wrap {
-        bgTex() i
+        bgTex()
         padding-bottom 10px
     }
     
@@ -682,8 +715,8 @@
         }
     }
     
-    .im_message_contact_photo,
-    .im_message_from_photo,
+    .im_message_contact_photo
+    .im_message_from_photo
     .im_message_fwd_photo{
         min-width icon-size
     }
@@ -693,14 +726,25 @@
         margin-top -10px
     }
 
-    /* clamping video thumb images to 256x256 */
-    .im_message_video_thumb,
-    a.im_message_video_thumb,
+    /* clamping and fitting photo and video thumb images to prevsize */
+    .im_message_photo_thumb
+    .im_message_video_thumb
+    a.im_message_video_thumb
     img.im_message_video_thumb{
-        max-width 256px
-        max-height 256px
-        width auto i
-        height auto i
+        // max-width 256px // maximum width depends on maximum in\out messages. will implement in future release.. may also prevent inconsistent overall width of the bubble when clamping the bubble itself
+        // max-height 256px // no need for this
+        width prevsize i
+        height prevsize i
+        display flex
+        justify-content center
+        align-content center
+        overflow hidden
+        & img{
+            // flex-shrink 0
+            object-fit cover
+            min-width 100%
+            min-height 100%
+        }
     }
 
     /* fix message body to fit inside chat area */
@@ -871,13 +915,13 @@
     }
 
     /* photo messages */
-    .im_message_photo_thumb,
+    .im_message_photo_thumb
     .im_message_video_thumb{
         brad msgb-thumb i
     }
     
     /* photo messages vignette */
-    .im_message_video_thumb,
+    .im_message_video_thumb
     .im_message_photo_thumb::before{
         content ''
         position absolute
@@ -886,7 +930,7 @@
         opacity 1
         shad inset 0px 0px 50px black
         transition t-out
-        visibility var(--vignette)
+        visibility vignette
     }
     
     /* fade out vignette when mouse hover */
@@ -955,7 +999,7 @@
         /* show custom message */
         &:before{
             display block
-            content var(--message) " \A " var(--link) " \A"
+            content message " \A " link " \A"
             white-space pre-wrap
             border-bottom 1px solid border
             font-size 16px
@@ -973,7 +1017,7 @@
         /* version footer */
         &:after{
             display block
-            content var(--notice) '\A' var(--version)
+            content notice '\A' version
             white-space pre-wrap
             border-top 1px solid border
             font-size 11px
@@ -999,14 +1043,14 @@
     .login_head_bg
     html
     .modal-content{        
-        bgTex bgcolor i
+        bgTex bgcolor
     }
     
     body{
         /* bgc bgcolor i*/
         color textc1 i
         if(customFont){
-            font-family var(--ui-font) i
+            font-family uifont i
         }
         &:before{
             if(app_image == default and bgopacity != null and bgopacity > .01){
@@ -1128,7 +1172,7 @@
     }
 
     .im_message_video_duration{
-        bgc var(--control-t)
+        bgc control-t
     }
 
     /*  replacing telegram logo with a simple text to be able to paint it 
@@ -1154,7 +1198,7 @@
     /* outer body */
     .im_page_wrap {
         /*background color of contentwrapper under header*/
-        bgTex() i
+        bgTex()
         border-top 0px none i
         border-left 1px solid border i
         border-right 1px solid border i
@@ -1200,7 +1244,7 @@
     .im_dialogs_scrollable_wrap a.im_dialog_searchpeer_selected,
     .active a.im_dialog {
         /*selected peer */
-        bgTex(active) i
+        bgTex control-active
         transition t-in
     }
     
@@ -1209,7 +1253,7 @@
     .md_modal_head{
         /*page header block*/
         // bgc control i
-        bgTex() i
+        bgTex()
         brad border-size border-size 0px 0px
     }
 
@@ -1226,7 +1270,7 @@
     .dropdown.open .tg_head_btn,
     .tg_head_btn:hover,
     .im_bottom_panel_wrap {
-        bgTex() i
+        bgTex()
     }
     
     .tg_head_btn{  
@@ -1378,7 +1422,7 @@
     .btn:focus,
     .im_edit_cancel_link:focus,
     .im_submit:focus{
-        bgTex btnbg
+        bgTex btn-bg
         padding 5px 15px
         margin 0px
         height auto
@@ -1395,7 +1439,7 @@
     .btn:hover,
     .im_edit_cancel_link:hover,
     .im_submit:hover {
-        bgTex btnh i
+        bgTex btn-bg-h
         shad 0px 2px 5px shadow
         border 1px solid border
         border-bottom 3px solid border
@@ -1432,7 +1476,7 @@
     .im_record_bg,
     .im_message_file_button,
     .md_modal_split_action{
-        bgTex btnbg
+        bgTex btn-bg
         border 1px solid border
         shad 0px 2px 5px shadow
         transition t-out
@@ -1492,7 +1536,7 @@
         }
     } 
     a.im_dialog:hover, .dropdown-menu a:hover{
-        bgTex(hover) i
+        bgTex control-hover
         // transition: t-in;
     }
     
@@ -1590,7 +1634,7 @@
     }
 
     .im_history_select_active .im_message_outer_wrap:hover {
-        bg var(--control-t-active)
+        bg control-t-active
         // transition: t-in;
     }
 
@@ -1766,7 +1810,7 @@
             height 50px
             top -25px
             left -25px
-            bgc var(--control-t)
+            bgc control-t
             z-index -1
             // padding 5px
             brad 50%
@@ -1843,7 +1887,7 @@
     .composer_emoji_tooltip,
     .icon-tooltip-tail,
     .dropdown-menu {
-        bgTex i
+        bgTex()
         border-color border i
         border-radius 3px i
         shad 0px 0px 5px shadow
@@ -1992,7 +2036,7 @@
         bottom 0
         brad 0
         width 6px
-        bg var(--control-t-active)
+        bg control-t-active
         z-index 5
     }
     
@@ -2025,7 +2069,7 @@
     
     /* contacts scrollbar bg */
     .im_dialogs_col .nano > .nano-pane{
-        bg var(--control-t-active)
+        bg control-t-active
         width 4px
     }
     
@@ -2159,28 +2203,6 @@
         // margin-right 56px
     }
 
-    /* quote\reply messages mixin */
-    quote(b-rad, m){
-        bgc var(--control-t)
-        brad b-rad
-        padding 8px 16px
-        margin m
-        border 0 // old border: 1px solid border-t
-        position relative
-        overflow hidden
-        &:before{
-            content ''
-            width 5px
-            height 100%
-            bgc accent-alt
-            position absolute
-            left 0
-            top 0
-            // right 0
-            bottom 0
-        }
-    }
-
     /* replay messages */
     .im_message_reply_wrap{
         quote(0 2px 2px 0, 12px 12px 5px 12px i)
@@ -2220,7 +2242,7 @@
     /* media messages */
     .audio_player_wrap,
     .im_message_document{
-        bgc var(--control-t)
+        bgc control-t
         brad msgb-thumb
         padding 8px 
         border 1px solid border
@@ -2236,10 +2258,11 @@
 
     /* media not supported message */
     div[ng-switch-when="messageMediaUnsupported"]{
-        bgc var(--control-t)
-        brad msgb-thumb
-        padding 0px 8px
-        margin-top 4px
+        // bgc control-t
+        // brad msgb-thumb
+        // padding 0px 8px
+        // margin-top 4px
+        quote(msgb-thumb, 4px 0 0 0, false)
     }
 
     /* reply messages border radius */
@@ -2270,11 +2293,12 @@
     
     /* shared link background */
     .im_message_webpage_wrap{
-        brad 0 msgb-thumb msgb-thumb 0
-        border-color accent-alt
-        border-left-width 4px
-        bgc #0000000d
-        padding 5px 5px 5px 12px i
+        // brad 0 msgb-thumb msgb-thumb 0
+        // border-color accent-alt
+        // border-left-width 4px
+        // bgc #0000000d
+        // padding 5px 5px 5px 12px i
+        quote(0 msgb-thumb msgb-thumb 0, -10px 0 0 0)
     }
     
     /* model divider */
@@ -2528,11 +2552,21 @@
         setSvg cameraSvg
     }
 
-    /* a fix for issue #8 where the info of upload\download files won't show up */
     .im_message_document_info{
+        quote(msgb-thumb, 4px 0 0 0, false)
+        width 100%
+        max-width prevsize i
+        // may fix document info position in some situations
+        display inline-block
+        // a fix for issue #8 where the info of upload\download files won't show up
         float unset
     }
 
+    .im_message_document_thumbed{
+        max-width prevsize i
+        width min-content i
+    }
+    
     /* need to keep this first... */
     .im_message_file_button .im_message_file_button_icon{
         setSvg downloadSvg 13 15
@@ -2684,7 +2718,7 @@
     .audio_player_volume_slider .tg_slider_track,
     /* media slider track */
     .audio_player_seek_slider .tg_slider_track{
-        bg var(--accent-t)
+        bg accent-t
     }
     
     /* unread badge */
@@ -2700,7 +2734,7 @@
     
     /* unread badge muted */
     .im_dialog_badge_muted{
-        bg var(--accent-t)
+        bg accent-t
     }
     
     /* media player panel */
@@ -2793,5 +2827,20 @@
     .composer_dropdown li.composer_autocomplete_option_active a{
         color accent-alt i
         bgc control-active
+    }
+
+    /* text messages alignment within bubbles */
+    if(texta != textaauto){
+        .im_message_text
+        .im_message_document_caption
+        .im_message_photo_caption{
+            text-align texta
+        }
+    }
+    
+    .im_message_document_caption
+    .im_message_photo_caption{
+        max-width prevsize
+        quote(msgb-thumb, 4px 0 0 0, false )
     }
 }
