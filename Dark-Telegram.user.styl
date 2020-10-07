@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.4.31
+@version        1.4.32
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -160,7 +160,7 @@
 @-moz-document domain("web.telegram.org") {
     :root {
         /* auto generated line below. please do not delete or modify! */
-        --version "Dark-Telegram v1.4.31 -- October 7th, 2020"
+        --version "Dark-Telegram v1.4.32 -- October 7th, 2020"
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -2066,13 +2066,13 @@
     }
     
     /* right scrollbar */
-    .im_history_col .nano > .nano-pane,
-    .contacts_modal_col .nano > .nano-pane,
-    .sessions_modal_col .nano > .nano-pane,
-    .stickerset_modal_col .nano > .nano-pane, 
-    .im_dialogs_modal_col .nano > .nano-pane,
-    .composer_rich_textarea,
-    .composer_textarea,
+    .im_history_col .nano > .nano-pane
+    .contacts_modal_col .nano > .nano-pane
+    .sessions_modal_col .nano > .nano-pane
+    .stickerset_modal_col .nano > .nano-pane
+    .im_dialogs_modal_col .nano > .nano-pane
+    .composer_rich_textarea
+    .composer_textarea
     ::-webkit-scrollbar{
         right 0
         top 0
@@ -2084,14 +2084,13 @@
     }
     
     /* right scrollbar knob */
-    .im_history_col .nano > .nano-pane > .nano-slider,
-    .contacts_modal_col .nano > .nano-pane > .nano-slider,
-    .sessions_modal_col .nano > .nano-pane > .nano-slider,
-    .stickerset_modal_col .nano > .nano-pane > .nano-slider,
-    .im_dialogs_modal_col .nano > .nano-pane > .nano-slider,
-    .composer_rich_textarea,
-    .composer_textarea,
-    ::-webkit-scrollbar-thumb{
+    .im_history_col .nano > .nano-pane > .nano-slider
+    .contacts_modal_col .nano > .nano-pane > .nano-slider
+    .sessions_modal_col .nano > .nano-pane > .nano-slider
+    .stickerset_modal_col .nano > .nano-pane > .nano-slider
+    .im_dialogs_modal_col .nano > .nano-pane > .nano-slider
+    .composer_rich_textarea
+    .composer_textarea{
         brad 0
         bg accent
         z-index 5

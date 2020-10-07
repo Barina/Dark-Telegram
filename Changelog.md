@@ -1,3 +1,7 @@
+## V1.4.32 (2020-10-07)
+
+- Fixed scroll bars thumb leaking when mouse isn't around.
+
 ## V1.4.31 (2020-10-07)
 
 - Fixed focused elements outline to math the theme's colors.
