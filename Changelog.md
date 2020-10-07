@@ -1,3 +1,7 @@
+## V1.4.31 (2020-10-07)
+
+- Fixed focused elements outline to math the theme's colors.
+
 ## V1.4.30 (2020-10-07)
 
 - Separated preview messages width for incoming or outgoing messages.
