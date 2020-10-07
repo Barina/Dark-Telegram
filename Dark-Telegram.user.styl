@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.3.30
+@version        1.4.30
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -40,8 +40,12 @@
     'Sharp Corner                 ': 'recttail',
 }
 
-@var text msgwmax-in            'Incoming message maximum width' 550px
-@var text msgwmax-out           'Outgoing message maximum width' 65%
+@var text msgwmax-in            'Incoming message maximum width' 750px
+@var text msgwmax-out           'Outgoing message maximum width' 550px
+
+@var text prevw                 'Media preview width' 350px
+@var text prevh                 'Media preview height' 220px
+@var checkbox prevs             'Keep media previews squared (height will use width value so it will not work when using percentage)' 0
 
 @var checkbox centerauthor      'Center author name within chat bubbles' 0
 
@@ -107,7 +111,6 @@
 @var text noiseimg              'Noise image' url('https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Resources/noise.png')
 
 @var checkbox vign              'Vignette effect on photos' 1
-@var text prevsize              'Video preview size' 256px
 
 @var range emojo                'Emoji and sticker icons opacity' [.6, 0, 1, .01]
 @var select emoj-pos            'Emoji and sticker popup position' {
@@ -157,7 +160,7 @@
 @-moz-document domain("web.telegram.org") {
     :root {
         /* auto generated line below. please do not delete or modify! */
-        --version "Dark-Telegram v1.3.30 -- October 7th, 2020"
+        --version "Dark-Telegram v1.4.30 -- October 7th, 2020"
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -203,6 +206,37 @@
     border-t = rgba(border, .1)
 
     icon-size = 42px
+
+    if(prevs){
+        prevh = prevw
+    }
+
+    if(unit(msgwmax-in) != unit(prevw) and unit(prevw) == "%"){
+        prevwin = msgwmax-in * (prevw / 100)
+    } else if(unit(msgwmax-in) == "%" and unit(prevw) != "%"){
+        prevwin = 100%
+    } else if(unit(msgwmax-in) == "%" and unit(prevw) == "%"){
+        prevwin = prevw
+    } else {
+        prevwin = min(prevw, msgwmax-in)
+    }
+        
+    if(unit(msgwmax-out) != unit(prevw) and unit(prevw) == "%"){
+        prevwout = msgwmax-out * (prevw / 100)
+    } else if(unit(msgwmax-out) == "%" and unit(prevw) != "%"){
+        prevwout = 100%
+    } else if(unit(msgwmax-out) == "%" and unit(prevw) == "%"){
+        prevwout = prevw
+    } else {
+        prevwout = min(prevw, msgwmax-out)
+    }
+    
+    if(prevwin != unset and unit(prevwin) != "%"){
+        prevwin -= 26px
+    }
+    if(prevwout != unset and unit(prevwout) != "%"){
+        prevwout -= 26px
+    }
 
     // set emoji popup position
     if(emoj-pos is right) {
@@ -672,11 +706,12 @@
         }
     }
     
-    .im_message_video, 
-    a.im_message_photo_thumb,
+    .im_message_video
+    a.im_message_photo_thumb
     /* non-animated stickers */
     .im_message_media > div > div {
         margin-top 5px i
+        width 100%
     }
 
     .im_history_scrollable_wrap .im_history_scrollable{
@@ -726,15 +761,23 @@
         margin-top -10px
     }
 
-    /* clamping and fitting photo and video thumb images to prevsize */
+    /* clamping and fitting photo and video thumb images to media preview properties */
     .im_message_photo_thumb
     .im_message_video_thumb
     a.im_message_video_thumb
     img.im_message_video_thumb{
+        width 100% i
+        height prevh i
         // max-width 256px // maximum width depends on maximum in\out messages. will implement in future release.. may also prevent inconsistent overall width of the bubble when clamping the bubble itself
         // max-height 256px // no need for this
-        width prevsize i
-        height prevsize i
+        .im_message_body_media div[my-message-body="historyMessage"] .im_message_media div[ng-switch="::media._"] div &{
+            .im_message_in &{
+                width prevwin i
+            }
+            .im_message_out &{
+                width prevwout i
+            }
+        }
         display flex
         justify-content center
         align-content center
@@ -925,7 +968,7 @@
     .im_message_photo_thumb::before{
         content ''
         position absolute
-        width inherit
+        width 100%
         height 100%
         opacity 1
         shad inset 0px 0px 50px black
@@ -2553,9 +2596,9 @@
     }
 
     .im_message_document_info{
+        max-width 100% i
         quote(msgb-thumb, 4px 0 0 0, false)
         width 100%
-        max-width prevsize i
         // may fix document info position in some situations
         display inline-block
         // a fix for issue #8 where the info of upload\download files won't show up
@@ -2563,8 +2606,15 @@
     }
 
     .im_message_document_thumbed{
-        max-width prevsize i
-        width min-content i
+        .im_message_body_media div[my-message-body="historyMessage"] .im_message_media div[ng-switch="::media._"] div &{
+            .im_message_in &{
+                max-width prevwin i
+            }
+            .im_message_out &{
+                max-width prevwout i
+            }
+        }
+        // width min-content i
     }
     
     /* need to keep this first... */
@@ -2840,7 +2890,14 @@
     
     .im_message_document_caption
     .im_message_photo_caption{
-        max-width prevsize
+        .im_message_body_media div[my-message-body="historyMessage"] .im_message_media div[ng-switch="::media._"] div &{
+            .im_message_in &{
+                max-width prevwin i
+            }
+            .im_message_out &{
+                max-width prevwout i
+            }
+        }
         quote(msgb-thumb, 4px 0 0 0, false )
     }
 }

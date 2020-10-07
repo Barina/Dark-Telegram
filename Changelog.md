@@ -1,3 +1,8 @@
+## V1.4.30 (2020-10-07)
+
+- Separated preview messages width for incoming or outgoing messages.
+- Added preview messages height.
+
 ## V1.3.30 (2020-10-07)
 
 - Added messages text align.
