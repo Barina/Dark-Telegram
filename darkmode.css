@@ -4,7 +4,7 @@
 @homepageURL https://github.com/Barina/Dark-Telegram
 @supportURL https://github.com/Barina/Dark-Telegram/issues
 @updateURL https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version 1.4.32
+@version 1.5.33
 @description Customizable theme for telegram web.
 @author Roy Barina
 @license MIT
@@ -56,39 +56,39 @@
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_0 {
-  bg: #000 !important;
+  Background: #000 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_1 {
-  bg: #735a7c !important;
+  Background: #735a7c !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_2 {
-  bg: #536e4a !important;
+  Background: #536e4a !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_3 {
-  bg: #766e51 !important;
+  Background: #766e51 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_4 {
-  bg: #4d6273 !important;
+  Background: #4d6273 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_5 {
-  bg: #6c4848 !important;
+  Background: #6c4848 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_6 {
-  bg: #7a5863 !important;
+  Background: #7a5863 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_7 {
-  bg: #4d7173 !important;
+  Background: #4d7173 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_8 {
-  bg: #766051 !important;
+  Background: #766051 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .peer_initials {
@@ -415,14 +415,14 @@ a.im_message_photo_thumb {
 .im_message_author {
   padding: 0px 5px 0px 5px;
   margin: 5px 0 0 0;
+  display: inline-block;
+  width: max-content;
 }
-.im_message_out .im_message_body .im_message_author_wrap .im_message_author {
+.im_message_out .im_message_body .im_message_author_wrap {
   text-align: end;
-  width: 100%;
 }
-.im_message_in .im_message_body .im_message_author_wrap .im_message_author {
+.im_message_in .im_message_body .im_message_author_wrap {
   text-align: start;
-  width: 100%;
 }
 a.pull-right,
 #notify_sound {
@@ -455,7 +455,7 @@ a.pull-right,
 }
 .im_history_not_selected:after {
   display: block;
-  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.4.32 -- October 7th, 2020";
+  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.5.33 -- October 9th, 2020";
   white-space: pre-wrap;
   border-top: 1px solid #333943;
   font-size: 11px;
@@ -479,9 +479,6 @@ html,
 .modal-content {
   background-color: #1f232a !important;
 }
-body {
-  color: #ccccca !important;
-}
 body:before {
   content: '';
   position: absolute;
@@ -496,7 +493,7 @@ body:before {
   z-index: -1;
 }
 ::selection {
-  background: #7289da !important;
+  background-color: #7289da !important;
   color: #fff !important;
 }
 .login_form_messaging,
@@ -510,11 +507,94 @@ p.tg_checkbox,
 .im_message_video_duration,
 .media_modal_bottom_panel,
 a.md_modal_action,
-body {
+.md_modal_section_param_value,
+.md_modal_section_param_name,
+.md_modal_section_link,
+.confirm_modal_description,
+.im_message_webpage_description,
+.composer_rich_textarea,
+.im_short_message_text,
+.im_message_photo_caption,
+.im_message_document_caption,
+.im_short_message_media,
+.dropdown-menu li a span,
+.dropdown-menu li a,
+.md_modal_list_peer_name a,
+.im_message_sign_link {
+  color: #ccccca;
+}
+.im_message_text,
+.md_modal_section_description {
   color: #ccccca;
 }
 input {
   color: #ccccca !important;
+}
+.login_head_submit_progress,
+.login_footer_wrap,
+.logo_footer_learn_more_link,
+.composer_dropdown li a,
+.composer_dropdown li a:hover .composer_user_mention,
+.error_modal_details_link,
+.changelog_github_link,
+.im_message_author,
+.im_message_fwd_author,
+.im_message_text a,
+.im_message_webpage_title a,
+.im_message_document_actions a,
+.im_message_webpage_description a,
+.composer_emoji_tooltip_tab_emoji,
+.composer_emoji_tooltip_tabs_stickers_active .composer_emoji_tooltip_tab_stickers,
+.im_message_document_name,
+.btn-link,
+.btn-link:hover,
+.im_message_reply_author span,
+.peer_modal_profile_description,
+.dropdown-menu li:hover a span,
+.dropdown-menu li:hover a,
+a.im_dialog .im_dialog_chat_from_wrap,
+a.im_dialog .im_short_message_media,
+a.im_dialog .im_short_message_service,
+.md_modal_list_peer_description .status_online,
+.md_modal_list_peer_description.status_online,
+.tg_head_peer_status,
+.composer_user_mention,
+.composer_dropdown li.composer_autocomplete_option_active a .composer_user_mention,
+.im_message_photo_caption a,
+.changelog_more_link,
+.audio_player_actions a,
+.audio_player_title {
+  color: #7289da;
+}
+a,
+a:focus,
+a:hover,
+.tg_head_btn {
+  color: #7289da;
+}
+.login_phone_head,
+.countries_modal_country:hover .countries_modal_country_code,
+.countries_modal_country:hover .countries_modal_country_name,
+.composer_dropdown > li > a:hover,
+.error_modal_details_link:hover,
+.im_message_selected .im_message_document_size,
+.im_message_selected .im_message_audio_duration,
+.im_message_selected .im_message_audio_size,
+.im_message_selected .im_message_fwd_date,
+.im_message_selected .im_message_author_admin,
+.im_history_select_active .im_message_outer_wrap:hover .im_message_document_size,
+.im_history_select_active .im_message_outer_wrap:hover .im_message_audio_duration,
+.im_history_select_active .im_message_outer_wrap:hover .im_message_audio_size,
+.im_history_select_active .im_message_outer_wrap:hover .im_message_fwd_date,
+.im_history_select_active .im_message_outer_wrap:hover .im_message_author_admin,
+.im_history_select_active .im_message_outer_wrap:hover .im_message_sign_link,
+.dropdown-menu li a:focus,
+.dropdown-menu li a:hover,
+.dropdown.open .tg_head_btn,
+.tg_head_btn:hover,
+a:focus,
+a:hover {
+  color: #a1b0e6;
 }
 .countries_modal_country_code,
 .im_history_typing,
@@ -531,16 +611,24 @@ a.media_modal_date:hover,
 .im_dialog_date,
 .im_service_message,
 .im_message_date,
+.im_message_date .im_message_edited,
+.im_message_date .im_message_date_text,
 .im_message_fwd_date,
 .im_message_author_admin,
-.im_history_empty,
 a.im_dialog .im_short_message_text,
-.md-input-label {
+.md-input-label,
+.im_dialog_message_text,
+.im_message_service,
+.im_message_date_split_text,
+.composer_rich_textarea:before {
   color: #6e6e6e;
+}
+.md_modal_list_peer_description {
+  color: #6e6e6e;
+  display: unset;
 }
 .md_modal_list_peer_description,
 .im_dialog_message,
-.composer_rich_textarea:empty::before,
 input::placeholder {
   color: #6e6e6e !important;
 }
@@ -548,6 +636,8 @@ input::placeholder {
 .login_form_head,
 .badge,
 .im_message_views_cnt,
+.im_message_selected .im_message_views_cnt,
+.im_history_select_active .im_message_outer_wrap:hover .im_message_views_cnt,
 .contacts_modal_members_list .active a.contacts_modal_contact,
 .contacts_modal_members_list .active a.contacts_modal_contact:hover,
 .contacts_modal_members_list .active a.contacts_modal_contact .md_modal_list_peer_description,
@@ -555,7 +645,6 @@ input::placeholder {
 .contacts_modal_members_list .active a.contacts_modal_contact .md_modal_list_peer_description .status_online,
 .active a.im_dialog .im_dialog_chat_from_wrap,
 .active a.im_dialog .im_dialog_draft_from,
-.active a.im_dialog .im_dialog_message,
 .active a.im_dialog .im_short_message_media,
 .active a.im_dialog .im_short_message_service,
 .active a.im_dialog .im_short_message_text,
@@ -568,13 +657,12 @@ input::placeholder {
 .peer_modal_profile_name,
 a.md_modal_action:hover,
 .tg_head_peer_media,
-.media_modal_title_wrap,
-.peer_initials {
+.media_modal_title_wrap {
   color: #fff;
 }
 .icon-hamburger-wrap .icon-bar,
 .icon-bar {
-  Background: #fff !important;
+  Background: #fff;
 }
 .im_message_video_duration {
   background-color: rgba(37,42,51,0.5);
@@ -610,7 +698,7 @@ a.md_modal_action:hover,
   box-shadow: 0px 3px 5px rgba(0,0,0,0.251);
 }
 .im_dialog_peer {
-  color: #ccccca !important;
+  color: #ccccca;
 }
 .contacts_modal_members_list a.contacts_modal_contact {
   color: #ccccca;
@@ -762,6 +850,11 @@ code {
   transition: 1s;
   color: #7289da;
 }
+.btn:focus,
+.im_edit_cancel_link:focus,
+.im_submit:focus {
+  border-color: #7289da !important;
+}
 .btn:hover,
 .im_edit_cancel_link:hover,
 .im_submit:hover {
@@ -809,6 +902,7 @@ fieldset[disabled] .btn-primary:hover {
   box-shadow: 0px 2px 5px rgba(0,0,0,0.251);
   transition: 1s;
   color: #7289da;
+  border-radius: 100% !important;
 }
 .im_record_bg:hover,
 .im_message_file_button:hover,
@@ -923,6 +1017,7 @@ a.im_dialog:hover,
   z-index: -1;
 }
 .im_history_empty {
+  color: #ccccca;
   margin-bottom: 25px;
   line-height: 30px;
   position: relative;
@@ -1198,6 +1293,16 @@ a.im_panel_own_photo {
   -moz-shadow: 0 0 5px rgba(0,0,0,0.251);
   box-shadow: 0 0 5px rgba(0,0,0,0.251);
 }
+.login_form_wrap li a,
+.tg_head_peer_dropdown .dropdown-menu li a,
+.tg_head_logo_dropdown .dropdown-menu li a {
+  color: #ccccca;
+}
+.login_form_wrap li:hover a,
+.tg_head_peer_dropdown .dropdown-menu li:hover a,
+.tg_head_logo_dropdown .dropdown-menu li:hover a {
+  color: #7289da !important;
+}
 .im_message_views {
   left: 4px;
   top: 25px;
@@ -1330,67 +1435,6 @@ a.im_panel_own_photo {
   width: 5px;
   left: -5px;
 }
-.login_head_submit_progress,
-.login_footer_wrap,
-.logo_footer_learn_more_link,
-.composer_dropdown > li > a,
-.composer_dropdown li a:hover .composer_user_mention,
-.error_modal_details_link,
-.changelog_github_link,
-.im_message_author,
-.im_message_fwd_author,
-a,
-a:focus,
-a:hover,
-.tg_head_btn,
-.composer_emoji_tooltip_tab_emoji,
-.composer_emoji_tooltip_tabs_stickers_active .composer_emoji_tooltip_tab_stickers,
-.im_message_document_name,
-.btn-link,
-.btn-link:hover,
-.im_message_reply_author,
-.peer_modal_profile_description,
-.tg_head_peer_dropdown .dropdown-menu > li > a,
-a.im_dialog .im_dialog_chat_from_wrap,
-a.im_dialog .im_short_message_media,
-a.im_dialog .im_short_message_service,
-.tg_head_logo_dropdown .dropdown-menu > li > a,
-.md_modal_list_peer_description .status_online,
-.md_modal_list_peer_description.status_online,
-.tg_head_peer_status,
-.composer_user_mention,
-.composer_dropdown li.composer_autocomplete_option_active a .composer_user_mention {
-  color: #7289da;
-}
-.login_phone_head,
-.countries_modal_country:hover .countries_modal_country_code,
-.countries_modal_country:hover .countries_modal_country_name,
-.composer_dropdown > li > a:hover,
-.error_modal_details_link:hover,
-.im_message_selected .im_message_date,
-.im_message_selected .im_message_document_size,
-.im_message_selected .im_message_audio_duration,
-.im_message_selected .im_message_audio_size,
-.im_message_selected .im_message_fwd_date,
-.im_message_selected .im_message_author_admin,
-.im_message_selected .im_message_views_cnt,
-.im_message_selected .im_message_sign_link,
-.im_history_select_active .im_message_outer_wrap:hover .im_message_date,
-.im_history_select_active .im_message_outer_wrap:hover .im_message_document_size,
-.im_history_select_active .im_message_outer_wrap:hover .im_message_audio_duration,
-.im_history_select_active .im_message_outer_wrap:hover .im_message_audio_size,
-.im_history_select_active .im_message_outer_wrap:hover .im_message_fwd_date,
-.im_history_select_active .im_message_outer_wrap:hover .im_message_author_admin,
-.im_history_select_active .im_message_outer_wrap:hover .im_message_views_cnt,
-.im_history_select_active .im_message_outer_wrap:hover .im_message_sign_link,
-.dropdown-menu > li > a:focus,
-.dropdown-menu > li > a:hover,
-.dropdown.open .tg_head_btn,
-.tg_head_btn:hover,
-a:focus,
-a:hover {
-  color: #a1b0e6 !important;
-}
 .composer_emoji_tooltip_tab_shadow {
   Background: #a1b0e6;
   -webkit-box-shadow: 0 1px 0 0 #a1b0e6;
@@ -1413,7 +1457,7 @@ a:hover {
 }
 .contacts_modal_contact_wrap:hover .contacts_modal_contact .md_modal_list_peer_description,
 a.im_dialog:hover .im_short_message_text {
-  color: #a1b0e6 !important;
+  color: #a1b0e6;
 }
 a.im_dialog:hover .im_dialog_date {
   color: #7289da;
@@ -2648,9 +2692,9 @@ h5,
   opacity: 0.75;
   transition: 1s;
 }
-.dropdown-menu>li>a,
-.dropdown-menu>li>a:focus,
-.dropdown-menu>li>a:hover {
+.dropdown-menu li a,
+.dropdown-menu li a:focus,
+.dropdown-menu li a:hover {
   color: #ccccca;
 }
 .tg_slider_thumb {
@@ -2761,17 +2805,21 @@ a.tg_radio_on:hover i.icon-radio {
   background-color: unset !important;
 }
 .composer_mention_option {
-  color: #ccccca !important;
+  color: #ccccca;
 }
 .composer_dropdown li a:hover,
 .composer_dropdown li.composer_autocomplete_option_active a {
-  color: #a1b0e6 !important;
+  color: #a1b0e6;
   background-color: #343b46;
 }
 .im_message_text,
 .im_message_document_caption,
 .im_message_photo_caption {
   text-align: 'Start';
+}
+.im_message_text {
+  padding: unset;
+  margin: 10px;
 }
 .im_message_document_caption,
 .im_message_photo_caption {
@@ -2793,6 +2841,9 @@ a.tg_radio_on:hover i.icon-radio {
 }
 :focus {
   outline: #a1b0e6 solid 1px;
+}
+.im_service_message_pinned {
+  vertical-align: bottom !important;
 }
 @-moz-keyframes pulse {
   0% {

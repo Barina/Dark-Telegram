@@ -1,3 +1,9 @@
+## V1.5.33 (2020-10-09)
+
+- Added the 'Pose mode' that was hidden in the style as a feature you can enable. Can't see how you will use this toy.. but it can be handy maybe as a separated more private mode. Also this feature drew dome big changes in the style. Please report any issues as usual :) .
+- Fixed service message for pinned messages vertical align.
+- Messages date & time no longer unnecessarily highlighted.
+
 ## V1.4.32 (2020-10-07)
 
 - Fixed scroll bars thumb leaking when mouse isn't around.

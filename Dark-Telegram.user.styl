@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.4.32
+@version        1.5.33
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -155,15 +155,110 @@
 @var text blurbehind            'Blur amount behind focused media' 8px
 
 @var checkbox fffix             'Chat list fix' 0
+@var checkbox poseon            'Enable pose mode' 0
 
 ==/UserStyle== */
 @-moz-document domain("web.telegram.org") {
     :root {
         /* auto generated line below. please do not delete or modify! */
-        --version "Dark-Telegram v1.4.32 -- October 7th, 2020"
+        --version "Dark-Telegram v1.5.33 -- October 9th, 2020"
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
+    }
+
+
+    /* ==================================
+    *   Basic Mixins & Functions
+    * =================================== */
+
+    shad(){
+        -webkit-box-shadow arguments
+        -moz-box-shadow arguments
+        -webkit-shadow arguments
+        -moz-shadow arguments
+        box-shadow arguments
+    }
+
+
+    /* background */
+    bg() { Background arguments }
+    bgc() { background-color arguments }
+    bgi() { background-image arguments }
+    bgs() { background-size arguments }
+
+
+    /*
+    * set a textured color for a given control
+    *   c: control color to use (default = control)
+    */
+    bgTex(c = control) {
+        bgc c i
+        if(noise) { bgi noiseimg i }
+    }
+
+
+    /* border */
+    brad() { border-radius arguments }
+
+
+    /* Clamping a given value by a given minimum and maximum. */
+    clamp(value, minimum, maximum){
+        max(minimum, min(maximum, value))
+    }
+
+    /*  colorize with the given arguments taking care when in posing mode.
+        to ignore posing mode use 'color' instead of this. */
+    col(col, shrink = true){
+        if(poseon){
+            color transparent i
+            bgi none i
+            bgc col
+            brad 4px
+            if(shrink){                
+                width max-content
+                max-width min(chatSize, min(msgwmax-in, msgwmax-out)) - 100px
+            }
+        } else {
+            color col
+        }
+    }
+
+    /* override methods */
+    mask-image(){
+        -webkit-mask-image arguments
+        -o-mask-image arguments
+        -moz-mask-image arguments
+        mask-image arguments
+    }
+
+    mask-position(){
+        mask-position arguments
+        -webkit-mask-position arguments
+        -o-mask-position arguments
+        -moz-mask-position arguments
+    }
+
+    mask-repeat(){
+        mask-repeat arguments
+        -webkit-mask-repeat arguments
+        -o-mask-repeat arguments
+        -moz-mask-repeat arguments
+    }
+        
+    mask-size(){
+        mask-size arguments
+        -webkit-mask-size arguments
+        -o-mask-size arguments
+        -moz-mask-size arguments
+    }
+
+    anim(){
+        animation arguments
+        -webkit-animation arguments
+        -o-animation arguments
+        -moz-animation arguments
+        -ms-animation arguments
     }
 
 
@@ -262,8 +357,9 @@
     cc = contrast(ccon)
 
     for c, n in colors1{
-        .user_color_{n},.user_color_{n}:hover{ 
-            color c * clight i
+        .user_color_{n}
+        .user_color_{n}:hover{ 
+            col(c * clight i)
             filter ch cc
         }
     }
@@ -317,56 +413,12 @@
     qrSvg = url('https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Resources/issues-qr-code.svg')
 
     // Svg = url('')
-
-    /* default colors */
-    // .user_color_1,.user_color_1:hover{ color: usrc1 i; }
-    // .user_color_2,.user_color_2:hover{ color: usrc2 i; }
-    // .user_color_3,.user_color_3:hover{ color: usrc3 i; }
-    // .user_color_4,.user_color_4:hover{ color: usrc4 i; }
-    // .user_color_5,.user_color_5:hover{ color: usrc5 i; }
-    // .user_color_6,.user_color_6:hover{ color: usrc6 i; }
-    // .user_color_7,.user_color_7:hover{ color: usrc7 i; }
-    // .user_color_8,.user_color_8:hover{ color: usrc8 i; }
-    // .user_bgcolor_1{ bg: usrbgc1 i; }
-    // .user_bgcolor_2{ bg: usrbgc2 i; }
-    // .user_bgcolor_3{ bg: usrbgc3 i; }
-    // .user_bgcolor_4{ bg: usrbgc4 i; }
-    // .user_bgcolor_5{ bg: usrbgc5 i; }
-    // .user_bgcolor_6{ bg: usrbgc6 i; }
-    // .user_bgcolor_7{ bg: usrbgc7 i; }
-    // .user_bgcolor_8{ bg: usrbgc8 i; }
     
 
 
     /* ==================================
     *   Mixins & Functions
     * =================================== */
-
-    shad(){
-        -webkit-box-shadow arguments
-        -moz-box-shadow arguments
-        -webkit-shadow arguments
-        -moz-shadow arguments
-        box-shadow arguments
-    }
-
-
-    /* background */
-    bg() { Background arguments }
-    bgc() { background-color arguments }
-    bgi() { background-image arguments }
-    bgs() { background-size arguments }
-
-
-    /* border */
-    brad() { border-radius arguments }
-
-
-    /* Clamping a given value by a given minimum and maximum. */
-    clamp(value, minimum, maximum){
-        max(minimum, min(maximum, value))
-    }
-
 
     /* quote\reply\pinned messages mixin */
     quote(b-rad, m, showbanner = true){
@@ -392,76 +444,99 @@
         }
     }
     
-    /*
-    * set a textured color for a given control
-    *   c: control color to use (default = control)
-    */
-    bgTex(c = control) {
-        bgc c i
-        if(noise) { bgi noiseimg i }
-    }
 
-
-    /* override methods */
-    mask-image(){
-        -webkit-mask-image arguments
-        -o-mask-image arguments
-        -moz-mask-image arguments
-        mask-image arguments
-    }
-
-    mask-position(){
-        mask-position arguments
-        -webkit-mask-position arguments
-        -o-mask-position arguments
-        -moz-mask-position arguments
-    }
-
-    mask-repeat(){
-        mask-repeat arguments
-        -webkit-mask-repeat arguments
-        -o-mask-repeat arguments
-        -moz-mask-repeat arguments
-    }
-        
-    mask-size(){
-        mask-size arguments
-        -webkit-mask-size arguments
-        -o-mask-size arguments
-        -moz-mask-size arguments
-    }
-
-    anim(){
-        animation arguments
-        -webkit-animation arguments
-        -o-animation arguments
-        -moz-animation arguments
-        -ms-animation arguments
+    /* banner mixin */
+    banner(width){
+        margin-bottom 25px
+        line-height 30px
+        position relative
+        z-index 1
+        if(poseon){
+            color transparent
+        } else {
+            color accent
+        }
+        /* banner background */
+        &:before{
+            visibility visible
+            content ''
+            bgc control i
+            border-top 1px solid border
+            border-bottom 1px solid border
+            position absolute
+            min-width 100px i
+            width 100%
+            height 40px
+            left 0
+            right 0
+            margin-top -5px
+            z-index -2
+        }
+        /* banner text bacground */
+        &:after{
+            visibility visible
+            content ''
+            bgc control-active i
+            border-radius 50px
+            position absolute
+            vertical-align middle
+            text-align center
+            min-width 100px i
+            width width
+            height 30px
+            line-height 30px
+            margin-top 0px
+            margin-left -(width * .5)
+            left 50%
+            z-index -1
+        }
     }
 
 
     /* ==================================
     *   style pose
     * =================================== */
-    /*body,div,p,a,.tg_head_peer_title,.im_dialog_peer>span,.im_short_message_text,.im_dialog_chat_from_wrap,.im_short_message_media,.im_short_message_service,.im_submit {
-        color transparent i
+    if(poseon){
+        .icon-tg-title::after{
+            bgc control-active
+            bgi none
+            brad 4px
+        }
+        .im_service_message_photo_thumb
+        .im_message_fwd_photo
+        .im_message_reply_thumb_wrap
+        .im_message_from_photo
+        div.im_dialog_photo{
+            & img{
+                visibility hidden
+            }
+            bgc transparent i
+            bgi contacticon i
+            bgs cover i
+        }
+        .icon-tg-title::after{
+            col transparent i
+            bgc textc2 i
+        }
+        .emoji{
+            height 0
+        }
+        a.im_message_video_thumb
+        a.im_message_photo_thumb{
+            &:hover{
+                bgc unset i
+            }
+            &:before{
+                content url('https://images.unsplash.com/photo-1434569117012-ce134ee1a088?fit=crop&w=1280&h=720&q=80') i
+                filter blur(15px)
+                margin -30px
+            }
+            & img{
+                display none
+            }
+        }
     }
-    .tg_head_peer_title,.icon-tg-title,.im_dialog_peer>span,.im_short_message_text,.im_dialog_chat_from_wrap,.im_short_message_media,.im_short_message_service,.im_submit {
-        bgc control-active
-        bgi none
-        brad 4px
-    }
-    img.im_dialog_photo{
-        visibility hidden
-        bgc transparent i
-        bgi contacticon i
-        bgs cover i
-    }
-    .im_dialog_chat_from_wrap,.im_short_message_media,.im_short_message_service {
-        bgc accent i
-    }*/
     /* end of pose */
-    
 
 
     /* ==================================
@@ -470,16 +545,18 @@
 
 
     /* contact icon initials */
-    if(hideinitials){
-        .peer_initials{
+    .peer_initials{
+        if(hideinitials){
             color transparent i
+        } else {
+            color textc2
         }
     }
 
     /* contact icon */
-    if(useicons is 1){
+    if(useicons){
         // .im_dialog_photo,//
-        .im_message_contact_photo,
+        .im_message_contact_photo
         // .im_message_from_photo,//
         // .im_message_fwd_photo,
         // .md_modal_list_peer_photo,//
@@ -550,7 +627,7 @@
     }
     
     /* emoji's & stickers opacity */
-    a.composer_emoji_btn,
+    a.composer_emoji_btn
     .composer_sticker_image{
         opacity emojo
         &:hover{
@@ -992,22 +1069,23 @@
     .im_message_author{
         padding 0px 5px 0px 5px
         margin 5px 0 0 0
+        display inline-block
+        width max-content
     }
     
     /* message author position mixin */
-    authorAlign(a, w){
+    authorAlign(a){
         text-align (centerauthor ? center : a)
-        width w
     }
 
     /* out message author position mixin */
-    .im_message_out .im_message_body .im_message_author_wrap .im_message_author{        
-        authorAlign (outpos == right ? end : start) 100%
+    .im_message_out .im_message_body .im_message_author_wrap{// .im_message_author{        
+        authorAlign (outpos == right ? end : start) 
     }
         
     /* in message author position mixin */
-    .im_message_in .im_message_body .im_message_author_wrap .im_message_author{        
-        authorAlign (inpos != right ? start : end) 100%
+    .im_message_in .im_message_body .im_message_author_wrap{// .im_message_author{        
+        authorAlign (inpos != right ? start : end)
     }
         
     /* right user profile photo in text area */
@@ -1091,7 +1169,7 @@
     
     body{
         /* bgc bgcolor i*/
-        color textc1 i
+        // color textc1 i // try to skip this property in body as much as posible
         if(customFont){
             font-family uifont i
         }
@@ -1122,96 +1200,248 @@
     }
     
     ::selection {
-        background accent i
-        color textc2 i
+        if(poseon){
+            col(accent i)
+        } else{
+            bgc accent i
+            color textc2 i
+        }
     }
 
     /* primary text color elements */
-    .login_form_messaging,
-    .login_smscode_lead,
-    .login_form_lead,
-    .countries_modal_country_name,
-    a.tg_checkbox, p.tg_checkbox,
-    .error_modal_description,
-    .im_message_webpage_site,
-    .im_message_video_duration,
-    .media_modal_bottom_panel,
-    a.md_modal_action,
-    a.tg_checkbox,
-    body{
-        color textc1
-    }
+    .login_form_messaging
+    .login_smscode_lead
+    .login_form_lead
+    .countries_modal_country_name
+    a.tg_checkbox
+    p.tg_checkbox
+    .error_modal_description
+    .im_message_webpage_site
+    .im_message_video_duration
+    .media_modal_bottom_panel
+    a.md_modal_action
+    a.tg_checkbox
+    .md_modal_section_param_value
+    .md_modal_section_param_name
+    .md_modal_section_link
+    .confirm_modal_description
+    .im_message_webpage_description
+    .composer_rich_textarea
+    .im_short_message_text
+    .im_message_photo_caption
+    .im_message_document_caption
+    .im_short_message_media
+    .dropdown-menu li a span
+    .dropdown-menu li a
+    .md_modal_list_peer_name a
+    .im_message_sign_link{
+    // body{
+        col textc1
+    }    
+
+    .im_message_text
+    .md_modal_section_description{
+        col textc1 false
+    }    
 
     /* force primary text color elements */
     input{
         color textc1 i
     }
 
+    /* accent text color elements */
+    .login_head_submit_progress
+    .login_footer_wrap
+    .logo_footer_learn_more_link
+    .composer_dropdown li a
+    .composer_dropdown li a:hover .composer_user_mention
+    .error_modal_details_link
+    .changelog_github_link
+    .im_message_author
+    .im_message_fwd_author
+    .im_message_text a
+    .im_message_webpage_title a
+    .im_message_document_actions a
+    .im_message_webpage_description a
+    // a
+    // a:focus
+    // a:hover
+    // .tg_head_btn
+    .composer_emoji_tooltip_tab_emoji
+    .composer_emoji_tooltip_tabs_stickers_active .composer_emoji_tooltip_tab_stickers
+    .im_message_document_name
+    .btn-link
+    .btn-link:hover
+    .im_message_reply_author span
+    .peer_modal_profile_description
+    .dropdown-menu li:hover a span
+    .dropdown-menu li:hover a
+    a.im_dialog .im_dialog_chat_from_wrap 
+    a.im_dialog .im_short_message_media
+    a.im_dialog .im_short_message_service
+    .md_modal_list_peer_description .status_online
+    .md_modal_list_peer_description.status_online
+    .tg_head_peer_status
+    .composer_user_mention
+    .composer_dropdown li a:hover .composer_user_mention
+    .composer_dropdown li.composer_autocomplete_option_active a .composer_user_mention
+    .im_message_photo_caption a
+    .changelog_more_link
+    .audio_player_actions a
+    .audio_player_title{
+        col accent false
+        // transition t-in
+    }
+
+    /* accent bg color elements */
+    // .login_head_submit_progress
+    // .login_footer_wrap
+    // .logo_footer_learn_more_link
+    // .composer_dropdown li a
+    // .composer_dropdown li a:hover .composer_user_mention
+    // .error_modal_details_link
+    // .changelog_github_link
+    // .im_message_author
+    // .im_message_fwd_author
+    a
+    a:focus
+    a:hover
+    .tg_head_btn
+    // .composer_emoji_tooltip_tab_emoji
+    // .composer_emoji_tooltip_tabs_stickers_active .composer_emoji_tooltip_tab_stickers
+    // .im_message_document_name
+    // .btn-link
+    // .btn-link:hover
+    // .im_message_reply_author
+    // .peer_modal_profile_description
+    // .tg_head_peer_dropdown .dropdown-menu li a
+    // .tg_head_logo_dropdown .dropdown-menu li a
+    // a.im_dialog .im_dialog_chat_from_wrap 
+    // a.im_dialog .im_short_message_media
+    // a.im_dialog .im_short_message_service
+    // .md_modal_list_peer_description .status_online
+    // .md_modal_list_peer_description.status_online
+    // .tg_head_peer_status
+    // .composer_user_mention
+    // .composer_dropdown li a:hover .composer_user_mention
+    // .composer_dropdown li.composer_autocomplete_option_active a .composer_user_mention
+    {
+        color accent
+        // transition t-in
+    }
+
+    /* alt accent text color elements */
+    .login_phone_head
+    .countries_modal_country:hover .countries_modal_country_code
+    .countries_modal_country:hover .countries_modal_country_name
+    .composer_dropdown > li > a:hover
+    .error_modal_details_link:hover
+    // .im_message_selected .im_message_date
+    .im_message_selected .im_message_document_size
+    .im_message_selected .im_message_audio_duration
+    .im_message_selected .im_message_audio_size
+    .im_message_selected .im_message_fwd_date
+    .im_message_selected .im_message_author_admin
+    // .im_message_selected .im_message_views_cnt
+    // .im_message_selected .im_message_sign_link
+    // .im_history_select_active .im_message_outer_wrap:hover .im_message_date
+    .im_history_select_active .im_message_outer_wrap:hover .im_message_document_size
+    .im_history_select_active .im_message_outer_wrap:hover .im_message_audio_duration
+    .im_history_select_active .im_message_outer_wrap:hover .im_message_audio_size
+    .im_history_select_active .im_message_outer_wrap:hover .im_message_fwd_date
+    .im_history_select_active .im_message_outer_wrap:hover .im_message_author_admin
+    // .im_history_select_active .im_message_outer_wrap:hover .im_message_views_cnt
+    .im_history_select_active .im_message_outer_wrap:hover .im_message_sign_link
+    .dropdown-menu li a:focus
+    .dropdown-menu li a:hover
+    .dropdown.open .tg_head_btn
+    .tg_head_btn:hover
+    a:focus
+    a:hover{
+        col(accent-alt, false)
+    }
+
     /* secondary text color elements */
-    .countries_modal_country_code,
-    .im_history_typing,
-    .im_history_typing a.im_history_typing_author,
-    .audio_player_duration, 
-    .audio_player_size,
-    .im_message_document_size,
-    .md-input-disabled .md-input,
-    .media_modal_date, 
-    a.media_modal_date:hover,
-    .im_dialogs_contacts_wrap h5, .im_dialogs_messages_wrap h5,
-    .md_modal_section_param_wrap .md_modal_section_param_name,
-    .im_dialog_date,
-    .im_service_message,
-    .im_message_date, 
-    .im_message_fwd_date,
-    .im_message_author_admin,
-    .im_history_empty,
-    a.im_dialog .im_short_message_text,
-    .md-input-label{
-        color textc3
+    .countries_modal_country_code
+    .im_history_typing
+    .im_history_typing a.im_history_typing_author
+    .audio_player_duration
+    .audio_player_size
+    .im_message_document_size
+    .md-input-disabled .md-input
+    .media_modal_date
+    a.media_modal_date:hover
+    .im_dialogs_contacts_wrap h5
+    .im_dialogs_messages_wrap h5
+    .md_modal_section_param_wrap .md_modal_section_param_name
+    .im_dialog_date
+    .im_service_message
+    .im_message_date
+    .im_message_date .im_message_edited
+    .im_message_date .im_message_date_text
+    .im_message_fwd_date
+    .im_message_author_admin
+    a.im_dialog .im_short_message_text
+    .md-input-label
+    .im_dialog_message_text
+    .im_message_service
+    .im_message_date_split_text
+    .composer_rich_textarea:before{
+        col textc3
+    }
+    
+    .md_modal_list_peer_description{
+        col textc3
+        display unset
     }
         
     /* force secondary text color elements */
-    .md_modal_list_peer_description,
-    .im_dialog_message,
-    .composer_rich_textarea:empty::before,
+    .md_modal_list_peer_description
+    .im_dialog_message
+    // .composer_rich_textarea:empty::before
     input::placeholder{
-        color textc3 i
+        if(poseon){
+            color transparent i
+        } else {
+            color textc3 i
+        }
     }
 
     /* headers color elements */
-    .login_head_submit_btn,
-    .login_form_head,
-    .badge,
-    .im_message_views_cnt,
-    .contacts_modal_members_list .active a.contacts_modal_contact, 
-    .contacts_modal_members_list .active a.contacts_modal_contact:hover,
-    .contacts_modal_members_list .active a.contacts_modal_contact .md_modal_list_peer_description, 
-    .contacts_modal_members_list .active a.contacts_modal_contact:hover .md_modal_list_peer_description, 
-    .contacts_modal_members_list .active a.contacts_modal_contact .md_modal_list_peer_description .status_online,
-    .active a.im_dialog .im_dialog_chat_from_wrap, 
-    .active a.im_dialog .im_dialog_draft_from, 
-    .active a.im_dialog .im_dialog_message, 
-    .active a.im_dialog .im_short_message_media, 
-    .active a.im_dialog .im_short_message_service, 
-    .active a.im_dialog .im_short_message_text,
-    .active .im_dialog_date, 
-    .active a.im_dialog:hover .im_dialog_date, 
-    .active a.im_dialog_selected .im_dialog_date,
-    .icon-tg-title,
-    .tg_head_peer_title,
-    .md_modal_title,
-    .peer_modal_profile_name,
-    a.md_modal_action:hover,
-    .tg_head_peer_media,
-    .media_modal_title_wrap,
-    .peer_initials{
-        color textc2
+    .login_head_submit_btn
+    .login_form_head
+    .badge
+    .im_message_views_cnt
+    .im_message_selected .im_message_views_cnt
+    .im_history_select_active .im_message_outer_wrap:hover .im_message_views_cnt
+    .contacts_modal_members_list .active a.contacts_modal_contact
+    .contacts_modal_members_list .active a.contacts_modal_contact:hover
+    .contacts_modal_members_list .active a.contacts_modal_contact .md_modal_list_peer_description
+    .contacts_modal_members_list .active a.contacts_modal_contact:hover .md_modal_list_peer_description
+    .contacts_modal_members_list .active a.contacts_modal_contact .md_modal_list_peer_description .status_online
+    .active a.im_dialog .im_dialog_chat_from_wrap
+    .active a.im_dialog .im_dialog_draft_from
+    // .active a.im_dialog .im_dialog_message // redundant
+    .active a.im_dialog .im_short_message_media
+    .active a.im_dialog .im_short_message_service
+    .active a.im_dialog .im_short_message_text
+    .active .im_dialog_date
+    .active a.im_dialog:hover .im_dialog_date
+    .active a.im_dialog_selected .im_dialog_date
+    .icon-tg-title
+    .tg_head_peer_title
+    .md_modal_title
+    .peer_modal_profile_name
+    a.md_modal_action:hover
+    .tg_head_peer_media
+    .media_modal_title_wrap{
+        col textc2
     }
 
     /* force secondary background color elements */
     .icon-hamburger-wrap .icon-bar,
     .icon-bar{
-        bg textc2 i
+        bg textc2
     }
 
     .im_message_video_duration{
@@ -1252,12 +1482,12 @@
 
     /* nickname unselected */
     .im_dialog_peer {
-        color textc1 i;     
+        col textc1 i;     
     }
 
     /*nicknames in contactlist via hamburger menu*/
     .contacts_modal_members_list a.contacts_modal_contact {
-        color textc1
+        col textc1
     }
     
     /* hiding scrollbars */
@@ -1454,57 +1684,57 @@
 
     /* inline code messages */
     code {
-        color accent
+        col accent
         bgc control
     }
 
     /* buttons */
-    .btn,
-    .im_edit_cancel_link,
-    .im_submit,
-    .btn:focus,
-    .im_edit_cancel_link:focus,
-    .im_submit:focus{
-        bgTex btn-bg
-        padding 5px 15px
-        margin 0px
-        height auto
-        width auto
-        border 1px solid border
-        border-bottom 3px solid border
-        border-radius 5px
-        shad 0px 2px 5px shadow
-        transition t-out
-        color accent
-    }
-
-    /* buttons hover */
-    .btn:hover,
-    .im_edit_cancel_link:hover,
-    .im_submit:hover {
-        bgTex btn-bg-h
-        shad 0px 2px 5px shadow
-        border 1px solid border
-        border-bottom 3px solid border
-        transition t-in
-        color accent-alt
+    .btn
+    .im_edit_cancel_link
+    .im_submit{
+        &
+        &:focus{
+            bgTex btn-bg
+            padding 5px 15px
+            margin 0px
+            height auto
+            width auto
+            border 1px solid border
+            border-bottom 3px solid border
+            border-radius 5px
+            shad 0px 2px 5px shadow
+            transition t-out
+            col accent
+        }
+        &:focus{
+            border-color accent i
+        }
+        /* buttons hover */
+        &:hover{
+            bgTex btn-bg-h
+            shad 0px 2px 5px shadow
+            border 1px solid border
+            border-bottom 3px solid border
+            transition t-in
+            col accent-alt
+        }
     }
 
     /* buttons disabled */
-    .btn-primary.disabled,
-    .btn-primary.disabled.active,
-    .btn-primary.disabled:active,
-    .btn-primary.disabled:focus,
-    .btn-primary.disabled:hover,
-    .btn-primary[disabled],
-    .btn-primary[disabled].active,
-    .btn-primary[disabled]:active,
-    .btn-primary[disabled]:focus,
-    .btn-primary[disabled]:hover,
-    fieldset[disabled] .btn-primary,
-    fieldset[disabled] .btn-primary.active,
-    fieldset[disabled] .btn-primary:active,
-    fieldset[disabled] .btn-primary:focus,
+    .btn-primary.disabled
+    .btn-primary.disabled.active
+    .btn-primary.disabled:active
+    .btn-primary.disabled:focus
+    .btn-primary.disabled:hover
+    .btn-primary[disabled]
+    .btn-primary[disabled].active
+    .btn-primary[disabled]:active
+    .btn-primary[disabled]:focus
+    .btn-primary[disabled]:hover
+    fieldset[disabled] .btn-primary
+    fieldset[disabled] .btn-primary.active
+    fieldset[disabled] .btn-primary:active
+    fieldset[disabled] .btn-primary:focus
     fieldset[disabled] .btn-primary:hover{
         border 1px solid border
         border-bottom 3px solid border
@@ -1516,27 +1746,28 @@
     }
     
     /* round button */
-    .im_record_bg,
-    .im_message_file_button,
+    .im_record_bg
+    .im_message_file_button
     .md_modal_split_action{
         bgTex btn-bg
         border 1px solid border
         shad 0px 2px 5px shadow
         transition t-out
-        color accent
+        col accent
+        brad 100% i
         &:hover{
             bgc btn-bg-h i
             shad 0px 2px 5px shadow
             border 1px solid border
             transition t-in
-            color accent-alt
+            col accent-alt
         }
     }
 
     /* counter on buttons and current session text */
-    .im_selected_count,
+    .im_selected_count
     .session_active_date_online{
-        color accent-alt
+        col accent-alt
     }
     
     .btn.btn-link.dropdown-toggle{
@@ -1616,49 +1847,6 @@
         }
     }
     
-    /* banner mixin */
-    banner(width){
-        margin-bottom 25px
-        line-height 30px
-        position relative
-        z-index 1
-        color accent
-        /* banner background */
-        &:before{
-            visibility visible
-            content ''
-            bgc control i
-            border-top 1px solid border
-            border-bottom 1px solid border
-            position absolute
-            min-width 100px i
-            width 100%
-            height 40px
-            left 0
-            right 0
-            margin-top -5px
-            z-index -2
-        }
-        /* banner text bacground */
-        &:after{
-            visibility visible
-            content ''
-            bgc control-active i
-            border-radius 50px
-            position absolute
-            vertical-align middle
-            text-align center
-            min-width 100px i
-            width width
-            height 30px
-            line-height 30px
-            margin-top 0px
-            margin-left -(width * .5)
-            left 50%
-            z-index -1
-        }
-    }
-
     /* unread banner text */
     .im_message_unread_split{
         banner 140px
@@ -1666,6 +1854,7 @@
     
     /* empty conversation banner */
     .im_history_empty{
+        color textc1
         banner 200px
     }
 
@@ -1683,7 +1872,7 @@
 
     .im_dialog_chat_from_wrap,
     .im_dialog_message_service {
-        color red
+        col red
     }
     
     .im_bottom_panel_wrap{
@@ -1803,7 +1992,7 @@
     }
 
     /* long word overflow fix */
-    .im_message_text,
+    .im_message_text
     .composer_rich_textarea{
         overflow-wrap anywhere i
     }
@@ -1936,11 +2125,23 @@
         shad 0px 0px 5px shadow
     }
         
-    .login_form_wrap,
+    .login_form_wrap
     /* drop shadow under top dropdown menus */
-    .tg_head_peer_dropdown .dropdown-menu,
+    .tg_head_peer_dropdown .dropdown-menu
     .tg_head_logo_dropdown .dropdown-menu{
         shad 0 0 5px shadow
+        & li {
+            & a{
+                if(poseon){
+                    padding 0
+                    margin 11px 18px
+                }
+                col textc1
+            }
+            &:hover a{
+                col(accent i)
+            }
+        }
     }
 
     /* views eye */
@@ -1976,8 +2177,7 @@
     }
     
     /* pinned and history date message */
-    .im_service_message_wrap .im_service_message
-    {
+    .im_service_message_wrap .im_service_message{
         bgTex()
         padding 6px
         border 1px solid border
@@ -2122,68 +2322,6 @@
         left -5px
     }
     
-    /* accent text color elements */
-    .login_head_submit_progress,
-    .login_footer_wrap,
-    .logo_footer_learn_more_link,
-    .composer_dropdown > li > a,
-    .composer_dropdown li a:hover .composer_user_mention,
-    .error_modal_details_link,
-    .changelog_github_link,
-    .im_message_author, .im_message_fwd_author,
-    a, a:focus, a:hover,
-    .tg_head_btn,
-    .composer_emoji_tooltip_tab_emoji,
-    .composer_emoji_tooltip_tabs_stickers_active .composer_emoji_tooltip_tab_stickers,
-    .im_message_document_name,
-    .btn-link, .btn-link:hover,
-    .im_message_reply_author,
-    .peer_modal_profile_description,
-    .tg_head_peer_dropdown .dropdown-menu > li > a,
-    a.im_dialog .im_dialog_chat_from_wrap, 
-    a.im_dialog .im_short_message_media, 
-    a.im_dialog .im_short_message_service,
-    .tg_head_logo_dropdown .dropdown-menu > li > a,
-    .md_modal_list_peer_description .status_online,
-    .md_modal_list_peer_description.status_online,
-    .tg_head_peer_status
-    .composer_user_mention
-    .composer_dropdown li a:hover .composer_user_mention
-    .composer_dropdown li.composer_autocomplete_option_active a .composer_user_mention{
-        color accent
-        // transition t-in
-    }
-
-    /* alt accent text color elements */
-    .login_phone_head,
-    .countries_modal_country:hover .countries_modal_country_code,
-    .countries_modal_country:hover .countries_modal_country_name,
-    .composer_dropdown > li > a:hover,
-    .error_modal_details_link:hover,
-    .im_message_selected .im_message_date, 
-    .im_message_selected .im_message_document_size, 
-    .im_message_selected .im_message_audio_duration, 
-    .im_message_selected .im_message_audio_size, 
-    .im_message_selected .im_message_fwd_date, 
-    .im_message_selected .im_message_author_admin, 
-    .im_message_selected .im_message_views_cnt, 
-    .im_message_selected .im_message_sign_link, 
-    .im_history_select_active .im_message_outer_wrap:hover .im_message_date, 
-    .im_history_select_active .im_message_outer_wrap:hover .im_message_document_size, 
-    .im_history_select_active .im_message_outer_wrap:hover .im_message_audio_duration, 
-    .im_history_select_active .im_message_outer_wrap:hover .im_message_audio_size, 
-    .im_history_select_active .im_message_outer_wrap:hover .im_message_fwd_date, 
-    .im_history_select_active .im_message_outer_wrap:hover .im_message_author_admin, 
-    .im_history_select_active .im_message_outer_wrap:hover .im_message_views_cnt, 
-    .im_history_select_active .im_message_outer_wrap:hover .im_message_sign_link,    
-    .dropdown-menu > li > a:focus,
-    .dropdown-menu > li > a:hover,
-    .dropdown.open .tg_head_btn,
-    .tg_head_btn:hover,
-    a:focus, a:hover{
-        color accent-alt i
-    }
-
     /* emoji/stickers tab */
     .composer_emoji_tooltip_tab_shadow{
         bg accent-alt
@@ -2211,12 +2349,12 @@
     /* message content when hover in left contact list */
     .contacts_modal_contact_wrap:hover .contacts_modal_contact .md_modal_list_peer_description,
     a.im_dialog:hover .im_short_message_text{
-        color accent-alt i
+        col accent-alt i
     }
     
     /* date when hover in left contact list */
     a.im_dialog:hover .im_dialog_date{
-        color accent
+        col accent
     }
     
     a.im_dialog:hover .im_dialog_meta .im_dialog_unread,
@@ -2651,7 +2789,7 @@
     /* group info edit input */
     .md-input{
         bg inputbg
-        color textc1
+        col textc1
         padding-left 5px
         padding-right 5px
     }
@@ -2663,7 +2801,7 @@
     }
     
     .error_modal_details textarea{
-        color textc1
+        col textc1
         bgc inputbg
         border-color border
     }
@@ -2672,7 +2810,7 @@
     h1, h2, h3, h4, h5,
     .composer_stickerset_title,
     .composer_stickerset_title:hover{
-        color textc1
+        col textc1
     }
     
     /* toggles ON */
@@ -2702,9 +2840,9 @@
     }
     
     /* lang drop down */
-    .dropdown-menu>li>a,
-    .dropdown-menu>li>a:focus,
-    .dropdown-menu>li>a:hover{
+    .dropdown-menu li a
+    .dropdown-menu li a:focus
+    .dropdown-menu li a:hover{
         color textc1
     }
     
@@ -2723,7 +2861,7 @@
     
     /* radio button */
     a.tg_radio{    
-        color textc1
+        col textc1
     }
     
     i.icon-radio{
@@ -2778,7 +2916,7 @@
     /* unread badge active */
     .active .im_dialog_badge{
         bgc accent-alt
-        color textc1
+        col textc1
     }
     
     /* unread badge muted */
@@ -2868,13 +3006,13 @@
     
     /* mentions drop down items */
     .composer_mention_option{
-        color textc1 i
+        col textc1 i
     }
 
     /* mentions drop down items when focus\hover */
     .composer_dropdown li a:hover
     .composer_dropdown li.composer_autocomplete_option_active a{
-        color accent-alt i
+        col accent-alt i
         bgc control-active
     }
 
@@ -2887,6 +3025,11 @@
         }
     }
     
+    .im_message_text{
+        padding unset
+        margin 10px
+    }
+
     .im_message_document_caption
     .im_message_photo_caption{
         .im_message_body_media div[my-message-body="historyMessage"] .im_message_media div[ng-switch="::media._"] div &{
@@ -2903,5 +3046,9 @@
     /* making the outline on focused elements match the theme */
     :focus{
         outline accent-alt solid 1px
+    }
+
+    .im_service_message_pinned{
+        vertical-align bottom i
     }
 }
