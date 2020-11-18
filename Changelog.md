@@ -1,3 +1,9 @@
+## V1.6.34 (2020-11-18)
+
+- This update contains fixes towards [Issue #12](../../issues/12) to take into account answering buttons in some channels.
+- Added bot channels header & intro message.
+- Added new reply buttons style to the composer textarea.
+
 ## V1.5.33 (2020-10-09)
 
 - Added the 'Pose mode' that was hidden in the style as a feature you can enable. Can't see how you will use this toy.. but it can be handy maybe as a separated more private mode. Also this feature drew dome big changes in the style. Please report any issues as usual :) .

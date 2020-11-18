@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.5.33
+@version        1.6.34
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -161,7 +161,7 @@
 @-moz-document domain("web.telegram.org") {
     :root {
         /* auto generated line below. please do not delete or modify! */
-        --version "Dark-Telegram v1.5.33 -- October 9th, 2020"
+        --version "Dark-Telegram v1.6.34 -- November 18th, 2020"
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -492,6 +492,20 @@
         }
     }
 
+
+    /* service messages */
+    service(){
+        bgTex()
+        padding 6px
+        border 1px solid border
+        border-bottom 3px solid border
+        border-radius 5px i
+        shad 0px 2px 5px shadow
+        display inline-block
+        float center
+        width auto
+        margin 5px auto
+    }
 
     /* ==================================
     *   style pose
@@ -1209,6 +1223,7 @@
     }
 
     /* primary text color elements */
+    .im_bot_intro_message
     .login_form_messaging
     .login_smscode_lead
     .login_form_lead
@@ -1408,6 +1423,7 @@
     }
 
     /* headers color elements */
+    .im_bot_intro_message_header
     .login_head_submit_btn
     .login_form_head
     .badge
@@ -2176,18 +2192,16 @@
         text-align center
     }
     
-    /* pinned and history date message */
+    /* pinned, history date message and bot message*/
+    .im_bot_intro_message_wrap
     .im_service_message_wrap .im_service_message{
-        bgTex()
-        padding 6px
-        border 1px solid border
-        border-bottom 3px solid border
-        border-radius 5px
-        shad 0px 2px 5px shadow
-        display inline-block
-        float center
-        width auto
-        margin 5px auto
+        service()
+    }
+
+    /* bot intro message */
+    .im_bot_intro_message{
+        quote(border-size, 5, false)
+        brad 3px i
     }
 
     /* message time */
@@ -2930,7 +2944,7 @@
     }
 
     /* vote buttons alignment and background */
-    .reply_markup_wrap{
+    .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_content_message_wrap .im_message_body div[my-message-body="historyMessage"] .im_message_keyboard .reply_markup_wrap{
         bgc rgba(0,0,0,.1)
         padding 5px
         margin 0
@@ -2946,19 +2960,43 @@
         }
     }
 
-    /* vote buttons width */
-    .reply_markup_button{
+
+    /* vote buttons width */    
+    .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_content_message_wrap .im_message_body div[my-message-body="historyMessage"] .im_message_keyboard .reply_markup_wrap .reply_markup .reply_markup_row {        
         // single button
-        .reply_markup_button_w1 &{
+        & .reply_markup_button_w1 .reply_markup_button{
             width 100% i
         }
         // dual buttons
-        .reply_markup_button_w2 &{
+        & .reply_markup_button_w2 .reply_markup_button{
             width 120px i
         }
         // triple buttons
-        .reply_markup_button_w3 &{
+        & .reply_markup_button_w3 .reply_markup_button{
             width 100px i
+        }        
+    }
+
+    /* answering panel buttons area */
+    .im_bottom_panel_wrap .im_send_panel_wrap .im_send_form_wrap1 .im_send_form_wrap .im_record_supported .im_send_form .im_send_keyboard_wrap{
+        quote(border-size, 5px, false)
+        padding 8px (8 + border-size * .5)px i
+        margin-top 8px
+        display table
+        grid-row 3
+        grid-column-start 1
+        grid-column-end 3
+        & div{
+            margin 0 i
+        }
+        & .reply_markup_wrap .scroller_scrollable_container .scroller_scrollable_wrap{
+            overflow visible
+            & .scroller_scrollable{
+                right 0 i
+                & .reply_markup .reply_markup_row .reply_markup_button_wrap .reply_markup_button{
+                    width 100% i
+                }
+            }
         }
     }
 
