@@ -2887,9 +2887,6 @@ a.tg_radio_on:hover i.icon-radio {
 .im_service_message_pinned {
   vertical-align: bottom !important;
 }
-.im_submit_send_label:before {
-  content: "long button name";
-}
 @-moz-keyframes pulse {
   0% {
     color: #7289da;
