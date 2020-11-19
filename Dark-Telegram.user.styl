@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.6.34
+@version        1.6.35
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -161,7 +161,7 @@
 @-moz-document domain("web.telegram.org") {
     :root {
         /* auto generated line below. please do not delete or modify! */
-        --version "Dark-Telegram v1.6.34 -- November 18th, 2020"
+        --version "Dark-Telegram v1.6.35 -- November 20th, 2020"
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -624,9 +624,9 @@
     }
     
     /* chat size */
-    .im_send_form,
-    .im_send_panel_wrap,
-    .im_message_wrap,
+    .im_send_form
+    .im_send_panel_wrap
+    .im_message_wrap
     .composer_rich_textarea {
         if(useChatSize){
             max-width unit(chatSize, "px") i
@@ -1924,7 +1924,7 @@
         position relative
         margin-right 50px
         display grid
-        grid-template-columns 1fr 190px
+        grid-template-columns 1fr 0fr
         grid-column-gap 10px
     }
     
@@ -1962,7 +1962,7 @@
         display table
         grid-row 2
         grid-column 2
-        // width max-content
+        width max-content
     }
     
     /* chosen reply message position */
@@ -2099,6 +2099,7 @@
     }
     .im_submit_send{
         margin-top 5px
+        margin-left 5px
     }
     
     /* making emoji button visible outside textarea */
@@ -3088,5 +3089,9 @@
 
     .im_service_message_pinned{
         vertical-align bottom i
+    }
+
+    .im_submit_send_label:before{
+        content "long button name"
     }
 }

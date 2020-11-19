@@ -1,4 +1,8 @@
-## V1.6.34 (2020-11-18)
+## V1.6.35 (2020-11-18)
+
+- Fixed an issue that can occur when not using English as the UI language that causes the send button to get bigger and pushes other buttons down. [Issue #12](../../issues/12)
+
+## V1.6.34 (2020-11-20)
 
 - This update contains fixes towards [Issue #12](../../issues/12) to take into account answering buttons in some channels.
 - Added bot channels header & intro message.

@@ -4,7 +4,7 @@
 @homepageURL https://github.com/Barina/Dark-Telegram
 @supportURL https://github.com/Barina/Dark-Telegram/issues
 @updateURL https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version 1.6.34
+@version 1.6.35
 @description Customizable theme for telegram web.
 @author Roy Barina
 @license MIT
@@ -455,7 +455,7 @@ a.pull-right,
 }
 .im_history_not_selected:after {
   display: block;
-  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.6.34 -- November 18th, 2020";
+  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.6.35 -- November 20th, 2020";
   white-space: pre-wrap;
   border-top: 1px solid #333943;
   font-size: 11px;
@@ -1086,7 +1086,7 @@ a.im_dialog:hover,
   position: relative;
   margin-right: 50px;
   display: grid;
-  grid-template-columns: 1fr 190px;
+  grid-template-columns: 1fr 0fr;
   grid-column-gap: 10px;
 }
 .im_edit_panel_wrap {
@@ -1114,6 +1114,7 @@ a.im_dialog:hover,
   display: table;
   grid-row: 2;
   grid-column: 2;
+  width: max-content;
 }
 .im_send_reply_wrap {
   grid-row: 1;
@@ -1250,6 +1251,7 @@ a.im_panel_own_photo {
 }
 .im_submit_send {
   margin-top: 5px;
+  margin-left: 5px;
 }
 .im_send_field_wrap,
 .im_inline_placeholder_wrap {
@@ -2884,6 +2886,9 @@ a.tg_radio_on:hover i.icon-radio {
 }
 .im_service_message_pinned {
   vertical-align: bottom !important;
+}
+.im_submit_send_label:before {
+  content: "long button name";
 }
 @-moz-keyframes pulse {
   0% {
