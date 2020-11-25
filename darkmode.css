@@ -10,85 +10,76 @@
 @license MIT
 
 ==/UserStyle== */
-.user_color_0,
-.user_color_0:hover {
-  color: #a45656 !important;
-  filter: hue-rotate(320deg) contrast(50%);
-}
 .user_color_1,
 .user_color_1:hover {
-  color: #a48956 !important;
+  color: #a45656 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_color_2,
 .user_color_2:hover {
-  color: #89a456 !important;
+  color: #a48956 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_color_3,
 .user_color_3:hover {
-  color: #56a456 !important;
+  color: #89a456 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_color_4,
 .user_color_4:hover {
-  color: #56a489 !important;
+  color: #56a456 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_color_5,
 .user_color_5:hover {
-  color: #5689a4 !important;
+  color: #56a489 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_color_6,
 .user_color_6:hover {
-  color: #5656a4 !important;
+  color: #5689a4 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_color_7,
 .user_color_7:hover {
-  color: #8956a4 !important;
+  color: #5656a4 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_color_8,
 .user_color_8:hover {
-  color: #a45689 !important;
-  filter: hue-rotate(320deg) contrast(50%);
-}
-.user_bgcolor_0 {
-  Background: #aa7070 !important;
+  color: #8956a4 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_1 {
-  Background: #aa9770 !important;
+  Background: #aa7070 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_2 {
-  Background: #97aa70 !important;
+  Background: #aa9770 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_3 {
-  Background: #70aa70 !important;
+  Background: #97aa70 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_4 {
-  Background: #70aa97 !important;
+  Background: #70aa70 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_5 {
-  Background: #7097aa !important;
+  Background: #70aa97 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_6 {
-  Background: #7070aa !important;
+  Background: #7097aa !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_7 {
-  Background: #9770aa !important;
+  Background: #7070aa !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_8 {
-  Background: #aa7097 !important;
+  Background: #9770aa !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .peer_initials {
@@ -141,7 +132,7 @@ a.im_service_message_photo_thumb {
 }
 .im_send_panel_wrap {
   background-color: #252a33 !important;
-  padding-bottom: 10px;
+  padding-bottom: 8px;
 }
 a.composer_emoji_btn,
 .composer_sticker_image {
@@ -281,7 +272,7 @@ a.composer_emoji_btn:hover {
 }
 .im_message_video,
 a.im_message_photo_thumb,
-.im_message_media > div > div {
+.im_message_media>div>div {
   margin-top: 5px !important;
   width: 100%;
 }
@@ -480,8 +471,8 @@ a.pull-right,
   margin-bottom: 15px;
   padding: 3px 10px;
 }
-.login_head_bg,
 html,
+.login_head_bg,
 .modal-content {
   background-color: #1f232a !important;
 }
@@ -1641,6 +1632,7 @@ div[ng-switch-when="messageMediaUnsupported"] {
   background-image: none !important;
   background-color: #7289da !important;
   transition: 1s;
+  display: visible !important;
 }
 .is_2x i.icon-verified:hover {
   background-color: #a1b0e6 !important;
