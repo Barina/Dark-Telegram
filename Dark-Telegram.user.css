@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.6.36
+@version        1.7.37
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -134,6 +134,7 @@
 @var range chue                 'Colors hue' [320, 0, 360, 1, 'deg']
 @var range ccon                 'Colors contrast' [50, 0, 100, 1, "%"]
 
+@var checkbox customcolors      'Enable custom colors' 0
 @var color usrc1                'User color 1' #6f5c8a
 @var color usrc2                'User color 2' #476845
 @var color usrc3                'User color 3' #817356
@@ -161,7 +162,7 @@
 @-moz-document domain("web.telegram.org") {
     :root {
         /* auto generated line below. please do not delete or modify! */
-        --version "Dark-Telegram v1.6.36 -- November 20th, 2020"
+        --version "Dark-Telegram v1.7.37 -- November 25th, 2020"
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -357,6 +358,9 @@
     cc = contrast(ccon)
 
     for c, n in colors1{
+        if(not customcolors){
+            c = hue(accent, 40 * n) 
+        }
         .user_color_{n}
         .user_color_{n}:hover{ 
             col(c * clight i)
@@ -364,6 +368,9 @@
         }
     }
     for c, n in colors2{
+        if(not customcolors){
+            c = hue(accent, 40 * n) + 25%
+        }
         .user_bgcolor_{n}{ 
             bg c * clight i
             filter ch cc
@@ -805,6 +812,10 @@
         width 100%
     }
 
+    .im_message_media{
+        padding 0 i
+    }
+
     .im_history_scrollable_wrap .im_history_scrollable{
         // bgc bgcolor
         // filter: invert(chatbg-i) opacity(chatbg-o);
@@ -1034,6 +1045,7 @@
     }
 
     .im_message_body{
+        padding 0 3px 3px 3px i
         /* in message bubble */
         .im_message_in &{
             bgc msgbgi
@@ -2400,7 +2412,7 @@
 
     /* replay messages */
     .im_message_reply_wrap{
-        quote(0 2px 2px 0, 12px 12px 5px 12px i)
+        quote(0 2px 2px 0, 4px 0 0 0 i)
     }
     
     /* pinned message panel */
@@ -2493,7 +2505,7 @@
         // border-left-width 4px
         // bgc #0000000d
         // padding 5px 5px 5px 12px i
-        quote(0 msgb-thumb msgb-thumb 0, -10px 0 0 0)
+        quote(msgb-thumb, -10px 0 0 0)
     }
     
     /* model divider */
@@ -2755,6 +2767,8 @@
         display inline-block
         // a fix for issue #8 where the info of upload\download files won't show up
         float unset
+        // fix for media info bottom gap too big
+        margin 4px 0 -4px 0 i
     }
 
     .im_message_document_thumbed{
@@ -2943,6 +2957,11 @@
     .media_modal_bottom_panel_wrap{
         bgc control
     }
+    
+    /* vote buttons */
+    .im_message_keyboard{
+        margin-top 4px    
+    }
 
     /* vote buttons alignment and background */
     .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_content_message_wrap .im_message_body div[my-message-body="historyMessage"] .im_message_keyboard .reply_markup_wrap{
@@ -2960,7 +2979,6 @@
             width max-content
         }
     }
-
 
     /* vote buttons width */    
     .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_content_message_wrap .im_message_body div[my-message-body="historyMessage"] .im_message_keyboard .reply_markup_wrap .reply_markup .reply_markup_row {        

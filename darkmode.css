@@ -4,7 +4,7 @@
 @homepageURL https://github.com/Barina/Dark-Telegram
 @supportURL https://github.com/Barina/Dark-Telegram/issues
 @updateURL https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version 1.6.36
+@version 1.7.37
 @description Customizable theme for telegram web.
 @author Roy Barina
 @license MIT
@@ -12,83 +12,83 @@
 ==/UserStyle== */
 .user_color_0,
 .user_color_0:hover {
-  color: #000 !important;
+  color: #a45656 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_color_1,
 .user_color_1:hover {
-  color: #534568 !important;
+  color: #a48956 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_color_2,
 .user_color_2:hover {
-  color: #354e34 !important;
+  color: #89a456 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_color_3,
 .user_color_3:hover {
-  color: #615641 !important;
+  color: #56a456 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_color_4,
 .user_color_4:hover {
-  color: #3b4a57 !important;
+  color: #56a489 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_color_5,
 .user_color_5:hover {
-  color: #614341 !important;
+  color: #5689a4 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_color_6,
 .user_color_6:hover {
-  color: #5e3f4b !important;
+  color: #5656a4 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_color_7,
 .user_color_7:hover {
-  color: #3b4f57 !important;
+  color: #8956a4 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_color_8,
 .user_color_8:hover {
-  color: #57473b !important;
+  color: #a45689 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_0 {
-  Background: #000 !important;
+  Background: #aa7070 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_1 {
-  Background: #735a7c !important;
+  Background: #aa9770 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_2 {
-  Background: #536e4a !important;
+  Background: #97aa70 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_3 {
-  Background: #766e51 !important;
+  Background: #70aa70 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_4 {
-  Background: #4d6273 !important;
+  Background: #70aa97 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_5 {
-  Background: #6c4848 !important;
+  Background: #7097aa !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_6 {
-  Background: #7a5863 !important;
+  Background: #7070aa !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_7 {
-  Background: #4d7173 !important;
+  Background: #9770aa !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .user_bgcolor_8 {
-  Background: #766051 !important;
+  Background: #aa7097 !important;
   filter: hue-rotate(320deg) contrast(50%);
 }
 .peer_initials {
@@ -285,6 +285,9 @@ a.im_message_photo_thumb,
   margin-top: 5px !important;
   width: 100%;
 }
+.im_message_media {
+  padding: 0 !important;
+}
 .im_dialog_photo,
 .md_modal_list_peer_photo,
 .im_message_contact_photo,
@@ -372,6 +375,9 @@ div.im_message_body {
 .im_grouped_short .im_message_outer_wrap .im_message_out .im_message_body {
   margin-right: 70px;
 }
+.im_message_body {
+  padding: 0 3px 3px 3px !important;
+}
 .im_message_in .im_message_body {
   background-color: #3c434f;
   border-top-left-radius: 4px;
@@ -455,7 +461,7 @@ a.pull-right,
 }
 .im_history_not_selected:after {
   display: block;
-  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.6.36 -- November 20th, 2020";
+  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.7.37 -- November 25th, 2020";
   white-space: pre-wrap;
   border-top: 1px solid #333943;
   font-size: 11px;
@@ -1494,7 +1500,7 @@ a.im_dialog:hover .im_dialog_meta .active .im_dialog_unread {
   background-color: rgba(46,52,63,0.5);
   border-radius: 0 2px 2px 0;
   padding: 8px 16px;
-  margin: 12px 12px 5px 12px !important;
+  margin: 4px 0 0 0 !important;
   border: 0;
   position: relative;
   overflow: hidden;
@@ -1589,7 +1595,7 @@ div[ng-switch-when="messageMediaUnsupported"] {
 }
 .im_message_webpage_wrap {
   background-color: rgba(46,52,63,0.5);
-  border-radius: 0 5px 5px 0;
+  border-radius: 5px;
   padding: 8px 16px;
   margin: -10px 0 0 0;
   border: 0;
@@ -2540,6 +2546,7 @@ div[ng-switch-when="messageMediaUnsupported"] {
   width: 100%;
   display: inline-block;
   float: unset;
+  margin: 4px 0 -4px 0 !important;
 }
 .im_message_in .im_message_body_media div[my-message-body="historyMessage"] .im_message_media div[ng-switch="::media._"] div .im_message_document_thumbed {
   max-width: 324px !important;
@@ -2766,6 +2773,9 @@ a.tg_radio_on:hover i.icon-radio {
 }
 .media_modal_bottom_panel_wrap {
   background-color: #252a33;
+}
+.im_message_keyboard {
+  margin-top: 4px;
 }
 .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_content_message_wrap .im_message_body div[my-message-body="historyMessage"] .im_message_keyboard .reply_markup_wrap {
   background-color: rgba(0,0,0,0.1);

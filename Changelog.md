@@ -1,3 +1,10 @@
+## V1.7.37 (2020-11-25)
+
+- Pre-built user colors + custom colors.
+- Fixed media info bottom gap too big.
+- Fixed "keyboard" buttons top gap too small.
+- Messages content padding reduced.
+
 ## V1.6.36 (2020-11-20)
 
 - A small patch for last fix ([Issue #12](../../issues/12)) to include other browsers like Chrome.
