@@ -1,3 +1,7 @@
+## V1.9.38 (2020-11-26)
+
+- Added fancy selection mode.
+
 ## V1.8.38 (2020-11-26)
 
 - You can now hide user names from chat bubbles. reshow them on mouse hover.

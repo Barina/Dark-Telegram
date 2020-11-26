@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.8.38
+@version        1.9.38
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -139,6 +139,8 @@
 
 @var checkbox fullscreen            'Enable fullscreen' 0
 
+@var checkbox fancyselect           'Enable fancy selection mode' 1
+
 @var range clight                   'Colors lightness' [0.75, 0, 2, 0.01]
 @var range chue                     'Colors hue' [320, 0, 360, 1, 'deg']
 @var range ccon                     'Colors contrast' [50, 0, 100, 1, "%"]
@@ -171,7 +173,7 @@
 @-moz-document domain("web.telegram.org") {
     :root {
         /* auto generated line below. please do not delete or modify! */
-        --version "Dark-Telegram v1.8.38 -- November 26th, 2020"
+        --version "Dark-Telegram v1.9.38 -- November 26th, 2020"
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -986,13 +988,13 @@
         /* triangle tail mixins */
         leftTail(tailCol, gap = 0){
             /*left: 79px;*/
-            left gap + 50px
+            left gap + 48px
             border-top 15px solid tailCol
             border-left 10px solid transparent        
         }
         rightTail(tailCol, gap = 0){
             /*right: 37px;*/
-            right gap + 6px
+            right gap + 5px
             border-top 15px solid tailCol
             border-right 10px solid transparent
         }
@@ -1018,39 +1020,39 @@
         /* tail hovered and selected when selection mode is active */
         .im_history_select_active .im_history_messages .im_history_messages_peer{
 
-            /* in tail hover */
-            & .im_message_outer_wrap:hover div .im_message_in .im_message_body:before{
-                if(inpos != right){
-                    leftTail(msgbgih)
-                }else{
-                    rightTail(msgbgih, 58)
-                }
-            }
-                
             /* in tail selected */
             & .im_message_selected .im_message_outer_wrap div .im_message_in .im_message_body:before{
                 if(inpos != right){
-                    leftTail(msgbgis)
+                    leftTail(fancyselect ? accent : msgbgis)
                 }else{
-                    rightTail(msgbgis, 58)
-                }
-            }
-            
-            /* out tail hover */
-            & .im_message_outer_wrap:hover div .im_message_out .im_message_body:before{
-                if(outpos == right){
-                    rightTail(msgbgoh, 58)
-                } else {
-                    leftTail(msgbgoh)
+                    rightTail(fancyselect ? accent : msgbgis, 58)
                 }
             }
                 
             /* out tail selected */
             & .im_message_selected .im_message_outer_wrap div .im_message_out .im_message_body:before{
                 if(outpos == right){
-                    rightTail(msgbgos, 58)
+                    rightTail(fancyselect ? accent : msgbgos, 58)
                 } else {
-                    leftTail(msgbgos)
+                    leftTail(fancyselect ? accent : msgbgos)
+                }
+            }
+            
+            /* in tail hover */
+            & .im_message_outer_wrap:hover div .im_message_in .im_message_body:before{
+                if(inpos != right){
+                    leftTail(fancyselect ? accent-alt : msgbgih)
+                }else{
+                    rightTail(fancyselect ? accent-alt : msgbgih, 58)
+                }
+            }
+                
+            /* out tail hover */
+            & .im_message_outer_wrap:hover div .im_message_out .im_message_body:before{
+                if(outpos == right){
+                    rightTail(fancyselect ? accent-alt : msgbgoh, 58)
+                } else {
+                    leftTail(fancyselect ? accent-alt : msgbgoh)
                 }
             }
         }
@@ -1895,23 +1897,33 @@
         bg none i
     }
 
+    /* fancy selection mixins */
+    select(s, c, oldc){
+        if(fancyselect){
+            border 1px solid c
+            shad 0 0 s c
+        } else {
+            bg oldc
+        }
+    }
+
     /* chat bubbles will change colors by hover+selected status */
     .im_history_select_active .im_history_messages .im_history_messages_peer{
         
         & .im_message_selected .im_message_outer_wrap div .im_message_in .im_message_body{
-            bg msgbgis i
+            select(15px, accent, msgbgis i)
         }
 
         & .im_message_outer_wrap:hover div .im_message_in .im_message_body{
-            bg msgbgih
+            select(unset, accent-alt, msgbgih)
         }
 
         & .im_message_selected .im_message_outer_wrap div .im_message_out .im_message_body{
-            bg msgbgos i
+            select(15px, accent, msgbgos i)
         }
 
         & .im_message_outer_wrap:hover div .im_message_out .im_message_body{
-            bg msgbgoh
+            select(unset, accent-alt, msgbgoh)
         }
     } 
     a.im_dialog:hover
