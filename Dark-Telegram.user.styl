@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.7.37
+@version        1.7.38
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -110,7 +110,7 @@
 @var checkbox noise             'Enable noise' 0
 @var text noiseimg              'Noise image' url('https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Resources/noise.png')
 
-@var checkbox vign              'Vignette effect on photos' 1
+@var checkbox vign              'Vignette effect on media previews' 1
 
 @var range emojo                'Emoji and sticker icons opacity' [.6, 0, 1, .01]
 @var select emoj-pos            'Emoji and sticker popup position' {
@@ -162,7 +162,7 @@
 @-moz-document domain("web.telegram.org") {
     :root {
         /* auto generated line below. please do not delete or modify! */
-        --version "Dark-Telegram v1.7.37 -- November 25th, 2020"
+        --version "Dark-Telegram v1.7.38 -- November 26th, 2020"
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -1067,7 +1067,7 @@
     }
     
     /* photo messages vignette */
-    .im_message_video_thumb
+    a.im_message_video_thumb::after
     .im_message_photo_thumb::before{
         content ''
         position absolute
@@ -1080,7 +1080,7 @@
     }
     
     /* fade out vignette when mouse hover */
-    .im_message_video_thumb
+    a.im_message_video_thumb:hover::after
     .im_message_photo_thumb:hover::before{
         opacity .75
         transition t-in

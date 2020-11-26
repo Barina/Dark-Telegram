@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.7.37
+@version        1.7.38
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -110,7 +110,7 @@
 @var checkbox noise             'Enable noise' 0
 @var text noiseimg              'Noise image' url('https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Resources/noise.png')
 
-@var checkbox vign              'Vignette effect on photos' 1
+@var checkbox vign              'Vignette effect on media previews' 1
 
 @var range emojo                'Emoji and sticker icons opacity' [.6, 0, 1, .01]
 @var select emoj-pos            'Emoji and sticker popup position' {
@@ -162,7 +162,7 @@
 @-moz-document domain("web.telegram.org") {
     :root {
         /* auto generated line below. please do not delete or modify! */
-        --version "Dark-Telegram v1.7.37 -- November 25th, 2020"
+        --version "Dark-Telegram v1.7.38 -- November 26th, 2020"
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -351,8 +351,8 @@
     }
 
     /* setting up icon and contact name colors */
-    colors1 = #000 usrc1 usrc2 usrc3 usrc4 usrc5 usrc6 usrc7 usrc8
-    colors2 = #000 usrbgc1 usrbgc2 usrbgc3 usrbgc4 usrbgc5 usrbgc6 usrbgc7 usrbgc8
+    colors1 = usrc1 usrc2 usrc3 usrc4 usrc5 usrc6 usrc7 usrc8
+    colors2 = usrbgc1 usrbgc2 usrbgc3 usrbgc4 usrbgc5 usrbgc6 usrbgc7 usrbgc8
 
     ch = hue-rotate(chue)
     cc = contrast(ccon)
@@ -361,8 +361,8 @@
         if(not customcolors){
             c = hue(accent, 40 * n) 
         }
-        .user_color_{n}
-        .user_color_{n}:hover{ 
+        .user_color_{n+1}
+        .user_color_{n+1}:hover{ 
             col(c * clight i)
             filter ch cc
         }
@@ -371,7 +371,7 @@
         if(not customcolors){
             c = hue(accent, 40 * n) + 25%
         }
-        .user_bgcolor_{n}{ 
+        .user_bgcolor_{n+1}{ 
             bg c * clight i
             filter ch cc
         }
@@ -576,12 +576,12 @@
 
     /* contact icon */
     if(useicons){
-        // .im_dialog_photo,//
+        // .im_dialog_photo//
         .im_message_contact_photo
-        // .im_message_from_photo,//
-        // .im_message_fwd_photo,
-        // .md_modal_list_peer_photo,//
-        // .im_dialog_photo,
+        // .im_message_from_photo//
+        // .im_message_fwd_photo
+        // .md_modal_list_peer_photo//
+        // .im_dialog_photo
         .peer_initials{
             bgc transparent i
             bgi contacticon i
@@ -606,26 +606,26 @@
     }
         
     /* Blurry mode for contacts and photos */
-    .im_dialog_wrap.active,
-    .im_dialog_wrap,
-    .tg_head_peer_info,
-    .im_content_message_wrap,
+    .im_dialog_wrap.active
+    .im_dialog_wrap
+    .tg_head_peer_info
+    .im_content_message_wrap
     .composer_rich_textarea{
         filter blur(privateblur)
         transition t-out
     }
     
     /* disable blur on mouse hover */
-    .im_dialog_wrap.active:hover,
-    .im_dialog_wrap:hover,
-    .tg_head_peer_info:hover,
-    .im_content_message_wrap:hover,
+    .im_dialog_wrap.active:hover
+    .im_dialog_wrap:hover
+    .tg_head_peer_info:hover
+    .im_content_message_wrap:hover
     .composer_rich_textarea:hover{
         filter blur(0)
         transition t-in
     }
 
-    .im_dialog_wrap,
+    .im_dialog_wrap
     .im_dialogs_panel{
         border-bottom 1px solid border
     }
@@ -644,7 +644,7 @@
 
     .im_send_panel_wrap {
         bgTex()
-        padding-bottom 10px
+        padding-bottom 8px
     }
     
     /* emoji's & stickers opacity */
@@ -662,11 +662,11 @@
     }
 
     /* enlarging emoji's and stickers when hover just like the original style */
-    .composer_sticker_btn .composer_sticker_image,
+    .composer_sticker_btn .composer_sticker_image
     .composer_emoji_btn .emoji{
         transition t-out ease-in-out
     }
-    .composer_sticker_btn:hover .composer_sticker_image,
+    .composer_sticker_btn:hover .composer_sticker_image
     .composer_emoji_btn:hover .emoji{
         transform scale(1.5)
         transition t-in ease-out
@@ -704,17 +704,17 @@
         .tg_head_split{
             margin-top -1px i
         }
-        .im_page_wrap,
+        .im_page_wrap
         .tg_head_split{
             min-width 100% i
         }
-        .im_page_wrap,
-        .im_page_split,
-        .im_dialogs_col_wrap,
+        .im_page_wrap
+        .im_page_split
+        .im_dialogs_col_wrap
         .im_history_col_wrap{
             height 100% i
         }
-        .footer_empty,
+        .footer_empty
         .footer_wrap.footer_empty{
             display none i
             height 0 i
@@ -782,7 +782,7 @@
     }
 
     /* control backgrounds */
-    .im_dialog_wrap a.im_dialog,
+    .im_dialog_wrap a.im_dialog
     .im_dialogs_panel{
         bgc control
     }
@@ -807,7 +807,7 @@
     .im_message_video
     a.im_message_photo_thumb
     /* non-animated stickers */
-    .im_message_media > div > div {
+    .im_message_media>div>div {
         margin-top 5px i
         width 100%
     }
@@ -822,10 +822,10 @@
     }
     
     /* user photo */
-    .im_dialog_photo,
-    .md_modal_list_peer_photo,
-    .im_message_contact_photo,
-    .im_message_from_photo,
+    .im_dialog_photo
+    .md_modal_list_peer_photo
+    .im_message_contact_photo
+    .im_message_from_photo
     .im_message_fwd_photo{
         brad round
     }
@@ -841,14 +841,14 @@
     /* own user photo in chat history */
     if(hideownicon){
         .im_message_out a.im_message_from_photo{
-            visibility hidden
+            hideIcon()
         }
     }
 
     /* other user photo in chat history */
     if(hideothericon){
         .im_message_in a.im_message_from_photo{
-            visibility hidden
+            hideIcon()
         }
     }
     
@@ -981,7 +981,7 @@
     }
         
     /* hide tails in short messages */
-    .im_grouped_short .im_message_outer_wrap .im_message_out .im_message_body:before,
+    .im_grouped_short .im_message_outer_wrap .im_message_out .im_message_body:before
     .im_grouped_short .im_message_outer_wrap .im_message_in .im_message_body:before{
         display none
         visibility hidden
@@ -991,7 +991,7 @@
     .im_message_ {
         &text{
             border 1px border
-            brad 0px 10px 10px 10px // fotget why this is here... 
+            brad 0px 10px 10px 10px // fotgot why this is here... 
         }        
         &text
         &media{
@@ -1000,7 +1000,7 @@
     }
     
     /* short message bubble */
-    .im_grouped_short .im_message_outer_wrap .im_message_out .im_message_body,
+    .im_grouped_short .im_message_outer_wrap .im_message_out .im_message_body
     .im_grouped_short .im_message_outer_wrap .im_message_in .im_message_body{
         brad msgb i
     }
@@ -1016,7 +1016,7 @@
     
     if(outpos == right){
         /* fixing out messages without icon right margin */
-        .im_history_message_wrap.im_grouped .im_message_out .im_message_body,
+        .im_history_message_wrap.im_grouped .im_message_out .im_message_body
         .im_grouped_short .im_message_outer_wrap .im_message_out .im_message_body{
             margin-right 70px
         }
@@ -1024,7 +1024,7 @@
 
     if(inpos == right){
         /* fixing in messages without icon right margin */
-        .im_history_message_wrap.im_grouped .im_message_in .im_message_body,
+        .im_history_message_wrap.im_grouped .im_message_in .im_message_body
         .im_grouped_short .im_message_outer_wrap .im_message_in .im_message_body{
             margin-right 70px
         }
@@ -1067,7 +1067,7 @@
     }
     
     /* photo messages vignette */
-    .im_message_video_thumb
+    a.im_message_video_thumb::after
     .im_message_photo_thumb::before{
         content ''
         position absolute
@@ -1080,14 +1080,14 @@
     }
     
     /* fade out vignette when mouse hover */
-    .im_message_video_thumb,
+    a.im_message_video_thumb:hover::after
     .im_message_photo_thumb:hover::before{
         opacity .75
         transition t-in
     }
     
     /* fix the vignette in the right place */
-    .im_message_video_thumb,
+    .im_message_video_thumb
     a.im_message_photo_thumb{
         position relative
     }
@@ -1115,7 +1115,7 @@
     }
         
     /* right user profile photo in text area */
-    a.pull-right,
+    a.pull-right
     #notify_sound {
         display none
         margin 0
@@ -1187,8 +1187,8 @@
         padding 3px 10px
     }
     
-    .login_head_bg
     html
+    .login_head_bg
     .modal-content{        
         bgTex bgcolor
     }
@@ -1467,7 +1467,7 @@
     }
 
     /* force secondary background color elements */
-    .icon-hamburger-wrap .icon-bar,
+    .icon-hamburger-wrap .icon-bar
     .icon-bar{
         bg textc2
     }
@@ -1540,9 +1540,9 @@
         }
     }
     
-    .contacts_modal_members_list .active a.contacts_modal_contact,
-    .im_dialogs_scrollable_wrap a.im_dialog_searchpeer:hover,
-    .im_dialogs_scrollable_wrap a.im_dialog_searchpeer_selected,
+    .contacts_modal_members_list .active a.contacts_modal_contact
+    .im_dialogs_scrollable_wrap a.im_dialog_searchpeer:hover
+    .im_dialogs_scrollable_wrap a.im_dialog_searchpeer_selected
     .active a.im_dialog {
         /*selected peer */
         bgTex control-active
@@ -1550,7 +1550,7 @@
     }
     
     /* top bar */
-    .tg_head_split,
+    .tg_head_split
     .md_modal_head{
         /*page header block*/
         // bgc control i
@@ -1566,10 +1566,10 @@
         }
     }
 
-    // .modal-content,
-    .login_form_wrap,
-    .dropdown.open .tg_head_btn,
-    .tg_head_btn:hover,
+    // .modal-content
+    .login_form_wrap
+    .dropdown.open .tg_head_btn
+    .tg_head_btn:hover
     .im_bottom_panel_wrap {
         bgTex()
     }
@@ -1585,13 +1585,14 @@
     }    
     
     // disabling the border that splits the header
-    // .tg_head_logo_wrap, .tg_head_logo_wrap:hover{
+    // .tg_head_logo_wrap
+    // .tg_head_logo_wrap:hover{
     //     border-right 1px solid border
     // }
     
     /* search box */
-    .form-control,
-    .form-control:focus,
+    .form-control
+    .form-control:focus
     .im_dialogs_modal_col_wrap .im_dialogs_search_field{
         bgc inputbg
         border-radius border-size
@@ -1606,7 +1607,7 @@
         height auto
     }
 
-    /* positioning meta data as preparation for compact mode*/
+    /* positioning meta data as preparation for compact mode */
     .im_dialog_meta{
         position absolute
         right 18px
@@ -1625,48 +1626,48 @@
             wmax = 31%
             
             /* let all the envolved transit nicely */
-            .tg_head_main_wrap,
-            .im_history_col_wrap,
-            .im_send_form,
-            .im_dialog_meta,
-            .tg_head_logo_wrap,
-            .im_dialogs_col_wrap,
+            .tg_head_main_wrap
+            .im_history_col_wrap
+            .im_send_form
+            .im_dialog_meta
+            .tg_head_logo_wrap
+            .im_dialogs_col_wrap
             .tg_head_btn .icon-tg-title{
                 transition comTranDurOff ease i
                 transition-delay compactDelayOff i
             }
             
             /* top left header and contact list minimum width */
-            .tg_head_logo_wrap,
+            .tg_head_logo_wrap
             .im_dialogs_col_wrap{
                 width wmin
             }
             
             /* top right header and message history panel maximum width */
-            .tg_head_main_wrap,
+            .tg_head_main_wrap
             .im_history_col_wrap{
                 width calc(100% - 80px)
             }
 
             /* hiding top left header text and metadata */
-            .im_dialog_meta,
+            .im_dialog_meta
             .tg_head_btn .icon-tg-title{
                 opacity 0
             }
             
             /* while contact list is hovered or has focus within (search box) */
-            .page_wrap .im_page_wrap .im_page_split .im_dialogs_col_wrap:hover,
+            .page_wrap .im_page_wrap .im_page_split .im_dialogs_col_wrap:hover
             .page_wrap .im_page_wrap .im_page_split .im_dialogs_col_wrap:focus-within{
 
                 // setting the contacts width to expand on hover/focused
                 width wmax i
 
                 /* let all the envolved transit nicely */
-                .tg_head_logo_wrap,//<- need to fix that
-                .tg_head_main_wrap,//<- need to fix that
-                .tg_head_btn .icon-tg-title,//<- need to fix that
-                & .im_dialogs_col .im_dialogs_wrap .im_dialogs_scrollable_wrap .nav .im_dialog_wrap .im_dialog .im_dialog_meta,
-                ~ .im_history_col_wrap,
+                .tg_head_logo_wrap//<- need to fix that
+                .tg_head_main_wrap//<- need to fix that
+                .tg_head_btn .icon-tg-title//<- need to fix that
+                & .im_dialogs_col .im_dialogs_wrap .im_dialogs_scrollable_wrap .nav .im_dialog_wrap .im_dialog .im_dialog_meta
+                ~ .im_history_col_wrap
                 &{
                     transition comTranDurOn ease i
                     transition-delay compactDelayOn i
@@ -1674,19 +1675,19 @@
                 
                 // preventing expanding of left header in compact mode
                 /* maximize contact list and top left header width */
-                // / div .tg_page_head .tg_head_split .tg_head_logo_wrap:hover,//<- need to fix that
+                // / div .tg_page_head .tg_head_split .tg_head_logo_wrap:hover//<- need to fix that
                 // &{
                 //    width wmax i
                 // }
 
                 /* minimize message history (including textarea) and top right header width to it's initial state */
-                .tg_head_main_wrap,//<- need to fix that
+                .tg_head_main_wrap//<- need to fix that
                 ~ .im_history_col_wrap{
                     width 69% i
                 }
                 
                 /* show top left header text and metadata */
-                .tg_head_btn .icon-tg-title,//<- need to fix that
+                .tg_head_btn .icon-tg-title//<- need to fix that
                 & .im_dialogs_col .im_dialogs_wrap .im_dialogs_scrollable_wrap .nav .im_dialog_wrap .im_dialog .im_dialog_meta{
                     opacity 1 i
                 }
@@ -1696,8 +1697,8 @@
             // /* while hovering the top left header (temporary until I find a way to do this from a different selector) */
             // .page_wrap div[my-head=""] .tg_page_head .tg_head_split .tg_head_logo_wrap:hover{
             //     width wmax i
-            //     &,
-            //     .tg_head_btn .icon-tg-title,
+            //     &
+            //     .tg_head_btn .icon-tg-title
             //     ~ .tg_head_main_wrap{
             //         transition comTranDurOn ease i
             //         transition-delay compactDelayOn i
@@ -1837,7 +1838,8 @@
             bg msgbgoh
         }
     } 
-    a.im_dialog:hover, .dropdown-menu a:hover{
+    a.im_dialog:hover
+    .dropdown-menu a:hover{
         bgTex control-hover
         // transition: t-in;
     }
@@ -1898,7 +1900,7 @@
         // transition: t-in;
     }
 
-    .im_dialog_chat_from_wrap,
+    .im_dialog_chat_from_wrap
     .im_dialog_message_service {
         col red
     }
@@ -1914,7 +1916,7 @@
             margin-left 5px
         }
     }
-    .im_dialog_unread,
+    .im_dialog_unread
     .active .im_dialog_unread{
         bg accent
         bgc accent
@@ -1992,7 +1994,7 @@
     }
     
     /* message textbox */
-    .composer_rich_textarea,
+    .composer_rich_textarea
     .composer_textarea{
         shad 0px 1px 1px control
         bg inputbg i
@@ -2103,7 +2105,8 @@
     .im_attach{
         margin-top 14px i
     }
-    .im_attach, .im_media_attach{
+    .im_attach
+    .im_media_attach{
         margin 13px 6px
     }
     .im_record_supported .im_record{
@@ -2115,7 +2118,7 @@
     }
     
     /* making emoji button visible outside textarea */
-    .im_send_field_wrap,
+    .im_send_field_wrap
     .im_inline_placeholder_wrap{
         overflow unset
     }
@@ -2139,14 +2142,14 @@
         transition t-in
     }
 
-    .btn-primary.disabled,
+    .btn-primary.disabled
     .btn-primary[disabled] {
         bg btn-bg none repeat scroll 0% 0%
     }
 
     /*emoji*/
-    .composer_emoji_tooltip,
-    .icon-tooltip-tail,
+    .composer_emoji_tooltip
+    .icon-tooltip-tail
     .dropdown-menu {
         bgTex()
         border-color border i
@@ -2195,7 +2198,7 @@
         bgc border i
     }
     
-    .countries_scrollable_wrap a.countries_modal_country:hover,
+    .countries_scrollable_wrap a.countries_modal_country:hover
     .contacts_modal_contact:hover{
         bg control-hover i
         transition t-in
@@ -2250,12 +2253,12 @@
     /*.im_content_message_wrap{                
     }*/
     
-    .im_grouped_short .im_content_message_wrap,
+    .im_grouped_short .im_content_message_wrap
     .im_content_message_wrap{
         margin 2px 16px
     }
     
-    .im_message_meta,
+    .im_message_meta
     .historyMessage{
          display flex
     }
@@ -2324,7 +2327,7 @@
     }
     
     /*scrollbarbutton when hover*/
-    .im_dialogs_col .nano > .nano-pane > .nano-slider,
+    .im_dialogs_col .nano > .nano-pane > .nano-slider
     ::-webkit-scrollbar-thumb:hover{
        bg accent-alt
        z-index 5
@@ -2368,13 +2371,13 @@
     }
     
     /* sticker button background */
-    .composer_sticker_btn:hover,
+    .composer_sticker_btn:hover
     .stickerset_modal_sticker_wrap:hover{
         bg control-hover
     }
     
     /* message content when hover in left contact list */
-    .contacts_modal_contact_wrap:hover .contacts_modal_contact .md_modal_list_peer_description,
+    .contacts_modal_contact_wrap:hover .contacts_modal_contact .md_modal_list_peer_description
     a.im_dialog:hover .im_short_message_text{
         col accent-alt i
     }
@@ -2384,7 +2387,7 @@
         col accent
     }
     
-    a.im_dialog:hover .im_dialog_meta .im_dialog_unread,
+    a.im_dialog:hover .im_dialog_meta .im_dialog_unread
     a.im_dialog:hover .im_dialog_meta .active .im_dialog_unread{
         bgc accent-alt
     }
@@ -2447,7 +2450,7 @@
     }
     
     /* media messages */
-    .audio_player_wrap,
+    .audio_player_wrap
     .im_message_document{
         bgc control-t
         brad msgb-thumb
@@ -2491,7 +2494,7 @@
     }
     
     /* thumbed reply messages thumb fix */
-    .im_message_reply_thumbed .im_message_reply_author,
+    .im_message_reply_thumbed .im_message_reply_author
     .im_message_reply_thumbed .im_message_reply_body{
         display block
         position relative
@@ -2529,6 +2532,7 @@
     .is_2x i.icon-verified{
         svgIcon verifiedSvg accent
         transition t-out
+        display visible i
         &:hover{
             bgc accent-alt i
             transition t-in
@@ -2596,12 +2600,12 @@
         svgIcon searchSvg
     }
 
-    .is_2x .countries_modal_search_field,
+    .is_2x .countries_modal_search_field
     .is_2x .im_dialogs_search_field{
         bgi none
     }
 
-    .countries_modal_search,
+    .countries_modal_search
     .im_dialogs_search{
         &:after{
             content ''
@@ -2646,11 +2650,11 @@
         svgIcon emojiSvg
     }
 
-    .composer_emoji_tooltip_category_recent,
-    .composer_emoji_tooltip_category_smile,
-    .composer_emoji_tooltip_category_flower,
-    .composer_emoji_tooltip_category_bell,
-    .composer_emoji_tooltip_category_car,
+    .composer_emoji_tooltip_category_recent
+    .composer_emoji_tooltip_category_smile
+    .composer_emoji_tooltip_category_flower
+    .composer_emoji_tooltip_category_bell
+    .composer_emoji_tooltip_category_car
     .composer_emoji_tooltip_category_grid{
         .active &{
             bgc accent-alt i
@@ -2802,14 +2806,14 @@
     }
 
     /* button images hover color */
-    .im_message_file_button:hover .im_message_file_button_icon,
-    .im_message_file_button_dl_doc:hover .im_message_file_button_icon,
-    .im_message_file_button_dl_audio:hover .im_message_file_button_icon,
-    .md_modal_split_action:active .md_modal_split_action_msg,
-    .md_modal_split_action:hover .md_modal_split_action_msg,
-    .md_modal_split_action:active .md_modal_split_action_twitter,
-    .md_modal_split_action:hover .md_modal_split_action_twitter,
-    .md_modal_split_action:active .md_modal_split_action_camera,
+    .im_message_file_button:hover .im_message_file_button_icon
+    .im_message_file_button_dl_doc:hover .im_message_file_button_icon
+    .im_message_file_button_dl_audio:hover .im_message_file_button_icon
+    .md_modal_split_action:active .md_modal_split_action_msg
+    .md_modal_split_action:hover .md_modal_split_action_msg
+    .md_modal_split_action:active .md_modal_split_action_twitter
+    .md_modal_split_action:hover .md_modal_split_action_twitter
+    .md_modal_split_action:active .md_modal_split_action_camera
     .md_modal_split_action:hover .md_modal_split_action_camera{
         bgc accent-alt i    
         transition t-in
@@ -2837,7 +2841,7 @@
 
     /* headers */
     h1, h2, h3, h4, h5,
-    .composer_stickerset_title,
+    .composer_stickerset_title
     .composer_stickerset_title:hover{
         col textc1
     }
@@ -2855,7 +2859,7 @@
     }
     
     /* toggles bg ON */
-    .tg_checkbox.tg_checkbox_on span.icon-checkbox-outer, {
+    .tg_checkbox.tg_checkbox_on span.icon-checkbox-outer {
         bg accent-alt
         opacity 1
         transition t-in
@@ -2908,30 +2912,31 @@
     }
     
     /* radio button inner */
-    .tg_radio.tg_radio_on i.icon-radio,
-    a.tg_radio_on i.icon-radio,
+    .tg_radio.tg_radio_on i.icon-radio
+    a.tg_radio_on i.icon-radio
     .tg_radio.tg_radio_on .icon-radio-outer{
         bgc accent
     }
     
     /* radio button hover */
-    a.tg_radio:hover i.icon-radio,
+    a.tg_radio:hover i.icon-radio
     a.tg_radio_on:hover i.icon-radio{
         bgc accent-alt
     }
     
     /* media track fill */
-    .audio_player_seek_slider .tg_slider_track_fill,
+    .audio_player_seek_slider .tg_slider_track_fill
     /* progress bar fill */
-    .tg_down_progress .progress-bar, .tg_up_progress .progress-bar,
+    .tg_down_progress .progress-bar
+    .tg_up_progress .progress-bar
     /* volume knob */
-    .audio_player_volume_slider .tg_slider_thumb,
+    .audio_player_volume_slider .tg_slider_thumb
     .audio_player_volume_slider .tg_slider_track_fill{
         bg accent
     }
     
     /* volume slider track */
-    .audio_player_volume_slider .tg_slider_track,
+    .audio_player_volume_slider .tg_slider_track
     /* media slider track */
     .audio_player_seek_slider .tg_slider_track{
         bg accent-t

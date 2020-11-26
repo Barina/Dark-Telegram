@@ -1,3 +1,8 @@
+## V1.7.38 (2020-11-26)
+
+- Fixed [Issue #13](../../issues/13) were turning off vignette makes video preview disappear.
+- Also fixed the vignette effect not properly shown on video thumbs.
+
 ## V1.7.37 (2020-11-25)
 
 - Pre-built user colors + custom colors.
