@@ -4,52 +4,52 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.7.38
+@version        1.8.38
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
 @preprocessor   stylus
 
-@var text windowwidth           'Window width' 75%
+@var text windowwidth               'Window width' 75%
 
-@var color textc2               'Headers text color' #fff
-@var color textc1               'Primary text color' #ccccca
-@var color textc3               'Secondary text color' #6e6e6e
+@var color textc2                   'Headers text color' #fff
+@var color textc1                   'Primary text color' #ccccca
+@var color textc3                   'Secondary text color' #6e6e6e
 
-@var checkbox customFont        'Use custom font' 0
-@var text ui_font               'Font family' 'sans-serif'
+@var checkbox customFont            'Use custom font' 0
+@var text ui_font                   'Font family' 'sans-serif'
 
-@var range msgb                 'Messages bubble corner size' [10, 1, 100, 1, "px"]
-@var color msg-in-bg            'Incoming message background color'  #3c434f
-@var color msg-out-bg           'Outgoing message background color' #333a47
+@var range msgb                     'Messages bubble corner size' [10, 1, 100, 1, "px"]
+@var color msg-in-bg                'Incoming message background color'  #3c434f
+@var color msg-out-bg               'Outgoing message background color' #333a47
 
-@var select inpos               'Incoming bubble position'{
+@var select inpos                   'Incoming bubble position'{
     'Left                       *': 'left',
     'Right                       ': 'right',
     'Stretch                     ': 'stretch'
 }
-@var select outpos              'Outgoing bubble position'{
+@var select outpos                  'Outgoing bubble position'{
     'Left                        ': 'left',
     'Right                       *': 'right',
     'Stretch                     ': 'stretch'
 }
-@var select tail                'Messages tail' {
+@var select tail                    'Messages tail' {
     'None                         ': 'notail',
     'Round Corner                *': 'roundtail',
     'Triangle                     ': 'tritail',
     'Sharp Corner                 ': 'recttail',
 }
 
-@var text msgwmax-in            'Incoming message maximum width' 750px
-@var text msgwmax-out           'Outgoing message maximum width' 550px
+@var text msgwmax-in                'Incoming message maximum width' 750px
+@var text msgwmax-out               'Outgoing message maximum width' 550px
 
-@var text prevw                 'Media preview width' 350px
-@var text prevh                 'Media preview height' 220px
-@var checkbox prevs             'Keep media previews squared (height will use width value so it will not work when using percentage)' 0
+@var text prevw                     'Media preview width' 350px
+@var text prevh                     'Media preview height' 220px
+@var checkbox prevs                 'Keep media previews squared (height will use width value so it will not work when using percentage)' 0
 
-@var checkbox centerauthor      'Center author name within chat bubbles' 0
+@var checkbox centerauthor          'Center author name within chat bubbles' 0
 
-@var select texta               'Messages text align' {
+@var select texta                   'Messages text align' {
     'Auto                         ': 'textaauto',
     'Unset                        ': 'unset',
     'Start                       *': 'Start',
@@ -59,110 +59,119 @@
     'Right                        ': 'right',
 }
 
-@var checkbox hideothericon     'Hide other contact user photo from chat window' 1
-@var checkbox hideownicon       'Hide own user photo from chat window' 1
+@var checkbox hideothericon         'Hide other contact user photo from chat window' 1
+@var checkbox hideownicon           'Hide own user photo from chat window' 1
 
-@var color bgcolor              'Background color' #1f232a
+@var checkbox hideownname           'Hide own name from private chat bubbles' 1
+@var checkbox hideothername         'Hide other name from private chat bubbles' 1
+@var checkbox hideownnamegr         'Hide own name from group chat bubbles' 1
+@var checkbox hideothernamegr       'Hide other name from group chat bubbles' 0
+@var checkbox shownamehover         'Show name when hover on chat bubbles' 0
+@var checkbox showothernamehover    'Show other names when hover on chat bubbles' 1
 
-@var color border               'Border color' #333943
-@var range border-size          'Border size' [3, 0, 50, 1, "px"]
+@var checkbox autohidedata          'Auto hide extra message data' 1
 
-@var color control              'Base control color' #252A33
-@var color control-hover        'Control hover color' #292f38
-@var color control-active       'Control active color' #343b46
+@var color bgcolor                  'Background color' #1f232a
 
-@var color inputbg              'Input background color' #1c2026
+@var color border                   'Border color' #333943
+@var range border-size              'Border size' [3, 0, 50, 1, "px"]
 
-@var color shadow               'Shadow color' #00000040
+@var color control                  'Base control color' #252A33
+@var color control-hover            'Control hover color' #292f38
+@var color control-active           'Control active color' #343b46
 
-@var color btn-bg               'Buttons color' #2b313b
-@var color btn-bg-h             'Hover buttons color' #363d4a
+@var color inputbg                  'Input background color' #1c2026
 
-@var color accent               'Accent color' #7289da
+@var color shadow                   'Shadow color' #00000040
 
-@var range round                'User photo round' [25, 0, 50, 1, "%"]
+@var color btn-bg                   'Buttons color' #2b313b
+@var color btn-bg-h                 'Hover buttons color' #363d4a
 
-@var checkbox enableCompact     'Enable compact mode' 1
-@var text compactBreak          'Compact mode breakpoint' 1080px
-@var text compactDelayOn        'Compact mode hover-on delay' 0.25s
-@var text compactDelayOff       'Compact mode hover-off delay' 1s
-@var range comTranDurOn         'Compact mode transition on duration' [0.7, 0, 5, .1, "s"]
-@var range comTranDurOff        'Compact mode transition off duration' [1.2, 0, 5, .1, "s"]
+@var color accent                   'Accent color' #7289da
 
-@var checkbox useChatSize       'Use custom chat width' 0
-@var number chatSize            'Chat width in px' [780, 0]
-@var color bgccolor             'Chat background color' #1f232a
-@var checkbox showchatbg        'Enable chat background image' 1
-@var text chatbg                'Custom image for chat' url('https://web.whatsapp.com/img/bg-chat-tile_9e8a2898faedb7db9bf5638405cf81ae.png')
-@var range chatbg-o             'Chat background image opacity' [0.15, 0.0, 1, 0.01]
-@var range chatbg-i             'Chat background image inverted colors' [0.6, 0.0, 1, 0.1]
+@var range round                    'User photo round' [25, 0, 50, 1, "%"]
 
-@var select app_image           'Custom app background' {
+@var checkbox enableCompact         'Enable compact mode' 1
+@var text compactBreak              'Compact mode breakpoint' 1080px
+@var text compactDelayOn            'Compact mode hover-on delay' 0.25s
+@var text compactDelayOff           'Compact mode hover-off delay' 1s
+@var range comTranDurOn             'Compact mode transition on duration' [0.7, 0, 5, .1, "s"]
+@var range comTranDurOff            'Compact mode transition off duration' [1.2, 0, 5, .1, "s"]
+
+@var checkbox useChatSize           'Use custom chat width' 0
+@var number chatSize                'Chat width in px' [780, 0]
+@var color bgccolor                 'Chat background color' #1f232a
+@var checkbox showchatbg            'Enable chat background image' 1
+@var text chatbg                    'Custom image for chat' url('https://web.whatsapp.com/img/bg-chat-tile_9e8a2898faedb7db9bf5638405cf81ae.png')
+@var range chatbg-o                 'Chat background image opacity' [0.15, 0.0, 1, 0.01]
+@var range chatbg-i                 'Chat background image inverted colors' [0.6, 0.0, 1, 0.1]
+
+@var select app_image               'Custom app background' {
     'Default background          *': 'default',
     'None                         ': 'none',
 }
-@var text bgimage               'Custom background image' url('https://images.unsplash.com/photo-1434569117012-ce134ee1a088?fit=crop&w=1280&h=720&q=80')
-@var range bgopacity            'Background image opacity' [0.4, 0.0, 1, 0.01]
-@var range bgblur               'Background image blur size' [12, 0, 50, 1, 'px']
-@var range bghue                'Background image hue' [320, 0, 360, 1, 'deg']
-@var range bginvert             'Background image invert colors' [0, 0.0, 1, 0.1]
+@var text bgimage                   'Custom background image' url('https://images.unsplash.com/photo-1434569117012-ce134ee1a088?fit=crop&w=1280&h=720&q=80')
+@var range bgopacity                'Background image opacity' [0.4, 0.0, 1, 0.01]
+@var range bgblur                   'Background image blur size' [12, 0, 50, 1, 'px']
+@var range bghue                    'Background image hue' [320, 0, 360, 1, 'deg']
+@var range bginvert                 'Background image invert colors' [0, 0.0, 1, 0.1]
 
-@var checkbox noise             'Enable noise' 0
-@var text noiseimg              'Noise image' url('https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Resources/noise.png')
+@var checkbox noise                 'Enable noise' 0
+@var text noiseimg                  'Noise image' url('https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Resources/noise.png')
 
-@var checkbox vign              'Vignette effect on media previews' 1
+@var checkbox vign                  'Vignette effect on media previews' 1
 
-@var range emojo                'Emoji and sticker icons opacity' [.6, 0, 1, .01]
-@var select emoj-pos            'Emoji and sticker popup position' {
+@var range emojo                    'Emoji and sticker icons opacity' [.6, 0, 1, .01]
+@var select emoj-pos                'Emoji and sticker popup position' {
     'Center                      *': 'center',
     'Right                        ': 'right',
     'Left                         ': 'left',
 }
-@var checkbox private           'Enable private mode' 0
-@var checkbox shift-anim        'Enable contacts shift animation on mouse hover' 1
+@var checkbox private               'Enable private mode' 0
+@var checkbox shift-anim            'Enable contacts shift animation on mouse hover' 1
 
-@var checkbox hideinitials      'Hide contact initials' 1
-@var checkbox useicons          'Enable custom contact icons' 1
+@var checkbox hideinitials          'Hide contact initials' 1
+@var checkbox useicons              'Enable custom contact icons' 1
 
-@var text contacticon           'Contact icon url' url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjxz%0D%0AdmcKICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICB4bWxu%0D%0AczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIgogICB4bWxuczpyZGY9Imh0dHA6%0D%0ALy93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiCiAgIHhtbG5zOnN2Zz0iaHR0%0D%0AcDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAw%0D%0AL3N2ZyIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQv%0D%0ARFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2Fw%0D%0AZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgdmlld0JveD0iMCAwIDIxMiAyMTIiCiAgIHdp%0D%0AZHRoPSIyMTIiCiAgIGhlaWdodD0iMjEyIgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmczNzI5%0D%0AIgogICBzb2RpcG9kaTpkb2NuYW1lPSJjb250YWN0LWljb24uc3ZnIgogICBpbmtzY2FwZTp2ZXJz%0D%0AaW9uPSIwLjkyLjQgKDVkYTY4OWMzMTMsIDIwMTktMDEtMTQpIj4KICA8bWV0YWRhdGEKICAgICBp%0D%0AZD0ibWV0YWRhdGEzNzM1Ij4KICAgIDxyZGY6UkRGPgogICAgICA8Y2M6V29yawogICAgICAgICBy%0D%0AZGY6YWJvdXQ9IiI+CiAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9zdmcreG1sPC9kYzpmb3JtYXQ+%0D%0ACiAgICAgICAgPGRjOnR5cGUKICAgICAgICAgICByZGY6cmVzb3VyY2U9Imh0dHA6Ly9wdXJsLm9y%0D%0AZy9kYy9kY21pdHlwZS9TdGlsbEltYWdlIiAvPgogICAgICA8L2NjOldvcms+CiAgICA8L3JkZjpS%0D%0AREY+CiAgPC9tZXRhZGF0YT4KICA8ZGVmcwogICAgIGlkPSJkZWZzMzczMyIgLz4KICA8c29kaXBv%0D%0AZGk6bmFtZWR2aWV3CiAgICAgcGFnZWNvbG9yPSIjZmZmZmZmIgogICAgIGJvcmRlcmNvbG9yPSIj%0D%0ANjY2NjY2IgogICAgIGJvcmRlcm9wYWNpdHk9IjEiCiAgICAgb2JqZWN0dG9sZXJhbmNlPSIxMCIK%0D%0AICAgICBncmlkdG9sZXJhbmNlPSIxMCIKICAgICBndWlkZXRvbGVyYW5jZT0iMTAiCiAgICAgaW5r%0D%0Ac2NhcGU6cGFnZW9wYWNpdHk9IjAiCiAgICAgaW5rc2NhcGU6cGFnZXNoYWRvdz0iMiIKICAgICBp%0D%0AbmtzY2FwZTp3aW5kb3ctd2lkdGg9IjI1NjAiCiAgICAgaW5rc2NhcGU6d2luZG93LWhlaWdodD0i%0D%0AMTM2MSIKICAgICBpZD0ibmFtZWR2aWV3MzczMSIKICAgICBzaG93Z3JpZD0iZmFsc2UiCiAgICAg%0D%0AaW5rc2NhcGU6c25hcC1nbG9iYWw9InRydWUiCiAgICAgaW5rc2NhcGU6c25hcC1iYm94PSJ0cnVl%0D%0AIgogICAgIGlua3NjYXBlOmJib3gtcGF0aHM9InRydWUiCiAgICAgaW5rc2NhcGU6YmJveC1ub2Rl%0D%0Acz0idHJ1ZSIKICAgICBpbmtzY2FwZTpzbmFwLWJib3gtZWRnZS1taWRwb2ludHM9InRydWUiCiAg%0D%0AICAgaW5rc2NhcGU6c25hcC1iYm94LW1pZHBvaW50cz0idHJ1ZSIKICAgICBpbmtzY2FwZTpzbmFw%0D%0ALWludGVyc2VjdGlvbi1wYXRocz0idHJ1ZSIKICAgICBpbmtzY2FwZTpzbmFwLXNtb290aC1ub2Rl%0D%0Acz0idHJ1ZSIKICAgICBpbmtzY2FwZTp6b29tPSI0IgogICAgIGlua3NjYXBlOmN4PSIxMTAuMTgx%0D%0AMzYiCiAgICAgaW5rc2NhcGU6Y3k9Ijk5LjU3MDIyOSIKICAgICBpbmtzY2FwZTp3aW5kb3cteD0i%0D%0ALTkiCiAgICAgaW5rc2NhcGU6d2luZG93LXk9Ii05IgogICAgIGlua3NjYXBlOndpbmRvdy1tYXhp%0D%0AbWl6ZWQ9IjEiCiAgICAgaW5rc2NhcGU6Y3VycmVudC1sYXllcj0ic3ZnMzcyOSIgLz4KICA8cmVj%0D%0AdAogICAgIGZpbGw9IiMxZjIzMmEiCiAgICAgd2lkdGg9IjIxMiIKICAgICBoZWlnaHQ9IjIxMiIK%0D%0AICAgICBpZD0icmVjdDM3MjUiIC8+CiAgPHBhdGgKICAgICBjbGFzcz0icHJpbWFyeSIKICAgICBk%0D%0APSJtIDE3My41NjEsMTcxLjYxNSBjIC0wLjY1OTksLTEuMDA0NTcgLTEuMzQ4NTIsLTEuOTg5OTcg%0D%0ALTIuMDY1LC0yLjk1NSAtMC44MzQ5NiwtMS4xMjY0MSAtMS43MDQ3MSwtMi4yMjY2MSAtMi42MDgs%0D%0ALTMuMjk5IC0xLjAyMTE4LC0xLjIxMTMgLTIuMDgzMTIsLTIuMzg3NjUgLTMuMTg0LC0zLjUyNyAt%0D%0AMS44Njk2LC0xLjkzMzkzIC0zLjg0NzQ1LC0zLjc2MDIgLTUuOTI0LC01LjQ3IC0zLjE5NDUxLC0y%0D%0ALjYyOTAyIC02LjYwODMyLC00Ljk3OTYxIC0xMC4yMDQsLTcuMDI2IC0xLjk0Njg1LC0xLjEwNjg3%0D%0AIC0zLjk0MjE3LC0yLjEyNjIyIC01Ljk4LC0zLjA1NSAtMC4wNjIsLTAuMDI4IC0wLjExOCwtMC4w%0D%0ANTkgLTAuMTgsLTAuMDg3IC05Ljc5MiwtNC40NCAtMjIuMTA2LC03LjUyOSAtMzcuNDE2LC03LjUy%0D%0AOSAtMTUuMzEsMCAtMjcuNjI0LDMuMDg5IC0zNy40MTYsNy41MjkgLTAuMzM4LDAuMTUzIC0wLjY1%0D%0AMywwLjMxOCAtMC45ODUsMC40NzQgLTIuMTI2NjI3LDEuMDAxNTkgLTQuMjA1MjMzLDIuMTAyMTMg%0D%0ALTYuMjI5LDMuMjk4IC0zLjIwOTYzMywxLjg5MzYzIC02LjI2ODY3Niw0LjAzMTYyIC05LjE1LDYu%0D%0AMzk1IC0yLjA3NjM0NywxLjcxMDA0IC00LjA1NDE4LDMuNTM2MjkgLTUuOTI0LDUuNDcgLTEuMTAw%0D%0AOTA1LDEuMTM5MzMgLTIuMTYyODQ5LDIuMzE1NjcgLTMuMTg0LDMuNTI3IC0wLjkwMzkwNSwxLjA3%0D%0AMjE1IC0xLjc3Mzk5OCwyLjE3MjM2IC0yLjYwOSwzLjI5OSAtMC43MTYyNTIsMC45NjUxOSAtMS40%0D%0AMDQ4NjQsMS45NTA1OSAtMi4wNjUsMi45NTUgQyAzMC4xNjczMjYsMTg0LjAyMDIzIDI1LjkzNDQx%0D%0ANiwxOTYuOTgyNzUgMjMuODc5NzI5LDIxMiBIIDEwNS45NDQgMTg2Ljk3MjM2IGMgLTIuMDU0ODgs%0D%0ALTEzLjQ0ODA3IC01LjA0Nzk1LC0yNi4yMjk3NiAtMTEuOTY1MzYsLTM4LjA2Mjk5IC0wLjQ2Mzc5%0D%0ALC0wLjc4NTE5IC0wLjk0NTkyLC0xLjU1OTQxIC0xLjQ0NiwtMi4zMjIgeiBNIDEwNi4wMDIsMTI1%0D%0ALjUgYyAyLjY0NSwwIDUuMjEyLC0wLjI1MyA3LjY4LC0wLjczNyAxLjIyMTg2LC0wLjIzOTU0IDIu%0D%0ANDMxMjksLTAuNTM4NTYgMy42MjQsLTAuODk2IDEuNzUyNTksLTAuNTI1NiAzLjQ2MzkyLC0xLjE4%0D%0AMDA1IDUuMTIsLTEuOTU4IDIuMTY1OTQsLTEuMDE3NjYgNC4yMjU5NiwtMi4yNDY5NyA2LjE1LC0z%0D%0ALjY3IDMuODI1OTcsLTIuODMwMyA3LjA1MTQyLC02LjM5MjYxIDkuNDg5LC0xMC40OCAwLjkyNTgx%0D%0ALC0xLjU1MTI3IDEuNzM1MzYsLTMuMTY5MDQgMi40MjIsLTQuODQgMC43MDE4MiwtMS43MDQ4NyAx%0D%0ALjI3NTQyLC0zLjQ1OTc0MyAxLjcxNiwtNS4yNSAwLjI5OSwtMS4yMDggMC41NDIsLTIuNDQzIDAu%0D%0ANzI1LC0zLjcwMSAwLjI3NSwtMS44ODcgMC40MTcsLTMuODI3IDAuNDE3LC01LjgxMSAwLC0xLjk4%0D%0ANCAtMC4xNDIsLTMuOTI1IC0wLjQxNywtNS44MTEgLTAuMjcxMjcsLTEuODU4MzY3IC0wLjY3NzM0%0D%0ALC0zLjY5NDU0NCAtMS4yMTUsLTUuNDk0IC0wLjg2ODI0LC0yLjkwNjE5IC0yLjA5MzU5LC01LjY5%0D%0AMzQ2OCAtMy42NDgsLTguMjk4IC0yLjQzNzU4LC00LjA4NzM5NCAtNS42NjMwMywtNy42NDk3MDIg%0D%0ALTkuNDg5LC0xMC40OCAtMS45MjQxOCwtMS40MjI4MDkgLTMuOTg0MTgsLTIuNjUyMTA4IC02LjE1%0D%0ALC0zLjY3IC0xLjY1NjA4LC0wLjc3Nzk0OCAtMy4zNjc0MSwtMS40MzIzOTggLTUuMTIsLTEuOTU4%0D%0AIC0xLjE5MjQ1LC0wLjM1ODM3NyAtMi40MDE5MywtMC42NTc0MSAtMy42MjQsLTAuODk2IC0yLjUz%0D%0AMDE2LC0wLjQ5MzMzNCAtNS4xMDIyLC0wLjc0MDE1NiAtNy42OCwtMC43MzcgLTIxLjE2MiwwIC0z%0D%0ANy4zNDUsMTYuMTgzIC0zNy4zNDUsMzcuMzQ1IDAsMjEuMTU5IDE2LjE4MywzNy4zNDIgMzcuMzQ1%0D%0ALDM3LjM0MiB6IgogICAgIGlkPSJwYXRoMzcyNyIKICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3Vy%0D%0AdmF0dXJlPSIwIgogICAgIHN0eWxlPSJmaWxsOiNhMWExYTEiCiAgICAgc29kaXBvZGk6bm9kZXR5%0D%0AcGVzPSJzY2NjY2NjY3NjY2NjY2NjY2NjY2Njc3NjY2NjY2Njc2NjY2NjY2Njc3NzIiAvPgo8L3N2%0D%0AZz4K")
+@var text contacticon               'Contact icon url' url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjxz%0D%0AdmcKICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICB4bWxu%0D%0AczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIgogICB4bWxuczpyZGY9Imh0dHA6%0D%0ALy93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiCiAgIHhtbG5zOnN2Zz0iaHR0%0D%0AcDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAw%0D%0AL3N2ZyIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQv%0D%0ARFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2Fw%0D%0AZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgdmlld0JveD0iMCAwIDIxMiAyMTIiCiAgIHdp%0D%0AZHRoPSIyMTIiCiAgIGhlaWdodD0iMjEyIgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmczNzI5%0D%0AIgogICBzb2RpcG9kaTpkb2NuYW1lPSJjb250YWN0LWljb24uc3ZnIgogICBpbmtzY2FwZTp2ZXJz%0D%0AaW9uPSIwLjkyLjQgKDVkYTY4OWMzMTMsIDIwMTktMDEtMTQpIj4KICA8bWV0YWRhdGEKICAgICBp%0D%0AZD0ibWV0YWRhdGEzNzM1Ij4KICAgIDxyZGY6UkRGPgogICAgICA8Y2M6V29yawogICAgICAgICBy%0D%0AZGY6YWJvdXQ9IiI+CiAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9zdmcreG1sPC9kYzpmb3JtYXQ+%0D%0ACiAgICAgICAgPGRjOnR5cGUKICAgICAgICAgICByZGY6cmVzb3VyY2U9Imh0dHA6Ly9wdXJsLm9y%0D%0AZy9kYy9kY21pdHlwZS9TdGlsbEltYWdlIiAvPgogICAgICA8L2NjOldvcms+CiAgICA8L3JkZjpS%0D%0AREY+CiAgPC9tZXRhZGF0YT4KICA8ZGVmcwogICAgIGlkPSJkZWZzMzczMyIgLz4KICA8c29kaXBv%0D%0AZGk6bmFtZWR2aWV3CiAgICAgcGFnZWNvbG9yPSIjZmZmZmZmIgogICAgIGJvcmRlcmNvbG9yPSIj%0D%0ANjY2NjY2IgogICAgIGJvcmRlcm9wYWNpdHk9IjEiCiAgICAgb2JqZWN0dG9sZXJhbmNlPSIxMCIK%0D%0AICAgICBncmlkdG9sZXJhbmNlPSIxMCIKICAgICBndWlkZXRvbGVyYW5jZT0iMTAiCiAgICAgaW5r%0D%0Ac2NhcGU6cGFnZW9wYWNpdHk9IjAiCiAgICAgaW5rc2NhcGU6cGFnZXNoYWRvdz0iMiIKICAgICBp%0D%0AbmtzY2FwZTp3aW5kb3ctd2lkdGg9IjI1NjAiCiAgICAgaW5rc2NhcGU6d2luZG93LWhlaWdodD0i%0D%0AMTM2MSIKICAgICBpZD0ibmFtZWR2aWV3MzczMSIKICAgICBzaG93Z3JpZD0iZmFsc2UiCiAgICAg%0D%0AaW5rc2NhcGU6c25hcC1nbG9iYWw9InRydWUiCiAgICAgaW5rc2NhcGU6c25hcC1iYm94PSJ0cnVl%0D%0AIgogICAgIGlua3NjYXBlOmJib3gtcGF0aHM9InRydWUiCiAgICAgaW5rc2NhcGU6YmJveC1ub2Rl%0D%0Acz0idHJ1ZSIKICAgICBpbmtzY2FwZTpzbmFwLWJib3gtZWRnZS1taWRwb2ludHM9InRydWUiCiAg%0D%0AICAgaW5rc2NhcGU6c25hcC1iYm94LW1pZHBvaW50cz0idHJ1ZSIKICAgICBpbmtzY2FwZTpzbmFw%0D%0ALWludGVyc2VjdGlvbi1wYXRocz0idHJ1ZSIKICAgICBpbmtzY2FwZTpzbmFwLXNtb290aC1ub2Rl%0D%0Acz0idHJ1ZSIKICAgICBpbmtzY2FwZTp6b29tPSI0IgogICAgIGlua3NjYXBlOmN4PSIxMTAuMTgx%0D%0AMzYiCiAgICAgaW5rc2NhcGU6Y3k9Ijk5LjU3MDIyOSIKICAgICBpbmtzY2FwZTp3aW5kb3cteD0i%0D%0ALTkiCiAgICAgaW5rc2NhcGU6d2luZG93LXk9Ii05IgogICAgIGlua3NjYXBlOndpbmRvdy1tYXhp%0D%0AbWl6ZWQ9IjEiCiAgICAgaW5rc2NhcGU6Y3VycmVudC1sYXllcj0ic3ZnMzcyOSIgLz4KICA8cmVj%0D%0AdAogICAgIGZpbGw9IiMxZjIzMmEiCiAgICAgd2lkdGg9IjIxMiIKICAgICBoZWlnaHQ9IjIxMiIK%0D%0AICAgICBpZD0icmVjdDM3MjUiIC8+CiAgPHBhdGgKICAgICBjbGFzcz0icHJpbWFyeSIKICAgICBk%0D%0APSJtIDE3My41NjEsMTcxLjYxNSBjIC0wLjY1OTksLTEuMDA0NTcgLTEuMzQ4NTIsLTEuOTg5OTcg%0D%0ALTIuMDY1LC0yLjk1NSAtMC44MzQ5NiwtMS4xMjY0MSAtMS43MDQ3MSwtMi4yMjY2MSAtMi42MDgs%0D%0ALTMuMjk5IC0xLjAyMTE4LC0xLjIxMTMgLTIuMDgzMTIsLTIuMzg3NjUgLTMuMTg0LC0zLjUyNyAt%0D%0AMS44Njk2LC0xLjkzMzkzIC0zLjg0NzQ1LC0zLjc2MDIgLTUuOTI0LC01LjQ3IC0zLjE5NDUxLC0y%0D%0ALjYyOTAyIC02LjYwODMyLC00Ljk3OTYxIC0xMC4yMDQsLTcuMDI2IC0xLjk0Njg1LC0xLjEwNjg3%0D%0AIC0zLjk0MjE3LC0yLjEyNjIyIC01Ljk4LC0zLjA1NSAtMC4wNjIsLTAuMDI4IC0wLjExOCwtMC4w%0D%0ANTkgLTAuMTgsLTAuMDg3IC05Ljc5MiwtNC40NCAtMjIuMTA2LC03LjUyOSAtMzcuNDE2LC03LjUy%0D%0AOSAtMTUuMzEsMCAtMjcuNjI0LDMuMDg5IC0zNy40MTYsNy41MjkgLTAuMzM4LDAuMTUzIC0wLjY1%0D%0AMywwLjMxOCAtMC45ODUsMC40NzQgLTIuMTI2NjI3LDEuMDAxNTkgLTQuMjA1MjMzLDIuMTAyMTMg%0D%0ALTYuMjI5LDMuMjk4IC0zLjIwOTYzMywxLjg5MzYzIC02LjI2ODY3Niw0LjAzMTYyIC05LjE1LDYu%0D%0AMzk1IC0yLjA3NjM0NywxLjcxMDA0IC00LjA1NDE4LDMuNTM2MjkgLTUuOTI0LDUuNDcgLTEuMTAw%0D%0AOTA1LDEuMTM5MzMgLTIuMTYyODQ5LDIuMzE1NjcgLTMuMTg0LDMuNTI3IC0wLjkwMzkwNSwxLjA3%0D%0AMjE1IC0xLjc3Mzk5OCwyLjE3MjM2IC0yLjYwOSwzLjI5OSAtMC43MTYyNTIsMC45NjUxOSAtMS40%0D%0AMDQ4NjQsMS45NTA1OSAtMi4wNjUsMi45NTUgQyAzMC4xNjczMjYsMTg0LjAyMDIzIDI1LjkzNDQx%0D%0ANiwxOTYuOTgyNzUgMjMuODc5NzI5LDIxMiBIIDEwNS45NDQgMTg2Ljk3MjM2IGMgLTIuMDU0ODgs%0D%0ALTEzLjQ0ODA3IC01LjA0Nzk1LC0yNi4yMjk3NiAtMTEuOTY1MzYsLTM4LjA2Mjk5IC0wLjQ2Mzc5%0D%0ALC0wLjc4NTE5IC0wLjk0NTkyLC0xLjU1OTQxIC0xLjQ0NiwtMi4zMjIgeiBNIDEwNi4wMDIsMTI1%0D%0ALjUgYyAyLjY0NSwwIDUuMjEyLC0wLjI1MyA3LjY4LC0wLjczNyAxLjIyMTg2LC0wLjIzOTU0IDIu%0D%0ANDMxMjksLTAuNTM4NTYgMy42MjQsLTAuODk2IDEuNzUyNTksLTAuNTI1NiAzLjQ2MzkyLC0xLjE4%0D%0AMDA1IDUuMTIsLTEuOTU4IDIuMTY1OTQsLTEuMDE3NjYgNC4yMjU5NiwtMi4yNDY5NyA2LjE1LC0z%0D%0ALjY3IDMuODI1OTcsLTIuODMwMyA3LjA1MTQyLC02LjM5MjYxIDkuNDg5LC0xMC40OCAwLjkyNTgx%0D%0ALC0xLjU1MTI3IDEuNzM1MzYsLTMuMTY5MDQgMi40MjIsLTQuODQgMC43MDE4MiwtMS43MDQ4NyAx%0D%0ALjI3NTQyLC0zLjQ1OTc0MyAxLjcxNiwtNS4yNSAwLjI5OSwtMS4yMDggMC41NDIsLTIuNDQzIDAu%0D%0ANzI1LC0zLjcwMSAwLjI3NSwtMS44ODcgMC40MTcsLTMuODI3IDAuNDE3LC01LjgxMSAwLC0xLjk4%0D%0ANCAtMC4xNDIsLTMuOTI1IC0wLjQxNywtNS44MTEgLTAuMjcxMjcsLTEuODU4MzY3IC0wLjY3NzM0%0D%0ALC0zLjY5NDU0NCAtMS4yMTUsLTUuNDk0IC0wLjg2ODI0LC0yLjkwNjE5IC0yLjA5MzU5LC01LjY5%0D%0AMzQ2OCAtMy42NDgsLTguMjk4IC0yLjQzNzU4LC00LjA4NzM5NCAtNS42NjMwMywtNy42NDk3MDIg%0D%0ALTkuNDg5LC0xMC40OCAtMS45MjQxOCwtMS40MjI4MDkgLTMuOTg0MTgsLTIuNjUyMTA4IC02LjE1%0D%0ALC0zLjY3IC0xLjY1NjA4LC0wLjc3Nzk0OCAtMy4zNjc0MSwtMS40MzIzOTggLTUuMTIsLTEuOTU4%0D%0AIC0xLjE5MjQ1LC0wLjM1ODM3NyAtMi40MDE5MywtMC42NTc0MSAtMy42MjQsLTAuODk2IC0yLjUz%0D%0AMDE2LC0wLjQ5MzMzNCAtNS4xMDIyLC0wLjc0MDE1NiAtNy42OCwtMC43MzcgLTIxLjE2MiwwIC0z%0D%0ANy4zNDUsMTYuMTgzIC0zNy4zNDUsMzcuMzQ1IDAsMjEuMTU5IDE2LjE4MywzNy4zNDIgMzcuMzQ1%0D%0ALDM3LjM0MiB6IgogICAgIGlkPSJwYXRoMzcyNyIKICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3Vy%0D%0AdmF0dXJlPSIwIgogICAgIHN0eWxlPSJmaWxsOiNhMWExYTEiCiAgICAgc29kaXBvZGk6bm9kZXR5%0D%0AcGVzPSJzY2NjY2NjY3NjY2NjY2NjY2NjY2Njc3NjY2NjY2Njc2NjY2NjY2Njc3NzIiAvPgo8L3N2%0D%0AZz4K")
 
-@var text groupicon             'Group icon url' url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmOCI/Pg0KPHN2ZyB4bWxucz0iaHR0cDov%0D%0AL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMTIgMjEyIiB3aWR0aD0iMjEyIiBo%0D%0AZWlnaHQ9IjIxMiI+DQogICAgPHJlY3QgZmlsbD0iIzFmMjMyYSIgd2lkdGg9IjIxMiIgaGVpZ2h0%0D%0APSIyMTIiLz4NCiAgICA8cGF0aCBmaWxsPSIjYTFhMWExIiBjbGFzcz0icHJpbWFyeSIgZD0iTTYx%0D%0ALjU0MyAxMDAuOTg4YzguMDczIDAgMTQuMjQ2LTYuMTc0IDE0LjI0Ni0xNC4yNDZzLTYuMTczLTE0%0D%0ALjI0Ni0xNC4yNDYtMTQuMjQ2LTE0LjI0NiA2LjE3My0xNC4yNDYgMTQuMjQ2IDYuMTc0IDE0LjI0%0D%0ANiAxNC4yNDYgMTQuMjQ2em04LjE1OSAxNy41NDFhNDguMTkyIDQ4LjE5MiAwIDAgMSA4LjU0NS02%0D%0ALjA2MmMtNC4xNzQtMi4yMTctOS42NDEtMy44NTktMTYuNzA0LTMuODU5LTIxLjg0NCAwLTI4LjQ5%0D%0AMiAxNS42Ny0yOC40OTIgMTUuNjd2OC4wNzNoMjYuMTgxbC4xMDUtLjI0OGMuMzAzLS43MTMgMy4x%0D%0ANjQtNy4xNTEgMTAuMzY1LTEzLjU3NHptODAuNzU1LTkuOTIxYy02Ljg1NCAwLTEyLjIxIDEuNTQz%0D%0ALTE2LjMzNiAzLjY2MWE0OC4yMjMgNDguMjIzIDAgMCAxIDguOTAzIDYuMjZjNy4yMDEgNi40MjIg%0D%0AMTAuMDYxIDEyLjg2MSAxMC4zNjQgMTMuNTc0bC4xMDUuMjQ4aDI1LjQ1NnYtOC4wNzNjLS4wMDEg%0D%0AMC02LjY0OS0xNS42Ny0yOC40OTItMTUuNjd6bTAtNy42MmM4LjA3MyAwIDE0LjI0Ni02LjE3NCAx%0D%0ANC4yNDYtMTQuMjQ2cy02LjE3My0xNC4yNDYtMTQuMjQ2LTE0LjI0Ni0xNC4yNDYgNi4xNzMtMTQu%0D%0AMjQ2IDE0LjI0NiA2LjE3MyAxNC4yNDYgMTQuMjQ2IDE0LjI0NnptLTQ0LjA5MyAzLjIxYTIzLjIx%0D%0AIDIzLjIxIDAgMCAwIDQuNDY0LS40MjhjLjcxNy0uMTQgMS40MTktLjMxNSAyLjEwNi0uNTIxIDEu%0D%0AMDMtLjMwOSAyLjAyMy0uNjkgMi45NzYtMS4xMzhhMjEuMDk5IDIxLjA5OSAwIDAgMCAzLjU3NC0y%0D%0ALjEzMyAyMC44NzIgMjAuODcyIDAgMCAwIDUuNTE1LTYuMDkxIDIxLjI4MyAyMS4yODMgMCAwIDAg%0D%0AMi4xMjEtNC44MjMgMjIuMTYgMjIuMTYgMCAwIDAgLjcwNi0zLjE5M2MuMTYtMS4wOTcuMjQyLTIu%0D%0AMjI0LjI0Mi0zLjM3N3MtLjA4My0yLjI4MS0uMjQyLTMuMzc3YTIyLjc3OCAyMi43NzggMCAwIDAt%0D%0ALjcwNi0zLjE5MyAyMS4yODMgMjEuMjgzIDAgMCAwLTMuMjcyLTYuNTUgMjAuODQ4IDIwLjg0OCAw%0D%0AIDAgMC00LjM2NC00LjM2NCAyMS4wOTkgMjEuMDk5IDAgMCAwLTMuNTc0LTIuMTMzIDIxLjQ4OCAy%0D%0AMS40ODggMCAwIDAtMi45NzYtMS4xMzggMjIuMzMgMjIuMzMgMCAwIDAtMi4xMDYtLjUyMSAyMy4y%0D%0AMDIgMjMuMjAyIDAgMCAwLTQuNDY0LS40MjhjLTEyLjI5OSAwLTIxLjcwNSA5LjQwNS0yMS43MDUg%0D%0AMjEuNzA0IDAgMTIuMjk5IDkuNDA2IDIxLjcwNCAyMS43MDUgMjEuNzA0ek0xNDUuNjI5IDEzMWEz%0D%0ANi43MzkgMzYuNzM5IDAgMCAwLTEuMi0xLjcxOCAzOS44MDQgMzkuODA0IDAgMCAwLTMuMzY3LTMu%0D%0AOTY3IDQxLjQ4MSA0MS40ODEgMCAwIDAtMy40NDItMy4xNzkgNDIuMDc4IDQyLjA3OCAwIDAgMC01%0D%0ALjkzMS00LjA4MyA0My43MjUgNDMuNzI1IDAgMCAwLTMuNDc2LTEuNzc2Yy0uMDM2LS4wMTYtLjA2%0D%0AOS0uMDM0LS4xMDQtLjA1LTUuNjkyLTIuNTgxLTEyLjg0OS00LjM3Ni0yMS43NDYtNC4zNzYtOC44%0D%0AOTggMC0xNi4wNTUgMS43OTUtMjEuNzQ2IDQuMzc2LS4xOTYuMDg5LS4zNzkuMTg1LS41NzIuMjc2%0D%0AYTQzLjMxNiA0My4zMTYgMCAwIDAtMy42MiAxLjkxNyA0Mi4zMiA0Mi4zMiAwIDAgMC01LjMxOCAz%0D%0ALjcxNiA0MS41MDEgNDEuNTAxIDAgMCAwLTMuNDQzIDMuMTc5IDQwLjYzMiA0MC42MzIgMCAwIDAt%0D%0AMy4zNjYgMy45NjdjLS40NTIuNjEtLjg1MSAxLjE4Ni0xLjIgMS43MTgtLjMyNC40OTMtLjYuOTQz%0D%0ALS44NDEgMS4zNTFsLS4wNjEuMTAxYTI3Ljk2IDI3Ljk2IDAgMCAwLS42MjIgMS4xMTljLS4zMjUu%0D%0ANjIxLS40NzUuOTc1LS40NzUuOTc1djExLjY5Mmg4Mi41M3YtMTEuNjkycy0uMzYtLjg0Mi0xLjE1%0D%0AOC0yLjE5NWEzNS40MTcgMzUuNDE3IDAgMCAwLS44NDItMS4zNTF6Ii8+DQo8L3N2Zz4=")
+@var text groupicon                 'Group icon url' url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmOCI/Pg0KPHN2ZyB4bWxucz0iaHR0cDov%0D%0AL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMTIgMjEyIiB3aWR0aD0iMjEyIiBo%0D%0AZWlnaHQ9IjIxMiI+DQogICAgPHJlY3QgZmlsbD0iIzFmMjMyYSIgd2lkdGg9IjIxMiIgaGVpZ2h0%0D%0APSIyMTIiLz4NCiAgICA8cGF0aCBmaWxsPSIjYTFhMWExIiBjbGFzcz0icHJpbWFyeSIgZD0iTTYx%0D%0ALjU0MyAxMDAuOTg4YzguMDczIDAgMTQuMjQ2LTYuMTc0IDE0LjI0Ni0xNC4yNDZzLTYuMTczLTE0%0D%0ALjI0Ni0xNC4yNDYtMTQuMjQ2LTE0LjI0NiA2LjE3My0xNC4yNDYgMTQuMjQ2IDYuMTc0IDE0LjI0%0D%0ANiAxNC4yNDYgMTQuMjQ2em04LjE1OSAxNy41NDFhNDguMTkyIDQ4LjE5MiAwIDAgMSA4LjU0NS02%0D%0ALjA2MmMtNC4xNzQtMi4yMTctOS42NDEtMy44NTktMTYuNzA0LTMuODU5LTIxLjg0NCAwLTI4LjQ5%0D%0AMiAxNS42Ny0yOC40OTIgMTUuNjd2OC4wNzNoMjYuMTgxbC4xMDUtLjI0OGMuMzAzLS43MTMgMy4x%0D%0ANjQtNy4xNTEgMTAuMzY1LTEzLjU3NHptODAuNzU1LTkuOTIxYy02Ljg1NCAwLTEyLjIxIDEuNTQz%0D%0ALTE2LjMzNiAzLjY2MWE0OC4yMjMgNDguMjIzIDAgMCAxIDguOTAzIDYuMjZjNy4yMDEgNi40MjIg%0D%0AMTAuMDYxIDEyLjg2MSAxMC4zNjQgMTMuNTc0bC4xMDUuMjQ4aDI1LjQ1NnYtOC4wNzNjLS4wMDEg%0D%0AMC02LjY0OS0xNS42Ny0yOC40OTItMTUuNjd6bTAtNy42MmM4LjA3MyAwIDE0LjI0Ni02LjE3NCAx%0D%0ANC4yNDYtMTQuMjQ2cy02LjE3My0xNC4yNDYtMTQuMjQ2LTE0LjI0Ni0xNC4yNDYgNi4xNzMtMTQu%0D%0AMjQ2IDE0LjI0NiA2LjE3MyAxNC4yNDYgMTQuMjQ2IDE0LjI0NnptLTQ0LjA5MyAzLjIxYTIzLjIx%0D%0AIDIzLjIxIDAgMCAwIDQuNDY0LS40MjhjLjcxNy0uMTQgMS40MTktLjMxNSAyLjEwNi0uNTIxIDEu%0D%0AMDMtLjMwOSAyLjAyMy0uNjkgMi45NzYtMS4xMzhhMjEuMDk5IDIxLjA5OSAwIDAgMCAzLjU3NC0y%0D%0ALjEzMyAyMC44NzIgMjAuODcyIDAgMCAwIDUuNTE1LTYuMDkxIDIxLjI4MyAyMS4yODMgMCAwIDAg%0D%0AMi4xMjEtNC44MjMgMjIuMTYgMjIuMTYgMCAwIDAgLjcwNi0zLjE5M2MuMTYtMS4wOTcuMjQyLTIu%0D%0AMjI0LjI0Mi0zLjM3N3MtLjA4My0yLjI4MS0uMjQyLTMuMzc3YTIyLjc3OCAyMi43NzggMCAwIDAt%0D%0ALjcwNi0zLjE5MyAyMS4yODMgMjEuMjgzIDAgMCAwLTMuMjcyLTYuNTUgMjAuODQ4IDIwLjg0OCAw%0D%0AIDAgMC00LjM2NC00LjM2NCAyMS4wOTkgMjEuMDk5IDAgMCAwLTMuNTc0LTIuMTMzIDIxLjQ4OCAy%0D%0AMS40ODggMCAwIDAtMi45NzYtMS4xMzggMjIuMzMgMjIuMzMgMCAwIDAtMi4xMDYtLjUyMSAyMy4y%0D%0AMDIgMjMuMjAyIDAgMCAwLTQuNDY0LS40MjhjLTEyLjI5OSAwLTIxLjcwNSA5LjQwNS0yMS43MDUg%0D%0AMjEuNzA0IDAgMTIuMjk5IDkuNDA2IDIxLjcwNCAyMS43MDUgMjEuNzA0ek0xNDUuNjI5IDEzMWEz%0D%0ANi43MzkgMzYuNzM5IDAgMCAwLTEuMi0xLjcxOCAzOS44MDQgMzkuODA0IDAgMCAwLTMuMzY3LTMu%0D%0AOTY3IDQxLjQ4MSA0MS40ODEgMCAwIDAtMy40NDItMy4xNzkgNDIuMDc4IDQyLjA3OCAwIDAgMC01%0D%0ALjkzMS00LjA4MyA0My43MjUgNDMuNzI1IDAgMCAwLTMuNDc2LTEuNzc2Yy0uMDM2LS4wMTYtLjA2%0D%0AOS0uMDM0LS4xMDQtLjA1LTUuNjkyLTIuNTgxLTEyLjg0OS00LjM3Ni0yMS43NDYtNC4zNzYtOC44%0D%0AOTggMC0xNi4wNTUgMS43OTUtMjEuNzQ2IDQuMzc2LS4xOTYuMDg5LS4zNzkuMTg1LS41NzIuMjc2%0D%0AYTQzLjMxNiA0My4zMTYgMCAwIDAtMy42MiAxLjkxNyA0Mi4zMiA0Mi4zMiAwIDAgMC01LjMxOCAz%0D%0ALjcxNiA0MS41MDEgNDEuNTAxIDAgMCAwLTMuNDQzIDMuMTc5IDQwLjYzMiA0MC42MzIgMCAwIDAt%0D%0AMy4zNjYgMy45NjdjLS40NTIuNjEtLjg1MSAxLjE4Ni0xLjIgMS43MTgtLjMyNC40OTMtLjYuOTQz%0D%0ALS44NDEgMS4zNTFsLS4wNjEuMTAxYTI3Ljk2IDI3Ljk2IDAgMCAwLS42MjIgMS4xMTljLS4zMjUu%0D%0ANjIxLS40NzUuOTc1LS40NzUuOTc1djExLjY5Mmg4Mi41M3YtMTEuNjkycy0uMzYtLjg0Mi0xLjE1%0D%0AOC0yLjE5NWEzNS40MTcgMzUuNDE3IDAgMCAwLS44NDItMS4zNTF6Ii8+DQo8L3N2Zz4=")
 
-@var checkbox fullscreen        'Enable fullscreen' 0
+@var checkbox fullscreen            'Enable fullscreen' 0
 
-@var range clight               'Colors lightness' [0.75, 0, 2, 0.01]
-@var range chue                 'Colors hue' [320, 0, 360, 1, 'deg']
-@var range ccon                 'Colors contrast' [50, 0, 100, 1, "%"]
+@var range clight                   'Colors lightness' [0.75, 0, 2, 0.01]
+@var range chue                     'Colors hue' [320, 0, 360, 1, 'deg']
+@var range ccon                     'Colors contrast' [50, 0, 100, 1, "%"]
 
-@var checkbox customcolors      'Enable custom colors' 0
-@var color usrc1                'User color 1' #6f5c8a
-@var color usrc2                'User color 2' #476845
-@var color usrc3                'User color 3' #817356
-@var color usrc4                'User color 4' #4e6274
-@var color usrc5                'User color 5' #815956
-@var color usrc6                'User color 6' #7d5464
-@var color usrc7                'User color 7' #4e6974
-@var color usrc8                'User color 8' #745e4e
+@var checkbox customcolors          'Enable custom colors' 0
+@var color usrc1                    'User color 1' #6f5c8a
+@var color usrc2                    'User color 2' #476845
+@var color usrc3                    'User color 3' #817356
+@var color usrc4                    'User color 4' #4e6274
+@var color usrc5                    'User color 5' #815956
+@var color usrc6                    'User color 6' #7d5464
+@var color usrc7                    'User color 7' #4e6974
+@var color usrc8                    'User color 8' #745e4e
 
-@var color usrbgc1              'User bg color 1' #9978a5
-@var color usrbgc2              'User bg color 2' #6e9362
-@var color usrbgc3              'User bg color 3' #9d926c
-@var color usrbgc4              'User bg color 4' #668399
-@var color usrbgc5              'User bg color 5' #906060
-@var color usrbgc6              'User bg color 6' #a37584
-@var color usrbgc7              'User bg color 7' #669799
-@var color usrbgc8              'User bg color 8' #9d806c
+@var color usrbgc1                  'User bg color 1' #9978a5
+@var color usrbgc2                  'User bg color 2' #6e9362
+@var color usrbgc3                  'User bg color 3' #9d926c
+@var color usrbgc4                  'User bg color 4' #668399
+@var color usrbgc5                  'User bg color 5' #906060
+@var color usrbgc6                  'User bg color 6' #a37584
+@var color usrbgc7                  'User bg color 7' #669799
+@var color usrbgc8                  'User bg color 8' #9d806c
 
-@var text blurbehind            'Blur amount behind focused media' 8px
+@var text blurbehind                'Blur amount behind focused media' 8px
 
-@var checkbox fffix             'Chat list fix' 0
-@var checkbox poseon            'Enable pose mode' 0
+@var checkbox fffix                 'Chat list fix' 0
+@var checkbox poseon                'Enable pose mode' 0
 
 ==/UserStyle== */
 @-moz-document domain("web.telegram.org") {
     :root {
         /* auto generated line below. please do not delete or modify! */
-        --version "Dark-Telegram v1.7.38 -- November 26th, 2020"
+        --version "Dark-Telegram v1.8.38 -- November 26th, 2020"
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -821,6 +830,73 @@
         // filter: invert(chatbg-i) opacity(chatbg-o);
     }
     
+    /* hiding meta data and reveal it on mouse hover */
+    .im_content_message_wrap{
+        &.im_message_out .im_message_meta{
+            transform translateX(autohidedata ? (outpos == right ? 25px : -25px) : 0)
+        }
+        &.im_message_in .im_message_meta{
+            transform translateX(autohidedata ? (inpos != right ? -25px : 25px) : 0)
+        }
+        & .im_message_meta{
+            opacity (autohidedata ? 0 : 1)
+            transform scaleX(autohidedata ? 0 : 1)
+            transition t-in ease-in
+        }
+        &:hover .im_message_meta{
+            opacity 1
+            transform scaleX(1)
+            transform translateX(0)
+            transition t-in ease-out
+        }
+    }    
+
+    /* user names */
+    // own in private chat
+    if(hideownname){
+        .im_history_messages .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body .im_message_author_wrap{
+            overflow hidden
+            max-height 0
+        }
+    }
+    // other in private chat
+    if(hideothername){
+        .im_history_messages .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body .im_message_author_wrap{
+            overflow hidden
+            max-height 0
+        }
+    }
+    // own in group chat
+    .im_history_messages.im_history_messages_group .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body .im_message_author_wrap{
+        overflow hidden
+        max-height (hideownnamegr is 1 ? 0 : unset i)
+    }
+    // other in group chat
+    .im_history_messages.im_history_messages_group .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body .im_message_author_wrap{
+        overflow hidden
+        max-height (hideothernamegr is 1 ? 0 : unset i)
+    }
+    // show own name on mouse over
+    if(shownamehover){
+        .im_message_out .im_message_body .im_message_author_wrap{            
+            transition t-in ease-in
+        }
+        .im_message_out .im_message_body:hover .im_message_author_wrap{            
+            max-height 25px i
+            transition t-in ease-out            
+        }
+    }
+    // show other names on mouse over
+    if(showothernamehover){
+        .im_message_in .im_message_body .im_message_author_wrap{            
+            transition t-in ease-in            
+        }
+        .im_message_in .im_message_body:hover .im_message_author_wrap{            
+            max-height 25px i
+            transition t-in ease-out            
+        }
+    }
+
     /* user photo */
     .im_dialog_photo
     .md_modal_list_peer_photo

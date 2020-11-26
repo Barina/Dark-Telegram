@@ -4,7 +4,7 @@
 @homepageURL https://github.com/Barina/Dark-Telegram
 @supportURL https://github.com/Barina/Dark-Telegram/issues
 @updateURL https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version 1.7.38
+@version 1.8.38
 @description Customizable theme for telegram web.
 @author Roy Barina
 @license MIT
@@ -279,6 +279,46 @@ a.im_message_photo_thumb,
 .im_message_media {
   padding: 0 !important;
 }
+.im_content_message_wrap.im_message_out .im_message_meta {
+  transform: translateX(25px);
+}
+.im_content_message_wrap.im_message_in .im_message_meta {
+  transform: translateX(-25px);
+}
+.im_content_message_wrap .im_message_meta {
+  opacity: 0;
+  transform: scaleX(0);
+  transition: 0.1s ease-in;
+}
+.im_content_message_wrap:hover .im_message_meta {
+  opacity: 1;
+  transform: scaleX(1);
+  transform: translateX(0);
+  transition: 0.1s ease-out;
+}
+.im_history_messages .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body .im_message_author_wrap {
+  overflow: hidden;
+  max-height: 0;
+}
+.im_history_messages .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body .im_message_author_wrap {
+  overflow: hidden;
+  max-height: 0;
+}
+.im_history_messages.im_history_messages_group .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body .im_message_author_wrap {
+  overflow: hidden;
+  max-height: 0;
+}
+.im_history_messages.im_history_messages_group .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body .im_message_author_wrap {
+  overflow: hidden;
+  max-height: unset !important;
+}
+.im_message_in .im_message_body .im_message_author_wrap {
+  transition: 0.1s ease-in;
+}
+.im_message_in .im_message_body:hover .im_message_author_wrap {
+  max-height: 25px !important;
+  transition: 0.1s ease-out;
+}
 .im_dialog_photo,
 .md_modal_list_peer_photo,
 .im_message_contact_photo,
@@ -452,7 +492,7 @@ a.pull-right,
 }
 .im_history_not_selected:after {
   display: block;
-  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.7.38 -- November 26th, 2020";
+  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.8.38 -- November 26th, 2020";
   white-space: pre-wrap;
   border-top: 1px solid #333943;
   font-size: 11px;

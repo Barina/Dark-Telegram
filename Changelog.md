@@ -1,3 +1,8 @@
+## V1.8.38 (2020-11-26)
+
+- You can now hide user names from chat bubbles. reshow them on mouse hover.
+- You can also hide messages metadata, same deal as above.
+
 ## V1.7.38 (2020-11-26)
 
 - Fixed [Issue #13](../../issues/13) were turning off vignette makes video preview disappear.
