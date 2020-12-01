@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.9.38
+@version        1.10.39
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -173,7 +173,7 @@
 @-moz-document domain("web.telegram.org") {
     :root {
         /* auto generated line below. please do not delete or modify! */
-        --version "Dark-Telegram v1.9.38 -- November 26th, 2020"
+        --version "Dark-Telegram v1.10.39 -- December 2nd, 2020"
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -973,6 +973,8 @@
     /* fix message body to fit inside chat area */
     div.im_message_body{
         display grid i
+        border 1px solid transparent
+        transition .1s ease-out
     }
     
     if(tail == tritail){
@@ -1898,12 +1900,12 @@
     }
 
     /* fancy selection mixins */
-    select(s, c, oldc){
+    select(s, sc, bc, bgc){
         if(fancyselect){
-            border 1px solid c
-            shad 0 0 s c
+            border 1px solid bc
+            shad 0 0 s sc
         } else {
-            bg oldc
+            bg bgc
         }
     }
 
@@ -1911,21 +1913,22 @@
     .im_history_select_active .im_history_messages .im_history_messages_peer{
         
         & .im_message_selected .im_message_outer_wrap div .im_message_in .im_message_body{
-            select(15px, accent, msgbgis i)
+            select(15px, accent, accent-alt i, msgbgis i)
         }
 
         & .im_message_outer_wrap:hover div .im_message_in .im_message_body{
-            select(unset, accent-alt, msgbgih)
+            select(unset, accent, accent, msgbgih)
         }
 
         & .im_message_selected .im_message_outer_wrap div .im_message_out .im_message_body{
-            select(15px, accent, msgbgos i)
+            select(15px, accent, accent-alt i, msgbgos i)
         }
 
         & .im_message_outer_wrap:hover div .im_message_out .im_message_body{
-            select(unset, accent-alt, msgbgoh)
+            select(unset, accent, accent, msgbgoh)
         }
-    } 
+    }
+
     a.im_dialog:hover
     .dropdown-menu a:hover{
         bgTex control-hover
@@ -2103,7 +2106,9 @@
     /* message textbox when focused */
     .composer_rich_textarea:focus {
         shad 0px 1px 1px accent i
+        // shad 0 1px 1px transparent i
         border 1px solid border
+        // border-bottom 1px solid accent
         border-radius border-size i
         min-height 42px
         scrollbar-width none
@@ -2503,7 +2508,7 @@
 
     /* replay messages */
     .im_message_reply_wrap{
-        quote(0 2px 2px 0, 4px 0 0 0 i)
+        quote(0 2px 2px 0, 0 0 8px 0 i)
     }
     
     /* pinned message panel */

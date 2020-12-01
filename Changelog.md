@@ -1,3 +1,9 @@
+## V1.10.39 (2020-12-02)
+
+- Fixed reply preview position.
+- Fixed glitchy hover in selection mode.
+- Fancy selection is now fancier with smooth transitions.
+
 ## V1.9.38 (2020-11-26)
 
 - Added fancy selection mode.

@@ -4,7 +4,7 @@
 @homepageURL https://github.com/Barina/Dark-Telegram
 @supportURL https://github.com/Barina/Dark-Telegram/issues
 @updateURL https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version 1.9.38
+@version 1.10.39
 @description Customizable theme for telegram web.
 @author Roy Barina
 @license MIT
@@ -373,6 +373,8 @@ img.im_message_video_thumb img {
 }
 div.im_message_body {
   display: grid !important;
+  border: 1px solid transparent;
+  transition: 0.1s ease-out;
 }
 .im_grouped_short .im_message_outer_wrap .im_message_out .im_message_body:before,
 .im_grouped_short .im_message_outer_wrap .im_message_in .im_message_body:before {
@@ -492,7 +494,7 @@ a.pull-right,
 }
 .im_history_not_selected:after {
   display: block;
-  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.9.38 -- November 26th, 2020";
+  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.10.39 -- December 2nd, 2020";
   white-space: pre-wrap;
   border-top: 1px solid #333943;
   font-size: 11px;
@@ -976,7 +978,7 @@ fieldset[disabled] .btn-primary:hover {
   Background: none !important;
 }
 .im_history_select_active .im_history_messages .im_history_messages_peer .im_message_selected .im_message_outer_wrap div .im_message_in .im_message_body {
-  border: 1px solid #7289da;
+  border: 1px solid #a1b0e6 !important;
   -webkit-box-shadow: 0 0 15px #7289da;
   -moz-box-shadow: 0 0 15px #7289da;
   -webkit-shadow: 0 0 15px #7289da;
@@ -984,15 +986,15 @@ fieldset[disabled] .btn-primary:hover {
   box-shadow: 0 0 15px #7289da;
 }
 .im_history_select_active .im_history_messages .im_history_messages_peer .im_message_outer_wrap:hover div .im_message_in .im_message_body {
-  border: 1px solid #a1b0e6;
-  -webkit-box-shadow: 0 0 unset #a1b0e6;
-  -moz-box-shadow: 0 0 unset #a1b0e6;
-  -webkit-shadow: 0 0 unset #a1b0e6;
-  -moz-shadow: 0 0 unset #a1b0e6;
-  box-shadow: 0 0 unset #a1b0e6;
+  border: 1px solid #7289da;
+  -webkit-box-shadow: 0 0 unset #7289da;
+  -moz-box-shadow: 0 0 unset #7289da;
+  -webkit-shadow: 0 0 unset #7289da;
+  -moz-shadow: 0 0 unset #7289da;
+  box-shadow: 0 0 unset #7289da;
 }
 .im_history_select_active .im_history_messages .im_history_messages_peer .im_message_selected .im_message_outer_wrap div .im_message_out .im_message_body {
-  border: 1px solid #7289da;
+  border: 1px solid #a1b0e6 !important;
   -webkit-box-shadow: 0 0 15px #7289da;
   -moz-box-shadow: 0 0 15px #7289da;
   -webkit-shadow: 0 0 15px #7289da;
@@ -1000,12 +1002,12 @@ fieldset[disabled] .btn-primary:hover {
   box-shadow: 0 0 15px #7289da;
 }
 .im_history_select_active .im_history_messages .im_history_messages_peer .im_message_outer_wrap:hover div .im_message_out .im_message_body {
-  border: 1px solid #a1b0e6;
-  -webkit-box-shadow: 0 0 unset #a1b0e6;
-  -moz-box-shadow: 0 0 unset #a1b0e6;
-  -webkit-shadow: 0 0 unset #a1b0e6;
-  -moz-shadow: 0 0 unset #a1b0e6;
-  box-shadow: 0 0 unset #a1b0e6;
+  border: 1px solid #7289da;
+  -webkit-box-shadow: 0 0 unset #7289da;
+  -moz-box-shadow: 0 0 unset #7289da;
+  -webkit-shadow: 0 0 unset #7289da;
+  -moz-shadow: 0 0 unset #7289da;
+  box-shadow: 0 0 unset #7289da;
 }
 a.im_dialog:hover,
 .dropdown-menu a:hover {
@@ -1551,7 +1553,7 @@ a.im_dialog:hover .im_dialog_meta .active .im_dialog_unread {
   background-color: rgba(46,52,63,0.5);
   border-radius: 0 2px 2px 0;
   padding: 8px 16px;
-  margin: 4px 0 0 0 !important;
+  margin: 0 0 8px 0 !important;
   border: 0;
   position: relative;
   overflow: hidden;
