@@ -1,10 +1,14 @@
+## V1.11.41 (2020-12-07)
+
+- Fixed an issue where other name in a group chat still takes space even tho marked to be hidden.
+
 ## V1.11.40 (2020-12-06)
 
 - Fixed the "quoted" elements to have a black background rather than general single control color.
 - Fixed chat participants name taking space when set to not visible.
 - Fixed short messages having tails.
 - Fixed video thumbnails ignoring tails in tailed chat bubbles.
-- Fixed reply preview misplaced.
+- Fixed forward preview misplaced and style.
 - Content message will now take care of tail type too.
 - Forwarded messages got a new look.
 

@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.11.40
+@version        1.11.41
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -173,7 +173,7 @@
 @-moz-document domain("web.telegram.org") {
     :root {
         /* auto generated line below. please do not delete or modify! */
-        --version "Dark-Telegram v1.11.40 -- December 6th, 2020"
+        --version "Dark-Telegram v1.11.41 -- December 7th, 2020"
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -859,56 +859,62 @@
     }    
 
     /* user names */
-    // own in private chat
-    if(hideownname){
-        .im_history_messages .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body .im_message_author_wrap{
+    NameOwn = ".im_history_messages:not(.im_history_messages_group) .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body .im_message_author_wrap"
+    NameOwnHover = ".im_history_messages:not(.im_history_messages_group) .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body:hover .im_message_author_wrap"
+    
+    NameOther = ".im_history_messages:not(.im_history_messages_group) .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body .im_message_author_wrap"
+    NameOtherHover = ".im_history_messages:not(.im_history_messages_group) .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body:hover .im_message_author_wrap"
+    
+    NameGroupOwn = ".im_history_messages_group .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body .im_message_author_wrap"
+    NameGroupOwnHover = ".im_history_messages_group .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body:hover .im_message_author_wrap"
+    
+    NameGroupOther = ".im_history_messages_group .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body .im_message_author_wrap"
+    NameGroupOtherHover = ".im_history_messages_group .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body:hover .im_message_author_wrap"
+
+    /* user names mixins */
+    username(hidename, showonhover){
+        transition t-in ease-in
+        if(hidename){
             overflow hidden
             max-height 0
-            if(!shownamehover){
+            if(!showonhover){
                 max-width 0
             }
         }
     }
-    // other in private chat
-    if(hideothername){
-        .im_history_messages .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body .im_message_author_wrap{
-            overflow hidden
-            max-height 0
-            if(!showothernamehover){
-                max-width 0
-            }
-        }
-    }
-    // own in group chat
-    .im_history_messages.im_history_messages_group .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body .im_message_author_wrap{
-        overflow hidden
-        max-height (hideownnamegr is 1 ? 0 : unset i)
-    }
-    // other in group chat
-    .im_history_messages.im_history_messages_group .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body .im_message_author_wrap{
-        overflow hidden
-        max-height (hideothernamegr is 1 ? 0 : unset i)
-    }
-    // show own name on mouse over
-    if(shownamehover){
-        .im_message_out .im_message_body .im_message_author_wrap{            
-            transition t-in ease-in
-        }
-        .im_message_out .im_message_body:hover .im_message_author_wrap{            
+    usernamehover(show){
+        if(show){
             max-height 25px i
-            transition t-in ease-out            
+            transition t-in ease-out
         }
     }
-    // show other names on mouse over
-    if(showothernamehover){
-        .im_message_in .im_message_body .im_message_author_wrap{            
-            transition t-in ease-in            
-        }
-        .im_message_in .im_message_body:hover .im_message_author_wrap{            
-            max-height 25px i
-            transition t-in ease-out            
-        }
+
+    {NameOwn}{
+        username(hideownname, shownamehover)
     }
+    {NameOther}{
+        username(hideothername, showothernamehover)
+    }
+    {NameGroupOwn}{
+        username(hideownnamegr, shownamehover)
+    }        
+    {NameGroupOther}{
+        username(hideothernamegr, showothernamehover)
+    }
+    
+    {NameOwnHover}{
+        usernamehover(hideownname and shownamehover)            
+    }    
+    {NameOtherHover}{
+        usernamehover(hideothername and showothernamehover)
+    }
+    {NameGroupOwnHover}{
+        usernamehover(hideownnamegr and shownamehover)
+    }
+    {NameGroupOtherHover}{
+        usernamehover(hideothernamegr and showothernamehover)
+    }
+
 
     /* user photo */
     .im_dialog_photo
