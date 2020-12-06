@@ -4,7 +4,7 @@
 @homepageURL https://github.com/Barina/Dark-Telegram
 @supportURL https://github.com/Barina/Dark-Telegram/issues
 @updateURL https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version 1.10.39
+@version 1.11.40
 @description Customizable theme for telegram web.
 @author Roy Barina
 @license MIT
@@ -273,7 +273,7 @@ a.composer_emoji_btn:hover {
 .im_message_video,
 a.im_message_photo_thumb,
 .im_message_media>div>div {
-  margin-top: 5px !important;
+  margin-top: 0 !important;
   width: 100%;
 }
 .im_message_media {
@@ -299,6 +299,7 @@ a.im_message_photo_thumb,
 .im_history_messages .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body .im_message_author_wrap {
   overflow: hidden;
   max-height: 0;
+  max-width: 0;
 }
 .im_history_messages .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body .im_message_author_wrap {
   overflow: hidden;
@@ -389,6 +390,8 @@ div.im_message_body {
 .im_message_media {
   padding: 10px;
 }
+.im_grouped .im_message_outer_wrap .im_message_out .im_message_body,
+.im_grouped .im_message_outer_wrap .im_message_in .im_message_body,
 .im_grouped_short .im_message_outer_wrap .im_message_out .im_message_body,
 .im_grouped_short .im_message_outer_wrap .im_message_in .im_message_body {
   border-radius: 10px !important;
@@ -409,7 +412,7 @@ div.im_message_body {
   margin-right: 70px;
 }
 .im_message_body {
-  padding: 0 3px 3px 3px !important;
+  padding: 3px !important;
 }
 .im_message_in .im_message_body {
   background-color: #3c434f;
@@ -423,9 +426,96 @@ div.im_message_body {
   margin-right: 15px;
   max-width: 550px !important;
 }
+.im_message_fwd .im_message_body .im_message_fwd_from {
+  display: grid;
+  grid-template-columns: 0;
+  background-color: rgba(0,0,0,0.145);
+  border-radius: 5px 5px 0 0;
+  padding: 8px 16px 5px 16px;
+  margin: 0;
+  border: 0;
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(0,0,0,0.188);
+}
+.im_message_fwd .im_message_body .im_message_fwd_from:before {
+  content: '';
+  width: 5px;
+  height: 100%;
+  background-color: #a1b0e6;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+.im_message_fwd .im_message_body .im_message_fwd_from .im_message_fwd_photo {
+  grid-row: 1;
+  grid-column: 1;
+}
+.im_message_fwd .im_message_body .im_message_fwd_from .im_message_fwd_author_wrap {
+  display: grid;
+  grid-template-columns: max-content;
+  grid-row: 1;
+  grid-column: 2;
+  margin-left: 52px;
+}
+.im_message_fwd .im_message_body .im_message_fwd_from .im_message_fwd_author_wrap .im_message_fwd_author {
+  grid-row: 1;
+  grid-column: 1;
+  width: max-content;
+}
+.im_message_fwd .im_message_body .im_message_fwd_from .im_message_fwd_author_wrap .im_message_fwd_date {
+  grid-row: 2;
+  grid-column: 1;
+}
+.im_message_fwd .im_message_body .im_message_fwd_from .im_message_fwd_author_wrap .im_message_views_inline {
+  grid-row: 1;
+  grid-column: 2;
+  width: max-content;
+}
+.im_message_fwd .im_message_body div[my-message-body="historyMessage"] {
+  background-color: rgba(0,0,0,0.145);
+  border-radius: 0 0 5px 5px;
+  padding: 5px 8px 8px 16px;
+  margin: 0;
+  border: 0;
+  position: relative;
+  overflow: hidden;
+}
+.im_message_fwd .im_message_body div[my-message-body="historyMessage"]:before {
+  content: '';
+  width: 5px;
+  height: 100%;
+  background-color: #a1b0e6;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+.im_message_fwd .im_message_body div[my-message-body="historyMessage"] div {
+  margin-left: unset;
+}
+.im_history_message_wrap:not(.im_grouped):not(.im_grouped_short):not(.im_grouped_fwd_end) .im_message_outer_wrap .im_message_wrap .im_message_in.im_message_fwd .im_message_body .im_message_fwd_from {
+  border-radius: 3px 5px 0 0 !important;
+}
+.im_history_message_wrap:not(.im_grouped):not(.im_grouped_short):not(.im_grouped_fwd_end) .im_message_outer_wrap .im_message_wrap .im_message_out.im_message_fwd .im_message_body .im_message_fwd_from {
+  border-radius: 5px 3px 0 0 !important;
+}
+.im_grouped_fwd .im_message_outer_wrap .im_message_wrap .im_message_fwd .im_message_from_photo {
+  display: unset;
+  visibility: hidden;
+}
 .im_message_photo_thumb,
 .im_message_video_thumb {
   border-radius: 5px !important;
+}
+.im_history_message_wrap:not(.im_grouped):not(.im_grouped_short) .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body_media div .im_message_media div div .im_message_photo_thumb,
+.im_history_message_wrap:not(.im_grouped):not(.im_grouped_short) .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body_media div .im_message_media div div div .im_message_video .im_message_video_thumb {
+  border-radius: 5px 3px 5px 5px !important;
+}
+.im_history_message_wrap:not(.im_grouped):not(.im_grouped_short) .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body_media div .im_message_media div div .im_message_photo_thumb,
+.im_history_message_wrap:not(.im_grouped):not(.im_grouped_short) .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body_media div .im_message_media div div div .im_message_video .im_message_video_thumb {
+  border-radius: 3px 5px 5px 5px !important;
 }
 a.im_message_video_thumb::after,
 .im_message_photo_thumb::before {
@@ -453,7 +543,7 @@ a.im_message_photo_thumb {
 }
 .im_message_author {
   padding: 0px 5px 0px 5px;
-  margin: 5px 0 0 0;
+  margin: 0 0 5px 0;
   display: inline-block;
   width: max-content;
 }
@@ -494,7 +584,7 @@ a.pull-right,
 }
 .im_history_not_selected:after {
   display: block;
-  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.10.39 -- December 2nd, 2020";
+  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.11.40 -- December 6th, 2020";
   white-space: pre-wrap;
   border-top: 1px solid #333943;
   font-size: 11px;
@@ -517,6 +607,7 @@ html,
 .login_head_bg,
 .modal-content {
   background-color: #1f232a !important;
+  border-radius: 3px 3px 0 0;
 }
 body:before {
   content: '';
@@ -1410,7 +1501,7 @@ a.im_panel_own_photo {
   margin: 5px auto;
 }
 .im_bot_intro_message {
-  background-color: rgba(46,52,63,0.5);
+  background-color: rgba(0,0,0,0.145);
   border-radius: 3px;
   padding: 8px 16px;
   margin: 5;
@@ -1549,16 +1640,75 @@ a.im_dialog:hover .im_dialog_meta .active .im_dialog_unread {
 .im_message_reply {
   padding-left: unset;
 }
-.im_message_reply_wrap {
-  background-color: rgba(46,52,63,0.5);
-  border-radius: 0 2px 2px 0;
+.im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_content_message_wrap .im_message_body .im_message_reply_wrap {
+  background-color: rgba(0,0,0,0.145);
+  border-radius: 5px;
+  padding: 8px 17.25px;
+  margin: 0 !important;
+  border: 0;
+  position: relative;
+  overflow: hidden;
+}
+.im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_content_message_wrap .im_message_body .im_message_reply_wrap:before {
+  content: '';
+  width: 5px;
+  height: 100%;
+  background-color: #a1b0e6;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+.im_history_message_wrap:not(.im_grouped):not(.im_grouped_short) .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body .im_message_reply_wrap {
+  background-color: rgba(0,0,0,0.145);
+  border-radius: 3px 5px 5px 5px;
+  padding: 8px 17.25px;
+  margin: 0 !important;
+  border: 0;
+  position: relative;
+  overflow: hidden;
+}
+.im_history_message_wrap:not(.im_grouped):not(.im_grouped_short) .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body .im_message_reply_wrap:before {
+  content: '';
+  width: 5px;
+  height: 100%;
+  background-color: #a1b0e6;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+.im_history_message_wrap:not(.im_grouped):not(.im_grouped_short) .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body .im_message_reply_wrap {
+  background-color: rgba(0,0,0,0.145);
+  border-radius: 5px 3px 5px 5px;
+  padding: 8px 17.25px;
+  margin: 0 !important;
+  border: 0;
+  position: relative;
+  overflow: hidden;
+}
+.im_history_message_wrap:not(.im_grouped):not(.im_grouped_short) .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body .im_message_reply_wrap:before {
+  content: '';
+  width: 5px;
+  height: 100%;
+  background-color: #a1b0e6;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+.im_send_reply_wrap .im_message_reply_wrap,
+.im_send_reply_wrap a.im_message_reply_wrap {
+  background-color: rgba(0,0,0,0.145);
+  border-radius: 5px;
   padding: 8px 16px;
   margin: 0 0 8px 0 !important;
   border: 0;
   position: relative;
   overflow: hidden;
 }
-.im_message_reply_wrap:before {
+.im_send_reply_wrap .im_message_reply_wrap:before,
+.im_send_reply_wrap a.im_message_reply_wrap:before {
   content: '';
   width: 5px;
   height: 100%;
@@ -1576,7 +1726,7 @@ a.im_dialog:hover .im_dialog_meta .active .im_dialog_unread {
   padding: 5px;
 }
 .im_history_pinned_wrap .im_message_reply {
-  background-color: rgba(46,52,63,0.5);
+  background-color: rgba(0,0,0,0.145);
   border-radius: 0 2px 2px 0;
   padding: 8px 16px;
   margin: 5px 12px !important;
@@ -1606,33 +1756,53 @@ a.im_dialog:hover .im_dialog_meta .active .im_dialog_unread {
   bottom: 18px;
   left: 18px;
 }
-.audio_player_wrap,
-.im_message_document {
-  background-color: rgba(37,42,51,0.5);
+.im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_content_message_wrap .im_message_body_media div .im_message_media div div div .im_message_audio div .audio_player_wrap,
+.im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_content_message_wrap .im_message_body_media div .im_message_media div div div .im_message_document {
+  background-color: rgba(0,0,0,0.145);
   border-radius: 5px;
-  padding: 8px;
+  padding: 8px 16px;
+  margin: 0;
+  border: 0;
+  position: relative;
+  overflow: hidden;
   border: 1px solid #333943;
-  margin-top: 4px;
   display: block;
+}
+.im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_content_message_wrap .im_message_body_media div .im_message_media div div div .im_message_audio div .audio_player_wrap:before,
+.im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_content_message_wrap .im_message_body_media div .im_message_media div div div .im_message_document:before {
+  content: '';
+  width: 5px;
+  height: 100%;
+  background-color: #a1b0e6;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+.im_history_message_wrap:not(.im_grouped):not(.im_grouped_short) .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body_media div .im_message_media div div div .im_message_audio div {
+  border-radius: 3px 5px 5px 5px !important;
+}
+.im_history_message_wrap:not(.im_grouped):not(.im_grouped_short) .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body_media div .im_message_media div div div .im_message_audio div {
+  border-radius: 5px 3px 5px 5px !important;
 }
 .im_message_document {
   display: -webkit-box !important;
   display: -moz-box !important;
 }
 div[ng-switch-when="messageMediaUnsupported"] {
-  background-color: rgba(46,52,63,0.5);
+  background-color: rgba(0,0,0,0.145);
   border-radius: 5px;
   padding: 8px 16px;
-  margin: 4px 0 0 0;
+  margin: 0;
   border: 0;
   position: relative;
   overflow: hidden;
 }
-.im_message_reply_wrap {
-  border-radius: 5px;
+.im_history_message_wrap:not(.im_grouped):not(.im_grouped_short) .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body_media div .im_message_media div div[ng-switch-when="messageMediaUnsupported"] {
+  border-radius: 3px 5px 5px 5px !important;
 }
-.im_message_reply_wrap .im_message_reply_thumbed {
-  margin-bottom: unset;
+.im_history_message_wrap:not(.im_grouped):not(.im_grouped_short) .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body_media div .im_message_media div div[ng-switch-when="messageMediaUnsupported"] {
+  border-radius: 5px 3px 5px 5px !important;
 }
 .im_message_reply_thumb_wrap {
   display: inline;
@@ -1647,10 +1817,10 @@ div[ng-switch-when="messageMediaUnsupported"] {
   margin-left: unset;
 }
 .im_message_webpage_wrap {
-  background-color: rgba(46,52,63,0.5);
+  background-color: rgba(0,0,0,0.145);
   border-radius: 5px;
-  padding: 8px 16px;
-  margin: -10px 0 0 0;
+  padding: 8px 18.5px;
+  margin: 0;
   border: 0;
   position: relative;
   overflow: hidden;
@@ -2590,17 +2760,19 @@ div[ng-switch-when="messageMediaUnsupported"] {
 }
 .im_message_document_info {
   max-width: 100% !important;
-  background-color: rgba(46,52,63,0.5);
-  border-radius: 5px;
-  padding: 8px 16px;
-  margin: 4px 0 0 0;
-  border: 0;
-  position: relative;
-  overflow: hidden;
   width: 100%;
   display: inline-block;
   float: unset;
   margin: 4px 0 -4px 0 !important;
+}
+.im_message_document_thumbed .im_message_document_info {
+  background-color: rgba(0,0,0,0.145);
+  border-radius: 5px;
+  padding: 8px 18.5px;
+  margin: 0;
+  border: 0;
+  position: relative;
+  overflow: hidden;
 }
 .im_message_in .im_message_body_media div[my-message-body="historyMessage"] .im_message_media div[ng-switch="::media._"] div .im_message_document_thumbed {
   max-width: 324px !important;
@@ -2833,7 +3005,7 @@ a.tg_radio_on:hover i.icon-radio {
 }
 .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_content_message_wrap .im_message_body div[my-message-body="historyMessage"] .im_message_keyboard .reply_markup_wrap {
   background-color: rgba(0,0,0,0.1);
-  padding: 5px;
+  padding: 8px 4px 10px 4px;
   margin: 0;
   border-radius: 0 0 10px 10px;
   width: 100%;
@@ -2856,7 +3028,7 @@ a.tg_radio_on:hover i.icon-radio {
   width: 100px !important;
 }
 .im_bottom_panel_wrap .im_send_panel_wrap .im_send_form_wrap1 .im_send_form_wrap .im_record_supported .im_send_form .im_send_keyboard_wrap {
-  background-color: rgba(46,52,63,0.5);
+  background-color: rgba(0,0,0,0.145);
   border-radius: 3px;
   padding: 8px 16px;
   margin: 5px;
@@ -2900,6 +3072,7 @@ a.tg_radio_on:hover i.icon-radio {
 .im_message_document_name_wrap,
 .im_message_document_actions {
   width: unset !important;
+  margin-top: 0;
 }
 .audio_player_title_wrap {
   overflow: unset !important;
@@ -2929,9 +3102,9 @@ a.tg_radio_on:hover i.icon-radio {
 }
 .im_message_document_caption,
 .im_message_photo_caption {
-  background-color: rgba(46,52,63,0.5);
+  background-color: rgba(0,0,0,0.145);
   border-radius: 5px;
-  padding: 8px 16px;
+  padding: 8px 18.5px;
   margin: 4px 0 0 0;
   border: 0;
   position: relative;

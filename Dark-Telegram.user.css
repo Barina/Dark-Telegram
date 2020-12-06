@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.10.39
+@version        1.11.40
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -173,7 +173,7 @@
 @-moz-document domain("web.telegram.org") {
     :root {
         /* auto generated line below. please do not delete or modify! */
-        --version "Dark-Telegram v1.10.39 -- December 2nd, 2020"
+        --version "Dark-Telegram v1.11.40 -- December 6th, 2020"
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -304,6 +304,9 @@
     msgbgoh = msgbgo + 10%
     msgbgis = msgbgi + 33%
     msgbgos = msgbgo + 33%
+
+    // chat border size
+    cbs = 3px
 
     accent-alt = accent + 33%
     accent-t = rgba(accent, .3)
@@ -439,10 +442,11 @@
     * =================================== */
 
     /* quote\reply\pinned messages mixin */
-    quote(b-rad, m, showbanner = true){
-        bgc control-t + 5%
+    quote(b-rad, m, showbanner = true, p = 8px 16px){
+        // bgc control-t + 5%
+        bgc #00000025
         brad b-rad
-        padding 8px 16px
+        padding p
         margin m
         border 0 // old border: 1px solid border-t
         position relative
@@ -819,7 +823,8 @@
     a.im_message_photo_thumb
     /* non-animated stickers */
     .im_message_media>div>div {
-        margin-top 5px i
+        // margin-top 5px i
+        margin-top 0 i
         width 100%
     }
 
@@ -859,6 +864,9 @@
         .im_history_messages .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body .im_message_author_wrap{
             overflow hidden
             max-height 0
+            if(!shownamehover){
+                max-width 0
+            }
         }
     }
     // other in private chat
@@ -866,6 +874,9 @@
         .im_history_messages .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body .im_message_author_wrap{
             overflow hidden
             max-height 0
+            if(!showothernamehover){
+                max-width 0
+            }
         }
     }
     // own in group chat
@@ -979,7 +990,7 @@
     
     if(tail == tritail){
         /* messages bubble triangle tail*/
-        .im_message_body:before{
+        .im_history_message_wrap:not(.im_grouped):not(.im_grouped_short) .im_message_outer_wrap .im_message_wrap .im_content_message_wrap .im_message_body:before{
             content ''
             position absolute
             top 0
@@ -1080,9 +1091,12 @@
     }
     
     /* short message bubble */
-    .im_grouped_short .im_message_outer_wrap .im_message_out .im_message_body
-    .im_grouped_short .im_message_outer_wrap .im_message_in .im_message_body{
-        brad msgb i
+    .im_message_outer_wrap .im_message_out .im_message_body
+    .im_message_outer_wrap .im_message_in .im_message_body{
+        .im_grouped &
+        .im_grouped_short &{
+            brad msgb i
+        }
     }
         
     /* message bubble base */
@@ -1109,7 +1123,7 @@
             margin-right 70px
         }
     }
-    
+
     /* bubble mixins */
     rightBubble(){
         if(tail != notail) {
@@ -1125,7 +1139,8 @@
     }
 
     .im_message_body{
-        padding 0 3px 3px 3px i
+        // padding 0 3px 3px 3px i
+        padding cbs i
         /* in message bubble */
         .im_message_in &{
             bgc msgbgi
@@ -1140,12 +1155,120 @@
         }
     }
 
+    /* forward messages */
+    b = msgb-thumb
+    .im_message_fwd .im_message_body{
+        & .im_message_fwd_from{
+            /* upper part - author icon + name data and views indicator */
+            display grid
+            grid-template-columns 0
+            quote(b b 0 0, 0, true, 8px 16px 5px 16px)
+            bgc #00000030
+            & .im_message_fwd_photo{
+                /* author icon */
+                grid-row 1
+                grid-column 1
+            }
+            & .im_message_fwd_author_wrap{
+                /* header */
+                display grid
+                grid-template-columns max-content
+                grid-row 1
+                grid-column 2
+                margin-left 52px // to compensate for auton icon
+                & .im_message_fwd_author{
+                    /* author name */
+                    grid-row 1
+                    grid-column 1
+                    width max-content
+                }
+                & .im_message_fwd_date{
+                    /* message date */
+                    grid-row 2
+                    grid-column 1
+                }
+                & .im_message_views_inline{
+                    /* message views indicator */
+                    grid-row 1
+                    grid-column 2
+                    width max-content
+                }
+            }
+        }
+        & div[my-message-body="historyMessage"]{
+            /* bottom part - message */
+            quote(0 0 b b, 0, true, 5px 8px 8px 16px)
+            & div{
+                margin-left unset
+            }
+        }
+    }
+
+    /* taking care of tails */
+    if(tail != 'notail'){
+        .im_history_message_wrap:not(.im_grouped):not(.im_grouped_short):not(.im_grouped_fwd_end) .im_message_outer_wrap .im_message_wrap {
+            & .im_message_in.im_message_fwd .im_message_body .im_message_fwd_from{
+                if(inpos != 'right'){
+                    brad cbs b 0 0 i
+                } else {
+                    brad b cbs 0 0 i
+                }            
+            }
+            & .im_message_out.im_message_fwd .im_message_body .im_message_fwd_from{
+                if(outpos != 'right'){
+                    brad cbs b 0 0 i
+                } else {
+                    brad b cbs 0 0 i
+                }
+            }
+        }
+    }
+
+    /* fixing wrong indentation */
+    .im_grouped_fwd .im_message_outer_wrap .im_message_wrap .im_message_fwd .im_message_from_photo {
+        display unset
+        visibility hidden
+    }
+
     /* photo messages */
     .im_message_photo_thumb
     .im_message_video_thumb{
         brad msgb-thumb i
     }
-    
+    /* taking care of messages tail */
+    if(tail != 'notail'){
+        .im_history_message_wrap:not(.im_grouped):not(.im_grouped_short){
+            & .im_message_outer_wrap .im_message_wrap .im_message_{
+                &out{
+                    & .im_message_body_media div .im_message_media div div {
+                        & .im_message_photo_thumb
+                        & div .im_message_video .im_message_video_thumb{
+                            // outline 3px solid red i
+                            if(outpos != 'right'){
+                                brad cbs msgb-thumb msgb-thumb msgb-thumb i
+                            } else {
+                                brad msgb-thumb cbs msgb-thumb msgb-thumb i
+                            }
+                        }
+                    }
+                }
+                &in{
+                    & .im_message_body_media div .im_message_media div div {
+                        & .im_message_photo_thumb
+                        & div .im_message_video .im_message_video_thumb{
+                            // outline 3px solid blue i
+                            if(inpos != 'right'){
+                                brad cbs msgb-thumb msgb-thumb msgb-thumb i
+                            } else {
+                                brad msgb-thumb cbs msgb-thumb msgb-thumb i
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+        
     /* photo messages vignette */
     a.im_message_video_thumb::after
     .im_message_photo_thumb::before{
@@ -1174,7 +1297,7 @@
     
     .im_message_author{
         padding 0px 5px 0px 5px
-        margin 5px 0 0 0
+        margin 0 0 5px 0
         display inline-block
         width max-content
     }
@@ -1271,6 +1394,7 @@
     .login_head_bg
     .modal-content{        
         bgTex bgcolor
+        brad border-size border-size 0 0
     }
     
     body{
@@ -2505,12 +2629,44 @@
     .im_history_pinned_wrap .im_message_reply{
         // margin-right 56px
     }
-
-    /* replay messages */
-    .im_message_reply_wrap{
-        quote(0 2px 2px 0, 0 0 8px 0 i)
-    }
     
+    /* replay messages with border radius */
+    // inside chat
+    // not the first message
+    .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_content_message_wrap .im_message_body .im_message_reply_wrap{
+        quote(msgb-thumb, 0 i, true, 8px (msgb-thumb / 4 + 16)px)        
+    }
+    // the first message
+    .im_history_message_wrap:not(.im_grouped):not(.im_grouped_short) .im_message_outer_wrap .im_message_wrap{
+        & .im_message_in .im_message_body .im_message_reply_wrap{
+            cs = msgb-thumb
+            if(tail != notail){
+                if(inpos != right){
+                    cs = cbs msgb-thumb msgb-thumb msgb-thumb
+                } else {
+                    cs = msgb-thumb cbs msgb-thumb msgb-thumb
+                }
+            }
+            quote(cs, 0 i, true, 8px (msgb-thumb / 4 + 16)px)
+        }
+        & .im_message_out .im_message_body .im_message_reply_wrap{
+            cs = msgb-thumb
+            if(tail != notail){
+                if(outpos != right){
+                    cs = cbs msgb-thumb msgb-thumb msgb-thumb
+                } else {
+                    cs = msgb-thumb cbs msgb-thumb msgb-thumb
+                }
+            }            
+            quote(cs, 0 i, true, 8px (msgb-thumb / 4 + 16)px)
+        }
+    }
+    // inside send form
+    .im_send_reply_wrap .im_message_reply_wrap
+    .im_send_reply_wrap a.im_message_reply_wrap{
+        quote(msgb-thumb, 0 0 8px 0 i)
+    }    
+       
     /* pinned message panel */
     .im_history_pinned_{
         &panel{
@@ -2543,16 +2699,37 @@
     }
     
     /* media messages */
-    .audio_player_wrap
-    .im_message_document{
-        bgc control-t
-        brad msgb-thumb
-        padding 8px 
-        border 1px solid border
-        margin-top 4px
-        display block
+    .im_history_message_wrap{
+        & .im_message_outer_wrap .im_message_wrap .im_content_message_wrap .im_message_body_media div .im_message_media div div div{
+            & .im_message_audio div .audio_player_wrap
+            & .im_message_document{
+                quote(msgb-thumb, 0, true, p = 8px 16px)
+                border 1px solid border
+                display block
+            }
+        }
+        if(tail != 'notail'){
+            /* taking care of tails */
+            &:not(.im_grouped):not(.im_grouped_short) .im_message_outer_wrap .im_message_wrap{
+                & .im_message_in .im_message_body_media div .im_message_media div div div .im_message_audio div{
+                    if(inpos != 'right'){
+                        brad cbs msgb-thumb msgb-thumb msgb-thumb i
+                    } else {
+                        brad msgb-thumb cbs msgb-thumb msgb-thumb i
+                    }            
+                }
+                & .im_message_out .im_message_body_media div .im_message_media div div div .im_message_audio div{
+                    if(outpos != 'right'){
+                        brad cbs msgb-thumb msgb-thumb msgb-thumb i
+                    } else {
+                        brad msgb-thumb cbs msgb-thumb msgb-thumb i
+                    }
+                }
+            }
+        }
     }
 
+    
     /* fixing the media messages button in place ... */
     .im_message_document{
         display -webkit-box i
@@ -2561,21 +2738,31 @@
 
     /* media not supported message */
     div[ng-switch-when="messageMediaUnsupported"]{
-        // bgc control-t
-        // brad msgb-thumb
-        // padding 0px 8px
-        // margin-top 4px
-        quote(msgb-thumb, 4px 0 0 0, false)
+        quote(msgb-thumb, 0, false)
+    }
+    if(tail != 'notail'){
+        /* taking care of tails */
+        .im_history_message_wrap:not(.im_grouped):not(.im_grouped_short) .im_message_outer_wrap .im_message_wrap{
+            & .im_message_in .im_message_body_media div .im_message_media div div[ng-switch-when="messageMediaUnsupported"]{
+                if(inpos != 'right'){
+                    brad cbs msgb-thumb msgb-thumb msgb-thumb i
+                } else {
+                    brad msgb-thumb cbs msgb-thumb msgb-thumb i
+                }   
+            }
+            & .im_message_out .im_message_body_media div .im_message_media div div[ng-switch-when="messageMediaUnsupported"]{    
+                if(outpos != 'right'){
+                    brad cbs msgb-thumb msgb-thumb msgb-thumb i
+                } else {
+                    brad msgb-thumb cbs msgb-thumb msgb-thumb i
+                }        
+            }
+        }
     }
 
-    /* reply messages border radius */
-    .im_message_reply_wrap{
-        brad msgb-thumb
-    }
-        
     /* removing the bottom margin from thumbed reply messages */
     .im_message_reply_wrap .im_message_reply_thumbed{
-        margin-bottom unset
+        // margin-bottom unset
     }
     
     /* thumbed reply messages content fix */
@@ -2601,7 +2788,7 @@
         // border-left-width 4px
         // bgc #0000000d
         // padding 5px 5px 5px 12px i
-        quote(msgb-thumb, -10px 0 0 0)
+        quote(msgb-thumb, 0, true, 8px (msgb-thumb / 2 + 16)px)
     }
     
     /* model divider */
@@ -2857,8 +3044,10 @@
     }
 
     .im_message_document_info{
+        .im_message_document_thumbed &{
+            quote(msgb-thumb, 0, false, 8px (msgb-thumb / 2 + 16)px)
+        }
         max-width 100% i
-        quote(msgb-thumb, 4px 0 0 0, false)
         width 100%
         // may fix document info position in some situations
         display inline-block
@@ -3064,7 +3253,7 @@
     /* vote buttons alignment and background */
     .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_content_message_wrap .im_message_body div[my-message-body="historyMessage"] .im_message_keyboard .reply_markup_wrap{
         bgc rgba(0,0,0,.1)
-        padding 5px
+        padding 8px 4px msgb 4px
         margin 0
         brad 0 0 msgb msgb
         width 100%
@@ -3142,6 +3331,7 @@
     .im_message_document_name_wrap
     .im_message_document_actions{
         width unset i
+        margin-top 0
     }
 
     /* audio messages undesire line break fix */
@@ -3185,6 +3375,7 @@
         margin 10px
     }
 
+    /* media descrition */
     .im_message_document_caption
     .im_message_photo_caption{
         .im_message_body_media div[my-message-body="historyMessage"] .im_message_media div[ng-switch="::media._"] div &{
@@ -3195,7 +3386,7 @@
                 max-width prevwout i
             }
         }
-        quote(msgb-thumb, 4px 0 0 0, false )
+        quote(msgb-thumb, 4px 0 0 0, false, 8px (msgb-thumb / 2 + 16)px)
     }
 
     /* making the outline on focused elements match the theme */

@@ -1,3 +1,13 @@
+## V1.11.40 (2020-12-06)
+
+- Fixed the "quoted" elements to have a black background rather than general single control color.
+- Fixed chat participants name taking space when set to not visible.
+- Fixed short messages having tails.
+- Fixed video thumbnails ignoring tails in tailed chat bubbles.
+- Fixed reply preview misplaced.
+- Content message will now take care of tail type too.
+- Forwarded messages got a new look.
+
 ## V1.10.39 (2020-12-02)
 
 - Fixed reply preview position.
