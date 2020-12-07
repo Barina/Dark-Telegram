@@ -4,7 +4,7 @@
 @homepageURL https://github.com/Barina/Dark-Telegram
 @supportURL https://github.com/Barina/Dark-Telegram/issues
 @updateURL https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version 1.11.41
+@version 1.12.42
 @description Customizable theme for telegram web.
 @author Roy Barina
 @license MIT
@@ -436,7 +436,7 @@ div.im_message_body {
   border: 0;
   position: relative;
   overflow: hidden;
-  background-color: rgba(0,0,0,0.188);
+  background-color: rgba(0,0,0,0.082);
 }
 .im_message_fwd .im_message_body .im_message_fwd_from:before {
   content: '';
@@ -584,7 +584,7 @@ a.pull-right,
 }
 .im_history_not_selected:after {
   display: block;
-  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.11.41 -- December 7th, 2020";
+  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.12.42 -- December 7th, 2020";
   white-space: pre-wrap;
   border-top: 1px solid #333943;
   font-size: 11px;
@@ -626,6 +626,7 @@ body:before {
   background-color: #7289da !important;
   color: #fff !important;
 }
+.im_message_reply_body,
 .im_bot_intro_message,
 .login_form_messaging,
 .login_smscode_lead,
@@ -887,11 +888,19 @@ a.md_modal_action:hover,
   border-radius: 3px;
   border-color: #333943 !important;
 }
+.tg_head_main_wrap,
+.im_history_col_wrap {
+  width: 69%;
+}
 .im_dialogs_col_wrap {
   border-right: 1px solid #333943;
   border-top: 0px none !important;
   padding-bottom: initial;
   height: auto;
+}
+.tg_head_logo_wrap,
+.page_wrap .im_page_wrap .im_page_split .im_dialogs_col_wrap {
+  width: 31%;
 }
 .im_dialog_meta {
   position: absolute;
@@ -914,7 +923,7 @@ a.md_modal_action:hover,
   }
   .tg_head_logo_wrap,
   .im_dialogs_col_wrap {
-    width: 80px;
+    width: 80px !important;
   }
   .tg_head_main_wrap,
   .im_history_col_wrap {

@@ -1,3 +1,9 @@
+## V1.12.42 (2020-12-07)
+
+- You can now change the contact list width.
+- Forwarded messages header should be lighter now.
+- Fixed old issue where wrapped text ellipsis wasn't receive the style colors.
+
 ## V1.11.41 (2020-12-07)
 
 - Fixed an issue where other name in a group chat still takes space even tho marked to be hidden.

@@ -4,13 +4,14 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.11.41
+@version        1.12.42
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
 @preprocessor   stylus
 
 @var text windowwidth               'Window width' 75%
+@var range contactlistwidth         'Contact list width' [31, 5, 80, 1, "%"]
 
 @var color textc2                   'Headers text color' #fff
 @var color textc1                   'Primary text color' #ccccca
@@ -173,7 +174,7 @@
 @-moz-document domain("web.telegram.org") {
     :root {
         /* auto generated line below. please do not delete or modify! */
-        --version "Dark-Telegram v1.11.41 -- December 7th, 2020"
+        --version "Dark-Telegram v1.12.42 -- December 7th, 2020"
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -735,7 +736,7 @@
             height 0 i
         }
         
-        /* fix overly compated button area */
+        /* fix overly compacted button area */
         .im_record{
             position relative
             top unset
@@ -1169,7 +1170,7 @@
             display grid
             grid-template-columns 0
             quote(b b 0 0, 0, true, 8px 16px 5px 16px)
-            bgc #00000030
+            bgc #00000015
             & .im_message_fwd_photo{
                 /* author icon */
                 grid-row 1
@@ -1445,6 +1446,7 @@
     }
 
     /* primary text color elements */
+    .im_message_reply_body
     .im_bot_intro_message
     .login_form_messaging
     .login_smscode_lead
@@ -1809,12 +1811,23 @@
         border-color border i
     }
 
+    /* right part width */
+    .tg_head_main_wrap
+    .im_history_col_wrap{
+        width (100% - contactlistwidth)
+    }
+
+    /* left part (contact list) */
     .im_dialogs_col_wrap {
         /* contact list right border */
         border-right 1px solid border
         border-top 0px none i
         padding-bottom initial
         height auto
+        / .tg_head_logo_wrap
+        .page_wrap .im_page_wrap .im_page_split &{
+            width contactlistwidth
+        }
     }
 
     /* positioning meta data as preparation for compact mode */
@@ -1833,7 +1846,8 @@
     if(enableCompact){
         @media screen and (max-width compactBreak) {
             wmin = 80px
-            wmax = 31%
+            // wmax = 31%
+            wmax = contactlistwidth
             
             /* let all the envolved transit nicely */
             .tg_head_main_wrap
@@ -1850,7 +1864,7 @@
             /* top left header and contact list minimum width */
             .tg_head_logo_wrap
             .im_dialogs_col_wrap{
-                width wmin
+                width wmin i
             }
             
             /* top right header and message history panel maximum width */
@@ -1893,7 +1907,7 @@
                 /* minimize message history (including textarea) and top right header width to it's initial state */
                 .tg_head_main_wrap//<- need to fix that
                 ~ .im_history_col_wrap{
-                    width 69% i
+                    width (100% - wmax) i
                 }
                 
                 /* show top left header text and metadata */
