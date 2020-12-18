@@ -4,11 +4,17 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.13.43
+@version        1.14.44
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
 @preprocessor   stylus
+
+@var select browser                 'Browser'{
+    'Chromium (Chrome, Edge etc) *': 'chromium',
+    'FireFox                      ': 'firefox',
+    'Other                        ': 'other',
+}
 
 @var text windowwidth               'Window width' 75%
 @var range contactlistwidth         'Contact list width' [31, 5, 80, 1, "%"]
@@ -168,14 +174,13 @@
 
 @var text blurbehind                'Blur amount behind focused media' 8px
 
-@var checkbox fffix                 'Chat list fix' 0
 @var checkbox poseon                'Enable pose mode' 0
 
 ==/UserStyle== */
 @-moz-document domain("web.telegram.org") {
     :root {
         /* auto generated line below. please do not delete or modify! */
-        --version "Dark-Telegram v1.13.43 -- December 18th, 2020"
+        --version "Dark-Telegram v1.14.44 -- December 18th, 2020"
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -1724,13 +1729,6 @@
         }
     }
 
-    /* FireFox fix */
-    if(fffix){
-        .nav{
-            padding-right 15px i
-        }
-    }
-    
     .contacts_modal_members_list .active a.contacts_modal_contact
     .im_dialogs_scrollable_wrap a.im_dialog_searchpeer:hover
     .im_dialogs_scrollable_wrap a.im_dialog_searchpeer_selected
@@ -2610,7 +2608,7 @@
     .composer_emoji_tooltip_tail{
         left emoj-t-l
         right emoj-t-r
-        bottom -14px
+        bottom emoj-pos is center ? -13px : -12px
     }
     
     /* sticker button background */
@@ -3422,6 +3420,22 @@
 
     .im_service_message_pinned{
         vertical-align bottom i
+    }
+
+    /* browser specific fixes */
+    if(browser is chrome){
+        /* chrome emojis width fix */
+        .composer_emoji_tooltip_content_wrap{
+            width 285px
+        }
+
+    } else if(browser is firefox){
+        /* FireFox contact list fix */
+        .nav{
+            padding-right 15px i
+        }        
+    } else {
+
     }
 
     // debugging

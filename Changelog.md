@@ -1,3 +1,8 @@
+## V1.14.44 (2020-12-18)
+
+- Added browser specific fixes. You can now check the browser you are using to fix browser specific issues.
+- Fixed emoji popup tail position.
+
 ## V1.13.43 (2020-12-18)
 
 - You can now scale the emoji popup as suggested in [Issue #14](../../issues/14).
