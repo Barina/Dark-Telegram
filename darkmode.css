@@ -4,7 +4,7 @@
 @homepageURL https://github.com/Barina/Dark-Telegram
 @supportURL https://github.com/Barina/Dark-Telegram/issues
 @updateURL https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version 1.12.42
+@version 1.13.43
 @description Customizable theme for telegram web.
 @author Roy Barina
 @license MIT
@@ -133,26 +133,6 @@ a.im_service_message_photo_thumb {
 .im_send_panel_wrap {
   background-color: #252a33 !important;
   padding-bottom: 8px;
-}
-a.composer_emoji_btn,
-.composer_sticker_image {
-  opacity: 0.6;
-}
-a.composer_emoji_btn:hover,
-.composer_sticker_image:hover {
-  opacity: 1;
-}
-a.composer_emoji_btn:hover {
-  background-color: #343b46;
-}
-.composer_sticker_btn .composer_sticker_image,
-.composer_emoji_btn .emoji {
-  transition: 1s ease-in-out;
-}
-.composer_sticker_btn:hover .composer_sticker_image,
-.composer_emoji_btn:hover .emoji {
-  transform: scale(1.5);
-  transition: 0.1s ease-out;
 }
 .progress-arc {
   display: none !important;
@@ -584,7 +564,7 @@ a.pull-right,
 }
 .im_history_not_selected:after {
   display: block;
-  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.12.42 -- December 7th, 2020";
+  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.13.43 -- December 18th, 2020";
   white-space: pre-wrap;
   border-top: 1px solid #333943;
   font-size: 11px;
@@ -1256,9 +1236,6 @@ a.im_dialog:hover,
   border-bottom: 1px solid #333943;
   display: none;
 }
-.composer_emoji_panel {
-  display: none;
-}
 .im_send_field_wrap {
   border-radius: 3px;
   min-height: 32px;
@@ -1412,18 +1389,6 @@ a.im_panel_own_photo {
   margin-top: 5px;
   margin-left: 5px;
 }
-.im_send_field_wrap,
-.im_inline_placeholder_wrap {
-  overflow: unset;
-}
-.composer_emoji_insert_btn {
-  position: absolute;
-  left: -39px;
-  top: 8px;
-  cursor: pointer;
-  margin-top: 1px;
-  display: block;
-}
 .btn-primary {
   background-color: #2b313b;
 }
@@ -1434,18 +1399,6 @@ a.im_panel_own_photo {
 .btn-primary.disabled,
 .btn-primary[disabled] {
   Background: #2b313b none repeat scroll 0% 0%;
-}
-.composer_emoji_tooltip,
-.icon-tooltip-tail,
-.dropdown-menu {
-  background-color: #252a33 !important;
-  border-color: #333943 !important;
-  border-radius: 3px !important;
-  -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,0.251);
-  -moz-box-shadow: 0px 0px 5px rgba(0,0,0,0.251);
-  -webkit-shadow: 0px 0px 5px rgba(0,0,0,0.251);
-  -moz-shadow: 0px 0px 5px rgba(0,0,0,0.251);
-  box-shadow: 0px 0px 5px rgba(0,0,0,0.251);
 }
 .login_form_wrap,
 .tg_head_peer_dropdown .dropdown-menu,
@@ -1609,6 +1562,53 @@ a.im_panel_own_photo {
   width: 5px;
   left: -5px;
 }
+.composer_emoji_panel {
+  display: none;
+}
+a.composer_emoji_btn,
+.composer_sticker_image {
+  opacity: 0.6;
+}
+a.composer_emoji_btn:hover,
+.composer_sticker_image:hover {
+  opacity: 1;
+}
+a.composer_emoji_btn:hover {
+  background-color: #343b46;
+}
+.composer_sticker_btn .composer_sticker_image,
+.composer_emoji_btn .emoji {
+  transition: 1s ease-in-out;
+}
+.composer_sticker_btn:hover .composer_sticker_image,
+.composer_emoji_btn:hover .emoji {
+  transform: scale(1.5);
+  transition: 0.1s ease-out;
+}
+.im_send_field_wrap,
+.im_inline_placeholder_wrap {
+  overflow: unset;
+}
+.composer_emoji_insert_btn {
+  position: absolute;
+  left: -39px;
+  top: 8px;
+  cursor: pointer;
+  margin-top: 1px;
+  display: block;
+}
+.composer_emoji_tooltip,
+.icon-tooltip-tail,
+.dropdown-menu {
+  background-color: #252a33 !important;
+  border-color: #333943 !important;
+  border-radius: 3px !important;
+  -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,0.251);
+  -moz-box-shadow: 0px 0px 5px rgba(0,0,0,0.251);
+  -webkit-shadow: 0px 0px 5px rgba(0,0,0,0.251);
+  -moz-shadow: 0px 0px 5px rgba(0,0,0,0.251);
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.251);
+}
 .composer_emoji_tooltip_tab_shadow {
   Background: #a1b0e6;
   -webkit-box-shadow: 0 1px 0 0 #a1b0e6;
@@ -1618,12 +1618,14 @@ a.im_panel_own_photo {
   box-shadow: 0 1px 0 0 #a1b0e6;
 }
 .composer_emoji_tooltip {
+  transform: scale(1);
+  transform-origin: 143px 333px;
   margin-left: -133px;
 }
 .composer_emoji_tooltip_tail {
   left: 50%;
   right: initial;
-  bottom: -12px;
+  bottom: -14px;
 }
 .composer_sticker_btn:hover,
 .stickerset_modal_sticker_wrap:hover {
@@ -2945,8 +2947,7 @@ h5,
   transition: 0.1s;
 }
 .tg_checkbox span.icon-checkbox-outer {
-  Background: #a1b0e6;
-  opacity: 0.75;
+  Background: #252a33;
   transition: 1s;
 }
 .dropdown-menu li a,

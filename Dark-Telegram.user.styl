@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.12.42
+@version        1.13.43
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -122,6 +122,7 @@
 
 @var checkbox vign                  'Vignette effect on media previews' 1
 
+@var range emoj-scale               'Emoji panel scale' [1, .5, 3, .01]
 @var range emojo                    'Emoji and sticker icons opacity' [.6, 0, 1, .01]
 @var select emoj-pos                'Emoji and sticker popup position' {
     'Center                      *': 'center',
@@ -174,7 +175,7 @@
 @-moz-document domain("web.telegram.org") {
     :root {
         /* auto generated line below. please do not delete or modify! */
-        --version "Dark-Telegram v1.12.42 -- December 7th, 2020"
+        --version "Dark-Telegram v1.13.43 -- December 18th, 2020"
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -351,15 +352,18 @@
 
     // set emoji popup position
     if(emoj-pos is right) {
+        emoj-anchor-x = 12px
         emoj-l = -1px
         emoj-t-l = initial
         emoj-t-r = 260px
     } else if(emoj-pos is left) {
-        emoj-l = -263px
+        emoj-anchor-x = 273px
+        emoj-l = -263px 
         emoj-t-l = initial
         emoj-t-r = -1px
     } else {
         /* center */
+        emoj-anchor-x = (286 / 2)px
         emoj-l = -133px
         emoj-t-l = 50%
         emoj-t-r = initial
@@ -663,31 +667,6 @@
         padding-bottom 8px
     }
     
-    /* emoji's & stickers opacity */
-    a.composer_emoji_btn
-    .composer_sticker_image{
-        opacity emojo
-        &:hover{
-            opacity 1
-        }
-    }
-
-    /* emoji's button background when hovered */
-    a.composer_emoji_btn:hover{
-        bgc control-active
-    }
-
-    /* enlarging emoji's and stickers when hover just like the original style */
-    .composer_sticker_btn .composer_sticker_image
-    .composer_emoji_btn .emoji{
-        transition t-out ease-in-out
-    }
-    .composer_sticker_btn:hover .composer_sticker_image
-    .composer_emoji_btn:hover .emoji{
-        transform scale(1.5)
-        transition t-in ease-out
-    }
-
     /* hiding default progress bar */
     .progress-arc{
         display none i
@@ -2188,11 +2167,6 @@
         display none
     }
     
-    /* hiding useless emoji's below textarea */
-    .composer_emoji_panel{
-        display none
-    }
-    
     /* text message area */
     .im_send_field_wrap {
         border-radius border-size
@@ -2354,22 +2328,6 @@
         margin-left 5px
     }
     
-    /* making emoji button visible outside textarea */
-    .im_send_field_wrap
-    .im_inline_placeholder_wrap{
-        overflow unset
-    }
-        
-    /* emoji button */
-    .composer_emoji_insert_btn{
-        position absolute
-        left -39px
-        top 8px
-        cursor pointer
-        margin-top 1px
-        display block
-    }
-    
     .btn-primary {
         bgc btn-bg
     }
@@ -2383,17 +2341,7 @@
     .btn-primary[disabled] {
         bg btn-bg none repeat scroll 0% 0%
     }
-
-    /*emoji*/
-    .composer_emoji_tooltip
-    .icon-tooltip-tail
-    .dropdown-menu {
-        bgTex()
-        border-color border i
-        border-radius 3px i
-        shad 0px 0px 5px shadow
-    }
-        
+ 
     .login_form_wrap
     /* drop shadow under top dropdown menus */
     .tg_head_peer_dropdown .dropdown-menu
@@ -2589,6 +2537,62 @@
         left -5px
     }
     
+    /* hiding useless emoji's below textarea */
+    .composer_emoji_panel{
+        display none
+    }
+    
+    /* emoji's & stickers opacity */
+    a.composer_emoji_btn
+    .composer_sticker_image{
+        opacity emojo
+        &:hover{
+            opacity 1
+        }
+    }
+
+    /* emoji's button background when hovered */
+    a.composer_emoji_btn:hover{
+        bgc control-active
+    }
+
+    /* enlarging emoji's and stickers when hover just like the original style */
+    .composer_sticker_btn .composer_sticker_image
+    .composer_emoji_btn .emoji{
+        transition t-out ease-in-out
+    }
+    .composer_sticker_btn:hover .composer_sticker_image
+    .composer_emoji_btn:hover .emoji{
+        transform scale(1.5)
+        transition t-in ease-out
+    }
+
+    /* making emoji button visible outside textarea */
+    .im_send_field_wrap
+    .im_inline_placeholder_wrap{
+        overflow unset
+    }
+        
+    /* emoji button */
+    .composer_emoji_insert_btn{
+        position absolute
+        left -39px
+        top 8px
+        cursor pointer
+        margin-top 1px
+        display block
+    }
+    
+    /*emoji*/
+    .composer_emoji_tooltip
+    .icon-tooltip-tail
+    .dropdown-menu {
+        bgTex()
+        border-color border i
+        border-radius 3px i
+        shad 0px 0px 5px shadow
+    }
+       
     /* emoji/stickers tab */
     .composer_emoji_tooltip_tab_shadow{
         bg accent-alt
@@ -2597,6 +2601,8 @@
     
     /* emoji popup position */
     .composer_emoji_tooltip{
+        transform scale(emoj-scale)
+        transform-origin emoj-anchor-x 333px
         margin-left emoj-l
     }
     
@@ -2604,7 +2610,7 @@
     .composer_emoji_tooltip_tail{
         left emoj-t-l
         right emoj-t-r
-        bottom -12px
+        bottom -14px
     }
     
     /* sticker button background */
@@ -3169,8 +3175,8 @@
     
     /* toggles bg OFF */
     .tg_checkbox span.icon-checkbox-outer{
-        bg accent-alt
-        opacity .75
+        bg control // fixed issue #14
+        // opacity .75
         transition t-out
     }
     

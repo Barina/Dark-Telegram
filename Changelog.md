@@ -1,3 +1,8 @@
+## V1.13.43 (2020-12-18)
+
+- You can now scale the emoji popup as suggested in [Issue #14](../../issues/14).
+- Fixed confusing toggle buttons background color when toggled off, also suggested in [Issue #14](../../issues/14).
+
 ## V1.12.42 (2020-12-07)
 
 - You can now change the contact list width.
