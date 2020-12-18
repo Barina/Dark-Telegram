@@ -1,3 +1,7 @@
+## V1.14.45 (2020-12-18)
+
+- Fixed emojis fitting in popup on Chromium based browsers.
+
 ## V1.14.44 (2020-12-18)
 
 - Added browser specific fixes. You can now check the browser you are using to fix browser specific issues.
