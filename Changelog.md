@@ -1,15 +1,19 @@
+## V1.14.46 (2020-12-20)
+
+- No need for background if we won't even see it.
+
 ## V1.14.45 (2020-12-18)
 
-- Fixed emojis fitting in popup on Chromium based browsers.
+- Fixed Emojis fitting in panel on Chromium based browsers.
 
 ## V1.14.44 (2020-12-18)
 
 - Added browser specific fixes. You can now check the browser you are using to fix browser specific issues.
-- Fixed emoji popup tail position.
+- Fixed Emojis panel tail position.
 
 ## V1.13.43 (2020-12-18)
 
-- You can now scale the emoji popup as suggested in [Issue #14](../../issues/14).
+- You can now scale the Emojis panel as suggested in [Issue #14](../../issues/14).
 - Fixed confusing toggle buttons background color when toggled off, also suggested in [Issue #14](../../issues/14).
 
 ## V1.12.42 (2020-12-07)
