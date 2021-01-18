@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.14.46
+@version        1.14.47
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -180,7 +180,7 @@
 @-moz-document domain("web.telegram.org") {
     :root {
         /* auto generated line below. please do not delete or modify! */
-        --version "Dark-Telegram v1.14.46 -- December 20th, 2020"
+        --version "Dark-Telegram v1.14.47 -- January 18th, 2021"
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -452,7 +452,7 @@
     * =================================== */
 
     /* quote\reply\pinned messages mixin */
-    quote(b-rad, m, showbanner = true, p = 8px 16px){
+    q(b-rad, m, showbanner = true, p = 8px 16px){
         // bgc control-t + 5%
         bgc #00000025
         brad b-rad
@@ -842,19 +842,21 @@
             transition t-in ease-out
         }
     }    
-
+    
     /* user names */
-    NameOwn = ".im_history_messages:not(.im_history_messages_group) .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body .im_message_author_wrap"
-    NameOwnHover = ".im_history_messages:not(.im_history_messages_group) .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body:hover .im_message_author_wrap"
+    NamePfx = ".im_history_messages%s .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_%s .im_message_body%s .im_message_author_wrap"
     
-    NameOther = ".im_history_messages:not(.im_history_messages_group) .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body .im_message_author_wrap"
-    NameOtherHover = ".im_history_messages:not(.im_history_messages_group) .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body:hover .im_message_author_wrap"
+    NameOwn = s(NamePfx, s(':not(.im_history_messages_group)'), out, s(''))
+    NameOwnHover = s(NamePfx, s(':not(.im_history_messages_group)'), out, s(':hover'))
     
-    NameGroupOwn = ".im_history_messages_group .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body .im_message_author_wrap"
-    NameGroupOwnHover = ".im_history_messages_group .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_out .im_message_body:hover .im_message_author_wrap"
+    NameOther = s(NamePfx, s(':not(.im_history_messages_group)'), s('in'), s(''))
+    NameOtherHover = s(NamePfx, s(':not(.im_history_messages_group)'), s('in'), s(':hover'))
     
-    NameGroupOther = ".im_history_messages_group .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body .im_message_author_wrap"
-    NameGroupOtherHover = ".im_history_messages_group .im_history_messages_peer .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body:hover .im_message_author_wrap"
+    NameGroupOwn = s(NamePfx, _group, out, s(''))
+    NameGroupOwnHover = s(NamePfx, _group, out, s(':hover'))
+    
+    NameGroupOther = s(NamePfx, _group, s('in'), s(''))
+    NameGroupOtherHover = s(NamePfx, _group, s('in'), s(':hover'))
 
     /* user names mixins */
     username(hidename, showonhover){
@@ -1153,7 +1155,7 @@
             /* upper part - author icon + name data and views indicator */
             display grid
             grid-template-columns 0
-            quote(b b 0 0, 0, true, 8px 16px 5px 16px)
+            q(b b 0 0, 0, true, 8px 16px 5px 16px)
             bgc #00000015
             & .im_message_fwd_photo{
                 /* author icon */
@@ -1188,7 +1190,7 @@
         }
         & div[my-message-body="historyMessage"]{
             /* bottom part - message */
-            quote(0 0 b b, 0, true, 5px 8px 8px 16px)
+            q(0 0 b b, 0, true, 5px 8px 8px 16px)
             & div{
                 margin-left unset
             }
@@ -2399,7 +2401,7 @@
 
     /* bot intro message */
     .im_bot_intro_message{
-        quote(border-size, 5, false)
+        q(border-size, 5, false)
         brad 3px i
     }
 
@@ -2658,7 +2660,7 @@
     // inside chat
     // not the first message
     .im_history_message_wrap .im_message_outer_wrap .im_message_wrap .im_content_message_wrap .im_message_body .im_message_reply_wrap{
-        quote(msgb-thumb, 0 i, true, 8px (msgb-thumb / 4 + 16)px)        
+        q(msgb-thumb, 0 i, true, 8px (msgb-thumb / 4 + 16)px)        
     }
     // the first message
     .im_history_message_wrap:not(.im_grouped):not(.im_grouped_short) .im_message_outer_wrap .im_message_wrap{
@@ -2671,7 +2673,7 @@
                     cs = msgb-thumb cbs msgb-thumb msgb-thumb
                 }
             }
-            quote(cs, 0 i, true, 8px (msgb-thumb / 4 + 16)px)
+            q(cs, 0 i, true, 8px (msgb-thumb / 4 + 16)px)
         }
         & .im_message_out .im_message_body .im_message_reply_wrap{
             cs = msgb-thumb
@@ -2682,13 +2684,13 @@
                     cs = msgb-thumb cbs msgb-thumb msgb-thumb
                 }
             }            
-            quote(cs, 0 i, true, 8px (msgb-thumb / 4 + 16)px)
+            q(cs, 0 i, true, 8px (msgb-thumb / 4 + 16)px)
         }
     }
     // inside send form
     .im_send_reply_wrap .im_message_reply_wrap
     .im_send_reply_wrap a.im_message_reply_wrap{
-        quote(msgb-thumb, 0 0 8px 0 i)
+        q(msgb-thumb, 0 0 8px 0 i)
     }    
        
     /* pinned message panel */
@@ -2701,7 +2703,7 @@
             border-bottom unset i
             padding 5px
             & .im_message_reply{
-                quote(0 2px 2px 0, 5px 12px i)
+                q(0 2px 2px 0, 5px 12px i)
             }
         }
         &message{
@@ -2727,7 +2729,7 @@
         & .im_message_outer_wrap .im_message_wrap .im_content_message_wrap .im_message_body_media div .im_message_media div div div{
             & .im_message_audio div .audio_player_wrap
             & .im_message_document{
-                quote(msgb-thumb, 0, true, p = 8px 16px)
+                q(msgb-thumb, 0, true, p = 8px 16px)
                 border 1px solid border
                 display block
             }
@@ -2762,7 +2764,7 @@
 
     /* media not supported message */
     div[ng-switch-when="messageMediaUnsupported"]{
-        quote(msgb-thumb, 0, false)
+        q(msgb-thumb, 0, false)
     }
     if(tail != 'notail'){
         /* taking care of tails */
@@ -2812,7 +2814,7 @@
         // border-left-width 4px
         // bgc #0000000d
         // padding 5px 5px 5px 12px i
-        quote(msgb-thumb, 0, true, 8px (msgb-thumb / 2 + 16)px)
+        q(msgb-thumb, 0, true, 8px (msgb-thumb / 2 + 16)px)
     }
     
     /* model divider */
@@ -2843,65 +2845,58 @@
         }
     }
 
-    /* svg icons */
-    .md_modal_section_icon_people{
-        svgIcon groupSvg
-    }    
-    
-    .md_modal_section_icon_person{
-        svgIcon contactSvg
-    }    
-    
-    .md_modal_section_icon_more{
-        svgIcon menuSvg
-    }    
-    
-    .md_modal_section_icon_keyboard{
-        svgIcon keyboardSvg
-    }
-    
-    .md_modal_section_icon_phone{
-        svgIcon phoneSvg
-    }
-    
-    .md_modal_section_icon_notification{
-        svgIcon bellSvg
-    }
-
-    .is_2x .icon-message-views{
-        svgIcon eyeSvg
-    }
-
-    .md_modal_section_icon_about{
-        svgIcon infoSvg
+    icons = {
+        ".md_modal_section_icon_people" : groupSvg,
+        ".md_modal_section_icon_person" : contactSvg,
+        ".is_2x .icon-search" : searchSvg,    
+        ".md_modal_section_icon_more" : menuSvg,
+        ".md_modal_section_icon_keyboard" : keyboardSvg,
+        ".md_modal_section_icon_phone" : phoneSvg,
+        ".md_modal_section_icon_notification" : bellSvg,
+        ".is_2x .icon-message-views" : eyeSvg,
+        ".md_modal_section_icon_about" : infoSvg,
+        ".media_modal_action_btn i.media_modal_action_btn_download" : downbtnSvg,
+        ".media_modal_action_btn i.media_modal_action_btn_forward" : fwrSvg,
+        ".modal_next" : rightSvg,
+        ".modal_prev" : leftSvg,
+        ".media_modal_action_btn i.media_modal_action_btn_delete" : trashSvg,
+        ".icon-filter-photos" : bgSvg,
+        ".icon-filter-video" : videoSvg,
+        ".icon-filter-documents" : fileSvg,
+        ".icon-filter-audio" : micSvg,
+        ".icon-new-group" : groupIconSvg,
+        ".icon-contacts" : contactsSvg,
+        ".icon-settings" : gearSvg,
+        ".icon-faq" : faqSvg,
+        ".icon-about" : logoSvg,
+        ".is_2x .icon-next-submit" : arrowSvg,
+        ".is_2x i.icon-search-clear" : xSvg,
+        ".icon-camera" : cameraSvg,
+        ".icon-paperclip" : fileSvg,
+        ".icon-emoji" : emojiSvg,
     }
 
-    .media_modal_action_btn i.media_modal_action_btn_download{
-        svgIcon downbtnSvg
+    iconsaccent = {
+        ".composer_emoji_tooltip_category_recent" : timeSvg,
+        ".composer_emoji_tooltip_category_smile" : emojiSvg,
+        ".composer_emoji_tooltip_category_car" : carSvg,
+        ".composer_emoji_tooltip_category_grid" : hashSvg,
     }
 
-    .media_modal_action_btn i.media_modal_action_btn_forward{
-        svgIcon fwrSvg
+    for k, v in icons{
+        {k}{
+            svgIcon v
+        }
+    }
+
+    for k, v in iconsaccent{
+        {k}{
+            svgIcon v accent
+        }
     }
 
     .modal_close{
         svgIcon xSvg textc3
-    }
-
-    .modal_next{
-        svgIcon rightSvg
-    }
-
-    .modal_prev{
-        svgIcon leftSvg
-    }
-
-    .media_modal_action_btn i.media_modal_action_btn_delete{
-        svgIcon trashSvg
-    } 
-
-    .is_2x .icon-search{
-        svgIcon searchSvg
     }
 
     .is_2x .countries_modal_search_field
@@ -2929,10 +2924,6 @@
         left 20px i
     }
 
-    .is_2x i.icon-search-clear{
-        svgIcon xSvg
-    }
-
     .icon-mic{
         svgIcon micSvg accent
         transition t-out
@@ -2940,18 +2931,6 @@
             bgc accent-alt i    
             transition t-in
         }
-    }
-
-    .icon-camera{
-        svgIcon cameraSvg
-    }
-    
-    .icon-paperclip{
-        svgIcon fileSvg
-    }
-    
-    .icon-emoji{
-        svgIcon emojiSvg
     }
 
     .composer_emoji_tooltip_category_recent
@@ -2965,68 +2944,12 @@
         }
     }
     
-    .composer_emoji_tooltip_category_recent{
-        svgIcon timeSvg accent
-    }
-
-    .composer_emoji_tooltip_category_smile{
-        svgIcon emojiSvg accent
-    }
-
     .composer_emoji_tooltip_category_flower{
         svgIcon flowerSvg accent 85%
     }
 
     .composer_emoji_tooltip_category_bell{
         svgIcon bellSvg accent 85%
-    }
-
-    .composer_emoji_tooltip_category_car{
-        svgIcon carSvg accent
-    }
-
-    .composer_emoji_tooltip_category_grid{
-        svgIcon hashSvg accent
-    }
-
-    .icon-filter-photos{
-        svgIcon bgSvg
-    }
-
-    .icon-filter-video{
-        svgIcon videoSvg
-    }
-
-    .icon-filter-documents{
-        svgIcon fileSvg
-    }
-
-    .icon-filter-audio{
-        svgIcon micSvg
-    }
-
-    .icon-new-group{
-        svgIcon groupIconSvg
-    }
-
-    .icon-contacts{
-        svgIcon contactsSvg
-    }
-
-    .icon-settings{
-        svgIcon gearSvg
-    }
-
-    .icon-faq{
-        svgIcon faqSvg
-    }
-
-    .icon-about{
-        svgIcon logoSvg
-    }
-
-    .is_2x .icon-next-submit{
-        svgIcon arrowSvg
     }
 
     .im_history_pinned_hide{
@@ -3069,7 +2992,7 @@
 
     .im_message_document_info{
         .im_message_document_thumbed &{
-            quote(msgb-thumb, 0, false, 8px (msgb-thumb / 2 + 16)px)
+            q(msgb-thumb, 0, false, 8px (msgb-thumb / 2 + 16)px)
         }
         max-width 100% i
         width 100%
@@ -3309,7 +3232,7 @@
 
     /* answering panel buttons area */
     .im_bottom_panel_wrap .im_send_panel_wrap .im_send_form_wrap1 .im_send_form_wrap .im_record_supported .im_send_form .im_send_keyboard_wrap{
-        quote(border-size, 5px, false)
+        q(border-size, 5px, false)
         padding 8px (8 + border-size * .5)px i
         margin-top 8px
         display table
@@ -3410,7 +3333,7 @@
                 max-width prevwout i
             }
         }
-        quote(msgb-thumb, 4px 0 0 0, false, 8px (msgb-thumb / 2 + 16)px)
+        q(msgb-thumb, 4px 0 0 0, false, 8px (msgb-thumb / 2 + 16)px)
     }
 
     /* making the outline on focused elements match the theme */
@@ -3420,6 +3343,10 @@
 
     .im_service_message_pinned{
         vertical-align bottom i
+    }
+
+    .tg_try_desktop{
+        display none i
     }
 
     /* browser specific fixes */

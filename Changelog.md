@@ -1,3 +1,7 @@
+## V1.14.47 (2021-01-18)
+
+- Quick patch to hide the "try desktop app" ad.
+
 ## V1.14.46 (2020-12-20)
 
 - No need for background if we won't even see it.
