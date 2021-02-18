@@ -1,3 +1,7 @@
+## V1.14.48 (2021-02-19)
+
+- Shorten 'unsupported message' messages.
+
 ## V1.14.47 (2021-01-18)
 
 - Quick patch to hide the "try desktop app" ad.

@@ -4,7 +4,7 @@
 @homepageURL    https://github.com/Barina/Dark-Telegram
 @supportURL     https://github.com/Barina/Dark-Telegram/issues
 @updateURL      https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version        1.14.47
+@version        1.14.48
 @description    Customizable theme for telegram web.
 @author         Roy Barina
 @license        MIT
@@ -180,7 +180,7 @@
 @-moz-document domain("web.telegram.org") {
     :root {
         /* auto generated line below. please do not delete or modify! */
-        --version "Dark-Telegram v1.14.47 -- January 18th, 2021"
+        --version "Dark-Telegram v1.14.48 -- February 19th, 2021"
         --message "Scan to report any issues on GitHub."
         --link "https://github.com/Barina/Dark-Telegram"
         --notice "Ported from: https://github.com/vednoc/dark-whatsapp"
@@ -2765,6 +2765,13 @@
     /* media not supported message */
     div[ng-switch-when="messageMediaUnsupported"]{
         q(msgb-thumb, 0, false)
+        & .im_message_text{
+            display none
+        }
+        &:after{
+            content "Unsupported Message."
+            color textc3
+        }
     }
     if(tail != 'notail'){
         /* taking care of tails */

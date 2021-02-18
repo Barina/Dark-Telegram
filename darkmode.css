@@ -4,7 +4,7 @@
 @homepageURL https://github.com/Barina/Dark-Telegram
 @supportURL https://github.com/Barina/Dark-Telegram/issues
 @updateURL https://raw.githubusercontent.com/Barina/Dark-Telegram/master/Dark-Telegram.user.styl
-@version 1.14.47
+@version 1.14.48
 @description Customizable theme for telegram web.
 @author Roy Barina
 @license MIT
@@ -564,7 +564,7 @@ a.pull-right,
 }
 .im_history_not_selected:after {
   display: block;
-  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.14.47 -- January 18th, 2021";
+  content: "Ported from: https://github.com/vednoc/dark-whatsapp" '\A' "Dark-Telegram v1.14.48 -- February 19th, 2021";
   white-space: pre-wrap;
   border-top: 1px solid #333943;
   font-size: 11px;
@@ -1808,6 +1808,13 @@ div[ng-switch-when="messageMediaUnsupported"] {
   border: 0;
   position: relative;
   overflow: hidden;
+}
+div[ng-switch-when="messageMediaUnsupported"] .im_message_text {
+  display: none;
+}
+div[ng-switch-when="messageMediaUnsupported"]:after {
+  content: "Unsupported Message.";
+  color: #6e6e6e;
 }
 .im_history_message_wrap:not(.im_grouped):not(.im_grouped_short) .im_message_outer_wrap .im_message_wrap .im_message_in .im_message_body_media div .im_message_media div div[ng-switch-when="messageMediaUnsupported"] {
   border-radius: 3px 5px 5px 5px !important;
