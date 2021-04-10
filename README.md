@@ -53,6 +53,11 @@ For more information, please follow the original style [Dark-WhatsApp installati
 
 If you're using Franz or Ferdi, please take a look at [dcferreira](https://github.com/dcferreira)'s awesome [Franz Themes Repository](https://github.com/dcferreira/franz-themes) for more instructions on how to install the [Dark-Telegram theme for Franz\Ferdi](https://github.com/dcferreira/franz-themes/tree/master/telegram).
 
+## Community
+
+While GitHub is generally great for comunication, Telegram is best for IM.<br/>
+Feel free to join, discuss and share you themes and ideas in our [Super group on Telegram](https://t.me/joinchat/A7st42_MOlo4MTE0).
+
 ## Credits
 
 Full credit for design goes to original style creators at [vednoc](https://github.com/vednoc).
