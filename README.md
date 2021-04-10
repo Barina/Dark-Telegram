@@ -55,7 +55,7 @@ If you're using Franz or Ferdi, please take a look at [dcferreira](https://githu
 
 ## Community
 
-While GitHub is generally great for comunication, Telegram is best for IM.<br/>
+While GitHub is generally great for communication, Telegram is best for IM.<br/>
 Feel free to join, discuss and share you themes and ideas in our [Super group on Telegram](https://t.me/joinchat/A7st42_MOlo4MTE0).
 
 ## Credits
